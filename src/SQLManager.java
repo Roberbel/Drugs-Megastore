@@ -7,6 +7,8 @@ public abstract class SQLManager {
 
 	public static void main(String[] args) {
 
+		generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+		
 	}
 
 	public static Connection connect(String directory) throws ClassNotFoundException, SQLException {
@@ -64,7 +66,7 @@ public abstract class SQLManager {
 
 	public static void createCorridorTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE corridor" + "(id INT PRIMARY KEY AUTOINCREMENT," + "temperature FLOAT NOT NULL,"
+		String sql1 = "CREATE TABLE corridor" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "temperature FLOAT NOT NULL,"
 				+ "warehouse_id REFERENCES warehouse (id))";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -72,7 +74,7 @@ public abstract class SQLManager {
 
 	public static void createWarehouseTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE warehouse" + "(id INT PRIMARY KEY AUTOINCREMENT," + "phone INT NOT NULL,"
+		String sql1 = "CREATE TABLE warehouse" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "phone INT NOT NULL,"
 				+ "country TEXT NOT NULL," + "address TEXT NOT NULL," + "pc INT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -80,8 +82,8 @@ public abstract class SQLManager {
 
 	public static void createDeliveriesTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE deliveries  " + "(transaction_id INT PRIMARY KEY AUTOINCREMENT,"
-				+ " selling_price INT NOT NULL," + " amount INT NOT NULL," + " transaction _date DATE NOT NULL,"
+		String sql1 = "CREATE TABLE deliveries  " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ " selling_price INT NOT NULL," + " amount INT NOT NULL," + " transaction_date DATE NOT NULL,"
 				+ " client_id INT REFERENCES client (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -97,7 +99,7 @@ public abstract class SQLManager {
 
 	public static void createDrugTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE drug " + "(id INT PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL UNIQUE,"
+		String sql1 = "CREATE TABLE drug " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL UNIQUE,"
 				+ " stock INT NOT NULL," + " active_principle TEXT," + " corridor_id INT REFERENCES corridor (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -113,7 +115,7 @@ public abstract class SQLManager {
 
 	public static void createArrivalsTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE arrivals " + "(transaction_id INT PRIMARY KEY AUTOINCREMENT,"
+		String sql1 = "CREATE TABLE arrivals " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " buying_price INT NOT NULL," + " transaction_date DATE NOT NULL," + " amount INT NOT NULL,"
 				+ " provider_id REFERENCES provider (id) )";
 		stmt1.executeUpdate(sql1);
