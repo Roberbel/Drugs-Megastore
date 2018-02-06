@@ -1,6 +1,11 @@
 
 public class SQLManager {
 
-		psvm
+		public static void main(String[] args) {
+			
+		
+		}
+		
+		
 	
 }
