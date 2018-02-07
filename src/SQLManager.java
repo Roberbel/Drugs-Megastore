@@ -152,10 +152,10 @@ public abstract class SQLManager {
 		stmt1.close();
 	}
 	
-	public static void createTable (Connection c, String statement) {
+	public static void createTable (Connection c, String statement) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		stmt1.executeUpdate(statement);
 		stmt1.close();
 	}
-	}
+	
 }
