@@ -38,6 +38,7 @@ public abstract class SQLManager {
 			createDrugTable(c);
 			createArrivesTable(c);
 			createArrivalsTable(c);
+			createProvidersTable(c);
 			
 			disconnect(c);
 
