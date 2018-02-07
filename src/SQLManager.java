@@ -152,6 +152,18 @@ public abstract class SQLManager {
 		stmt1.close();
 	}
 	
+	public static void createProvidersTable(Connection c) throws SQLException {
+		Statement stmt1 = c.createStatement();
+		String sql1 = "CREATE TABLE provider"
+				+ "(id INTEGER PRIMARY KEY,"
+				+ "name TEXT NOT NULL,"
+				+ "adress TEXT NOT NULL,"
+				+ "telephone INTEGER,"
+				+ "email TEXT)";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+	}
+	
 	public static void createTable (Connection c, String statement) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		stmt1.executeUpdate(statement);
