@@ -151,4 +151,11 @@ public abstract class SQLManager {
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
+	
+	public static void createTable (Connection c, String statement) {
+		Statement stmt1 = c.createStatement();
+		stmt1.executeUpdate(statement);
+		stmt1.close();
+	}
+	}
 }
