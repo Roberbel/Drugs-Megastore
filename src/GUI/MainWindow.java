@@ -5,12 +5,12 @@ import javax.swing.*;
 
 public class MainWindow extends JFrame{
 	
-	private Container contenedor;
-	private JPanel panelCentral;
-	private JPanel panelNorte;
-	private JPanel panelSur;
-	private JPanel panelEste; 
-	private JPanel panelOeste;
+	private Container container;
+	private JPanel centralPanel;
+	private JPanel northPanel;
+	private JPanel southPanel;
+	private JPanel eastPanel; 
+	private JPanel westPanel;
 	
 		
 	public static void main(String[] args) {
@@ -21,26 +21,29 @@ public class MainWindow extends JFrame{
 	
 	MainWindow(){
 		
-		contenedor = getContentPane();
-		contenedor.setLayout(new BorderLayout());
-		panelNorte = new JPanel();
-		panelSur = new JPanel();
-		panelOeste = new JPanel();
-		panelEste = new JPanel();
-		panelCentral = new JPanel();
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setTitle("Drug Megastore - database managment");
 		
-		panelNorte.add(new JButton ("North"));
-		panelSur.add(new JButton ("South"));
-		panelEste.add(new JButton ("East"));
-		panelOeste.add(new JButton ("West"));
-		panelCentral.add(new JButton("Centro"));
+		container = getContentPane();
+		container.setLayout(new BorderLayout());
+		northPanel = new JPanel(new FlowLayout());
+		southPanel = new JPanel(new FlowLayout());
+		westPanel = new JPanel(new FlowLayout());
+		eastPanel = new JPanel(new FlowLayout());
+		centralPanel = new JPanel(new FlowLayout());
 		
-		contenedor.add(panelCentral, BorderLayout.CENTER);
-		contenedor.add(panelNorte, BorderLayout.NORTH);
-		contenedor.add(panelSur, BorderLayout.SOUTH);
-		contenedor.add(panelEste, BorderLayout.EAST);
-		contenedor.add(panelOeste, BorderLayout.WEST);
+		northPanel.add(new JButton ("North"));
+		southPanel.add(new JButton ("South"));
+		eastPanel.add(new JButton ("East"));
+		westPanel.add(new JButton ("West"));
+		centralPanel.add(new JButton("Centro"));
 		
+		
+		container.add(centralPanel, BorderLayout.CENTER);
+		container.add(northPanel, BorderLayout.NORTH);
+		container.add(southPanel, BorderLayout.SOUTH);
+		container.add(eastPanel, BorderLayout.EAST);
+		container.add(westPanel, BorderLayout.WEST);
 		
 		setSize(1000, 900);
 		
