@@ -102,7 +102,7 @@ public abstract class SQLManager {
 		String sql1 = "CREATE TABLE deliveries  "
 				+ "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " selling_price INT NOT NULL,"
-				+ " amount INT NOT NULL,"
+				+ " ammount INT NOT NULL,"
 				+ " transaction_date DATE NOT NULL,"
 				+ " client_id INT REFERENCES client (id) )";
 		stmt1.executeUpdate(sql1);
