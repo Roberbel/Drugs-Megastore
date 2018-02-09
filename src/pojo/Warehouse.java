@@ -11,8 +11,12 @@ import java.util.List;
 public class Warehouse implements Serializable{
 	
 
-	private static final long serialVersionUID = 1L;
 	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3781798634843187795L;
 	private Integer id;
 	private Integer pc;
 	private String country;
