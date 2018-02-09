@@ -198,7 +198,7 @@ public void setCorridor(List<Corridors> corridor) {
 	@Override
 	public String toString() {
 		return "Warehouse [id=" + id + ", pc=" + pc + ", country=" + country + ", adress=" + adress + ", phone=" + phone
-				+ "]";
+				+ "] garbage";
 	}
 
 	public Integer getId() {
