@@ -15,12 +15,13 @@ public class Employee implements Serializable {
 	private Integer phone;
 	private String position;
 	private Integer warehouseId;
+	private byte[] photo;
 
 	public Employee() {
 		super();
 	}
 
-	public Employee(Integer id, String name, float salary, Integer phone, String position, Integer warehouseId) {
+	public Employee(Integer id, String name, float salary, Integer phone, String position, Integer warehouseId, byte[]photo) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -28,7 +29,10 @@ public class Employee implements Serializable {
 		this.phone = phone;
 		this.position = position;
 		this.warehouseId = warehouseId;
+		this.photo=photo;
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -109,4 +113,11 @@ public class Employee implements Serializable {
 		this.warehouseId = warehouseId;
 	}
 
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
 }
