@@ -116,7 +116,7 @@ public class Corridors implements Serializable {
 		}
 	}
 
-	// Additional method to remove from a list
+
 	public void removeReport(Drugs drug) {
 		if (drugs.contains(drug)) {
 			this.drugs.remove(drug);
