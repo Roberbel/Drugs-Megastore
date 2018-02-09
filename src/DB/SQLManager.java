@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import pojo.Employee;
+
 public abstract class SQLManager {
 
 	public static void main(String[] args) {
@@ -173,6 +175,17 @@ public abstract class SQLManager {
 		Statement stmt1 = c.createStatement();
 		stmt1.executeUpdate(statement);
 		stmt1.close();
+	}
+	
+	public static void insertTableEmployees(Connection c, Employee employees) throws SQLException {
+		Statement stmt=c.createStatement();
+		String sql="INSERT INTO employee(name,salary, phone,position,warehouse_id)"
+				+ "VALUES('"+ employees.getName() + "','"+ employees.getPhoto()+"','"+
+				employees.getSalary()+ "','"+ employees.getPhone() + "','"+ employees.getPosition() +"','"+
+				employees.getWarehouseId().getId() +"');";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		
 	}
 	
 }
