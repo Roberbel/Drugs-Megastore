@@ -118,5 +118,17 @@ public class Provider implements Serializable {
 	public void setArrivals(List<Arrivals> arrivals) {
 		this.arrivals = arrivals;
 	}
+	
+	public void addArrival(Arrivals arrival) {
+		if(!arrivals.contains(arrival)) {
+			arrivals.add(arrival);
+		}
+	}
+	
+	public void removeArrival(Arrivals arrival) {
+		if(arrivals.contains(arrival)) {
+			arrivals.remove(arrival);
+		}
+	}
 
 }
