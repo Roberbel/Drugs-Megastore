@@ -20,6 +20,20 @@ public class Employee implements Serializable {
 	public Employee() {
 		super();
 	}
+	
+	
+
+	public Employee(String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[] photo) {
+		super();
+		this.name = name;
+		this.salary = salary;
+		this.phone = phone;
+		this.position = position;
+		this.warehouseId = warehouseId;
+		this.photo = photo;
+	}
+
+
 
 	public Employee(Integer id, String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[]photo) {
 		super();

@@ -21,6 +21,19 @@ public class Provider implements Serializable {
 		arrivals = new ArrayList<Arrivals>();
 	}
 
+	
+	
+	public Provider(String name, String adress, Integer telephone, String email, List<Arrivals> arrivals) {
+		super();
+		this.name = name;
+		this.adress = adress;
+		this.telephone = telephone;
+		this.email = email;
+		this.arrivals = arrivals;
+	}
+
+
+
 	public Provider(Integer providerId, String name, String adress, List<Arrivals> arrivals) {
 		super();
 		this.providerId = providerId;

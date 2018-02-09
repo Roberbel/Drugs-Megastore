@@ -27,6 +27,14 @@ public class Corridors implements Serializable {
 	
 	}
 	
+		
+	public Corridors(Integer temperature, Warehouse warehouse, List<Drugs> drugs) {
+		super();
+		this.temperature = temperature;
+		this.warehouse = warehouse;
+		this.drugs = drugs;
+	}
+
 	public Corridors(Integer id, Integer temperature, Warehouse warehouse) {
 		super();
 		this.id =id;
