@@ -14,14 +14,14 @@ public class Employee implements Serializable {
 	private float salary;
 	private Integer phone;
 	private String position;
-	private Integer warehouseId;
+	private Warehouse warehouseId;
 	private byte[] photo;
 
 	public Employee() {
 		super();
 	}
 
-	public Employee(Integer id, String name, float salary, Integer phone, String position, Integer warehouseId, byte[]photo) {
+	public Employee(Integer id, String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[]photo) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -105,11 +105,11 @@ public class Employee implements Serializable {
 		this.position = position;
 	}
 
-	public Integer getWarehouseId() {
+	public Warehouse getWarehouseId() {
 		return warehouseId;
 	}
 
-	public void setWarehouseId(Integer warehouseId) {
+	public void setWarehouseId(Warehouse warehouseId) {
 		this.warehouseId = warehouseId;
 	}
 
