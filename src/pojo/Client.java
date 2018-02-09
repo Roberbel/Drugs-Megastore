@@ -144,7 +144,7 @@ public class Client implements Serializable {
 	}
 
 	public void removeDelivery(Deliveries delivery) {
-		if (!deliveries.contains(delivery)) {
+		if (deliveries.contains(delivery)) {
 			this.deliveries.remove(delivery);
 		}
 	}

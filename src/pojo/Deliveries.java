@@ -16,21 +16,27 @@ public class Deliveries implements Serializable {
 	private Integer ammount;
 	private Date transactionDate;
 	private List<Drugs> drugId;
+	private Client client;
 
 	public Deliveries() {
 		super();
 		drugId = new ArrayList<Drugs>();
 	}
 
+	
+
 	public Deliveries(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,
-			List<Drugs> clientId) {
+			List<Drugs> drugId, Client client) {
 		super();
 		this.transactionId = transactionId;
 		this.sellingPrice = sellingPrice;
 		this.ammount = ammount;
 		this.transactionDate = transactionDate;
-		this.drugId = clientId;
+		this.drugId = drugId;
+		this.client = client;
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -57,10 +63,11 @@ public class Deliveries implements Serializable {
 		return true;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Deliveries [transactionId=" + transactionId + ", sellingPrice=" + sellingPrice + ", ammount=" + ammount
-				+ ", transactionDate=" + transactionDate + ", drugId=" + drugId + "]";
+				+ ", transactionDate=" + transactionDate + ", drugId=" + drugId + ", client=" + client + "]";
 	}
 
 	public Integer getTransactionId() {
@@ -101,6 +108,14 @@ public class Deliveries implements Serializable {
 
 	public void setDrugId(List<Drugs> clientId) {
 		this.drugId = clientId;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 }
