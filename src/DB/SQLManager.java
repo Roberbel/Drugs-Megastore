@@ -67,6 +67,7 @@ public abstract class SQLManager {
 		String sql1 = "CREATE TABLE employee"
 				+ "(id INT PRIMARY KEY," 
 				+ "name TEXT NOT NULL,"
+				+ "photo BLOB,"
 				+ "salary FLOAT NOT NULL," 
 				+ "phone INT NOT NULL," 
 				+ "position TEXT NOT NULL,"
@@ -126,6 +127,7 @@ public abstract class SQLManager {
 		String sql1 = "CREATE TABLE drug "
 				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " name TEXT NOT NULL UNIQUE,"
+				+ " photo BLOB,"
 				+ " stock INT NOT NULL,"
 				+ " active_principle TEXT,"
 				+ " corridor_id INT REFERENCES corridor (id) )";
