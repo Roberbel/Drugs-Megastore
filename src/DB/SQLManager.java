@@ -5,11 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-<<<<<<< HEAD
-import pojo.Employee;
-=======
 import pojo.Arrivals;
->>>>>>> fa3521681d05b9a6a576c7189a21fcb54f3d2a50
 
 public abstract class SQLManager {
 
@@ -155,20 +151,5 @@ public abstract class SQLManager {
 		stmt1.executeUpdate(statement);
 		stmt1.close();
 	}
-<<<<<<< HEAD
-	
-	public static void insertTableEmployees(Connection c, Employee employees) throws SQLException {
-		Statement stmt=c.createStatement();
-		String sql="INSERT INTO employee(name,salary, phone,position,warehouse_id)"
-				+ "VALUES('"+ employees.getName() + "','"+ employees.getPhoto()+"','"+
-				employees.getSalary()+ "','"+ employees.getPhone() + "','"+ employees.getPosition() +"','"+
-				employees.getWarehouseId().getId() +"');";
-			stmt.executeUpdate(sql);
-			stmt.close();
-		
-	}
-	
-=======
 
->>>>>>> fa3521681d05b9a6a576c7189a21fcb54f3d2a50
 }
