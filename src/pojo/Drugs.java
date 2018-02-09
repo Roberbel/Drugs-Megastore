@@ -17,6 +17,7 @@ public class Drugs implements Serializable {
 	private Corridors corridor;
 	private List<Deliveries> deliveries;
 	private List<Arrivals> arrivals;
+	private byte[] photo;
 
 	public Drugs() {
 		super();
@@ -25,7 +26,7 @@ public class Drugs implements Serializable {
 	}
 
 	public Drugs(Integer id, String name, Integer stock, Integer sellingPrice, Corridors corridor,
-			List<Deliveries> deliveries, List<Arrivals> arrivals) {
+			List<Deliveries> deliveries, List<Arrivals> arrivals, byte[] photo) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -34,10 +35,11 @@ public class Drugs implements Serializable {
 		this.corridor = corridor;
 		this.deliveries = deliveries;
 		this.arrivals = arrivals;
+		this.photo=photo;
 	}
 
 	public Drugs(Integer id, String name, Integer stock, Integer sellingPrice, String activePrinciple,
-			Corridors corridor, List<Deliveries> deliveries, List<Arrivals> arrivals) {
+			Corridors corridor, List<Deliveries> deliveries, List<Arrivals> arrivals, byte[]photo) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -47,6 +49,7 @@ public class Drugs implements Serializable {
 		this.corridor = corridor;
 		this.deliveries = deliveries;
 		this.arrivals = arrivals;
+		this.photo=photo;
 	}
 
 	@Override
@@ -167,4 +170,13 @@ public class Drugs implements Serializable {
 	public void setCorridor(Corridors corridor) {
 		this.corridor = corridor;
 	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+	
 }
