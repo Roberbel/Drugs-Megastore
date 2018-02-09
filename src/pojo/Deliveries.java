@@ -112,5 +112,17 @@ public class Deliveries implements Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	public void addDrug(Drugs drug) {
+		if (!drugId.contains(drug)) {
+			this.drugId.add(drug);
+		}
+	}
+
+
+	public void removeDrug(Drugs drug) {
+		if (drugId.contains(drug)) {
+			this.drugId.remove(drug);
+		}
+	}
 
 }
