@@ -10,7 +10,7 @@ public class Deliveries implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2324788895880344002L;
-	
+
 	private Integer transactionId;
 	private Integer sellingPrice;
 	private Integer ammount;
@@ -23,8 +23,6 @@ public class Deliveries implements Serializable {
 		drugId = new ArrayList<Drugs>();
 	}
 
-	
-
 	public Deliveries(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,
 			List<Drugs> drugId, Client client) {
 		super();
@@ -35,8 +33,6 @@ public class Deliveries implements Serializable {
 		this.drugId = drugId;
 		this.client = client;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -63,7 +59,6 @@ public class Deliveries implements Serializable {
 		return true;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Deliveries [transactionId=" + transactionId + ", sellingPrice=" + sellingPrice + ", ammount=" + ammount
