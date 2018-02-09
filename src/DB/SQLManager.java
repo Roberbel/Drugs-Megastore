@@ -145,6 +145,16 @@ public abstract class SQLManager {
 		stmt1.close();
 		
 	}
+	public static void insertTableEmployees(Connection c, Employee employees) throws SQLException {
+		Statement stmt=c.createStatement();
+		String sql="INSERT INTO employee(name,salary, phone,position,warehouse_id)"
+				+ "VALUES('"+ employees.getName() + "','"+ employees.getPhoto()+"','"+
+				employees.getSalary()+ "','"+ employees.getPhone() + "','"+ employees.getPosition() +"','"+
+				employees.getWarehouseId().getId() +"');";
+			stmt.executeUpdate(sql);
+			stmt.close();
+		
+	}
 
 	public static void createTable(Connection c, String statement) throws SQLException {
 		Statement stmt1 = c.createStatement();
