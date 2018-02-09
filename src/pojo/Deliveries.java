@@ -23,6 +23,19 @@ public class Deliveries implements Serializable {
 		drugId = new ArrayList<Drugs>();
 	}
 
+	
+	
+	public Deliveries(Integer sellingPrice, Integer ammount, Date transactionDate, List<Drugs> drugId, Client client) {
+		super();
+		this.sellingPrice = sellingPrice;
+		this.ammount = ammount;
+		this.transactionDate = transactionDate;
+		this.drugId = drugId;
+		this.client = client;
+	}
+
+
+
 	public Deliveries(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,
 			List<Drugs> drugId, Client client) {
 		super();

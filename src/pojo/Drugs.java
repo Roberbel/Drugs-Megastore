@@ -24,6 +24,22 @@ public class Drugs implements Serializable {
 		deliveries = new ArrayList<Deliveries>();
 		arrivals = new ArrayList<Arrivals>();
 	}
+	
+
+	public Drugs(String name, Integer stock, Integer sellingPrice, String activePrinciple, Corridors corridor,
+			List<Deliveries> deliveries, List<Arrivals> arrivals, byte[] photo) {
+		super();
+		this.name = name;
+		this.stock = stock;
+		this.sellingPrice = sellingPrice;
+		this.activePrinciple = activePrinciple;
+		this.corridor = corridor;
+		this.deliveries = deliveries;
+		this.arrivals = arrivals;
+		this.photo = photo;
+	}
+
+
 
 	public Drugs(Integer id, String name, Integer stock, Integer sellingPrice, Corridors corridor,
 			List<Deliveries> deliveries, List<Arrivals> arrivals, byte[] photo) {

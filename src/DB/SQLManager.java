@@ -1,17 +1,22 @@
 package DB;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+<<<<<<< HEAD
 import pojo.Employee;
+=======
+import pojo.Arrivals;
+>>>>>>> fa3521681d05b9a6a576c7189a21fcb54f3d2a50
 
 public abstract class SQLManager {
 
 	public static void main(String[] args) {
 
 		generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
-		
+
 	}
 
 	public static Connection connect(String directory) throws ClassNotFoundException, SQLException {
@@ -42,7 +47,7 @@ public abstract class SQLManager {
 			createArrivesTable(c);
 			createArrivalsTable(c);
 			createProvidersTable(c);
-			
+
 			disconnect(c);
 
 		} catch (Exception e) {
@@ -53,26 +58,16 @@ public abstract class SQLManager {
 
 	public static void createClientTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE client" 
-				+ "(id INT PRIMARY KEY," 
-				+ "name TEXT NOT NULL," 
-				+ "adress TEXT NOT NULL,"
-				+ "telephone INT," 
-				+ "email TEXT," 
-				+ "payment_method TEXT NOT NULL)";
+		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
+				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT," + "payment_method TEXT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
 
 	public static void createEmployeeTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE employee"
-				+ "(id INT PRIMARY KEY," 
-				+ "name TEXT NOT NULL,"
-				+ "photo BLOB,"
-				+ "salary FLOAT NOT NULL," 
-				+ "phone INT NOT NULL," 
-				+ "position TEXT NOT NULL,"
+		String sql1 = "CREATE TABLE employee" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
+				+ "photo BLOB," + "salary FLOAT NOT NULL," + "phone INT NOT NULL," + "position TEXT NOT NULL,"
 				+ "warehouse_id REFERENCES warehouse (id))";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -80,9 +75,7 @@ public abstract class SQLManager {
 
 	public static void createCorridorTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE corridor" 
-				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-				+ "temperature FLOAT NOT NULL,"
+		String sql1 = "CREATE TABLE corridor" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "temperature FLOAT NOT NULL,"
 				+ "warehouse_id REFERENCES warehouse (id))";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -90,24 +83,16 @@ public abstract class SQLManager {
 
 	public static void createWarehouseTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE warehouse"
-				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT," 
-				+ "phone INT NOT NULL,"
-				+ "city TEXT NOT NULL,"
-				+ "country TEXT NOT NULL," 
-				+ "address TEXT NOT NULL," 
-				+ "pc INT NOT NULL)";
+		String sql1 = "CREATE TABLE warehouse" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "phone INT NOT NULL,"
+				+ "city TEXT NOT NULL," + "country TEXT NOT NULL," + "address TEXT NOT NULL," + "pc INT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
 
 	public static void createDeliveriesTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE deliveries  "
-				+ "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-				+ " selling_price INT NOT NULL,"
-				+ " ammount INT NOT NULL,"
-				+ " transaction_date DATE NOT NULL,"
+		String sql1 = "CREATE TABLE deliveries  " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ " selling_price INT NOT NULL," + " ammount INT NOT NULL," + " transaction_date DATE NOT NULL,"
 				+ " client_id INT REFERENCES client (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -115,10 +100,7 @@ public abstract class SQLManager {
 
 	public static void createPackagedTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE packaged " 
-				+ "(drug_id INT,"
-				+ " transaction_id INT,"
-				+ " PRIMARY KEY (drug_id,"
+		String sql1 = "CREATE TABLE packaged " + "(drug_id INT," + " transaction_id INT," + " PRIMARY KEY (drug_id,"
 				+ " transaction_id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -126,12 +108,8 @@ public abstract class SQLManager {
 
 	public static void createDrugTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE drug "
-				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT,"
-				+ " name TEXT NOT NULL UNIQUE,"
-				+ " photo BLOB,"
-				+ " stock INT NOT NULL,"
-				+ " active_principle TEXT,"
+		String sql1 = "CREATE TABLE drug " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL UNIQUE,"
+				+ " photo BLOB," + " stock INT NOT NULL," + " active_principle TEXT,"
 				+ " corridor_id INT REFERENCES corridor (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -139,9 +117,7 @@ public abstract class SQLManager {
 
 	public static void createArrivesTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE arrives "
-				+ "(drug_id INT,"
-				+ " transaction_id INT,"
+		String sql1 = "CREATE TABLE arrives " + "(drug_id INT," + " transaction_id INT,"
 				+ " PRIMARY KEY (drug_id, transaction_id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -149,33 +125,37 @@ public abstract class SQLManager {
 
 	public static void createArrivalsTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE arrivals "
-				+ "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
-				+ " buying_price INT NOT NULL,"
-				+ " transaction_date DATE NOT NULL,"
-				+ " amount INT NOT NULL,"
+		String sql1 = "CREATE TABLE arrivals " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+				+ " buying_price INT NOT NULL," + " transaction_date DATE NOT NULL," + " ammount INT NOT NULL,"
 				+ " provider_id REFERENCES provider (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
-	
+
 	public static void createProvidersTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE provider"
-				+ "(id INTEGER PRIMARY KEY,"
-				+ "name TEXT NOT NULL,"
-				+ "adress TEXT NOT NULL,"
-				+ "telephone INTEGER,"
-				+ "email TEXT)";
+		String sql1 = "CREATE TABLE provider" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
+				+ "adress TEXT NOT NULL," + "telephone INTEGER," + "email TEXT)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
-	
-	public static void createTable (Connection c, String statement) throws SQLException {
+
+	public static void insertArrivals(Connection c, Arrivals arrival) throws SQLException {
+		Statement stmt1 = c.createStatement();
+		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, ammount, provider_id)"
+				+ "VALUES( '" + arrival.getBuyingPrice() + "' , '" + arrival.getDate() + "' , '" +
+				arrival.getAmmount() + "' , '" + arrival.getProvider().getProviderId() + "');";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+		
+	}
+
+	public static void createTable(Connection c, String statement) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		stmt1.executeUpdate(statement);
 		stmt1.close();
 	}
+<<<<<<< HEAD
 	
 	public static void insertTableEmployees(Connection c, Employee employees) throws SQLException {
 		Statement stmt=c.createStatement();
@@ -188,4 +168,7 @@ public abstract class SQLManager {
 		
 	}
 	
+=======
+
+>>>>>>> fa3521681d05b9a6a576c7189a21fcb54f3d2a50
 }

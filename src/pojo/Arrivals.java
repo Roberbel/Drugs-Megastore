@@ -21,6 +21,19 @@ public class Arrivals implements Serializable{
 		drugs = new ArrayList<Drugs>();
 	}
 
+	
+	
+	public Arrivals(Integer buyingPrice, Date date, Integer ammount, Provider provider, List<Drugs> drugs) {
+		super();
+		this.buyingPrice = buyingPrice;
+		this.date = date;
+		this.ammount = ammount;
+		this.provider = provider;
+		this.drugs = drugs;
+	}
+
+
+
 	public Arrivals(Integer arrivalId, Integer buyingPrice, Date date, Integer ammount, Provider provider,
 			List<Drugs> drugs) {
 		super();

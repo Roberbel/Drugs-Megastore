@@ -26,6 +26,21 @@ public class Client implements Serializable {
 		setDeliveries(new ArrayList<Deliveries>());
 	}
 	
+	
+	
+	public Client(String name, String adress, Integer telephone, String email, String paymentMethod,
+			List<Deliveries> deliveries) {
+		super();
+		this.name = name;
+		this.adress = adress;
+		this.telephone = telephone;
+		this.email = email;
+		this.paymentMethod = paymentMethod;
+		this.deliveries = deliveries;
+	}
+
+
+
 	public Client(Integer id, String name, String adress, String paymentMethod, ArrayList<Deliveries> deliveries) {
 		super();
 		this.id = id;
