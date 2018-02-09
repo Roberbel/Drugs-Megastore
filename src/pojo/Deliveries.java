@@ -9,30 +9,27 @@ public class Deliveries implements Serializable {
 	/**
 	 * 
 	 */
-	/**
-	 * 
-	 */
-	
+	private static final long serialVersionUID = -2324788895880344002L;
 	
 	private Integer transactionId;
 	private Integer sellingPrice;
 	private Integer ammount;
 	private Date transactionDate;
-	private List<Client> clientId;
+	private List<Drugs> drugId;
 
 	public Deliveries() {
 		super();
-		clientId = new ArrayList<Client>();
+		drugId = new ArrayList<Drugs>();
 	}
 
 	public Deliveries(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,
-			List<Client> clientId) {
+			List<Drugs> clientId) {
 		super();
 		this.transactionId = transactionId;
 		this.sellingPrice = sellingPrice;
 		this.ammount = ammount;
 		this.transactionDate = transactionDate;
-		this.clientId = clientId;
+		this.drugId = clientId;
 	}
 
 	@Override
@@ -63,7 +60,7 @@ public class Deliveries implements Serializable {
 	@Override
 	public String toString() {
 		return "Deliveries [transactionId=" + transactionId + ", sellingPrice=" + sellingPrice + ", ammount=" + ammount
-				+ ", transactionDate=" + transactionDate + ", clientId=" + clientId + "]";
+				+ ", transactionDate=" + transactionDate + ", drugId=" + drugId + "]";
 	}
 
 	public Integer getTransactionId() {
@@ -98,12 +95,12 @@ public class Deliveries implements Serializable {
 		this.transactionDate = transactionDate;
 	}
 
-	public List<Client> getClientId() {
-		return clientId;
+	public List<Drugs> getDrugId() {
+		return drugId;
 	}
 
-	public void setClientId(List<Client> clientId) {
-		this.clientId = clientId;
+	public void setDrugId(List<Drugs> clientId) {
+		this.drugId = clientId;
 	}
 
 }
