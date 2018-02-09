@@ -6,6 +6,14 @@ import java.util.*;
 
 public class Deliveries implements Serializable {
 
+	/**
+	 * 
+	 */
+	/**
+	 * 
+	 */
+	
+	
 	private Integer transactionId;
 	private Integer sellingPrice;
 	private Integer ammount;
@@ -17,7 +25,8 @@ public class Deliveries implements Serializable {
 		clientId = new ArrayList<Client>();
 	}
 
-	public Deliveries(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,List<Client> clientId) {
+	public Deliveries(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,
+			List<Client> clientId) {
 		super();
 		this.transactionId = transactionId;
 		this.sellingPrice = sellingPrice;
@@ -50,8 +59,6 @@ public class Deliveries implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
 
 	@Override
 	public String toString() {
@@ -98,7 +105,5 @@ public class Deliveries implements Serializable {
 	public void setClientId(List<Client> clientId) {
 		this.clientId = clientId;
 	}
-	
-	
 
 }

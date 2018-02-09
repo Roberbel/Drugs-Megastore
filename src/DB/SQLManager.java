@@ -90,6 +90,7 @@ public abstract class SQLManager {
 		String sql1 = "CREATE TABLE warehouse"
 				+ "(id INTEGER PRIMARY KEY AUTOINCREMENT," 
 				+ "phone INT NOT NULL,"
+				+ "city TEXT NOT NULL,"
 				+ "country TEXT NOT NULL," 
 				+ "address TEXT NOT NULL," 
 				+ "pc INT NOT NULL)";

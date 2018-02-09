@@ -1,6 +1,8 @@
 package pojo;
 
 import java.io.Serializable;
+import java.util.*;
+
 
 public class Client implements Serializable {
 
@@ -15,22 +17,25 @@ public class Client implements Serializable {
 	private Integer telephone;
 	private String email;
 	private String paymentMethod;
+	private List<Deliveries> deliveries;
 
 	
 	
 	public Client() {
 		super();
+		setDeliveries(new ArrayList<Deliveries>());
 	}
 	
-	public Client(Integer id, String name, String adress, String paymentMethod) {
+	public Client(Integer id, String name, String adress, String paymentMethod, ArrayList<Deliveries> deliveries) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.adress = adress;
 		this.paymentMethod = paymentMethod;
+		this.deliveries = deliveries;
 	}
 
-	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod) {
+	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod, ArrayList<Deliveries> deliveries) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -38,6 +43,8 @@ public class Client implements Serializable {
 		this.telephone = telephone;
 		this.email = email;
 		this.paymentMethod = paymentMethod;
+		this.deliveries = deliveries;
+
 	}
 
 
@@ -67,10 +74,11 @@ public class Client implements Serializable {
 		return true;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", name=" + name + ", adress=" + adress + ", telephone=" + telephone + ", email="
-				+ email + ", paymentMethod=" + paymentMethod + "]";
+				+ email + ", paymentMethod=" + paymentMethod + ", deliveries=" + deliveries + "]";
 	}
 
 	public Integer getId() {
@@ -120,4 +128,25 @@ public class Client implements Serializable {
 	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
+
+	public List<Deliveries> getDeliveries() {
+		return deliveries;
+	}
+
+	public void setDeliveries(List<Deliveries> deliveries) {
+		this.deliveries = deliveries;
+	}
+	
+	public void addDelivery(Deliveries delivery) {
+		if (!deliveries.contains(delivery)) {
+			this.deliveries.add(delivery);
+		}
+	}
+
+	public void removeDelivery(Deliveries delivery) {
+		if (!deliveries.contains(delivery)) {
+			this.deliveries.remove(delivery);
+		}
+	}
+	
 }
