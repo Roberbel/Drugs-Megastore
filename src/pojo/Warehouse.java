@@ -22,6 +22,7 @@ public class Warehouse implements Serializable{
 	private String country;
 	private String adress;
 	private Integer phone;
+	private String city;
 	private List<Employee> employees;
 	private List<Corridors> corridor;
 	
@@ -30,7 +31,7 @@ public class Warehouse implements Serializable{
 		super();
 		this.employees = new ArrayList<Employee>();
 	}
-	public Warehouse(Integer id, Integer pc, String country, String adress,Integer phone, List<Employee> employees, List<Corridors>corridor) {
+	public Warehouse(Integer id, Integer pc, String country, String adress, String city,Integer phone, List<Employee> employees, List<Corridors>corridor) {
 		
 		super();
 		this.id=id;
@@ -40,9 +41,10 @@ public class Warehouse implements Serializable{
 		this.phone=phone;
 		this.employees=employees;
         this.corridor=corridor;	
+        this.city=city;
 	}
 	
-public Warehouse(Integer id, Integer pc, String country, String adress,Integer phone) {
+public Warehouse(Integer id, Integer pc, String country, String adress,Integer phone, String city) {
 		
 		super();
 		this.id=id;
@@ -50,6 +52,7 @@ public Warehouse(Integer id, Integer pc, String country, String adress,Integer p
 		this.country=country;
 		this.adress=adress;
 		this.phone=phone;
+		this.city=city;
 		this.employees=new ArrayList<Employee>();
         this.corridor=new ArrayList<Corridors>();	
 	}
@@ -78,8 +81,15 @@ public boolean equals(Object obj) {
 }
 @Override
 public String toString() {
-	return "Warehouse [id=" + id + ", pc=" + pc + ", country=" + country + ", adress=" + adress + ", phone=" + phone
-			+ "]";
+	return "Warehouse [id=" + id + ", pc=" + pc + ", country=" + country + ", adress=" + adress + ", phone=" + phone +", city="
+			
+		+ city	+ "]";
+}
+public String getCity() {
+	return city;
+}
+public void setCity(String city) {
+	this.city = city;
 }
 public Integer getId() {
 	return id;
