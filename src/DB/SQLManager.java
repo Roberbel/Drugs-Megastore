@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import pojo.Arrivals;
+import pojo.*;
 
 public abstract class SQLManager {
 
@@ -136,7 +136,7 @@ public abstract class SQLManager {
 		stmt1.close();
 	}
 
-	public static void insertArrivals(Connection c, Arrivals arrival) throws SQLException {
+	public static void insertArrivalsEntrance(Connection c, Arrivals arrival) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, ammount, provider_id)"
 				+ "VALUES( '" + arrival.getBuyingPrice() + "' , '" + arrival.getDate() + "' , '" +
@@ -145,7 +145,17 @@ public abstract class SQLManager {
 		stmt1.close();
 		
 	}
-	public static void insertTableEmployees(Connection c, Employee employees) throws SQLException {
+	
+	public static void insertProviderEntrance(Connection c, Provider provider) throws SQLException {
+		Statement stmt1= c.createStatement();
+		String sql1 = "INSERT INTO provider(name, adress, telephone, email)" +
+				"VALUES( '" + provider.getName() + "' , '" + provider.getAdress() + "' , '" + provider.getTelephone() +
+				"' , '" + provider.getEmail() + "');";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+	}
+	
+	public static void insertEmployeesEntrance(Connection c, Employee employees) throws SQLException {
 		Statement stmt=c.createStatement();
 		String sql="INSERT INTO employee(name,salary, phone,position,warehouse_id)"
 				+ "VALUES('"+ employees.getName() + "','"+ employees.getPhoto()+"','"+
@@ -155,6 +165,8 @@ public abstract class SQLManager {
 			stmt.close();
 		
 	}
+	
+
 
 	public static void createTable(Connection c, String statement) throws SQLException {
 		Statement stmt1 = c.createStatement();
