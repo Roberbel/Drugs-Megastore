@@ -4,15 +4,35 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import pojo.*;
 
 public abstract class SQLManager {
 
 	public static void main(String[] args) {
 
-		generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+		try {
 
+		//generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");	
+			
+		Provider testProvider = new Provider();
+		testProvider.setProviderId(1);
+		Client testClient = new Client();
+		
+		testClient.setAdress("Avenida Monasterio de Silos 36");
+		testClient.setName("Jaime");
+		testClient.setEmail("Jimmyviniegra@gmail.com");
+		testClient.setTelephone(638079977);
+		Connection c;
+		
+		c = connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+		
+		insertClientEntrance(c,testClient);
+		
+		disconnect(c);
+		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static Connection connect(String directory) throws ClassNotFoundException, SQLException {
@@ -55,7 +75,7 @@ public abstract class SQLManager {
 	public static void createClientTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT," + "payment_method TEXT NOT NULL)";
+				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
@@ -155,18 +175,24 @@ public abstract class SQLManager {
 		stmt1.close();
 	}
 	
+	public static void insertClientEntrance(Connection c, Client client) throws SQLException {
+		Statement stmt1= c.createStatement();
+		String sql1 = "INSERT INTO client(name, adress, telephone, email)" +
+				"VALUES( '" + client.getName() + "' , '" + client.getAdress() + "' , '" + client.getTelephone() +
+				"' , '" + client.getEmail() + "');";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+	}
+	
 	public static void insertEmployeesEntrance(Connection c, Employee employees) throws SQLException {
-		Statement stmt=c.createStatement();
-		String sql="INSERT INTO employee(name,salary, phone,position,warehouse_id)"
+		Statement stmt1=c.createStatement();
+		String sql1="INSERT INTO employee(name,salary, phone,position,warehouse_id)"
 				+ "VALUES('"+ employees.getName() + "','"+ employees.getPhoto()+"','"+
 				employees.getSalary()+ "','"+ employees.getPhone() + "','"+ employees.getPosition() +"','"+
 				employees.getWarehouseId().getId() +"');";
-			stmt.executeUpdate(sql);
-			stmt.close();
-		
+			stmt1.executeUpdate(sql1);
+			stmt1.close();	
 	}
-	
-
 
 	public static void createTable(Connection c, String statement) throws SQLException {
 		Statement stmt1 = c.createStatement();
