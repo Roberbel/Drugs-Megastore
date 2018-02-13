@@ -22,6 +22,7 @@ public abstract class SQLManager {
 		testClient.setName("Jaime");
 		testClient.setEmail("Jimmyviniegra@gmail.com");
 		testClient.setTelephone(638079977);
+		testClient.setPaymentMethod("Credit card");
 		Connection c;
 		
 		c = connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
@@ -75,7 +76,7 @@ public abstract class SQLManager {
 	public static void createClientTable(Connection c) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT)";
+				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT, payment_method TEXT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
@@ -177,9 +178,9 @@ public abstract class SQLManager {
 	
 	public static void insertClientEntrance(Connection c, Client client) throws SQLException {
 		Statement stmt1= c.createStatement();
-		String sql1 = "INSERT INTO client(name, adress, telephone, email)" +
+		String sql1 = "INSERT INTO client(name, adress, telephone, email, payment_method)" +
 				"VALUES( '" + client.getName() + "' , '" + client.getAdress() + "' , '" + client.getTelephone() +
-				"' , '" + client.getEmail() + "');";
+				"' , '" + client.getEmail() +"' , '"+ client.getPaymentMethod() + "');";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
