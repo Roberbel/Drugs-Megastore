@@ -1,49 +1,46 @@
 package GUI;
 
-import java.awt.*;
-import javax.swing.*;
+import javafx.application.*;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.*;
 
-public class MainWindow extends JFrame{
-	
-	private Container contenedor;
-	private JPanel panelCentral;
-	private JPanel panelNorte;
-	private JPanel panelSur;
-	private JPanel panelEste; 
-	private JPanel panelOeste;
-	
-		
-	public static void main(String[] args) {
-		MainWindow window = new MainWindow();
-		window.setVisible(true);
 
+public class MainWindow extends Application {
+	private Stage stage;
+	private ChoiceBox<String> list;
+	
+	public static void main (String[] args) {
+		launch(args);
 	}
 	
-	MainWindow(){
+
+	private void listChanged() {
+		System.out.println(list.getValue());
 		
-		contenedor = getContentPane();
-		contenedor.setLayout(new BorderLayout());
-		panelNorte = new JPanel();
-		panelSur = new JPanel();
-		panelOeste = new JPanel();
-		panelEste = new JPanel();
-		panelCentral = new JPanel();
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		stage = primaryStage;
 		
-		panelNorte.add(new JButton ("North"));
-		panelSur.add(new JButton ("South"));
-		panelEste.add(new JButton ("East"));
-		panelOeste.add(new JButton ("West"));
-		panelCentral.add(new JButton("Centro"));
+//===========================================list====================================//
+		list = new ChoiceBox <String>();
+		list.getItems().addAll("Hello1","Hello2","Hello3");
+		list.setOnAction(e -> listChanged());
 		
-		contenedor.add(panelCentral, BorderLayout.CENTER);
-		contenedor.add(panelNorte, BorderLayout.NORTH);
-		contenedor.add(panelSur, BorderLayout.SOUTH);
-		contenedor.add(panelEste, BorderLayout.EAST);
-		contenedor.add(panelOeste, BorderLayout.WEST);
+//===========================================Table===================================//
 		
 		
-		setSize(1000, 900);
+//===========================================Pane====================================//
+		FlowPane pane = new FlowPane();
+		pane.getChildren().add();
 		
+//===========================================Scene===================================//		
+		Scene scene = new Scene(pane, 300, 400);
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 }
