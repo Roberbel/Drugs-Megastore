@@ -10,50 +10,46 @@ import pojo.*;
 
 public class SQLManager {
 
-	private static Connection c ;
-	
-	
-	
+	private static Connection c;
+
 	public static void main(String[] args) {
 
-		
-		
 		try {
 
-		generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");	
-			
-		Provider testProvider = new Provider();
-		testProvider.setProviderId(1);
-		Client testClient = new Client();
-		Date date = new Date();
-		
-		testClient.setAdress("Avenida Monasterio de Silos 36");
-		testClient.setName("Jaime");
-		testClient.setEmail("Jimmyviniegra@gmail.com");
-		testClient.setTelephone(638079977);
-		testClient.setPaymentMethod("Credit card");
-		testClient.setOrder_date(date);
-		
-		connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
-		
-		insertClientEntrance(testClient);
-		
-		disconnect();
-		
-		}catch(Exception e) {
+			generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+
+			Provider testProvider = new Provider();
+			testProvider.setProviderId(1);
+			Client testClient = new Client();
+			Date date = new Date();
+
+			testClient.setAdress("Avenida Monasterio de Silos 36");
+			testClient.setName("Jaime");
+			testClient.setEmail("Jimmyviniegra@gmail.com");
+			testClient.setTelephone(638079977);
+			testClient.setPaymentMethod("Credit card");
+			testClient.setOrder_date(date);
+
+			connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+
+			insertClientEntrance(testClient);
+
+			disconnect();
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static void connect (String directory) throws ClassNotFoundException, SQLException {
-		
+	public static void connect(String directory) throws ClassNotFoundException, SQLException {
+
 		try {
-		
-		Class.forName("org.sqlite.JDBC");
-		c = DriverManager.getConnection(directory);
-		c.createStatement().execute("PRAGMA foreign_keys=ON");
-		System.out.println("Database connection opened.");
-		}catch(Exception e) {
+
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection(directory);
+			c.createStatement().execute("PRAGMA foreign_keys=ON");
+			System.out.println("Database connection opened.");
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -87,12 +83,13 @@ public class SQLManager {
 
 	}
 
-	//===================================CREATE TABLE METHODS.===============================================
-	
+	// ===================================CREATE TABLE METHODS.===============================================
+
 	public static void createClientTable() throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-				+ "adress TEXT NOT NULL," + "telephone INT," + " order_date DATE NOT NULL," + "email TEXT, payment_method TEXT NOT NULL)";
+				+ "adress TEXT NOT NULL," + "telephone INT," + " order_date DATE NOT NULL,"
+				+ "email TEXT, payment_method TEXT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
@@ -173,51 +170,84 @@ public class SQLManager {
 		stmt1.close();
 	}
 
-	//===========================================================================================================
-	
-	//==========================INSERT ENTRANCE METHODS==========================================================
-	
-	
+	// ===========================================================================================================
+
+	// ==========================INSERT ENTRANCE METHODS==========================================================
+	public static void insertClientEntrance(Client client) throws SQLException {
+		Statement stmt1 = c.createStatement();
+		String sql1 = "INSERT INTO client(name, adress ,telephone, email, order_date, payment_method)" + "VALUES( '"
+				+ client.getName() + "' , '" + client.getAdress() + "' , '" + client.getTelephone() + "' , '"
+				+ client.getEmail() + "' , '" + client.getOrder_date() + "' , '" + client.getPaymentMethod() + "');";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+	}
+
+	public static void insertDeliveriesEntrance(Deliveries delivery) throws SQLException {
+		Statement stmt1 = c.createStatement();
+		String sql1 = "INSERT INTO deliveries(selling_price, ammount, transaction_date, client_id)" + "VALUES( '"
+				+ delivery.getSellingPrice() + "' , '" + delivery.getAmmount() + "' , '" + delivery.getTransactionDate()
+				+ "' , '" + delivery.getClient().getId() + "');";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+	}
+
+	public static void insertProviderEntrance(Provider provider) throws SQLException {
+		Statement stmt1 = c.createStatement();
+		String sql1 = "INSERT INTO provider(name, adress, telephone, email)" + "VALUES( '" + provider.getName()
+				+ "' , '" + provider.getAdress() + "' , '" + provider.getTelephone() + "' , '" + provider.getEmail()
+				+ "');";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+	}
+
 	public static void insertArrivalsEntrance(Arrivals arrival) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, ammount, provider_id)"
-				+ "VALUES( '" + arrival.getBuyingPrice() + "' , '" + arrival.getDate() + "' , '" +
-				arrival.getAmmount() + "' , '" + arrival.getProvider().getProviderId() + "');";
+		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, ammount, provider_id)" + "VALUES( '"
+				+ arrival.getBuyingPrice() + "' , '" + arrival.getDate() + "' , '" + arrival.getAmmount() + "' , '"
+				+ arrival.getProvider().getProviderId() + "');";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
-		
+
 	}
 	
-	public static void insertProviderEntrance(Provider provider) throws SQLException {
-		Statement stmt1= c.createStatement();
-		String sql1 = "INSERT INTO provider(name, adress, telephone, email)" +
-				"VALUES( '" + provider.getName() + "' , '" + provider.getAdress() + "' , '" + provider.getTelephone() +
-				"' , '" + provider.getEmail() + "');";
+	public static void insertDrugEntrance(Drugs drug) throws SQLException {
+		Statement stmt1 = c.createStatement();
+		String sql1 = "INSERT INTO drug(name, photo, stock, active_principle,corridor_id )" + "VALUES('"
+				+ drug.getName() + "','" + drug.getPhoto() + "','" + drug.getStock()+ "','" + drug.getActivePrinciple() + "','"
+				+ drug.getCorridor().getId() + "');";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+
 	}
 	
-	public static void insertClientEntrance(Client client) throws SQLException {
-		Statement stmt1= c.createStatement();
-		String sql1 = "INSERT INTO client(name, adress ,telephone, email, order_date, payment_method)" +
-				"VALUES( '" + client.getName() + "' , '" + client.getAdress() + "' , '" + client.getTelephone() +
-				"' , '" + client.getEmail() + "' , '" + client.getOrder_date() + "' , '"+ client.getPaymentMethod() + "');";
-		stmt1.executeUpdate(sql1);
-		stmt1.close();
+	public static void insertCorridorEntrance(Corridors corridor) throws SQLException{
+        Statement stmt1=c.createStatement();
+        String sql1="INSERT INTO corridors(temperature, warehouse_id)"
+                + "VALUES('"+corridor.getTemperature()+"','"+corridor.getWarehouse().getId()+"');";
+        stmt1.executeUpdate(sql1);
+        stmt1.close();
+    }
+
+	public static void insertWarehouseEntrance(Warehouse warehouse) throws SQLException{
+        Statement stmt1=c.createStatement();
+        String sql1="INSERT INTO warehouse (phone,city,country, address, pc)"+"VALUES('"+ warehouse.getPhone()+
+                "','"+ warehouse.getCity()+ "','"+ warehouse.getCountry()+ "','"+warehouse.getAdress()+ "','"+warehouse.getPc()+"');";
+        stmt1.executeUpdate(sql1);
+        stmt1.close();
 	}
 	
 	public static void insertEmployeesEntrance(Employee employees) throws SQLException {
-		Statement stmt1=c.createStatement();
-		String sql1="INSERT INTO employee(name,salary, phone,position,warehouse_id)"
-				+ "VALUES('"+ employees.getName() + "','"+ employees.getPhoto()+"','"+
-				employees.getSalary()+ "','"+ employees.getPhone() + "','"+ employees.getPosition() +"','"+
-				employees.getWarehouseId().getId() +"');";
-			stmt1.executeUpdate(sql1);
-			stmt1.close();	
+		Statement stmt1 = c.createStatement();
+		String sql1 = "INSERT INTO employee(name,salary, phone,position,warehouse_id)" + "VALUES('"
+				+ employees.getName() + "','" + employees.getPhoto() + "','" + employees.getSalary() + "','"
+				+ employees.getPhone() + "','" + employees.getPosition() + "','" + employees.getWarehouseId().getId()
+				+ "');";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
 	}
 
-	//===========================================================================================================
-	
+	// ===========================================================================================================
+
 	public static void createTable(String statement) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		stmt1.executeUpdate(statement);

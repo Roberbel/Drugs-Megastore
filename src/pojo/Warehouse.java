@@ -13,6 +13,7 @@ public class Warehouse implements Serializable {
 	private Integer id;
 	private Integer pc;
 	private String country;
+	private String city;
 	private String adress;
 	private Integer phone;
 	private List<Employee> employees;
@@ -25,12 +26,13 @@ public class Warehouse implements Serializable {
 	
 	
 
-	public Warehouse(Integer pc, String country, String adress, Integer phone, List<Employee> employees,
+	public Warehouse(Integer pc, String country, String city, String adress, Integer phone, List<Employee> employees,
 			List<Corridors> corridor) {
 		super();
 		this.pc = pc;
 		this.country = country;
 		this.adress = adress;
+		this.city = city;
 		this.phone = phone;
 		this.employees = employees;
 		this.corridor = corridor;
@@ -38,25 +40,27 @@ public class Warehouse implements Serializable {
 
 
 
-	public Warehouse(Integer id, Integer pc, String country, String adress, Integer phone, List<Employee> employees,
+	public Warehouse(Integer id, Integer pc, String country,String city, String adress, Integer phone, List<Employee> employees,
 			List<Corridors> corridor) {
 
 		super();
 		this.id = id;
 		this.pc = pc;
 		this.country = country;
+		this.city = city;
 		this.adress = adress;
 		this.phone = phone;
 		this.employees = employees;
 		this.corridor = corridor;
 	}
 
-	public Warehouse(Integer id, Integer pc, String country, String adress, Integer phone) {
+	public Warehouse(Integer id, Integer pc, String country,String city, String adress, Integer phone) {
 
 		super();
 		this.id = id;
 		this.pc = pc;
 		this.country = country;
+		this.city = city;
 		this.adress = adress;
 		this.phone = phone;
 		this.employees = new ArrayList<Employee>();
@@ -97,6 +101,18 @@ public class Warehouse implements Serializable {
 	public Integer getId() {
 		return id;
 	}
+
+	public String getCity() {
+		return city;
+	}
+
+
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+
 
 	public void setId(Integer id) {
 		this.id = id;
