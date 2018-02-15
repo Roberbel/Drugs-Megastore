@@ -15,6 +15,7 @@ public class Client implements Serializable {
 	private String name;
 	private String adress;
 	private Integer telephone;
+	private Date order_date;
 	private String email;
 	private String paymentMethod;
 	private List<Deliveries> deliveries;
@@ -28,7 +29,7 @@ public class Client implements Serializable {
 	
 	
 	
-	public Client(String name, String adress, Integer telephone, String email, String paymentMethod,
+	public Client(String name, String adress, Integer telephone, String email, String paymentMethod, Date date,
 			List<Deliveries> deliveries) {
 		super();
 		this.name = name;
@@ -36,26 +37,30 @@ public class Client implements Serializable {
 		this.telephone = telephone;
 		this.email = email;
 		this.paymentMethod = paymentMethod;
+		this.order_date = date;
 		this.deliveries = deliveries;
 	}
 
 
 
-	public Client(Integer id, String name, String adress, String paymentMethod, ArrayList<Deliveries> deliveries) {
+	public Client(Integer id, String name, String adress,Date date, String paymentMethod, ArrayList<Deliveries> deliveries) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.order_date = date;
 		this.adress = adress;
 		this.paymentMethod = paymentMethod;
 		this.deliveries = deliveries;
 	}
 
-	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod, ArrayList<Deliveries> deliveries) {
+	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod, Date date,
+			ArrayList<Deliveries> deliveries) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.adress = adress;
 		this.telephone = telephone;
+		this.order_date = date;
 		this.email = email;
 		this.paymentMethod = paymentMethod;
 		this.deliveries = deliveries;
@@ -103,6 +108,18 @@ public class Client implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public Date getOrder_date() {
+		return order_date;
+	}
+
+
+
+	public void setOrder_date(Date order_date) {
+		this.order_date = order_date;
+	}
+
+
 
 	public String getName() {
 		return name;

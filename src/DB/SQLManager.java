@@ -88,7 +88,7 @@ public class SQLManager {
 	public static void createClientTable() throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT, payment_method TEXT NOT NULL)";
+				+ "adress TEXT NOT NULL," + "telephone INT," + " order_date DATE NOT NULL," + "email TEXT, payment_method TEXT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
@@ -195,9 +195,9 @@ public class SQLManager {
 	
 	public static void insertClientEntrance(Client client) throws SQLException {
 		Statement stmt1= c.createStatement();
-		String sql1 = "INSERT INTO client(name, adress, telephone, email, payment_method)" +
+		String sql1 = "INSERT INTO client(name, adress, ,telephone, email, order_date, payment_method)" +
 				"VALUES( '" + client.getName() + "' , '" + client.getAdress() + "' , '" + client.getTelephone() +
-				"' , '" + client.getEmail() +"' , '"+ client.getPaymentMethod() + "');";
+				"' , '" + client.getEmail() +"' , '"+client.getOrder_date()+"' , '"+ client.getPaymentMethod() + "');";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
