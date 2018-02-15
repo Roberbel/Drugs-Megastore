@@ -15,6 +15,10 @@ import pojo.*;
 public class MainWindow extends Application {
 	private Stage stage;
 	private ChoiceBox<String> list;
+	private BorderPane mainPane;
+	private BorderPane secondPane;
+	private BorderPane tertPane;
+	private FlowPane tablesPane;
 	
 	public static void main (String[] args) {
 		launch(args);
@@ -22,21 +26,29 @@ public class MainWindow extends Application {
 	
 
 	private void listChanged() {
-		System.out.println(list.getValue());
+		String value=list.getValue();
+		switch (value) {
+		case "Drugs":
+			//tablesPane.
 		
+		}
 	}
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
+//===========================================Pane====================================//
+		FlowPane listPane = new FlowPane();
+		listPane.getChildren().add(list);
 		
+		BorderPane secondPane=new BorderPane();
+				
 //===========================================list====================================//
 		list = new ChoiceBox <String>();
 		list.getItems().addAll("Drugs","Arrivals","Clients","Corridors","Deliveries","Employees","Provider","Warehouse");
 		list.setOnAction(e -> listChanged());
 		
 //===========================================Table===================================//
-		BorderPane mainPane=new BorderPane();
 		
 		TableColumn <pojo.Employee,String> name= new TableColumn("Name");
 		TableColumn <pojo.Employee,Float> salary=new TableColumn("Salary");
@@ -53,18 +65,7 @@ public class MainWindow extends Application {
 		
 		
 		
-//===========================================Pane====================================//
-		FlowPane listPane = new FlowPane();
-		listPane.getChildren().add(list);
-		
-		//BorderPane mainPane=new BorderPane();
-		
-		BorderPane secondPane=new BorderPane();
-		
-		
-		
-		
-		
+	
 		
 //===========================================Scene===================================//		
 		Scene scene = new Scene(mainPane, 300, 400);
