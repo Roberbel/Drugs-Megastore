@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Date;
 
-import pojo.*;
+import pojos.*;
 
 public class SQLManager {
 
@@ -182,13 +182,22 @@ public class SQLManager {
 		stmt1.close();
 	}
 
-	public static void insertDeliveriesEntrance(Deliveries delivery) throws SQLException {
+	public static void insertDeliveriesEntrance(Delivery delivery) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "INSERT INTO deliveries(selling_price, ammount, transaction_date, client_id)" + "VALUES( '"
 				+ delivery.getSellingPrice() + "' , '" + delivery.getAmmount() + "' , '" + delivery.getTransactionDate()
 				+ "' , '" + delivery.getClient().getId() + "');";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+	}
+	
+	public static void insertPackagedEntrance(Drug drug,Delivery delivery) throws SQLException {
+		Statement stmt1 = c.createStatement();
+		String sql1 = "INSERT INTO packaged (drug_id, transaction_id)" + "VALUES( '"
+				+ drug.getId() + "' , '" + delivery.getTransactionId() +"');";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+
 	}
 
 	public static void insertProviderEntrance(Provider provider) throws SQLException {
@@ -200,7 +209,7 @@ public class SQLManager {
 		stmt1.close();
 	}
 
-	public static void insertArrivalsEntrance(Arrivals arrival) throws SQLException {
+	public static void insertArrivalsEntrance(Arrival arrival) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, ammount, provider_id)" + "VALUES( '"
 				+ arrival.getBuyingPrice() + "' , '" + arrival.getDate() + "' , '" + arrival.getAmmount() + "' , '"
@@ -210,7 +219,16 @@ public class SQLManager {
 
 	}
 	
-	public static void insertDrugEntrance(Drugs drug) throws SQLException {
+	public static void insertArrivesEntrance(Drug drug, Arrival arrival) throws SQLException {
+		Statement stmt1 = c.createStatement();
+		String sql1 = "INSERT INTO arrives(drug_id,transaction_id)" + "VALUES( '"
+				+ drug.getId() + "' , '" + arrival.getArrivalId() + "');";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+
+	}
+	
+	public static void insertDrugEntrance(Drug drug) throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "INSERT INTO drug(name, photo, stock, active_principle,corridor_id )" + "VALUES('"
 				+ drug.getName() + "','" + drug.getPhoto() + "','" + drug.getStock()+ "','" + drug.getActivePrinciple() + "','"
@@ -220,7 +238,7 @@ public class SQLManager {
 
 	}
 	
-	public static void insertCorridorEntrance(Corridors corridor) throws SQLException{
+	public static void insertCorridorEntrance(Corridor corridor) throws SQLException{
         Statement stmt1=c.createStatement();
         String sql1="INSERT INTO corridors(temperature, warehouse_id)"
                 + "VALUES('"+corridor.getTemperature()+"','"+corridor.getWarehouse().getId()+"');";

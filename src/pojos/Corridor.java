@@ -1,4 +1,4 @@
-package pojo;
+package pojos;
 
 
 import java.io.Serializable;
@@ -10,7 +10,7 @@ import java.util.List;
 
 
 
-public class Corridors implements Serializable {
+public class Corridor implements Serializable {
 
 	
 	private static final long serialVersionUID = 4227526298151577502L;
@@ -18,43 +18,43 @@ public class Corridors implements Serializable {
 	private Integer id;
 	private Integer temperature;
 	private Warehouse warehouse;
-	private List<Drugs>drugs;
+	private List<Drug>drugs;
 	
 	
-	public Corridors() {
+	public Corridor() {
 		super();
-		this.drugs=new ArrayList<Drugs>();
+		this.drugs=new ArrayList<Drug>();
 	
 	}
 	
 		
-	public Corridors(Integer temperature, Warehouse warehouse, List<Drugs> drugs) {
+	public Corridor(Integer temperature, Warehouse warehouse, List<Drug> drugs) {
 		super();
 		this.temperature = temperature;
 		this.warehouse = warehouse;
 		this.drugs = drugs;
 	}
 
-	public Corridors(Integer id, Integer temperature, Warehouse warehouse) {
+	public Corridor(Integer id, Integer temperature, Warehouse warehouse) {
 		super();
 		this.id =id;
 		this.temperature = temperature;
 		this.warehouse = warehouse;
-		this.drugs = new ArrayList<Drugs>();
+		this.drugs = new ArrayList<Drug>();
 	}
-	public Corridors(Integer id, Integer temperature, Warehouse warehouse,
-			List<Drugs> drugs) {
+	public Corridor(Integer id, Integer temperature, Warehouse warehouse,
+			List<Drug> drugs) {
 		super();
 		this.id =id;
 		this.temperature = temperature;
 		this.warehouse = warehouse;
 		this.drugs = drugs;
 	}
-	public Corridors(Integer id, Integer temperature) {
+	public Corridor(Integer id, Integer temperature) {
 		super();
 		this.id =id;
 		this.temperature = temperature;
-		this.drugs = new ArrayList<Drugs>();
+		this.drugs = new ArrayList<Drug>();
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class Corridors implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Corridors other = (Corridors) obj;
+		Corridor other = (Corridor) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -110,22 +110,22 @@ public class Corridors implements Serializable {
 		this.warehouse = warehouse;
 	}
 
-	public List<Drugs> getDrugs() {
+	public List<Drug> getDrugs() {
 		return drugs;
 	}
 
-	public void setDrugs(List<Drugs> drugs) {
+	public void setDrugs(List<Drug> drugs) {
 		this.drugs = drugs;
 	}
 
-	public void addDrug(Drugs drug) {
+	public void addDrug(Drug drug) {
 		if (!drugs.contains(drug)) {
 			this.drugs.add(drug);
 		}
 	}
 
 
-	public void removeDrug(Drugs drug) {
+	public void removeDrug(Drug drug) {
 		if (drugs.contains(drug)) {
 			this.drugs.remove(drug);
 		}

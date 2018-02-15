@@ -1,10 +1,10 @@
-package pojo;
+package pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.*;
 
-public class Deliveries implements Serializable {
+public class Delivery implements Serializable {
 
 	/**
 	 * 
@@ -15,17 +15,17 @@ public class Deliveries implements Serializable {
 	private Integer sellingPrice;
 	private Integer ammount;
 	private Date transactionDate;
-	private List<Drugs> drugId;
+	private List<Drug> drugId;
 	private Client client;
 
-	public Deliveries() {
+	public Delivery() {
 		super();
-		drugId = new ArrayList<Drugs>();
+		drugId = new ArrayList<Drug>();
 	}
 
 	
 	
-	public Deliveries(Integer sellingPrice, Integer ammount, Date transactionDate, List<Drugs> drugId, Client client) {
+	public Delivery(Integer sellingPrice, Integer ammount, Date transactionDate, List<Drug> drugId, Client client) {
 		super();
 		this.sellingPrice = sellingPrice;
 		this.ammount = ammount;
@@ -36,8 +36,8 @@ public class Deliveries implements Serializable {
 
 
 
-	public Deliveries(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,
-			List<Drugs> drugId, Client client) {
+	public Delivery(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,
+			List<Drug> drugId, Client client) {
 		super();
 		this.transactionId = transactionId;
 		this.sellingPrice = sellingPrice;
@@ -63,7 +63,7 @@ public class Deliveries implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Deliveries other = (Deliveries) obj;
+		Delivery other = (Delivery) obj;
 		if (transactionId == null) {
 			if (other.transactionId != null)
 				return false;
@@ -110,11 +110,11 @@ public class Deliveries implements Serializable {
 		this.transactionDate = transactionDate;
 	}
 
-	public List<Drugs> getDrugId() {
+	public List<Drug> getDrugId() {
 		return drugId;
 	}
 
-	public void setDrugId(List<Drugs> clientId) {
+	public void setDrugId(List<Drug> clientId) {
 		this.drugId = clientId;
 	}
 
@@ -125,14 +125,14 @@ public class Deliveries implements Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public void addDrug(Drugs drug) {
+	public void addDrug(Drug drug) {
 		if (!drugId.contains(drug)) {
 			this.drugId.add(drug);
 		}
 	}
 
 
-	public void removeDrug(Drugs drug) {
+	public void removeDrug(Drug drug) {
 		if (drugId.contains(drug)) {
 			this.drugId.remove(drug);
 		}

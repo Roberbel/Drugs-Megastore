@@ -1,4 +1,4 @@
-package pojo;
+package pojos;
 
 import java.io.Serializable;
 import java.util.*;
@@ -18,19 +18,19 @@ public class Client implements Serializable {
 	private Date order_date;
 	private String email;
 	private String paymentMethod;
-	private List<Deliveries> deliveries;
+	private List<Delivery> deliveries;
 
 	
 	
 	public Client() {
 		super();
-		setDeliveries(new ArrayList<Deliveries>());
+		setDeliveries(new ArrayList<Delivery>());
 	}
 	
 	
 	
 	public Client(String name, String adress, Integer telephone, String email, String paymentMethod, Date date,
-			List<Deliveries> deliveries) {
+			List<Delivery> deliveries) {
 		super();
 		this.name = name;
 		this.adress = adress;
@@ -43,7 +43,7 @@ public class Client implements Serializable {
 
 
 
-	public Client(Integer id, String name, String adress,Date date, String paymentMethod, ArrayList<Deliveries> deliveries) {
+	public Client(Integer id, String name, String adress,Date date, String paymentMethod, ArrayList<Delivery> deliveries) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -54,7 +54,7 @@ public class Client implements Serializable {
 	}
 
 	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod, Date date,
-			ArrayList<Deliveries> deliveries) {
+			ArrayList<Delivery> deliveries) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -161,21 +161,21 @@ public class Client implements Serializable {
 		this.paymentMethod = paymentMethod;
 	}
 
-	public List<Deliveries> getDeliveries() {
+	public List<Delivery> getDeliveries() {
 		return deliveries;
 	}
 
-	public void setDeliveries(List<Deliveries> deliveries) {
+	public void setDeliveries(List<Delivery> deliveries) {
 		this.deliveries = deliveries;
 	}
 	
-	public void addDelivery(Deliveries delivery) {
+	public void addDelivery(Delivery delivery) {
 		if (!deliveries.contains(delivery)) {
 			this.deliveries.add(delivery);
 		}
 	}
 
-	public void removeDelivery(Deliveries delivery) {
+	public void removeDelivery(Delivery delivery) {
 		if (deliveries.contains(delivery)) {
 			this.deliveries.remove(delivery);
 		}

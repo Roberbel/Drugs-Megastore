@@ -1,4 +1,4 @@
-package pojo;
+package pojos;
 
 import java.io.Serializable;
 import java.util.*;
@@ -14,16 +14,16 @@ public class Provider implements Serializable {
 	private String adress;
 	private Integer telephone;
 	private String email;
-	private List<Arrivals> arrivals;
+	private List<Arrival> arrivals;
 
 	public Provider() {
 		super();
-		arrivals = new ArrayList<Arrivals>();
+		arrivals = new ArrayList<Arrival>();
 	}
 
 	
 	
-	public Provider(String name, String adress, Integer telephone, String email, List<Arrivals> arrivals) {
+	public Provider(String name, String adress, Integer telephone, String email, List<Arrival> arrivals) {
 		super();
 		this.name = name;
 		this.adress = adress;
@@ -34,7 +34,7 @@ public class Provider implements Serializable {
 
 
 
-	public Provider(Integer providerId, String name, String adress, List<Arrivals> arrivals) {
+	public Provider(Integer providerId, String name, String adress, List<Arrival> arrivals) {
 		super();
 		this.providerId = providerId;
 		this.name = name;
@@ -43,7 +43,7 @@ public class Provider implements Serializable {
 	}
 
 	public Provider(Integer providerId, String name, String adress, Integer telephone, String email,
-			List<Arrivals> arrivals) {
+			List<Arrival> arrivals) {
 		super();
 		this.providerId = providerId;
 		this.name = name;
@@ -124,21 +124,21 @@ public class Provider implements Serializable {
 		this.email = email;
 	}
 
-	public List<Arrivals> getArrivals() {
+	public List<Arrival> getArrivals() {
 		return arrivals;
 	}
 
-	public void setArrivals(List<Arrivals> arrivals) {
+	public void setArrivals(List<Arrival> arrivals) {
 		this.arrivals = arrivals;
 	}
 	
-	public void addArrival(Arrivals arrival) {
+	public void addArrival(Arrival arrival) {
 		if(!arrivals.contains(arrival)) {
 			arrivals.add(arrival);
 		}
 	}
 	
-	public void removeArrival(Arrivals arrival) {
+	public void removeArrival(Arrival arrival) {
 		if(arrivals.contains(arrival)) {
 			arrivals.remove(arrival);
 		}

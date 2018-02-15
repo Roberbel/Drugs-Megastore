@@ -1,9 +1,9 @@
-package pojo;
+package pojos;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class Drugs implements Serializable {
+public class Drug implements Serializable {
 
 	/**
 	 * 
@@ -14,20 +14,20 @@ public class Drugs implements Serializable {
 	private Integer stock;
 	private Integer sellingPrice;
 	private String activePrinciple;
-	private Corridors corridor;
-	private List<Deliveries> deliveries;
-	private List<Arrivals> arrivals;
+	private Corridor corridor;
+	private List<Delivery> deliveries;
+	private List<Arrival> arrivals;
 	private byte[] photo;
 
-	public Drugs() {
+	public Drug() {
 		super();
-		deliveries = new ArrayList<Deliveries>();
-		arrivals = new ArrayList<Arrivals>();
+		deliveries = new ArrayList<Delivery>();
+		arrivals = new ArrayList<Arrival>();
 	}
 	
 
-	public Drugs(String name, Integer stock, Integer sellingPrice, String activePrinciple, Corridors corridor,
-			List<Deliveries> deliveries, List<Arrivals> arrivals, byte[] photo) {
+	public Drug(String name, Integer stock, Integer sellingPrice, String activePrinciple, Corridor corridor,
+			List<Delivery> deliveries, List<Arrival> arrivals, byte[] photo) {
 		super();
 		this.name = name;
 		this.stock = stock;
@@ -41,8 +41,8 @@ public class Drugs implements Serializable {
 
 
 
-	public Drugs(Integer id, String name, Integer stock, Integer sellingPrice, Corridors corridor,
-			List<Deliveries> deliveries, List<Arrivals> arrivals, byte[] photo) {
+	public Drug(Integer id, String name, Integer stock, Integer sellingPrice, Corridor corridor,
+			List<Delivery> deliveries, List<Arrival> arrivals, byte[] photo) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -54,8 +54,8 @@ public class Drugs implements Serializable {
 		this.photo=photo;
 	}
 
-	public Drugs(Integer id, String name, Integer stock, Integer sellingPrice, String activePrinciple,
-			Corridors corridor, List<Deliveries> deliveries, List<Arrivals> arrivals, byte[]photo) {
+	public Drug(Integer id, String name, Integer stock, Integer sellingPrice, String activePrinciple,
+			Corridor corridor, List<Delivery> deliveries, List<Arrival> arrivals, byte[]photo) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -84,7 +84,7 @@ public class Drugs implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Drugs other = (Drugs) obj;
+		Drug other = (Drug) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -139,51 +139,51 @@ public class Drugs implements Serializable {
 		this.activePrinciple = activePrinciple;
 	}
 
-	public List<Deliveries> getDeliveries() {
+	public List<Delivery> getDeliveries() {
 		return deliveries;
 	}
 
-	public void setDeliveries(List<Deliveries> deliveries) {
+	public void setDeliveries(List<Delivery> deliveries) {
 		this.deliveries = deliveries;
 	}
 
-	public List<Arrivals> getArrivals() {
+	public List<Arrival> getArrivals() {
 		return arrivals;
 	}
 
-	public void setArrivals(List<Arrivals> arrivals) {
+	public void setArrivals(List<Arrival> arrivals) {
 		this.arrivals = arrivals;
 	}
 
-	public void addDelivery(Deliveries delivery) {
+	public void addDelivery(Delivery delivery) {
 		if (!deliveries.contains(delivery)) {
 			deliveries.add(delivery);
 		}
 	}
 
-	public void removeDelivery(Deliveries delivery) {
+	public void removeDelivery(Delivery delivery) {
 		if (deliveries.contains(delivery)) {
 			deliveries.remove(delivery);
 		}
 	}
 
-	public void addArrival(Arrivals arrival) {
+	public void addArrival(Arrival arrival) {
 		if (!arrivals.contains(arrival)) {
 			arrivals.add(arrival);
 		}
 	}
 
-	public void removeArrival(Arrivals arrival) {
+	public void removeArrival(Arrival arrival) {
 		if (arrivals.contains(arrival)) {
 			arrivals.remove(arrival);
 		}
 	}
 
-	public Corridors getCorridor() {
+	public Corridor getCorridor() {
 		return corridor;
 	}
 
-	public void setCorridor(Corridors corridor) {
+	public void setCorridor(Corridor corridor) {
 		this.corridor = corridor;
 	}
 

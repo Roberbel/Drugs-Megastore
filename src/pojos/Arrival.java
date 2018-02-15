@@ -1,9 +1,9 @@
-package pojo;
+package pojos;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class Arrivals implements Serializable{
+public class Arrival implements Serializable{
 
 	/**
 	 * 
@@ -14,16 +14,16 @@ public class Arrivals implements Serializable{
 	private Date date;
 	private Integer ammount;
 	private Provider provider;
-	private List<Drugs> drugs;
+	private List<Drug> drugs;
 
-	public Arrivals() {
+	public Arrival() {
 		super();
-		drugs = new ArrayList<Drugs>();
+		drugs = new ArrayList<Drug>();
 	}
 
 	
 	
-	public Arrivals(Integer buyingPrice, Date date, Integer ammount, Provider provider, List<Drugs> drugs) {
+	public Arrival(Integer buyingPrice, Date date, Integer ammount, Provider provider, List<Drug> drugs) {
 		super();
 		this.buyingPrice = buyingPrice;
 		this.date = date;
@@ -34,8 +34,8 @@ public class Arrivals implements Serializable{
 
 
 
-	public Arrivals(Integer arrivalId, Integer buyingPrice, Date date, Integer ammount, Provider provider,
-			List<Drugs> drugs) {
+	public Arrival(Integer arrivalId, Integer buyingPrice, Date date, Integer ammount, Provider provider,
+			List<Drug> drugs) {
 		super();
 		this.arrivalId = arrivalId;
 		this.buyingPrice = buyingPrice;
@@ -61,7 +61,7 @@ public class Arrivals implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Arrivals other = (Arrivals) obj;
+		Arrival other = (Arrival) obj;
 		if (arrivalId == null) {
 			if (other.arrivalId != null)
 				return false;
@@ -116,21 +116,21 @@ public class Arrivals implements Serializable{
 		this.provider = provider;
 	}
 
-	public List<Drugs> getDrugs() {
+	public List<Drug> getDrugs() {
 		return drugs;
 	}
 
-	public void setDrugs(List<Drugs> drugs) {
+	public void setDrugs(List<Drug> drugs) {
 		this.drugs = drugs;
 	}
 
-	public void addDrug(Drugs drug) {
+	public void addDrug(Drug drug) {
 		if(!drugs.contains(drug)) {
 			drugs.add(drug);
 		}
 	}
 	
-	public void removeDrug(Drugs drug) {
+	public void removeDrug(Drug drug) {
 		if(drugs.contains(drug)) {
 			drugs.remove(drug);
 		}
