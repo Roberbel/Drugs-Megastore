@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+
 import pojo.*;
 
 public class SQLManager {
@@ -23,12 +25,14 @@ public class SQLManager {
 		Provider testProvider = new Provider();
 		testProvider.setProviderId(1);
 		Client testClient = new Client();
+		Date date = new Date();
 		
 		testClient.setAdress("Avenida Monasterio de Silos 36");
 		testClient.setName("Jaime");
 		testClient.setEmail("Jimmyviniegra@gmail.com");
 		testClient.setTelephone(638079977);
 		testClient.setPaymentMethod("Credit card");
+		testClient.setOrder_date(date);
 		
 		connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
 		
@@ -195,9 +199,9 @@ public class SQLManager {
 	
 	public static void insertClientEntrance(Client client) throws SQLException {
 		Statement stmt1= c.createStatement();
-		String sql1 = "INSERT INTO client(name, adress, ,telephone, email, order_date, payment_method)" +
+		String sql1 = "INSERT INTO client(name, adress ,telephone, email, order_date, payment_method)" +
 				"VALUES( '" + client.getName() + "' , '" + client.getAdress() + "' , '" + client.getTelephone() +
-				"' , '" + client.getEmail() +"' , '"+client.getOrder_date()+"' , '"+ client.getPaymentMethod() + "');";
+				"' , '" + client.getEmail() + "' , '" + client.getOrder_date() + "' , '"+ client.getPaymentMethod() + "');";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
