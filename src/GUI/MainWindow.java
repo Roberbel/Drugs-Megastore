@@ -65,7 +65,7 @@ public class MainWindow extends Application {
 		
 		TableView <pojo.Employee> employeeTable=new TableView<pojo.Employee>();
 		employeeTable.getColumns().addAll(name,salary,phone,position,warehouse,picture);
-		
+		mainPane = new BorderPane();
 		mainPane.setCenter(employeeTable);
 		
 		
