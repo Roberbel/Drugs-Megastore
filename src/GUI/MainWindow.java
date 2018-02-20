@@ -43,6 +43,8 @@ public class MainWindow extends Application {
 		list = new ChoiceBox <String>();
 		list.getItems().addAll("Drugs","Arrivals","Clients","Corridors","Deliveries","Employees","Provider","Warehouse");
 		list.setOnAction(e -> listChanged());
+		
+		
 //===========================================Pane====================================//
 		FlowPane listPane = new FlowPane();
 		listPane.getChildren().add(list);
