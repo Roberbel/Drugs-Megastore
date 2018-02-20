@@ -2,6 +2,7 @@ package pojos;
 
 import java.io.Serializable;
 import java.util.*;
+import java.sql.Date;
 
 public class Arrival implements Serializable{
 
@@ -12,7 +13,7 @@ public class Arrival implements Serializable{
 	private Integer arrivalId;
 	private Integer buyingPrice;
 	private Date date;
-	private Integer ammount;
+	private List<Integer> amount;
 	private Provider provider;
 	private List<Drug> drugs;
 
@@ -23,24 +24,24 @@ public class Arrival implements Serializable{
 
 	
 	
-	public Arrival(Integer buyingPrice, Date date, Integer ammount, Provider provider, List<Drug> drugs) {
+	public Arrival(Integer buyingPrice, Date date, List<Integer> amount, Provider provider, List<Drug> drugs) {
 		super();
 		this.buyingPrice = buyingPrice;
 		this.date = date;
-		this.ammount = ammount;
+		this.amount = amount;
 		this.provider = provider;
 		this.drugs = drugs;
 	}
 
 
 
-	public Arrival(Integer arrivalId, Integer buyingPrice, Date date, Integer ammount, Provider provider,
+	public Arrival(Integer arrivalId, Integer buyingPrice, Date date, List<Integer> amount, Provider provider,
 			List<Drug> drugs) {
 		super();
 		this.arrivalId = arrivalId;
 		this.buyingPrice = buyingPrice;
 		this.date = date;
-		this.ammount = ammount;
+		this.amount = amount;
 		this.provider = provider;
 		this.drugs = drugs;
 	}
@@ -72,8 +73,8 @@ public class Arrival implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Arrivals [arrivalId=" + arrivalId + ", buyingPrice=" + buyingPrice + ", date=" + date + ", ammount="
-				+ ammount + ", provider=" + provider + ", drugs=" + drugs + "]";
+		return "Arrivals [arrivalId=" + arrivalId + ", buyingPrice=" + buyingPrice + ", date=" + date + ", amount="
+				+ amount + ", provider=" + provider + ", drugs=" + drugs + "]";
 	}
 
 	public Integer getArrivalId() {
@@ -100,14 +101,14 @@ public class Arrival implements Serializable{
 		this.date = date;
 	}
 
-	public Integer getAmmount() {
-		return ammount;
+	public List<Integer> getAmount() {
+		return amount;
 	}
 
-	public void setAmmount(Integer ammount) {
-		this.ammount = ammount;
+	public void setAmount(List<Integer> amount) {
+		this.amount = amount;
 	}
-
+	
 	public Provider getProvider() {
 		return provider;
 	}

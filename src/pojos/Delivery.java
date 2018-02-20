@@ -13,8 +13,9 @@ public class Delivery implements Serializable {
 
 	private Integer transactionId;
 	private Integer sellingPrice;
-	private Integer ammount;
+	private List<Integer> amount;
 	private Date transactionDate;
+	private boolean deliveried;
 	private List<Drug> drugId;
 	private Client client;
 
@@ -25,23 +26,25 @@ public class Delivery implements Serializable {
 
 	
 	
-	public Delivery(Integer sellingPrice, Integer ammount, Date transactionDate, List<Drug> drugId, Client client) {
+	public Delivery(Integer sellingPrice, List<Integer> amount, Date transactionDate, List<Drug> drugId, Client client) {
 		super();
 		this.sellingPrice = sellingPrice;
-		this.ammount = ammount;
+		this.amount = amount;
 		this.transactionDate = transactionDate;
+		this.deliveried=false;
 		this.drugId = drugId;
 		this.client = client;
 	}
 
 
 
-	public Delivery(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,
+	public Delivery(Integer transactionId, Integer sellingPrice, List<Integer> amount, Date transactionDate,
 			List<Drug> drugId, Client client) {
 		super();
 		this.transactionId = transactionId;
 		this.sellingPrice = sellingPrice;
-		this.ammount = ammount;
+		this.amount = amount;
+		this.deliveried=false;
 		this.transactionDate = transactionDate;
 		this.drugId = drugId;
 		this.client = client;
@@ -72,11 +75,16 @@ public class Delivery implements Serializable {
 		return true;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "Deliveries [transactionId=" + transactionId + ", sellingPrice=" + sellingPrice + ", ammount=" + ammount
-				+ ", transactionDate=" + transactionDate + ", drugId=" + drugId + ", client=" + client + "]";
+		return "Delivery [transactionId=" + transactionId + ", sellingPrice=" + sellingPrice + ", amount=" + amount
+				+ ", transactionDate=" + transactionDate + ", deliveried=" + deliveried + ", drugId=" + drugId
+				+ ", client=" + client + "]";
 	}
+
+
 
 	public Integer getTransactionId() {
 		return transactionId;
@@ -94,12 +102,24 @@ public class Delivery implements Serializable {
 		this.sellingPrice = sellingPrice;
 	}
 
-	public Integer getAmmount() {
-		return ammount;
+	public List<Integer> getAmount() {
+		return amount;
 	}
 
-	public void setAmmount(Integer ammount) {
-		this.ammount = ammount;
+	public void setAmount(List<Integer> amount) {
+		this.amount = amount;
+	}
+	
+	public void addAmount(Integer amounts) {
+		if(!amount.contains(amounts)) {
+			amount.add(amounts);
+		}
+	}
+	
+	public void removeAmount(Integer amounts) {
+		if(amount.contains(amounts)) {
+			amount.remove(amounts);
+		}
 	}
 
 	public Date getTransactionDate() {
@@ -109,6 +129,18 @@ public class Delivery implements Serializable {
 	public void setTransactionDate(Date transactionDate) {
 		this.transactionDate = transactionDate;
 	}
+
+	public boolean isDeliveried() {
+		return deliveried;
+	}
+
+
+
+	public void setDeliveried(boolean deliveried) {
+		this.deliveried = deliveried;
+	}
+
+
 
 	public List<Drug> getDrugId() {
 		return drugId;
