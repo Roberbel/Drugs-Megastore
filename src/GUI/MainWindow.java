@@ -28,7 +28,7 @@ public class MainWindow extends Application {
 	private void listChanged() {
 		String value=list.getValue();
 		switch (value) {
-		case "Drugs":
+		//case "Drugs":
 			//tablesPane.
 		
 		}
@@ -37,16 +37,19 @@ public class MainWindow extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
+		
+		
+//===========================================List====================================//
+		list = new ChoiceBox <String>();
+		list.getItems().addAll("Drugs","Arrivals","Clients","Corridors","Deliveries","Employees","Provider","Warehouse");
+		list.setOnAction(e -> listChanged());
 //===========================================Pane====================================//
 		FlowPane listPane = new FlowPane();
 		listPane.getChildren().add(list);
 		
 		BorderPane secondPane=new BorderPane();
 				
-//===========================================list====================================//
-		list = new ChoiceBox <String>();
-		list.getItems().addAll("Drugs","Arrivals","Clients","Corridors","Deliveries","Employees","Provider","Warehouse");
-		list.setOnAction(e -> listChanged());
+
 		
 //===========================================Table===================================//
 		
