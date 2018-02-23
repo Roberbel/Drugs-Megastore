@@ -80,8 +80,7 @@ public class SQLManager {
 
 	}
 
-	// ===================================CREATE TABLE
-	// METHODS.===============================================
+	// ===================================CREATE TABLE METHODS.===============================================
 
 	public static void createClientTable() throws SQLException {
 		Statement stmt1 = c.createStatement();
@@ -169,8 +168,7 @@ public class SQLManager {
 
 	// ===========================================================================================================
 
-	// ==========================INSERT ENTRANCE
-	// METHODS==========================================================
+	// ==========================INSERT ENTRANCE METHODS==========================================================
 
 	public static void insertDeliveriesEntrance(Delivery delivery) throws SQLException {
 
@@ -198,13 +196,13 @@ public class SQLManager {
 
 	}
 
-	public static void insertPackagedEntrance(Drug drug, Delivery delivery) throws SQLException {
+	public static void insertPackagedEntrance(Drug drug, Delivery delivery, Integer amount) throws SQLException {
 
 		String sql1 = "INSERT INTO packaged (drug_id, transaction_id, amount)" + "VALUES( ?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setInt(1, drug.getId());
 		prep.setInt(2, delivery.getTransactionId());
-		//prep.setInt(3, x); //MISSING -> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN A POJO AS A LIST
+		prep.setInt(3, amount); // CHECK-> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN A POJO AS A LIST
 		prep.executeUpdate();
 		prep.close();
 	}
@@ -233,13 +231,13 @@ public class SQLManager {
 		prep.close();
 	}
 
-	public static void insertArrivesEntrance(Drug drug, Arrival arrival) throws SQLException {
+	public static void insertArrivesEntrance(Drug drug, Arrival arrival, Integer amount) throws SQLException {
 
 		String sql1 = "INSERT INTO arrives(drug_id,transaction_id,amount)" + "VALUES(?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setInt(1, drug.getId());
 		prep.setInt(2, arrival.getArrivalId());
-		//prep.setInt(3, ); //MISSING -> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN A POJO AS A LIST
+		prep.setInt(3, amount); //CHECK -> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN A POJO AS A LIST
 		prep.executeUpdate();
 		prep.close();
 
