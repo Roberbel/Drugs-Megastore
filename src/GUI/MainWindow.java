@@ -74,7 +74,7 @@ public class MainWindow extends Application {
 		stage = primaryStage;
 		
 		mainPane = new BorderPane();
-		secondPane = new BorderPane();
+		/*secondPane = new BorderPane();
 		secondPaneNorth= new FlowPane();
 		secondPaneSouth= new BorderPane();
 		secondPaneSouthTextBox= new FlowPane();	
@@ -121,10 +121,11 @@ public class MainWindow extends Application {
 		
 		
 	
-		
+		*/
 //===========================================Scene===================================//		
-		Scene scene = new Scene(mainPane, 300, 400);
-		stage.setScene(scene);
+		//Scene scene = new Scene(mainPane, 300, 400);
+		
+		stage.setScene(new Scene(new EmployeePane(), 300, 400));
 		stage.show();
 	}
 	
