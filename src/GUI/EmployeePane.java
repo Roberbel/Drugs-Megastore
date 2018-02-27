@@ -4,6 +4,8 @@ import java.awt.List;
 
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -14,6 +16,7 @@ import pojo.Drugs;
 import pojo.Employee;
 import pojo.Deliveries;
 import pojo.Arrivals;
+import java.util.*;
 
 public class EmployeePane extends FlowPane {
 	
@@ -82,14 +85,36 @@ public class EmployeePane extends FlowPane {
 	}
 	
 	private void showDrugsPane() {
-		List drugs;
+		java.util.List<Drugs> drugs = new java.util.List<Drugs> ();
 		//drugs = SQLManager.getDrugsByName();
 		
+		//first we clear the panel
+		mainPane.setTop(null);
+		mainPane.setCenter(null);
+		mainPane.setRight(null);
+		mainPane.setLeft(null);
+		mainPane.setBottom(null);
 		
+		VBox listPane = new VBox();
 		
-	}
-	
-	private void showDrugInfo(Drugs d) {
+		/*on the right we will have a list of the drugs present on the DB
+		 *with the info necessary: name, stock and corridor
+		 */
+		Iterator<Drugs> iterador = drugs.iterator();
+		while(iterador.hasNext()) {
+			Drugs d = iterador.next();
+			HBox hBox = new HBox();
+			Label name = new Label(d.getName());
+			Label stock = new Label(""+d.getStock());
+			Label corridor = new Label (""+d.getStock());
+			hBox.getChildren().addAll(name, stock, corridor);
+			listPane.getChildren().add(hBox);
+		}
+		/*
+		 * Finally create a scroll panel in case there are too many drugs
+		 */
+		ScrollPane scrollPane = new ScrollPane(listPane);
+		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 		
 	}
 	
