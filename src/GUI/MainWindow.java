@@ -1,6 +1,7 @@
 package GUI;
 
 import javafx.application.*;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.*;
 import pojo.*;
 
@@ -125,8 +127,24 @@ public class MainWindow extends Application {
 //===========================================Scene===================================//		
 		//Scene scene = new Scene(mainPane, 300, 400);
 		
-		stage.setScene(new Scene(new EmployeePane(), 300, 400));
+		stage.setScene(new Scene(logInPanel(), 300, 400));
 		stage.show();
+	}
+	
+	public GridPane logInPanel() {
+		
+		GridPane logInPanel =new GridPane(1,0);
+		
+		Button logInButton=new Button ("Log In");
+		//logInButton.addEventHandler(eventType, eventHandler);
+		
+		TextField user=new TextField ("User");
+		TextField password=new TextField ("Password");
+		
+		logInPanel.getChildren().addAll(user,password,logInButton);
+		logInPanel.setAlignment(Pos.CENTER);
+		
+		return logInPanel;	
 	}
 	
 }

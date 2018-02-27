@@ -85,7 +85,8 @@ public class EmployeePane extends FlowPane {
 	}
 	
 	private void showDrugsPane() {
-		java.util.List<Drugs> drugs = new java.util.List<Drugs> ();
+		java.util.List <Drugs> drugs = new java.util.List<Drugs> ();
+		
 		//drugs = SQLManager.getDrugsByName();
 		
 		//first we clear the panel
