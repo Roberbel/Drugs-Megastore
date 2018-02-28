@@ -15,7 +15,7 @@ public class SQLManager {
 
 		try {
 
-			generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+			/*generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
 
 			Provider testProvider = new Provider();
 			testProvider.setProviderId(1);
@@ -31,7 +31,9 @@ public class SQLManager {
 
 			insertClientEntrance(testClient);
 
-			disconnect();
+			disconnect();*/
+			
+			generateUsersDataBase("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,9 +81,30 @@ public class SQLManager {
 		}
 
 	}
+	
+	public static void generateUsersDataBase(String directory) {
+		try {
+			connect(directory);
+			
+			createUsersTable();
+			
+			disconnect();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	// ===================================CREATE TABLE METHODS.===============================================
 
+	public static void createUsersTable() throws SQLException {
+		Statement stmt1 = c.createStatement();
+		String sql1 = "CREATE TABLE user" + "(user_name STRING PRIMARY KEY," + "password STRING NOT NULL,"
+				+ "type STRING," + "id INTEGER)";
+		stmt1.executeUpdate(sql1);
+		stmt1.close();
+	}
+	
 	public static void createClientTable() throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
