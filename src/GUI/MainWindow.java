@@ -137,10 +137,16 @@ public class MainWindow extends Application {
 		GridPane logInPanel =new GridPane();
 			
 		Button logInButton=new Button ("Log In");
+		logInButton.setOnAction (e->
+			{
+				
+			}
+				);
 		
 		TextField user=new TextField ("User");
 		TextField password=new TextField ("Password");
 		
+		logInPanel.setVgap(20);
 		logInPanel.addColumn(0, user,password,logInButton);
 		logInPanel.setAlignment(Pos.CENTER);
 		logInPanel.setHalignment(logInButton, HPos.CENTER);
