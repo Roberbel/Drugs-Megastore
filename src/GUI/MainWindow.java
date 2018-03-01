@@ -1,6 +1,7 @@
 package GUI;
 
 import javafx.application.*;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -133,16 +134,16 @@ public class MainWindow extends Application {
 	
 	public GridPane logInPanel() {
 		
-		GridPane logInPanel =new GridPane(1,0);
-		
+		GridPane logInPanel =new GridPane();
+			
 		Button logInButton=new Button ("Log In");
-		//logInButton.addEventHandler(eventType, eventHandler);
 		
 		TextField user=new TextField ("User");
 		TextField password=new TextField ("Password");
 		
-		logInPanel.getChildren().addAll(user,password,logInButton);
+		logInPanel.addColumn(0, user,password,logInButton);
 		logInPanel.setAlignment(Pos.CENTER);
+		logInPanel.setHalignment(logInButton, HPos.CENTER);
 		
 		return logInPanel;	
 	}
