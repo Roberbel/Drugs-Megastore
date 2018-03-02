@@ -4,13 +4,17 @@ import java.awt.List;
 
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import pojo.Drugs;
 import pojo.Employee;
@@ -32,6 +36,7 @@ public class EmployeePane extends FlowPane {
 	Button logOut;
 	
 	TextField searchField;
+	ChoiceBox<String> order;
 
 	
 	public EmployeePane() {
@@ -46,6 +51,8 @@ public class EmployeePane extends FlowPane {
 		arrivalsButton.setOnAction(e -> showArrivalsPane());
 		departuresButton = new Button ("Departure");
 		departuresButton.setOnAction(e -> showDeparturesPane());
+		//we initialize already the search field
+		searchField = new TextField();
 		
 		HBox hBox = new HBox(20, drugButton, arrivalsButton, departuresButton);
 		
@@ -72,6 +79,8 @@ public class EmployeePane extends FlowPane {
 		arrivalsButton.setOnAction(e -> showArrivalsPane());
 		departuresButton = new Button ("Departure");
 		departuresButton.setOnAction(e -> showDeparturesPane());
+		//we initialize already the search field
+		searchField = new TextField();
 		
 		HBox hBox = new HBox(20, drugButton, arrivalsButton, departuresButton);
 		
@@ -96,6 +105,20 @@ public class EmployeePane extends FlowPane {
 		mainPane.setLeft(null);
 		mainPane.setBottom(null);
 		
+		HBox topPanel = new HBox(30);
+		topPanel.getChildren().addAll(searchField, new Region(),  drugButton, arrivalsButton, departuresButton);
+		
+		mainPane.setTop(topPanel);
+		
+		VBox leftPane = new VBox(70);
+		//=====================================//
+		//                                     //
+		//	No idea how to do this either 	   //
+		//									   //
+		//=====================================//
+		order = new ChoiceBox<String>();
+		
+		
 		VBox listPane = new VBox();
 		
 		/*on the right we will have a list of the drugs present on the DB
@@ -111,11 +134,16 @@ public class EmployeePane extends FlowPane {
 			hBox.getChildren().addAll(name, stock, corridor);
 			listPane.getChildren().add(hBox);
 		}
+		
+		
 		/*
 		 * Finally create a scroll panel in case there are too many drugs
 		 */
+		
 		ScrollPane scrollPane = new ScrollPane(listPane);
 		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+		
+		mainPane.setCenter(scrollPane);
 		
 	}
 	

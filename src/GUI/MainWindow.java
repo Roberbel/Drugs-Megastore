@@ -128,7 +128,7 @@ public class MainWindow extends Application {
 //===========================================Scene===================================//		
 		//Scene scene = new Scene(mainPane, 300, 400);
 		
-		stage.setScene(new Scene(logInPanel(), 300, 400));
+		stage.setScene(new Scene(new EmployeePane(), 300, 400));
 		stage.show();
 	}
 	
