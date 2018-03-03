@@ -205,7 +205,8 @@ public class EmployeePane extends FlowPane {
 		
 		leftPane.getChildren().addAll(order, direction);
 		mainPane.setLeft(leftPane);
-		
+		changeArrivalsListPane();
+		mainPane.setCenter(listPane);
 		
 	}
 	
