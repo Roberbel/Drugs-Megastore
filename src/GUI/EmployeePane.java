@@ -37,6 +37,8 @@ public class EmployeePane extends FlowPane {
 	
 	TextField searchField;
 	ChoiceBox<String> order;
+	ChoiceBox<String> direction;
+	VBox listPane;
 
 	
 	public EmployeePane() {
@@ -81,6 +83,7 @@ public class EmployeePane extends FlowPane {
 		departuresButton.setOnAction(e -> showDeparturesPane());
 		//we initialize already the search field
 		searchField = new TextField();
+		searchField.setText("Search");
 		
 		HBox hBox = new HBox(20, drugButton, arrivalsButton, departuresButton);
 		
@@ -94,9 +97,6 @@ public class EmployeePane extends FlowPane {
 	}
 	
 	private void showDrugsPane() {
-		java.util.List <Drugs> drugs = new java.util.List<Drugs> ();
-		
-		//drugs = SQLManager.getDrugsByName();
 		
 		//first we clear the panel
 		mainPane.setTop(null);
@@ -111,30 +111,24 @@ public class EmployeePane extends FlowPane {
 		mainPane.setTop(topPanel);
 		
 		VBox leftPane = new VBox(70);
-		//=====================================//
-		//                                     //
-		//	No idea how to do this either 	   //
-		//									   //
-		//=====================================//
 		order = new ChoiceBox<String>();
+		order.getItems().addAll("Name", "Stock");
+		order.setValue("Name");
+		order.setOnAction(e -> changeDrugListPane());
+		//order.setSelectionModel();
 		
+		direction = new ChoiceBox <String>();
+		direction.getItems().addAll("Ascending", "Descending");
+		direction.setValue("Descending");
+		direction.setOnAction(e -> changeDrugListPane());
 		
-		VBox listPane = new VBox();
-		
+		leftPane.getChildren().addAll(order, direction);
+		mainPane.setLeft(leftPane);
 		/*on the right we will have a list of the drugs present on the DB
 		 *with the info necessary: name, stock and corridor
 		 */
-		Iterator<Drugs> iterador = drugs.iterator();
-		while(iterador.hasNext()) {
-			Drugs d = iterador.next();
-			HBox hBox = new HBox();
-			Label name = new Label(d.getName());
-			Label stock = new Label(""+d.getStock());
-			Label corridor = new Label (""+d.getStock());
-			hBox.getChildren().addAll(name, stock, corridor);
-			listPane.getChildren().add(hBox);
-		}
-		
+		listPane = new VBox();
+		changeDrugListPane();
 		
 		/*
 		 * Finally create a scroll panel in case there are too many drugs
@@ -145,6 +139,42 @@ public class EmployeePane extends FlowPane {
 		
 		mainPane.setCenter(scrollPane);
 		
+	}
+	
+	private void changeDrugListPane() {
+	
+		listPane.getChildren().clear();
+		
+		java.util.List <Drugs> drugs;
+		
+		String value1 = order.getValue();
+		String value2 = direction.getValue();
+		if(value2 == "Name") {
+			if(value2 == "Descending") {
+				//here would go the SQL commands.
+			}else {
+				
+			}
+		}else {
+			if(value2 == "Descending") {
+				
+			}else {
+				
+			}
+		}
+		
+		/*Iterator<Drugs> iterador = drugs.iterator();
+		while(iterador.hasNext()) {
+			Drugs d = iterador.next();
+			HBox hBox = new HBox();
+			Label name = new Label(d.getName());
+			Label stock = new Label(""+d.getStock());
+			Label corridor = new Label (""+d.getCorridor());
+			hBox.getChildren().addAll(name, stock, corridor);
+			listPane.getChildren().add(hBox);
+		}*/
+	
+	
 	}
 	
 	private void showArrivalsPane() {
