@@ -53,9 +53,10 @@ public class EmployeePane extends FlowPane {
 		arrivalsButton.setOnAction(e -> showArrivalsPane());
 		departuresButton = new Button ("Departure");
 		departuresButton.setOnAction(e -> showDeparturesPane());
-		//we initialize already the search field
+		//we initialize some components
 		searchField = new TextField();
-		
+		listPane = new VBox();
+		searchField.setText("Search");
 		HBox hBox = new HBox(20, drugButton, arrivalsButton, departuresButton);
 		
 		mainPane.setCenter(hBox);
@@ -81,9 +82,10 @@ public class EmployeePane extends FlowPane {
 		arrivalsButton.setOnAction(e -> showArrivalsPane());
 		departuresButton = new Button ("Departure");
 		departuresButton.setOnAction(e -> showDeparturesPane());
-		//we initialize already the search field
+		//we initialize some components
 		searchField = new TextField();
 		searchField.setText("Search");
+		listPane = new VBox();
 		
 		HBox hBox = new HBox(20, drugButton, arrivalsButton, departuresButton);
 		
@@ -119,7 +121,7 @@ public class EmployeePane extends FlowPane {
 		
 		direction = new ChoiceBox <String>();
 		direction.getItems().addAll("Ascending", "Descending");
-		direction.setValue("Descending");
+		direction.setValue("Ascending");
 		direction.setOnAction(e -> changeDrugListPane());
 		
 		leftPane.getChildren().addAll(order, direction);
@@ -127,7 +129,6 @@ public class EmployeePane extends FlowPane {
 		/*on the right we will have a list of the drugs present on the DB
 		 *with the info necessary: name, stock and corridor
 		 */
-		listPane = new VBox();
 		changeDrugListPane();
 		
 		/*
@@ -142,7 +143,7 @@ public class EmployeePane extends FlowPane {
 	}
 	
 	private void changeDrugListPane() {
-	
+		//mainPane.setCenter(null);
 		listPane.getChildren().clear();
 		
 		java.util.List <Drugs> drugs;
@@ -178,7 +179,70 @@ public class EmployeePane extends FlowPane {
 	}
 	
 	private void showArrivalsPane() {
+		//first we clear the panel
+		mainPane.setTop(null);
+		mainPane.setCenter(null);
+		mainPane.setRight(null);
+		mainPane.setLeft(null);
+		mainPane.setBottom(null);
 		
+		HBox topPanel = new HBox(30);
+		topPanel.getChildren().addAll(searchField, new Region(),  drugButton, arrivalsButton, departuresButton);
+		
+		mainPane.setTop(topPanel);
+		
+		VBox leftPane = new VBox(70);
+		order = new ChoiceBox<String>();
+		order.getItems().addAll("Date");
+		order.setValue("Date");
+		order.setOnAction(e -> changeArrivalsListPane());
+		//order.setSelectionModel();
+		
+		direction = new ChoiceBox <String>();
+		direction.getItems().addAll("Ascending", "Descending");
+		direction.setValue("Acending");
+		direction.setOnAction(e -> changeArrivalsListPane());
+		
+		leftPane.getChildren().addAll(order, direction);
+		mainPane.setLeft(leftPane);
+		
+		
+	}
+	
+	private void changeArrivalsListPane() {
+		//mainPane.setCenter(null);
+		listPane.getChildren().clear();
+		
+		java.util.List <Arrivals> arrivals;
+		
+		String value1 = order.getValue();
+		String value2 = direction.getValue();
+		if(value2 == "Name") {
+			if(value2 == "Descending") {
+				//here would go the SQL commands.
+			}else {
+				
+			}
+		}else {
+			if(value2 == "Descending") {
+				
+			}else {
+				
+			}
+		}
+		
+		/*Iterator<Drugs> iterador = drugs.iterator();
+		while(iterador.hasNext()) {
+			Drugs d = iterador.next();
+			HBox hBox = new HBox();
+			Label name = new Label(d.getName());
+			Label stock = new Label(""+d.getStock());
+			Label corridor = new Label (""+d.getCorridor());
+			hBox.getChildren().addAll(name, stock, corridor);
+			listPane.getChildren().add(hBox);
+		}*/
+	
+	
 	}
 	
 	private void showArrivalInfo(Arrivals a) {
