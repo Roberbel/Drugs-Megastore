@@ -2,30 +2,40 @@ package pojos;
 
 import java.io.Serializable;
 
-public class User implements Serializable{
-	
+public class User implements Serializable {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2459371836299683662L;
-	
+
+	public enum UserClass {
+		EMPLOYEE, CLIENT, ADMIN
+	}
+
 	private String userName;
 	private String password;
-	private String type;
+	private UserClass type;
 	private Integer id;
-	
+
 	public User() {
 		super();
 	}
-	
+
 	public User(String userName, String password) {
 		super();
 		this.userName = userName;
 		this.password = password;
 	}
-	
-	
-	
+
+	public User(String userName, String password, UserClass type, Integer id) {
+		super();
+		this.userName = userName;
+		this.password = password;
+		this.type = type;
+		this.id = id;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -55,34 +65,46 @@ public class User implements Serializable{
 	public String toString() {
 		return "User [userName=" + userName + ", password=" + password + ", type=" + type + ", id=" + id + "]";
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getType() {
+
+	public UserClass getType() {
 		return type;
 	}
-	public void setType(String type) {
+
+	public void setType(UserClass type) {
 		this.type = type;
 	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	/*public boolean checkPassword() {
-		
-	}*/
-	
-	
+
+	/*
+	 * public boolean checkPassword() {
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
+
+
 }
