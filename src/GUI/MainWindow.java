@@ -26,6 +26,7 @@ public class MainWindow extends JFrame {
 			if (logInManager.checkExistance()) {
 				if (logInManager.checkPassword()) {
 					System.out.println("Log in correcto");
+					System.out.println(logInManager.getCompleteUser().toString());
 				} else {
 					System.out.println("Introduzca la Contraseña correcta");
 				}

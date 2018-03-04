@@ -383,7 +383,7 @@ public class SQLManager {
 		return null;
 	}
 	
-	public boolean checkUser(User userWanted) throws SQLException{
+	public static boolean checkUser(User userWanted) throws SQLException{
 		Statement stmt1 = c.createStatement();
 		String sql = "SELECT * FROM user";
 		ResultSet rs = stmt1.executeQuery(sql);
@@ -411,7 +411,7 @@ public class SQLManager {
 
 		case "ADMIN":
 
-			return UserClass.EMPLOYEE;
+			return UserClass.ADMIN;
 
 		case "CLIENT":
 

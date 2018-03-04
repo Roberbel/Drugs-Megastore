@@ -10,7 +10,6 @@ public class LogInManager {
 	
 		private User trialUser;
 		private User completeUser;
-		private SQLManager manager = new SQLManager();
 		
 		
 		
@@ -41,14 +40,14 @@ public class LogInManager {
 		
 		
 		public boolean checkExistance() throws SQLException, ClassNotFoundException{
-			manager.connect("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
+			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
 			
-			if(manager.checkUser(trialUser)) {
-				completeUser=manager.extractUserByName(trialUser);
-				manager.disconnect();
+			if(SQLManager.checkUser(trialUser)) {
+				completeUser=SQLManager.extractUserByName(trialUser);
+				SQLManager.disconnect();
 				return true;
 			}else {
-				manager.disconnect();
+				SQLManager.disconnect();
 				return false;
 			}
 		}
