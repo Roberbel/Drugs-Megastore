@@ -12,10 +12,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import pojo.Drugs;
-import pojo.Employee;
-import pojo.Deliveries;
-import pojo.Arrivals;
+import pojos.Arrivals;
+import pojos.Deliveries;
+import pojos.Drugs;
+import pojos.Employee;
+
 import java.util.*;
 
 public class EmployeePane extends FlowPane {
