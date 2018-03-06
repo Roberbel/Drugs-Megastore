@@ -41,11 +41,11 @@ public class AdminPane extends FlowPane {
 	
 	public TableView arrivalsTable() {
 		
-		TableColumn <pojos.Arrivals,Integer> cost=new TableColumn("Cost");
-		TableColumn <pojos.Arrivals,Date> dateOfOrder=new TableColumn("Date of Order");
-		TableColumn <pojos.Arrivals,String> provider=new TableColumn("Provider");
+		TableColumn <pojos.Arrival,Integer> cost=new TableColumn("Cost");
+		TableColumn <pojos.Arrival,Date> dateOfOrder=new TableColumn("Date of Order");
+		TableColumn <pojos.Arrival,String> provider=new TableColumn("Provider");
 		
-		TableView <pojos.Arrivals> arrivalsTable=new TableView<pojos.Arrivals>();
+		TableView <pojos.Arrival> arrivalsTable=new TableView<pojos.Arrival>();
 		arrivalsTable.getColumns().addAll(provider,dateOfOrder,cost);
 		
 		return arrivalsTable;		
@@ -53,13 +53,13 @@ public class AdminPane extends FlowPane {
 	
 	public TableView drugsTable() {
 		
-		TableColumn <pojos.Drugs,String> name=new TableColumn("Name");
-		TableColumn <pojos.Drugs,Integer> stock=new TableColumn("Stock");
-		TableColumn <pojos.Drugs,Integer> price=new TableColumn("Price");
-		TableColumn <pojos.Drugs,String> activePrinciple=new TableColumn("Active Principle");
-		TableColumn <pojos.Drugs,String> corridor=new TableColumn("Corridor");
+		TableColumn <pojos.Drug,String> name=new TableColumn("Name");
+		TableColumn <pojos.Drug,Integer> stock=new TableColumn("Stock");
+		TableColumn <pojos.Drug,Integer> price=new TableColumn("Price");
+		TableColumn <pojos.Drug,String> activePrinciple=new TableColumn("Active Principle");
+		TableColumn <pojos.Drug,String> corridor=new TableColumn("Corridor");
 		
-		TableView <pojos.Drugs> drugsTable=new TableView<pojos.Drugs>();
+		TableView <pojos.Drug> drugsTable=new TableView<pojos.Drug>();
 		drugsTable.getColumns().addAll(name,activePrinciple,stock,corridor,price);
 		
 		return drugsTable;
@@ -67,11 +67,11 @@ public class AdminPane extends FlowPane {
 	
 	public TableView corridorTable() {
 		
-		TableColumn <pojos.Corridors,String> name=new TableColumn("Corridor ID");
-		TableColumn <pojos.Corridors,Integer> temp=new TableColumn("Temperature");
-		TableColumn <pojos.Corridors,String> warehouse=new TableColumn("Warehouse");
+		TableColumn <pojos.Corridor,String> name=new TableColumn("Corridor ID");
+		TableColumn <pojos.Corridor,Integer> temp=new TableColumn("Temperature");
+		TableColumn <pojos.Corridor,String> warehouse=new TableColumn("Warehouse");
 		
-		TableView <pojos.Corridors> corridorTable=new TableView<pojos.Corridors>();
+		TableView <pojos.Corridor> corridorTable=new TableView<pojos.Corridor>();
 		corridorTable.getColumns().addAll(name,temp,warehouse);
 		
 		return corridorTable;
@@ -79,12 +79,12 @@ public class AdminPane extends FlowPane {
 	
 	public TableView deliveriesTable() {
 		
-		TableColumn <pojos.Deliveries,Integer> sellingPrice=new TableColumn("Cost");
-		TableColumn <pojos.Deliveries,Integer> amount=new TableColumn("Amount");
-		TableColumn <pojos.Deliveries,Date> dateOfOrder=new TableColumn("Date of Order");
-		TableColumn <pojos.Deliveries,pojos.Client> client=new TableColumn("Client");
+		TableColumn <pojos.Delivery,Integer> sellingPrice=new TableColumn("Cost");
+		TableColumn <pojos.Delivery,Integer> amount=new TableColumn("Amount");
+		TableColumn <pojos.Delivery,Date> dateOfOrder=new TableColumn("Date of Order");
+		TableColumn <pojos.Delivery,pojos.Client> client=new TableColumn("Client");
 		
-		TableView <pojos.Deliveries> deliveriesTable=new TableView <pojos.Deliveries>();
+		TableView <pojos.Delivery> deliveriesTable=new TableView <pojos.Delivery>();
 		deliveriesTable.getColumns().addAll(sellingPrice,amount,dateOfOrder,client);
 		
 		return deliveriesTable;

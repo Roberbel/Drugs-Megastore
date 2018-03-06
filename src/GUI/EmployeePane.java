@@ -16,9 +16,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import pojos.Arrivals;
-import pojos.Deliveries;
-import pojos.Drugs;
+import pojos.Arrival;
+import pojos.Delivery;
+import pojos.Drug;
 import pojos.Employee;
 
 import java.util.*;
@@ -147,7 +147,7 @@ public class EmployeePane extends FlowPane {
 		//mainPane.setCenter(null);
 		listPane.getChildren().clear();
 		
-		java.util.List <Drugs> drugs;
+		java.util.List <Drug> drugs;
 		
 		String value1 = order.getValue();
 		String value2 = direction.getValue();
@@ -215,7 +215,7 @@ public class EmployeePane extends FlowPane {
 		//mainPane.setCenter(null);
 		listPane.getChildren().clear();
 		
-		java.util.List <Arrivals> arrivals;
+		java.util.List <Arrival> arrivals;
 		
 		String value1 = order.getValue();
 		String value2 = direction.getValue();
@@ -247,7 +247,7 @@ public class EmployeePane extends FlowPane {
 	
 	}
 	
-	private void showArrivalInfo(Arrivals a) {
+	private void showArrivalInfo(Arrival a) {
 		
 	}
 	
@@ -255,7 +255,7 @@ public class EmployeePane extends FlowPane {
 		
 	}
 	
-	private void showDeparturesInfo(Deliveries d) {
+	private void showDeparturesInfo(Delivery d) {
 		
 	}
 

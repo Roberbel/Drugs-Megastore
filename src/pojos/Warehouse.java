@@ -16,7 +16,7 @@ public class Warehouse implements Serializable {
 	private String adress;
 	private Integer phone;
 	private List<Employee> employees;
-	private List<Corridors> corridor;
+	private List<Corridor> corridor;
 
 	public Warehouse() {
 		super();
@@ -26,7 +26,7 @@ public class Warehouse implements Serializable {
 	
 
 	public Warehouse(Integer pc, String country, String adress, Integer phone, List<Employee> employees,
-			List<Corridors> corridor) {
+			List<Corridor> corridor) {
 		super();
 		this.pc = pc;
 		this.country = country;
@@ -39,7 +39,7 @@ public class Warehouse implements Serializable {
 
 
 	public Warehouse(Integer id, Integer pc, String country, String adress, Integer phone, List<Employee> employees,
-			List<Corridors> corridor) {
+			List<Corridor> corridor) {
 
 		super();
 		this.id = id;
@@ -60,7 +60,7 @@ public class Warehouse implements Serializable {
 		this.adress = adress;
 		this.phone = phone;
 		this.employees = new ArrayList<Employee>();
-		this.corridor = new ArrayList<Corridors>();
+		this.corridor = new ArrayList<Corridor>();
 	}
 
 	@Override
@@ -142,11 +142,11 @@ public class Warehouse implements Serializable {
 		this.employees = employees;
 	}
 
-	public List<Corridors> getCorridor() {
+	public List<Corridor> getCorridor() {
 		return corridor;
 	}
 
-	public void setCorridor(List<Corridors> corridor) {
+	public void setCorridor(List<Corridor> corridor) {
 		this.corridor = corridor;
 	}
 
@@ -162,13 +162,13 @@ public class Warehouse implements Serializable {
 		}
 	}
 
-	public void addCorridor(Corridors corridors) {
+	public void addCorridor(Corridor corridors) {
 		if (!corridor.contains(corridors)) {
 			this.corridor.add(corridors);
 		}
 	}
 
-	public void removeCorridor(Corridors corridors) {
+	public void removeCorridor(Corridor corridors) {
 		if (corridor.contains(corridors)) {
 			this.corridor.remove(corridors);
 		}

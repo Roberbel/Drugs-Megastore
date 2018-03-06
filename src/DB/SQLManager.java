@@ -211,7 +211,7 @@ public class SQLManager {
 
 	// ==========================INSERT ENTRANCE METHODS==========================================================
 
-	public static void insertDeliveriesEntrance(Deliveries delivery) throws SQLException {
+	public static void insertDeliveriesEntrance(Delivery delivery) throws SQLException {
 
 		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id)" + "VALUES(?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -237,7 +237,7 @@ public class SQLManager {
 
 	}
 
-	public static void insertPackagedEntrance(Drugs drug, Deliveries delivery, Integer amount) throws SQLException {
+	public static void insertPackagedEntrance(Drug drug, Delivery delivery, Integer amount) throws SQLException {
 
 		String sql1 = "INSERT INTO packaged (drug_id, transaction_id, amount)" + "VALUES( ?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -261,7 +261,7 @@ public class SQLManager {
 
 	}
 
-	public static void insertArrivalsEntrance(Arrivals arrival) throws SQLException {
+	public static void insertArrivalsEntrance(Arrival arrival) throws SQLException {
 
 		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, provider_id)" + "VALUES( ?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -272,7 +272,7 @@ public class SQLManager {
 		prep.close();
 	}
 
-	public static void insertArrivesEntrance(Drugs drug, Arrivals arrival, Integer amount) throws SQLException {
+	public static void insertArrivesEntrance(Drug drug, Arrival arrival, Integer amount) throws SQLException {
 
 		String sql1 = "INSERT INTO arrives(drug_id,transaction_id,amount)" + "VALUES(?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -284,7 +284,7 @@ public class SQLManager {
 
 	}
 
-	public static void insertDrugEntrance(Drugs drug) throws SQLException {
+	public static void insertDrugEntrance(Drug drug) throws SQLException {
 
 		String sql1 = "INSERT INTO drug(name, photo, stock, active_principle,corridor_id )" + "VALUES(?,?.?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -298,7 +298,7 @@ public class SQLManager {
 		prep.close();
 	}
 
-	public static void insertCorridorEntrance(Corridors corridor) throws SQLException {
+	public static void insertCorridorEntrance(Corridor corridor) throws SQLException {
 
 		String sql1 = "INSERT INTO corridors(temperature, warehouse_id)" + "VALUES(?,?);";
 
