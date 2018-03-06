@@ -1,5 +1,7 @@
 package GUI;
 
+import java.sql.SQLException;
+
 import javafx.application.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -15,6 +17,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.*;
 import pojos.*;
+import model.*;
 
 
 
@@ -150,6 +153,28 @@ public class MainWindow extends Application {
 		logInPanel.setHalignment(logInButton, HPos.CENTER);
 		
 		return logInPanel;	
+	}
+	
+	public void logIn() {
+		User testUser = new User("Thevini98", "Testeo");
+		LogInManager logInManager = new LogInManager(testUser);
+
+		try {
+			if (logInManager.checkExistance()) {
+				if (logInManager.checkPassword()) {
+					System.out.println("Log in correcto");
+					System.out.println(logInManager.getCompleteUser().toString());
+				} else {
+					System.out.println("Introduzca la Contraseña correcta");
+				}
+			} else {
+				System.out.println("El usuario no existe");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
