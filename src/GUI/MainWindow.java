@@ -94,7 +94,6 @@ public class MainWindow extends Application {
 		list.setOnAction(e -> listChanged());
 		secondPaneNorth.getChildren().add(list);
 		secondPane.setTop(secondPaneNorth);
-
 //================Secondary Panel South(Add/del buttons and text box)====================================//
 		FlowPane buttonPane = new FlowPane();
 		buttonPane.getChildren().addAll(add, del);
@@ -103,7 +102,6 @@ public class MainWindow extends Application {
 		secondPaneSouth.setCenter(secondPaneSouthTextBox);
 		secondPane.setBottom(secondPaneSouth);
 				
-
 		
 //===========================================Table===================================//
 		
@@ -128,7 +126,7 @@ public class MainWindow extends Application {
 //===========================================Scene===================================//		
 		//Scene scene = new Scene(mainPane, 300, 400);
 		
-		stage.setScene(new Scene(logInPanel(), 300, 400));
+		stage.setScene(new Scene(new EmployeePane(), 300, 400));
 		stage.show();
 	}
 	
