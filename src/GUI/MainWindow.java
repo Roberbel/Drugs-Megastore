@@ -1,7 +1,6 @@
 package GUI;
 
 import java.sql.SQLException;
-
 import javafx.application.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -129,7 +128,7 @@ public class MainWindow extends Application {
 //===========================================Scene===================================//		
 		//Scene scene = new Scene(mainPane, 300, 400);
 		
-		stage.setScene(new Scene(new EmployeePane(), 300, 400));
+		stage.setScene(new Scene(logInPanel()));
 		stage.show();
 	}
 	
@@ -138,14 +137,14 @@ public class MainWindow extends Application {
 		GridPane logInPanel =new GridPane();
 			
 		Button logInButton=new Button ("Log In");
-		logInButton.setOnAction (e->
-			{
-				
-			}
-				);
-		
 		TextField user=new TextField ("User");
 		TextField password=new TextField ("Password");
+		
+		logInButton.setOnAction (e->
+			{
+				logIn(user.getText(),password.getText());
+			}
+				);
 		
 		logInPanel.setVgap(20);
 		logInPanel.addColumn(0, user,password,logInButton);
@@ -155,8 +154,8 @@ public class MainWindow extends Application {
 		return logInPanel;	
 	}
 	
-	public void logIn() {
-		User testUser = new User("Thevini98", "Testeo");
+	public void logIn(String _user,String _pass) {
+		User testUser = new User(_user,_pass);
 		LogInManager logInManager = new LogInManager(testUser);
 
 		try {
