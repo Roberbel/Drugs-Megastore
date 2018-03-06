@@ -16,6 +16,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.*;
 import pojos.*;
+import pojos.User.UserClass;
 import model.*;
 
 
@@ -48,10 +49,7 @@ public class MainWindow extends Application {
 		TextField user=new TextField ("User");
 		TextField password=new TextField ("Password");
 		
-		logInButton.setOnAction (e->
-			{
-				logIn(user.getText(),password.getText());
-			}
+		logInButton.setOnAction (e-> tryLogIn());
 				);
 		
 		logInPanel.setVgap(20);
@@ -62,7 +60,7 @@ public class MainWindow extends Application {
 		return logInPanel;	
 	}
 	
-	public void logIn(String _user,String _pass) {
+	public User logIn(String _user,String _pass) {
 		User testUser = new User(_user,_pass);
 		LogInManager logInManager = new LogInManager(testUser);
 
@@ -71,6 +69,7 @@ public class MainWindow extends Application {
 				if (logInManager.checkPassword()) {
 					System.out.println("Log in correcto");
 					System.out.println(logInManager.getCompleteUser().toString());
+					return logInManager.getCompleteUser();
 				} else {
 					System.out.println("Introduzca la Contraseña correcta");
 				}
@@ -82,6 +81,29 @@ public class MainWindow extends Application {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		return null;
+	}
+	
+	private void tryLogIn() {
+		User returned = new User();
+		
+		returned=logIn(user.getText(),password.getText());
+		
+		if (returned.equals(null)) {
+			//Error
+		}else {
+			switch (returned.getType()) {
+			case User.UserClass.EMPLOYEE:
+				
+				break;
+
+			default:
+				break;
+			}
+		
+		
+		
 	}
 	
 }

@@ -40,14 +40,14 @@ public class SQLManager {
 			
 			User testUser = new User();
 			
-			testUser.setUserName("Thelegency2011");
-			testUser.setPassword("Testeo");
-			testUser.setType(UserClass.ADMIN);
+			testUser.setUserName("Gonka98");
+			testUser.setPassword("Testeo2");
+			testUser.setType(UserClass.EMPLOYEE);
 			testUser.setId(1);
 			
 			connect("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
 			
-//			insertUserEntrance(testUser);
+			insertUserEntrance(testUser);
 			
 			
 			
