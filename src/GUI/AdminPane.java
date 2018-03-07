@@ -2,14 +2,21 @@ package GUI;
 
 import java.util.Date;
 
+import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import pojos.Employee;
 
 public class AdminPane extends FlowPane {
 
@@ -25,14 +32,8 @@ public class AdminPane extends FlowPane {
 		tableChoice.setValue("Employees");
 		tableChoice.setOnAction(e->changeTable());
 		
-		Button addButton=new Button("Add");
-		Button deleteButton=new Button("Delete");
-		Button modButton=new Button("Modify");
-		
-		
 		
 		mainPanel=new BorderPane();
-		//mainPanel.setCenter(employeeTable());
 		mainPanel.setTop(tableChoice);
 		this.getChildren().addAll(mainPanel);
 		
@@ -41,7 +42,7 @@ public class AdminPane extends FlowPane {
 	public void changeTable() {
 		switch(tableChoice.getValue().toString()) {
 		case "Employees":
-			mainPanel.setCenter(employeeTable());
+			mainPanel.setCenter(new EmployeeTable());
 			break;
 		case "Drugs":
 			mainPanel.setCenter(drugsTable());
@@ -70,10 +71,18 @@ public class AdminPane extends FlowPane {
 		}
 	}
 	
-	
-	public TableView employeeTable() {
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/*
+	public VBox employeeTable() {
+		//Primero creo la tabla
+		TableView <pojos.Employee> employeeTable=new TableView<pojos.Employee>();
+		employeeTable.setEditable(true);//Necesario para poder editar	
 		
 		TableColumn <pojos.Employee,String> name= new TableColumn("Name");
+		//Hace que cada celda de la columna sea editable y maneja el evento de que se edite
+		name.setCellValueFactory(new PropertyValueFactory<pojos.Employee,String>("Name"));
+		name.setCellFactory(TextFieldTableCell.forTableColumn());
+		name.setOnEditCommit(e->name_OnEditCommit(e));	
 		TableColumn <pojos.Employee,Float> salary=new TableColumn("Salary");
 		TableColumn <pojos.Employee,Integer> phone=new TableColumn("Phone Number");
 		phone.setMinWidth(100);
@@ -81,12 +90,44 @@ public class AdminPane extends FlowPane {
 		TableColumn <pojos.Employee,String> warehouse=new TableColumn("Warehouse");
 		TableColumn <pojos.Employee,byte []> picture=new TableColumn("Picture");
 		
-		TableView <pojos.Employee> employeeTable=new TableView<pojos.Employee>();
 		employeeTable.getColumns().addAll(name,salary,phone,position,warehouse,picture);
-		//employeeTable.setEditable(true);
 
-		return employeeTable;
+		//Panel para añadir o borrar elementos de la tabla
+		HBox paneAdd=new HBox();
+		TextField nameField=new TextField();
+		nameField.setPromptText("Name");
+		TextField  salaryField=new TextField();
+		salaryField.setPromptText("Salary");
+		TextField phoneField=new TextField();
+		phoneField.setPromptText("Phone Number");
+		TextField posField=new TextField();
+		posField.setPromptText("Position");
+		TextField wareField=new TextField();
+		wareField.setPromptText("Warehouse");
+		Button addBut=new Button("Add");
+		addBut.setOnAction(e->employeeAdd());
+		Button delBut=new Button("Delete");
+		paneAdd.getChildren().addAll(nameField,salaryField,phoneField,posField,wareField,addBut,delBut);
+		
+		VBox finalPan=new VBox();
+		finalPan.getChildren().addAll(employeeTable,paneAdd);
+
+		return finalPan;
 	}
+	
+	public void name_OnEditCommit(Event e) {
+		CellEditEvent<Employee, String> ce;
+		ce= (TableColumn.CellEditEvent<pojos.Employee,String>) e;
+		Employee ex=ce.getRowValue();
+		ex.setName(ce.getNewValue());
+	}
+	
+	public void employeeAdd() {
+		pojos.Employee newEmployee=new pojos.Employee();
+		
+	}
+	*/
+///////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	public TableView clientTable() {
 		
