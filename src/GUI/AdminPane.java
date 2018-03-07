@@ -3,6 +3,7 @@ package GUI;
 import java.util.Date;
 
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -24,8 +25,14 @@ public class AdminPane extends FlowPane {
 		tableChoice.setValue("Employees");
 		tableChoice.setOnAction(e->changeTable());
 		
+		Button addButton=new Button("Add");
+		Button deleteButton=new Button("Delete");
+		Button modButton=new Button("Modify");
+		
+		
+		
 		mainPanel=new BorderPane();
-		mainPanel.setCenter(employeeTable());
+		//mainPanel.setCenter(employeeTable());
 		mainPanel.setTop(tableChoice);
 		this.getChildren().addAll(mainPanel);
 		
@@ -76,6 +83,7 @@ public class AdminPane extends FlowPane {
 		
 		TableView <pojos.Employee> employeeTable=new TableView<pojos.Employee>();
 		employeeTable.getColumns().addAll(name,salary,phone,position,warehouse,picture);
+		//employeeTable.setEditable(true);
 
 		return employeeTable;
 	}
