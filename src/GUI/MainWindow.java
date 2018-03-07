@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -23,8 +24,10 @@ import model.*;
 
 public class MainWindow extends Application {
 	private Stage stage;
-	
+	private TextField user;
+	private PasswordField password;
 	private BorderPane mainPane;
+	private AdminPane adminPanel;
 	
 	
 	
@@ -46,16 +49,18 @@ public class MainWindow extends Application {
 		GridPane logInPanel =new GridPane();
 			
 		Button logInButton=new Button ("Log In");
-		TextField user=new TextField ("User");
-		TextField password=new TextField ("Password");
+		user=new TextField ();
+		user.setPromptText("User");
+		password=new PasswordField ();
+		password.setPromptText("Password");
 		
 		logInButton.setOnAction (e-> tryLogIn());
-				);
-		
+				
 		logInPanel.setVgap(20);
 		logInPanel.addColumn(0, user,password,logInButton);
 		logInPanel.setAlignment(Pos.CENTER);
 		logInPanel.setHalignment(logInButton, HPos.CENTER);
+		logInPanel.setMinSize(400,300);
 		
 		return logInPanel;	
 	}
@@ -87,23 +92,25 @@ public class MainWindow extends Application {
 	
 	private void tryLogIn() {
 		User returned = new User();
-		
 		returned=logIn(user.getText(),password.getText());
 		
 		if (returned.equals(null)) {
 			//Error
 		}else {
-			switch (returned.getType()) {
-			case User.UserClass.EMPLOYEE:
+			switch (returned.getType().toString()) {
+				case "ADMIN":
+					adminPanel=new AdminPane();
+					stage.setScene(new Scene(adminPanel,800,400));
+					stage.show();
+					break;
+				case "CLIENT":
+					break;
+				case "EMPLOYEE":
+					break;
+		}
+		
+	}
 				
-				break;
-
-			default:
-				break;
-			}
-		
-		
-		
 	}
 	
 }

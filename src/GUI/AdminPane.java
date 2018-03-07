@@ -2,12 +2,68 @@ package GUI;
 
 import java.util.Date;
 
+import javafx.geometry.Pos;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 
 public class AdminPane extends FlowPane {
 
+	BorderPane mainPanel;
+	ChoiceBox tableChoice;
+	
+	
+	public AdminPane() {
+		
+		tableChoice=new ChoiceBox <String>();
+		tableChoice.getItems().addAll("Employees","Drugs","Clients","Arrivals","Deliveries","Users","Providers",
+		"Warehouses","Corridors");
+		tableChoice.setValue("Employees");
+		tableChoice.setOnAction(e->changeTable());
+		
+		mainPanel=new BorderPane();
+		mainPanel.setCenter(employeeTable());
+		mainPanel.setTop(tableChoice);
+		this.getChildren().addAll(mainPanel);
+		
+	}
+	
+	public void changeTable() {
+		switch(tableChoice.getValue().toString()) {
+		case "Employees":
+			mainPanel.setCenter(employeeTable());
+			break;
+		case "Drugs":
+			mainPanel.setCenter(drugsTable());
+			break;
+		case "Clients":
+			mainPanel.setCenter(clientTable());
+			break;
+		case "Arrivals":
+			mainPanel.setCenter(arrivalsTable());
+			break;
+		case "Deliveries":
+			mainPanel.setCenter(deliveriesTable());
+			break;
+		case "Users":
+			mainPanel.setCenter(usersTable());
+			break;
+		case "Providers":
+			mainPanel.setCenter(providerTable());
+			break;
+		case "Warehouses":
+			mainPanel.setCenter(warehouseTable());
+			break;
+		case "Corridors":
+			mainPanel.setCenter(corridorTable());
+			break;		
+		}
+	}
+	
+	
 	public TableView employeeTable() {
 		
 		TableColumn <pojos.Employee,String> name= new TableColumn("Name");
@@ -114,6 +170,20 @@ public class AdminPane extends FlowPane {
 		warehouseTable.getColumns().addAll(pc,country,adress,phone);
 		
 		return warehouseTable;
+	}
+	
+	public TableView usersTable() {
+		
+		TableColumn <pojos.User,String> name=new TableColumn("User");
+		TableColumn <pojos.User,String> password=new TableColumn("Password");
+		TableColumn <pojos.User,pojos.User.UserClass> type=new TableColumn("Type");
+		TableColumn <pojos.User,Integer> id=new TableColumn("User ID");
+		
+		TableView <pojos.User> usersTable=new TableView<pojos.User>();
+		usersTable.getColumns().addAll(name,password,type,id);
+		
+		return usersTable;
+		
 	}
 	
 }
