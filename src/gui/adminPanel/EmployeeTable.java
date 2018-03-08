@@ -52,9 +52,15 @@ public class EmployeeTable extends VBox {
 		position.setOnEditCommit(e->position_OnEditCommit(e));	
 		TableColumn <pojos.Employee,pojos.Warehouse> warehouse=new TableColumn("Warehouse");
 		warehouse.setCellValueFactory(new PropertyValueFactory<pojos.Employee,pojos.Warehouse>("WarehouseId"));
-		warehouse.setCellFactory(ChoiceBoxTableCell.forTableColumn(items));
+		//warehouse.setCellFactory(ChoiceBoxTableCell.forTableColumn(items));
 		TableColumn <pojos.Employee,byte []> picture=new TableColumn("Picture");
-		
+		//========================TO DO=======================//
+		//                                                    //
+		//   **warehouse choicebox                            //
+		//   **pictures                                       //
+		//	 **delete                                         //
+		//                                                    //
+		//====================================================//
 		Table.getColumns().addAll(name,salary,phone,position,warehouse,picture);
 
 		//Panel para añadir o borrar elementos de la tabla
