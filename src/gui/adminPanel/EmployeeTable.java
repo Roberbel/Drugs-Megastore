@@ -19,14 +19,11 @@ import pojos.*;
 
 public class EmployeeTable extends VBox {
 
-	TableView <pojos.Employee> Table;
-	TextField nameField,salaryField,phoneField,posField,wareField;
-	Button addBut,delBut;
+	private TableView <pojos.Employee> Table;
+	private TextField nameField,salaryField,phoneField,posField,wareField;
+	private Button addBut,delBut;
 	
 	public EmployeeTable() {
-		
-		ArrayList <pojos.Warehouse> wareArray=new ArrayList <pojos.Warehouse> ();
-		wareArray.add(new pojos.Warehouse());
 		
 		//Primero creo la tabla
 		Table=new TableView<pojos.Employee>();

@@ -66,7 +66,7 @@ public class AdminPane extends FlowPane {
 			mainPanel.setCenter(warehouseTable());
 			break;
 		case "Corridors":
-			mainPanel.setCenter(corridorTable());
+			mainPanel.setCenter(new CorridorTable());
 			break;		
 		}
 	}
