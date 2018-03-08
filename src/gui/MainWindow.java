@@ -1,6 +1,8 @@
-package GUI;
+package gui;
 
 import java.sql.SQLException;
+
+import gui.adminPanel.AdminPane;
 import javafx.application.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;

@@ -1,4 +1,4 @@
-package GUI;
+package gui.adminPanel;
 
 import java.util.Date;
 

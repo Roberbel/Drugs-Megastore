@@ -1,4 +1,4 @@
-package GUI;
+package gui.employeePanel;
 
 import java.awt.List;
 

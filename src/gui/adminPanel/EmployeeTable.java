@@ -1,4 +1,6 @@
-package GUI;
+package gui.adminPanel;
+
+import java.util.ArrayList;
 
 import javafx.event.Event;
 import javafx.scene.control.Button;
@@ -6,10 +8,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableColumn.CellEditEvent;
+import javafx.scene.control.cell.ChoiceBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.converter.FloatStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 import pojos.*;
 
 public class EmployeeTable extends VBox {
@@ -19,6 +24,10 @@ public class EmployeeTable extends VBox {
 	Button addBut,delBut;
 	
 	public EmployeeTable() {
+		
+		ArrayList <pojos.Warehouse> wareArray=new ArrayList <pojos.Warehouse> ();
+		wareArray.add(new pojos.Warehouse());
+		
 		//Primero creo la tabla
 		Table=new TableView<pojos.Employee>();
 		Table.setEditable(true);//Necesario para poder editar celdas
@@ -29,10 +38,21 @@ public class EmployeeTable extends VBox {
 		name.setCellFactory(TextFieldTableCell.forTableColumn());
 		name.setOnEditCommit(e->name_OnEditCommit(e));	
 		TableColumn <pojos.Employee,Float> salary=new TableColumn("Salary");
+		salary.setCellValueFactory(new PropertyValueFactory<pojos.Employee,Float>("Salary"));
+		salary.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
+		salary.setOnEditCommit(e->salary_OnEditCommit(e));
 		TableColumn <pojos.Employee,Integer> phone=new TableColumn("Phone Number");
+		phone.setCellValueFactory(new PropertyValueFactory<pojos.Employee,Integer>("phone"));
+		phone.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		phone.setOnEditCommit(e->phone_OnEditCommit(e));
 		phone.setMinWidth(100);
 		TableColumn <pojos.Employee,String> position=new TableColumn("Position");
-		TableColumn <pojos.Employee,String> warehouse=new TableColumn("Warehouse");
+		position.setCellValueFactory(new PropertyValueFactory<pojos.Employee,String>("Position"));
+		position.setCellFactory(TextFieldTableCell.forTableColumn());
+		position.setOnEditCommit(e->position_OnEditCommit(e));	
+		TableColumn <pojos.Employee,pojos.Warehouse> warehouse=new TableColumn("Warehouse");
+		warehouse.setCellValueFactory(new PropertyValueFactory<pojos.Employee,pojos.Warehouse>("WarehouseId"));
+		warehouse.setCellFactory(ChoiceBoxTableCell.forTableColumn(items));
 		TableColumn <pojos.Employee,byte []> picture=new TableColumn("Picture");
 		
 		Table.getColumns().addAll(name,salary,phone,position,warehouse,picture);
@@ -67,13 +87,36 @@ public class EmployeeTable extends VBox {
 		ex.setName(ce.getNewValue());
 	}
 	
+	public void salary_OnEditCommit(Event e) {
+		CellEditEvent<Employee, Float> ce;
+		ce= (TableColumn.CellEditEvent<pojos.Employee,Float>) e;
+		Employee ex=ce.getRowValue();
+		ex.setSalary(ce.getNewValue());
+	}
+	
+	public void phone_OnEditCommit(Event e) {
+		CellEditEvent<Employee, Integer> ce;
+		ce= (TableColumn.CellEditEvent<pojos.Employee,Integer>) e;
+		Employee ex=ce.getRowValue();
+		ex.setPhone(ce.getNewValue());
+	}
+	
+	public void position_OnEditCommit(Event e) {
+		CellEditEvent<Employee, String> ce;
+		ce= (TableColumn.CellEditEvent<pojos.Employee,String>) e;
+		Employee ex=ce.getRowValue();
+		ex.setPosition(ce.getNewValue());
+	}
+	
+	
+	
 	public void addClicked() {
 		pojos.Employee newEmployee=new pojos.Employee();
 		newEmployee.setName(nameField.getText());
 		newEmployee.setSalary(Float.parseFloat(salaryField.getText()));
 		newEmployee.setPhone(Integer.parseInt(phoneField.getText()));
 		newEmployee.setPosition(posField.getText());
-		//newEmployee.setWarehouseId(Integer.parseInt(wareField.getText()));
+		newEmployee.setWarehouseId(wareField.get);
 		Table.getItems().add(newEmployee);
 		nameField.clear();
 		salaryField.clear();

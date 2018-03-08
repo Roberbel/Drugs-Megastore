@@ -1,4 +1,4 @@
-package GUI;
+package gui.clientPanel;
 
 import javafx.scene.layout.FlowPane;
 
