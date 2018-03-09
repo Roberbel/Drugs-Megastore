@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import pojos.Arrival;
+import pojos.Client;
 import pojos.Delivery;
 import pojos.Drug;
 import pojos.Employee;
@@ -238,7 +239,7 @@ public class EmployeePane extends FlowPane {
 			}
 		}
 		
-		Iterator<Drugs> iterador = arrivals.iterator();
+		Iterator<Arrival> iterador = arrivals.iterator();
 		while(iterador.hasNext()) {
 			Arrival a = iterador.next();
 			HBox hBox = new HBox();
@@ -247,6 +248,7 @@ public class EmployeePane extends FlowPane {
 			Label providerEmail = new Label(p.getEmail());
 			Label providerAdress = new Label(p.getAdress());
 			Label providerPhone = new Label(p.getTelephone().toString());
+			Label arrivalDate = new Label(a.getDate().toString());
 			ScrollPane drugNammountPane = new ScrollPane();
 			VBox listPane = new VBox();
 			int numDrugs = a.getDrugs().size();
@@ -258,7 +260,8 @@ public class EmployeePane extends FlowPane {
 				listPane.getChildren().add(h);
 			}
 			drugNammountPane.setContent(listPane);
-			hBox.getChildren().addAll();
+			
+			hBox.getChildren().addAll(providerName, providerEmail, providerAdress, providerPhone, arrivalDate, drugNammountPane);
 			listPane.getChildren().add(hBox);
 		}
 	
@@ -303,7 +306,54 @@ public class EmployeePane extends FlowPane {
 	}
 	
 	private void changeDepartureListPane() {
-		
+		//mainPane.setCenter(null);
+				listPane.getChildren().clear();
+				
+				java.util.List <Delivery> departures;
+				
+				String value1 = order.getValue();
+				String value2 = direction.getValue();
+				if(value2 == "Name") {
+					if(value2 == "Descending") {
+						//here would go the SQL commands.
+					}else {
+						
+					}
+				}else {
+					if(value2 == "Descending") {
+						
+					}else {
+						
+					}
+				}
+				
+				Iterator<Delivery> iterador = departures.iterator();
+				while(iterador.hasNext()) {
+					Delivery d = iterador.next();
+					HBox hBox = new HBox();
+					Client c = d.getClient()();
+					Label providerName = new Label(c.getName());
+					Label providerEmail = new Label(c.getEmail());
+					Label providerAdress = new Label(c.getAdress());
+					Label providerPhone = new Label(c.getTelephone().toString());
+					Label arrivalDate = new Label(a.getDate().toString());
+					ScrollPane drugNammountPane = new ScrollPane();
+					VBox listPane = new VBox();
+					int numDrugs = a.getDrugs().size();
+					for (int i = 0; i < numDrugs; i++ ) {
+						HBox h = new HBox();
+						Label drug = new Label(a.getDrugs().get(i).getName());
+						Label ammount = new Label(a.getAmount().get(i).toString());
+						h.getChildren().addAll(drug, ammount);
+						listPane.getChildren().add(h);
+					}
+					drugNammountPane.setContent(listPane);
+					
+					hBox.getChildren().addAll(providerName, providerEmail, providerAdress, providerPhone, arrivalDate, drugNammountPane);
+					listPane.getChildren().add(hBox);
+				}
+			
+			
 		
 	}
 	private void showDeparturesInfo(Delivery d) {
