@@ -12,7 +12,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import pojos.*;
 
@@ -26,6 +25,7 @@ public class CorridorTable extends VBox{
 	public CorridorTable() {
 		
 		table=new TableView <pojos.Corridor>();
+		table.setEditable(true);
 		TableColumn <pojos.Corridor,Integer> id=new TableColumn ("ID");
 		TableColumn <pojos.Corridor,Integer> temperature=new TableColumn("Temperature");
 		temperature.setCellValueFactory(new PropertyValueFactory <pojos.Corridor,Integer>("ID"));
