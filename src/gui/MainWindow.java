@@ -3,6 +3,7 @@ package gui;
 import java.sql.SQLException;
 
 import gui.adminPanel.AdminPane;
+import gui.employeePanel.EmployeePane;
 import javafx.application.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -106,6 +107,7 @@ public class MainWindow extends Application {
 				case "CLIENT":
 					break;
 				case "EMPLOYEE":
+					stage.setScene(new Scene(new EmployeePane(), 800, 400));
 					break;
 		}
 		
