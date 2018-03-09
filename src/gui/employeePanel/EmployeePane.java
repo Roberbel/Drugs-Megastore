@@ -1,4 +1,4 @@
-package GUI;
+package gui.employeePanel;
 
 import java.awt.List;
 
@@ -24,6 +24,9 @@ import pojos.Employee;
 import java.util.*;
 
 public class EmployeePane extends FlowPane {
+	
+	//this i s the change that should be kept
+	
 	
 	Employee employee;
 	
