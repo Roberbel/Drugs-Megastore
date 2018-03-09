@@ -237,14 +237,16 @@ public class SQLManager {
 
 	}
 
-	public static void insertPackagedEntrance(Drug drug, Delivery delivery, Integer amount) throws SQLException {
+	public static void insertPackagedEntrance(Delivery delivery) throws SQLException {
 
 		String sql1 = "INSERT INTO packaged (drug_id, transaction_id, amount)" + "VALUES( ?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setInt(1, drug.getId());
+		for(int i = 0 ; delivery.getDrugId().size() > i; i++) {
+		prep.setInt(1, delivery.getDrugId().get(i).getId());
 		prep.setInt(2, delivery.getTransactionId());
-		prep.setInt(3, amount); // CHECK-> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN A POJO AS A LIST
+		prep.setInt(3, delivery.getAmmount().get(i)); // CHECK-> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN A POJO AS A LIST
 		prep.executeUpdate();
+		}
 		prep.close();
 	}
 
@@ -272,14 +274,16 @@ public class SQLManager {
 		prep.close();
 	}
 
-	public static void insertArrivesEntrance(Drug drug, Arrival arrival, Integer amount) throws SQLException {
+	public static void insertArrivesEntrance(Arrival arrival) throws SQLException {
 
 		String sql1 = "INSERT INTO arrives(drug_id,transaction_id,amount)" + "VALUES(?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setInt(1, drug.getId());
-		prep.setInt(2, arrival.getArrivalId());
-		prep.setInt(3, amount); //CHECK -> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN A POJO AS A LIST
-		prep.executeUpdate();
+		for(int i=0; arrival.getAmount().size()>i;i++ ){
+			prep.setInt(1, arrival.getDrugs().get(i).getId());
+			prep.setInt(2, arrival.getArrivalId());
+			prep.setInt(3, arrival.getAmount().get(i));
+			prep.executeUpdate();
+		}
 		prep.close();
 
 	}
@@ -362,7 +366,7 @@ public class SQLManager {
 	
 	public static User extractUserByName(User userWanted) throws SQLException{
 		Statement stmt1 = c.createStatement();
-		String sql = "SELECT * FROM user";
+		String sql = "SELECT * FROM user WHERE id =" + userWanted.getId().toString();
 		ResultSet rs = stmt1.executeQuery(sql);
 		while (rs.next()) {
 			

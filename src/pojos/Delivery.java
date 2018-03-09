@@ -13,7 +13,7 @@ public class Delivery implements Serializable {
 
 	private Integer transactionId;
 	private Integer sellingPrice;
-	private Integer ammount;
+	private List<Integer> ammount;
 	private Date transactionDate;
 	private List<Drug> drugId;
 	private Client client;
@@ -25,7 +25,7 @@ public class Delivery implements Serializable {
 
 	
 	
-	public Delivery(Integer sellingPrice, Integer ammount, Date transactionDate, List<Drug> drugId, Client client) {
+	public Delivery(Integer sellingPrice, List<Integer> ammount, Date transactionDate, List<Drug> drugId, Client client) {
 		super();
 		this.sellingPrice = sellingPrice;
 		this.ammount = ammount;
@@ -36,7 +36,7 @@ public class Delivery implements Serializable {
 
 
 
-	public Delivery(Integer transactionId, Integer sellingPrice, Integer ammount, Date transactionDate,
+	public Delivery(Integer transactionId, Integer sellingPrice, List<Integer> ammount, Date transactionDate,
 			List<Drug> drugId, Client client) {
 		super();
 		this.transactionId = transactionId;
@@ -94,11 +94,11 @@ public class Delivery implements Serializable {
 		this.sellingPrice = sellingPrice;
 	}
 
-	public Integer getAmmount() {
+	public List<Integer> getAmmount() {
 		return ammount;
 	}
 
-	public void setAmmount(Integer ammount) {
+	public void setAmmount(List<Integer> ammount) {
 		this.ammount = ammount;
 	}
 

@@ -29,7 +29,7 @@ public class AdminPane extends FlowPane {
 		tableChoice=new ChoiceBox <String>();
 		tableChoice.getItems().addAll("Employees","Drugs","Clients","Arrivals","Deliveries","Users","Providers",
 		"Warehouses","Corridors");
-		tableChoice.setValue("Employees");
+		//tableChoice.setValue("Employees");
 		tableChoice.setOnAction(e->changeTable());
 		
 		

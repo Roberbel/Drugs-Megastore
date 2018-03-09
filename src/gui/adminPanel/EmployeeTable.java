@@ -2,6 +2,7 @@ package gui.adminPanel;
 
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -55,7 +56,7 @@ public class EmployeeTable extends VBox {
 		//                                                    //
 		//   **warehouse choicebox                            //
 		//   **pictures                                       //
-		//	 **delete                                         //
+		//	 **delete----->Done                               //
 		//                                                    //
 		//====================================================//
 		Table.getColumns().addAll(name,salary,phone,position,warehouse,picture);
@@ -77,6 +78,7 @@ public class EmployeeTable extends VBox {
 		addBut=new Button("Add");
 		addBut.setOnAction(e->addClicked());
 		delBut=new Button("Delete");
+		delBut.setOnAction(e->deleteClicked());
 		paneAdd.getChildren().addAll(nameField,salaryField,phoneField,posField,wareField,addBut,delBut);
 		
 		this.getChildren().addAll(Table,paneAdd);
@@ -111,7 +113,15 @@ public class EmployeeTable extends VBox {
 		ex.setPosition(ce.getNewValue());
 	}
 	
-	
+	public void deleteClicked() {
+		ObservableList <pojos.Employee> sel, items;
+		items=Table.getItems();
+		sel=Table.getSelectionModel().getSelectedItems();
+		
+		for(pojos.Employee e:sel) {
+			items.remove(e);
+		}
+	}
 	
 	public void addClicked() {
 		pojos.Employee newEmployee=new pojos.Employee();
@@ -119,7 +129,7 @@ public class EmployeeTable extends VBox {
 		newEmployee.setSalary(Float.parseFloat(salaryField.getText()));
 		newEmployee.setPhone(Integer.parseInt(phoneField.getText()));
 		newEmployee.setPosition(posField.getText());
-		newEmployee.setWarehouseId(wareField.get);
+		//newEmployee.setWarehouseId(wareField.get);
 		Table.getItems().add(newEmployee);
 		nameField.clear();
 		salaryField.clear();
