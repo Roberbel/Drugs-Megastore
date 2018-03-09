@@ -1,6 +1,7 @@
 package gui.adminPanel;
 
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -15,9 +16,10 @@ public class CorridorTable extends VBox{
 	public CorridorTable() {
 		
 		table=new TableView <pojos.Corridor>();
-		TableColumn <pojos.Corridor,String> 
+		TableColumn <pojos.Corridor,Integer> id=new TableColumn ("ID");
+		TableColumn <pojos.Corridor,Integer> temperature=new TableColumn("Temperature");
+		TableColumn <pojos.Corridor,pojos.Warehouse> warehouse=new TableColumn("Warehosue");
 		
-		GONZALO ERES IMBECIL.JAVA
 	}
 	
 }
