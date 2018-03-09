@@ -363,20 +363,23 @@ public class SQLManager {
 	}
 
 	public static User extractUserByName(User userWanted) throws SQLException {
-		Statement stmt1 = c.createStatement();
-		String sql = "SELECT * FROM user WHERE id= " + userWanted.getId().toString();
-		ResultSet rs = stmt1.executeQuery(sql);
+		String sql = "SELECT * FROM user WHERE username  = ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		
+		prep.setString(1, userWanted.getUserName());
+		
+		ResultSet rs = prep.executeQuery();
 
 		UserClass type = setUserEnum(rs.getString("type"));
 		User userObtained = new User(rs.getString("username"), rs.getString("password"), type, rs.getInt("id"));
 
 		if (userWanted.equals(userObtained)) {
 			rs.close();
-			stmt1.close();
+			prep.close();
 			return userObtained;
 		}
 		rs.close();
-		stmt1.close();
+		prep.close();
 		return null;
 	}
 
