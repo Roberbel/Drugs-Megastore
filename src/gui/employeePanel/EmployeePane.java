@@ -25,6 +25,9 @@ import java.util.*;
 
 public class EmployeePane extends FlowPane {
 	
+	//this i s the change that should be kept
+	
+	
 	Employee employee;
 	
 	//Panels
