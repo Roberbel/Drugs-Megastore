@@ -1,5 +1,6 @@
 package gui.adminPanel;
 
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -60,7 +61,13 @@ public class CorridorTable extends VBox{
 	}
 	
 	public void delClicked(Event e) {
+		ObservableList <pojos.Corridor> sel, items;
+		items=table.getItems();
+		sel=table.getSelectionModel().getSelectedItems();
 		
+		for(pojos.Corridor c:sel) {
+			items.remove(c);
+		}
 	}
 	
 	
