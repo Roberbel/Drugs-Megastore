@@ -272,14 +272,16 @@ public class SQLManager {
 		prep.close();
 	}
 
-	public static void insertArrivesEntrance(Drug drug, Arrival arrival, Integer amount) throws SQLException {
+	public static void insertArrivesEntrance(Arrival arrival) throws SQLException {
 
 		String sql1 = "INSERT INTO arrives(drug_id,transaction_id,amount)" + "VALUES(?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setInt(1, drug.getId());
-		prep.setInt(2, arrival.getArrivalId());
-		prep.setInt(3, amount); //CHECK -> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN A POJO AS A LIST
-		prep.executeUpdate();
+		for(int i=0; arrival.getAmount().size()>i;i++ ){
+			prep.setInt(1, arrival.getDrugs().get(i).getId());
+			prep.setInt(2, arrival.getArrivalId());
+			prep.setInt(3, arrival.getAmount().get(i));
+			prep.executeUpdate();
+		}
 		prep.close();
 
 	}
