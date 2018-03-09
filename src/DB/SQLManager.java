@@ -9,7 +9,6 @@ import java.sql.Statement;
 import pojos.*;
 import pojos.User.UserClass;
 
-
 public class SQLManager {
 
 	private static Connection c;
@@ -18,41 +17,39 @@ public class SQLManager {
 
 		try {
 
-			/*generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+			/*
+			 * generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+			 * 
+			 * Provider testProvider = new Provider(); testProvider.setProviderId(1); Client
+			 * testClient = new Client();
+			 * 
+			 * testClient.setAdress("Avenida Monasterio de Silos 36");
+			 * testClient.setName("Jaime"); testClient.setEmail("Jimmyviniegra@gmail.com");
+			 * testClient.setTelephone(638079977);
+			 * testClient.setPaymentMethod("Credit card");
+			 * 
+			 * connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+			 * 
+			 * insertClientEntrance(testClient);
+			 * 
+			 * disconnect();
+			 */
 
-			Provider testProvider = new Provider();
-			testProvider.setProviderId(1);
-			Client testClient = new Client();
+			// generateUsersDataBase("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
 
-			testClient.setAdress("Avenida Monasterio de Silos 36");
-			testClient.setName("Jaime");
-			testClient.setEmail("Jimmyviniegra@gmail.com");
-			testClient.setTelephone(638079977);
-			testClient.setPaymentMethod("Credit card");
-
-			connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
-
-			insertClientEntrance(testClient);
-
-			disconnect();*/
-			
-			//generateUsersDataBase("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
-			
 			User testUser = new User();
-			
+
 			testUser.setUserName("Gonka98");
 			testUser.setPassword("Testeo2");
 			testUser.setType(UserClass.EMPLOYEE);
 			testUser.setId(1);
-			
+
 			connect("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
-			
+
 			insertUserEntrance(testUser);
-			
-			
-			
+
 			disconnect();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,21 +96,22 @@ public class SQLManager {
 		}
 
 	}
-	
+
 	public static void generateUsersDataBase(String directory) {
 		try {
 			connect(directory);
-			
+
 			createUsersTable();
-			
+
 			disconnect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	// ===================================CREATE TABLE METHODS.===============================================
+	// ===================================CREATE TABLE
+	// METHODS.===============================================
 
 	public static void createUsersTable() throws SQLException {
 		Statement stmt1 = c.createStatement();
@@ -122,7 +120,7 @@ public class SQLManager {
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
-	
+
 	public static void createClientTable() throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
@@ -209,7 +207,8 @@ public class SQLManager {
 
 	// ===========================================================================================================
 
-	// ==========================INSERT ENTRANCE METHODS==========================================================
+	// ==========================INSERT ENTRANCE
+	// METHODS==========================================================
 
 	public static void insertDeliveriesEntrance(Delivery delivery) throws SQLException {
 
@@ -241,11 +240,12 @@ public class SQLManager {
 
 		String sql1 = "INSERT INTO packaged (drug_id, transaction_id, amount)" + "VALUES( ?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
-		for(int i = 0 ; delivery.getDrugId().size() > i; i++) {
-		prep.setInt(1, delivery.getDrugId().get(i).getId());
-		prep.setInt(2, delivery.getTransactionId());
-		prep.setInt(3, delivery.getAmmount().get(i)); // CHECK-> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN A POJO AS A LIST
-		prep.executeUpdate();
+		for (int i = 0; delivery.getDrugId().size() > i; i++) {
+			prep.setInt(1, delivery.getDrugId().get(i).getId());
+			prep.setInt(2, delivery.getTransactionId());
+			prep.setInt(3, delivery.getAmmount().get(i)); // CHECK-> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN
+															// A POJO AS A LIST
+			prep.executeUpdate();
 		}
 		prep.close();
 	}
@@ -278,7 +278,7 @@ public class SQLManager {
 
 		String sql1 = "INSERT INTO arrives(drug_id,transaction_id,amount)" + "VALUES(?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
-		for(int i=0; arrival.getAmount().size()>i;i++ ){
+		for (int i = 0; arrival.getAmount().size() > i; i++) {
 			prep.setInt(1, arrival.getDrugs().get(i).getId());
 			prep.setInt(2, arrival.getArrivalId());
 			prep.setInt(3, arrival.getAmount().get(i));
@@ -340,9 +340,9 @@ public class SQLManager {
 
 		prep.close();
 	}
-	
+
 	public static void insertUserEntrance(User user) throws SQLException {
-		
+
 		String sql1 = "INSERT INTO user(username,password,type,id)" + " VALUES(?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, user.getUserName());
@@ -350,11 +350,9 @@ public class SQLManager {
 		prep.setString(3, user.getType().toString());
 		prep.setInt(4, user.getId());
 		prep.executeUpdate();
-		
-		prep.close();	
+
+		prep.close();
 	}
-		
-	
 
 	// ===========================================================================================================
 
@@ -363,50 +361,25 @@ public class SQLManager {
 		stmt1.executeUpdate(statement);
 		stmt1.close();
 	}
-	
-	public static User extractUserByName(User userWanted) throws SQLException{
+
+	public static User extractUserByName(User userWanted) throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql = "SELECT * FROM user WHERE id =" + userWanted.getId().toString();
+		String sql = "SELECT * FROM user WHERE id= " + userWanted.getId().toString();
 		ResultSet rs = stmt1.executeQuery(sql);
-		while (rs.next()) {
-			
-			UserClass type = setUserEnum(rs.getString("type"));
-			User userObtained = new User(rs.getString("username"),rs.getString("password"),type,rs.getInt("id"));	
-			
-			if(userWanted.equals(userObtained)) {
-				rs.close();
-				stmt1.close();
-				return userObtained;
-			}
-			
+
+		UserClass type = setUserEnum(rs.getString("type"));
+		User userObtained = new User(rs.getString("username"), rs.getString("password"), type, rs.getInt("id"));
+
+		if (userWanted.equals(userObtained)) {
+			rs.close();
+			stmt1.close();
+			return userObtained;
 		}
-		
-		
 		rs.close();
 		stmt1.close();
 		return null;
 	}
-	
-	public static boolean checkUser(User userWanted) throws SQLException{
-		Statement stmt1 = c.createStatement();
-		String sql = "SELECT * FROM user";
-		ResultSet rs = stmt1.executeQuery(sql);
-		while (rs.next()) {
-			
-			UserClass type = setUserEnum(rs.getString("type"));
-			User userObtained = new User(rs.getString("username"),rs.getString("password"),type,rs.getInt("id"));	
-			
-			if(userObtained.equals(userWanted)){
-				rs.close();
-				stmt1.close();
-				return true;
-			}
-		}
-		rs.close();
-		stmt1.close();
-		return false;
-	}
-	
+
 	public static UserClass setUserEnum(String type) {
 		switch (type) {
 		case "EMPLOYEE":
