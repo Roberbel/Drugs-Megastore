@@ -42,8 +42,8 @@ public class LogInManager {
 		public boolean checkExistance() throws SQLException, ClassNotFoundException{
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
 			
-			if(SQLManager.checkUser(trialUser)) {
-				completeUser=SQLManager.extractUserByName(trialUser);
+			completeUser=SQLManager.extractUserByName(trialUser);
+			if(completeUser!=null){	
 				SQLManager.disconnect();
 				return true;
 			}else {
