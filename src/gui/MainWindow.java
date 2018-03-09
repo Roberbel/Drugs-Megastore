@@ -93,12 +93,10 @@ public class MainWindow extends Application {
 	}
 	
 	private void tryLogIn() {
-		User returned = new User();
+		User returned;
 		returned=logIn(user.getText(),password.getText());
 		
-		if (returned.equals(null)) {
-			//Error
-		}else {
+		if (!returned.equals(null)) {
 			switch (returned.getType().toString()) {
 				case "ADMIN":
 					adminPanel=new AdminPane();
