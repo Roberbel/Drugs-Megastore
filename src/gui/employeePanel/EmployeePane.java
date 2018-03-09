@@ -331,25 +331,29 @@ public class EmployeePane extends FlowPane {
 				while(iterador.hasNext()) {
 					Delivery d = iterador.next();
 					HBox hBox = new HBox();
-					Client c = d.getClient()();
+					Client c = d.getClient();
+					
 					Label providerName = new Label(c.getName());
 					Label providerEmail = new Label(c.getEmail());
 					Label providerAdress = new Label(c.getAdress());
 					Label providerPhone = new Label(c.getTelephone().toString());
-					Label arrivalDate = new Label(a.getDate().toString());
+					Label paymentMethod = new Label(c.getPaymentMethod());
+					Label transactionDate = new Label(d.getTransactionDate().toString());
+					Label transactionCost = new Label(d.getSellingPrice().toString());
+					
 					ScrollPane drugNammountPane = new ScrollPane();
 					VBox listPane = new VBox();
-					int numDrugs = a.getDrugs().size();
+					int numDrugs = d.getDrugId().size();
 					for (int i = 0; i < numDrugs; i++ ) {
 						HBox h = new HBox();
-						Label drug = new Label(a.getDrugs().get(i).getName());
-						Label ammount = new Label(a.getAmount().get(i).toString());
+						Label drug = new Label(d.getDrugId().get(i).getName());
+						Label ammount = new Label(d.getAmmount().get(i).toString());
 						h.getChildren().addAll(drug, ammount);
 						listPane.getChildren().add(h);
 					}
 					drugNammountPane.setContent(listPane);
 					
-					hBox.getChildren().addAll(providerName, providerEmail, providerAdress, providerPhone, arrivalDate, drugNammountPane);
+					hBox.getChildren().addAll(providerName, providerEmail, providerAdress, providerPhone, paymentMethod ,transactionDate, transactionCost , drugNammountPane);
 					listPane.getChildren().add(hBox);
 				}
 			
