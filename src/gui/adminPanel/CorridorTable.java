@@ -17,7 +17,7 @@ public class CorridorTable extends VBox{
 		table=new TableView <pojos.Corridor>();
 		TableColumn <pojos.Corridor,String> 
 		
-		
+		GONZALO ERES IMBECIL.JAVA
 	}
 	
 }
