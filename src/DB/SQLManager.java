@@ -353,6 +353,32 @@ public class SQLManager {
 
 		prep.close();
 	}
+	// ===========================================================================================================
+	public static Client extractClient(Integer id)throws SQLException{
+		String sql="SELECT * FROM client WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		ResultSet rs = prep.executeQuery();
+		
+			int id_client=rs.getInt("id");
+			String name=rs.getString("name");
+			String adress=rs.getString("adress");
+			int telephone=rs.getInt("telephone");
+			String email=rs.getString("email");
+			String payMethod=rs.getString("payMethod");
+			Client client=new Client(id_client,name,adress, telephone, email, payMethod);
+		
+		if	(id == id_client) {
+			prep.close();
+			rs.close();
+			return client;
+		}else {
+			
+		prep.close();
+		rs.close();
+		return null;
+		}	
+	}
+	
 
 	// ===========================================================================================================
 

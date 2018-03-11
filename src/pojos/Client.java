@@ -62,6 +62,16 @@ public class Client implements Serializable {
 		this.deliveries = deliveries;
 
 	}
+	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.adress = adress;
+		this.telephone = telephone;
+		this.email = email;
+		this.paymentMethod = paymentMethod;
+		
+	}
 
 
 
