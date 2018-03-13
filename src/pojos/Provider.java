@@ -53,6 +53,17 @@ public class Provider implements Serializable {
 		this.arrivals = arrivals;
 	}
 
+	public Provider(Integer providerId, String name, String adress, Integer telephone, String email) {
+		super();
+		this.providerId = providerId;
+		this.name = name;
+		this.adress = adress;
+		this.telephone = telephone;
+		this.email = email;
+	}
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

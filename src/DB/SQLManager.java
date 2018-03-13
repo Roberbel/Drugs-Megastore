@@ -233,7 +233,7 @@ public class SQLManager {
 		prep.setString(2, client.getAdress());
 		prep.setInt(3, client.getTelephone());
 		prep.setString(4, client.getEmail());
-		prep.setString(5, client.getPaymentMethod());
+		prep.setString(5, client.getPaymentMethod().toString());
 		prep.executeUpdate();
 		prep.close();
 
@@ -426,6 +426,29 @@ public class SQLManager {
 		}
 		
 	}
+	public static Provider extractProviderById(Integer id)throws SQLException{
+		String sql="SELECT * FROM provider WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		
+		prep.setInt(1, id);
+		
+		ResultSet rs = prep.executeQuery();
+		
+		Provider provider = new Provider (rs.getInt("id"), rs.getString("name"), rs.getString("adress"), rs.getInt("telephone"),
+				rs.getString("email"));
+		
+		if	(id == provider.getProviderId()) {
+			prep.close();
+			rs.close();
+			return provider;
+		}else {
+			
+		prep.close();
+		rs.close();
+		return null;
+		}	
+	}
+	
 	
 	public static Client extractClientById(Integer id)throws SQLException{
 		String sql="SELECT * FROM client WHERE id = ? ";
