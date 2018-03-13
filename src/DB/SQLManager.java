@@ -6,6 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import pojos.*;
 import pojos.User.UserClass;
 
@@ -379,7 +382,7 @@ public class SQLManager {
 		
 	}
 	
-	public static Warehouse extractWarehouseById(Integer id) {
+	public static Warehouse extractWarehouseById(Integer id) throws SQLException {
 		String sql = "SELECT * FROM warehouse WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
@@ -387,8 +390,8 @@ public class SQLManager {
 		
 		ResultSet rs = prep.executeQuery();
 		
-		Warehouse warehouse =  new Warehouse(rs.getInt("id"), rs.getString("name"), rs.getFloat("salary"), rs.getInt("phone"),
-				rs.getString("position"), warehouseWanted, rs.getBytes("photo"));
+		Warehouse warehouse =  new Warehouse(rs.getInt("id"), rs.getInt("pc"), rs.getString("country"),
+				rs.getString("city"), rs.getString("adress"),rs.getInt("phone"));
 	
 		if(id == warehouse.getId()) {
 			prep.close();
