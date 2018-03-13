@@ -16,9 +16,10 @@ public class Client implements Serializable {
 	private String adress;
 	private Integer telephone;
 	private String email;
-	private String paymentMethod;
+	private PaymentMethod paymentMethod;
 	private List<Delivery> deliveries;
-
+	
+	public enum PaymentMethod {PAYPAL, VISA, MASTERCARD, AMERICAN_EXPRESS, ORGANS};
 	
 	
 	public Client() {
