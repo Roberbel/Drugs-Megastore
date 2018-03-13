@@ -310,7 +310,7 @@ public class SQLManager {
 		String sql1 = "INSERT INTO corridors(temperature, warehouse_id)" + "VALUES(?,?);";
 
 		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setInt(1, corridor.getTemperature());
+		prep.setFloat(1, corridor.getTemperature());
 		prep.setInt(2, corridor.getWarehouse().getId());
 		prep.executeUpdate();
 		prep.close();
@@ -405,7 +405,7 @@ public class SQLManager {
 		
 	}
 	
-	public static Corridor extractCorridorById(Integer id) {
+	public static Corridor extractCorridorById(Integer id) throws SQLException {
 		String sql = "SELECT * FROM corridor WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		

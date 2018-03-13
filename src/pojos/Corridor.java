@@ -16,7 +16,7 @@ public class Corridor implements Serializable {
 	private static final long serialVersionUID = 4227526298151577502L;
 	
 	private Integer id;
-	private Integer temperature;
+	private float temperature;
 	private Warehouse warehouse;
 	private List<Drug>drugs;
 	
@@ -28,21 +28,21 @@ public class Corridor implements Serializable {
 	}
 	
 		
-	public Corridor(Integer temperature, Warehouse warehouse, List<Drug> drugs) {
+	public Corridor(float temperature, Warehouse warehouse, List<Drug> drugs) {
 		super();
 		this.temperature = temperature;
 		this.warehouse = warehouse;
 		this.drugs = drugs;
 	}
 
-	public Corridor(Integer id, Integer temperature, Warehouse warehouse) {
+	public Corridor(Integer id, float temperature, Warehouse warehouse) {
 		super();
 		this.id =id;
 		this.temperature = temperature;
 		this.warehouse = warehouse;
 		this.drugs = new ArrayList<Drug>();
 	}
-	public Corridor(Integer id, Integer temperature, Warehouse warehouse,
+	public Corridor(Integer id, float temperature, Warehouse warehouse,
 			List<Drug> drugs) {
 		super();
 		this.id =id;
@@ -50,7 +50,7 @@ public class Corridor implements Serializable {
 		this.warehouse = warehouse;
 		this.drugs = drugs;
 	}
-	public Corridor(Integer id, Integer temperature) {
+	public Corridor(Integer id, float temperature) {
 		super();
 		this.id =id;
 		this.temperature = temperature;
@@ -94,11 +94,11 @@ public class Corridor implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getTemperature() {
+	public float getTemperature() {
 		return temperature;
 	}
 
-	public void setTemperature(Integer temperature) {
+	public void setTemperature(float temperature) {
 		this.temperature = temperature;
 	}
 
