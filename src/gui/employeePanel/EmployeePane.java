@@ -132,9 +132,11 @@ public class EmployeePane extends FlowPane {
 		
 		leftPane.getChildren().addAll(order, direction);
 		mainPane.setLeft(leftPane);
-		/*on the right we will have a list of the drugs present on the DB
-		 *with the info necessary: name, stock and corridor
+		/*
+		 * on the right we will have a list of the drugs present on the DB
+		 * with the info necessary: name, stock and corridor
 		 */
+		
 		changeDrugListPane();
 		
 		/*

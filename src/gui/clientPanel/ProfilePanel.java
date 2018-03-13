@@ -3,10 +3,12 @@ package gui.clientPanel;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import pojos.Client;
+import pojos.Client.PaymentMethod;
 
-public class ProfilePanel extends FlowPane {
+public class ProfilePanel extends BorderPane {
 	
 	Client client;
 	
@@ -20,11 +22,14 @@ public class ProfilePanel extends FlowPane {
 	TextField addressField;
 	TextField telephoneField;
 	TextField emailField;
-	ChoiceBox<String> paymentMethod;
+	ChoiceBox<PaymentMethod> paymentMethod;
 	
 	ProfilePanel(Client client){
 		this.client = client;
 		
+		/*
+		 * Instance of components
+		 */
 		nameLab = new Label("Name");
 		addressLab = new Label("Address");
 		telephoneLab = new Label("Telephone");
@@ -35,7 +40,60 @@ public class ProfilePanel extends FlowPane {
 		addressField = new TextField(client.getAdress());
 		telephoneField = new TextField(client.getTelephone().toString());
 		emailField = new TextField(client.getEmail());
-		paymentMethod = new ChoiceBox<String>();
+		paymentMethod = new ChoiceBox<PaymentMethod>();
+		paymentMethod.getItems().addAll(PaymentMethod.AMERICAN_EXPRESS,
+										PaymentMethod.MASTERCARD,
+										PaymentMethod.PAYPAL,
+										PaymentMethod.VISA, 
+										PaymentMethod.ORGANS);
+		paymentMethod.setValue(client.getPaymentMethod());
 		
+		/*
+		 * now we set the event managers
+		 */
+		nameField.setOnInputMethodTextChanged(e -> nameChanged());
+		addressField.setOnInputMethodTextChanged(e -> addressChanged());
+		telephoneField.setOnInputMethodTextChanged(e -> telephoneChanged());
+		emailField.setOnInputMethodTextChanged(e -> emailChanged());
+		paymentMethod.setOnInputMethodTextChanged(e -> paymentMethodChanged());
+		
+		
+		/*
+		 * Adding components to Panels
+		 */
+		GridPane grid = new GridPane();
+		grid.add(nameLab, 0, 0);
+		grid.add(nameField, 1, 0);
+		grid.add(addressLab, 1, 0);
+		grid.add(addressField, 1, 1);
+		grid.add(telephoneLab, 2, 0);
+		grid.add(telephoneField, 2, 1);
+		grid.add(emailLab, 3, 0);
+		grid.add(emailField, 3, 1);
+		grid.add(paymentMethodLab, 4, 0);
+		grid.add(paymentMethod, 4, 1);
+		setCenter(grid);
+		
+		
+	}
+	
+	private void nameChanged() {
+		client.setName(nameField.getText());
+	}
+	
+	private void addressChanged(){
+		client.setAdress(addressField.getText());
+	}
+	
+	private void telephoneChanged() {
+		client.setTelephone(Integer.parseInt(telephoneField.getText()));
+	}
+	
+	private void emailChanged() {
+		client.setEmail(emailField.getText());
+	}
+	
+	private void paymentMethodChanged() {
+		client.setPaymentMethod(paymentMethod.getValue());
 	}
 }
