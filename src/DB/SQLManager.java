@@ -405,6 +405,28 @@ public class SQLManager {
 		
 	}
 	
+	public static Corridor extractCorridorById(Integer id) {
+		String sql = "SELECT * FROM corridor WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		
+		prep.setInt(1, id);
+		
+		ResultSet rs = prep.executeQuery();
+		
+		Corridor corridor = new Corridor (rs.getInt("id"), rs.getFloat("temperature"), extractWarehouseById(rs.getInt("warehouse_id")));
+	
+		if(id == corridor.getId()) {
+			prep.close();
+			rs.close();
+			return corridor;
+		}else {
+			prep.close();
+			rs.close();
+			return null;
+		}
+		
+	}
+	
 	public static Client extractClientById(Integer id)throws SQLException{
 		String sql="SELECT * FROM client WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
