@@ -45,6 +45,13 @@ public class Arrival implements Serializable{
 		this.provider = provider;
 		this.drugs = drugs;
 	}
+	public Arrival(Integer arrivalId, Integer buyingPrice, Date date,  Provider provider) {
+		super();
+		this.arrivalId = arrivalId;
+		this.buyingPrice = buyingPrice;
+		this.date = date;
+		this.provider = provider;
+	}
 
 	@Override
 	public int hashCode() {

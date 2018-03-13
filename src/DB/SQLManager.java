@@ -1,6 +1,7 @@
 package DB;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -397,6 +398,29 @@ public class SQLManager {
 			prep.close();
 			rs.close();
 			return warehouse;
+		}else {
+			prep.close();
+			rs.close();
+			return null;
+		}
+		
+	}
+	
+	public static Arrival extractArrivalById(Integer arrivalId)throws SQLException{
+		
+		String sql = "SELECT * FROM arrival WHERE id = ? ";
+		PreparedStatement prep= c.prepareStatement(sql);
+		prep.setInt(1, arrivalId);
+		ResultSet rs = prep.executeQuery();
+		
+		Provider providerWanted=extractProviderById(rs.getInt("id"));
+		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"),
+				rs.getDate("date"),providerWanted);
+		
+		if(arrivalId==arrival.getArrivalId()) {
+			prep.close();
+			rs.close();
+			return arrival;
 		}else {
 			prep.close();
 			rs.close();
