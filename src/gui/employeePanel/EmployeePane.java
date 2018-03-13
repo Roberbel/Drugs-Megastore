@@ -25,12 +25,10 @@ import pojos.Provider;
 
 import java.util.*;
 
-public class EmployeePane extends FlowPane {	
+public class EmployeePane extends BorderPane {	
 	
 	Employee employee;
 	
-	//Panels
-	BorderPane mainPane;
 	
 	//always shown elements
 	Button drugButton;
@@ -48,9 +46,7 @@ public class EmployeePane extends FlowPane {
 	public EmployeePane() {
 		
 		super();
-		
-		mainPane = new BorderPane();
-		
+			
 		drugButton = new Button("Drugs");
 		drugButton.setOnAction(e -> showDrugsPane());
 		arrivalsButton = new Button ("Arrivals");
@@ -63,8 +59,7 @@ public class EmployeePane extends FlowPane {
 		searchField.setText("Search");
 		HBox hBox = new HBox(20, drugButton, arrivalsButton, departuresButton);
 		
-		mainPane.setCenter(hBox);
-		this.getChildren().addAll(mainPane);
+		setCenter(hBox);
 		
 		//no idea how to do the log out, most likely we will have to make it work from the MainWindow part
 		logOut = new Button("Log Out");
@@ -77,8 +72,7 @@ public class EmployeePane extends FlowPane {
 		
 		//we keep track on who is making changes
 		this.employee = employee;
-		
-		mainPane = new BorderPane();
+
 		
 		drugButton = new Button("Drugs");
 		drugButton.setOnAction(e -> showDrugsPane());
@@ -93,8 +87,7 @@ public class EmployeePane extends FlowPane {
 		
 		HBox hBox = new HBox(20, drugButton, arrivalsButton, departuresButton);
 		
-		mainPane.setCenter(hBox);
-		this.getChildren().addAll(mainPane);
+		setCenter(hBox);
 		
 		//no idea how to do the log out, most likely we will have to make it work from the MainWindow part
 		logOut = new Button("Log Out");
@@ -107,16 +100,16 @@ public class EmployeePane extends FlowPane {
 	private void showDrugsPane() {
 		
 		//first we clear the panel
-		mainPane.setTop(null);
-		mainPane.setCenter(null);
-		mainPane.setRight(null);
-		mainPane.setLeft(null);
-		mainPane.setBottom(null);
+		setTop(null);
+		setCenter(null);
+		setRight(null);
+		setLeft(null);
+		setBottom(null);
 		
 		HBox topPanel = new HBox(30);
 		topPanel.getChildren().addAll(searchField, new Region(),  drugButton, arrivalsButton, departuresButton);
 		
-		mainPane.setTop(topPanel);
+		setTop(topPanel);
 		
 		VBox leftPane = new VBox(70);
 		order = new ChoiceBox<String>();
@@ -131,7 +124,7 @@ public class EmployeePane extends FlowPane {
 		direction.setOnAction(e -> changeDrugListPane());
 		
 		leftPane.getChildren().addAll(order, direction);
-		mainPane.setLeft(leftPane);
+		setLeft(leftPane);
 		/*
 		 * on the right we will have a list of the drugs present on the DB
 		 * with the info necessary: name, stock and corridor
@@ -145,7 +138,7 @@ public class EmployeePane extends FlowPane {
 		
 		ScrollPane scrollPane = new ScrollPane(listPane);
 		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-		mainPane.setCenter(scrollPane);
+		setCenter(scrollPane);
 		
 	}
 	
@@ -189,16 +182,16 @@ public class EmployeePane extends FlowPane {
 //==================================================================ARRIVALS PART======================================
 	private void showArrivalsPane() {
 		//first we clear the panel
-		mainPane.setTop(null);
-		mainPane.setCenter(null);
-		mainPane.setRight(null);
-		mainPane.setLeft(null);
-		mainPane.setBottom(null);
+		setTop(null);
+		setCenter(null);
+		setRight(null);
+		setLeft(null);
+		setBottom(null);
 		
 		HBox topPanel = new HBox(30);
 		topPanel.getChildren().addAll(searchField, new Region(),  drugButton, arrivalsButton, departuresButton);
 		
-		mainPane.setTop(topPanel);
+		setTop(topPanel);
 		
 		VBox leftPane = new VBox(70);
 		order = new ChoiceBox<String>();
@@ -213,9 +206,9 @@ public class EmployeePane extends FlowPane {
 		direction.setOnAction(e -> changeArrivalsListPane());
 		
 		leftPane.getChildren().addAll(order, direction);
-		mainPane.setLeft(leftPane);
+		setLeft(leftPane);
 		changeArrivalsListPane();
-		mainPane.setCenter(listPane);
+		setCenter(listPane);
 		
 	}
 	
@@ -278,16 +271,16 @@ public class EmployeePane extends FlowPane {
 	
 	private void showDeparturesPane() {
 		//first we clear the panel
-		mainPane.setTop(null);
-		mainPane.setCenter(null);
-		mainPane.setRight(null);
-		mainPane.setLeft(null);
-		mainPane.setBottom(null);
+		setTop(null);
+		setCenter(null);
+		setRight(null);
+		setLeft(null);
+		setBottom(null);
 		
 		HBox topPanel = new HBox(30);
 		topPanel.getChildren().addAll(searchField, new Region(),  drugButton, arrivalsButton, departuresButton);
 		
-		mainPane.setTop(topPanel);
+		setTop(topPanel);
 		
 		VBox leftPane = new VBox(70);
 		order = new ChoiceBox<String>();
@@ -302,9 +295,9 @@ public class EmployeePane extends FlowPane {
 		direction.setOnAction(e -> changeDepartureListPane());
 		
 		leftPane.getChildren().addAll(order, direction);
-		mainPane.setLeft(leftPane);
+		setLeft(leftPane);
 		changeDepartureListPane();
-		mainPane.setCenter(listPane);
+		setCenter(listPane);
 	}
 	
 	private void changeDepartureListPane() {
@@ -339,7 +332,7 @@ public class EmployeePane extends FlowPane {
 					Label providerEmail = new Label(c.getEmail());
 					Label providerAdress = new Label(c.getAdress());
 					Label providerPhone = new Label(c.getTelephone().toString());
-					Label paymentMethod = new Label(c.getPaymentMethod());
+					Label paymentMethod = new Label(c.getPaymentMethod().toString());
 					Label transactionDate = new Label(d.getTransactionDate().toString());
 					Label transactionCost = new Label(d.getSellingPrice().toString());
 					
