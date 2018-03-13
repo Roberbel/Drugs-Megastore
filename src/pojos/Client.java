@@ -36,7 +36,17 @@ public class Client implements Serializable {
 		this.adress = adress;
 		this.telephone = telephone;
 		this.email = email;
-		this.paymentMethod = paymentMethod;
+		if (paymentMethod.equals("PAYPAL")) {
+			this.paymentMethod = PaymentMethod.PAYPAL;
+		}else if(paymentMethod.equals("VISA")) {
+			this.paymentMethod = PaymentMethod.VISA;
+		}else if(paymentMethod.equals("MASTERCARD")) {
+			this.paymentMethod = PaymentMethod.MASTERCARD;
+		}else if(paymentMethod.equals("AMERICAN_EXPRESS")) {
+			this.paymentMethod = PaymentMethod.AMERICAN_EXPRESS;
+		}else if(paymentMethod.equals("ORGANS")) {
+			this.paymentMethod = PaymentMethod.ORGANS;
+		}
 		this.deliveries = deliveries;
 	}
 
@@ -47,7 +57,17 @@ public class Client implements Serializable {
 		this.id = id;
 		this.name = name;
 		this.adress = adress;
-		this.paymentMethod = paymentMethod;
+		if (paymentMethod.equals("PAYPAL")) {
+			this.paymentMethod = PaymentMethod.PAYPAL;
+		}else if(paymentMethod.equals("VISA")) {
+			this.paymentMethod = PaymentMethod.VISA;
+		}else if(paymentMethod.equals("MASTERCARD")) {
+			this.paymentMethod = PaymentMethod.MASTERCARD;
+		}else if(paymentMethod.equals("AMERICAN_EXPRESS")) {
+			this.paymentMethod = PaymentMethod.AMERICAN_EXPRESS;
+		}else if(paymentMethod.equals("ORGANS")) {
+			this.paymentMethod = PaymentMethod.ORGANS;
+		}
 		this.deliveries = deliveries;
 	}
 
@@ -59,7 +79,17 @@ public class Client implements Serializable {
 		this.adress = adress;
 		this.telephone = telephone;
 		this.email = email;
-		this.paymentMethod = paymentMethod;
+		if (paymentMethod.equals("PAYPAL")) {
+			this.paymentMethod = PaymentMethod.PAYPAL;
+		}else if(paymentMethod.equals("VISA")) {
+			this.paymentMethod = PaymentMethod.VISA;
+		}else if(paymentMethod.equals("MASTERCARD")) {
+			this.paymentMethod = PaymentMethod.MASTERCARD;
+		}else if(paymentMethod.equals("AMERICAN_EXPRESS")) {
+			this.paymentMethod = PaymentMethod.AMERICAN_EXPRESS;
+		}else if(paymentMethod.equals("ORGANS")) {
+			this.paymentMethod = PaymentMethod.ORGANS;
+		}
 		this.deliveries = deliveries;
 
 	}
@@ -70,7 +100,17 @@ public class Client implements Serializable {
 		this.adress = adress;
 		this.telephone = telephone;
 		this.email = email;
-		this.paymentMethod = paymentMethod;
+		if (paymentMethod.equals("PAYPAL")) {
+			this.paymentMethod = PaymentMethod.PAYPAL;
+		}else if(paymentMethod.equals("VISA")) {
+			this.paymentMethod = PaymentMethod.VISA;
+		}else if(paymentMethod.equals("MASTERCARD")) {
+			this.paymentMethod = PaymentMethod.MASTERCARD;
+		}else if(paymentMethod.equals("AMERICAN_EXPRESS")) {
+			this.paymentMethod = PaymentMethod.AMERICAN_EXPRESS;
+		}else if(paymentMethod.equals("ORGANS")) {
+			this.paymentMethod = PaymentMethod.ORGANS;
+		}
 		
 	}
 
@@ -149,11 +189,11 @@ public class Client implements Serializable {
 		this.email = email;
 	}
 
-	public String getPaymentMethod() {
+	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
 	}
 
-	public void setPaymentMethod(String paymentMethod) {
+	public void setPaymentMethod(PaymentMethod paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
 
