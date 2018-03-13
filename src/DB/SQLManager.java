@@ -354,9 +354,60 @@ public class SQLManager {
 		prep.close();
 	}
 	// ===========================================================================================================
-	public static Client extractClient(Integer id)throws SQLException{
+	public static Employee extractEmployeeById(Integer id) throws SQLException {
+		String sql = "SELECT * FROM employee WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		
+		prep.setInt(1, id);
+		
+		ResultSet rs = prep.executeQuery();
+		
+		Warehouse warehouseWanted = extractWarehouseById(rs.getInt("warehouse_id"));
+		Employee employee = new Employee(rs.getInt("id"), rs.getString("name"), rs.getFloat("salary"), rs.getInt("phone"),
+				rs.getString("position"), warehouseWanted, rs.getBytes("photo"));
+	
+		if(id == employee.getId()) {
+			prep.close();
+			rs.close();
+			return employee;
+		}else {
+			prep.close();
+			rs.close();
+			return null;
+		}
+		
+		
+	}
+	
+	public static Warehouse extractWarehouseById(Integer id) {
+		String sql = "SELECT * FROM warehouse WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		
+		prep.setInt(1, id);
+		
+		ResultSet rs = prep.executeQuery();
+		
+		Warehouse warehouse =  new Warehouse(rs.getInt("id"), rs.getString("name"), rs.getFloat("salary"), rs.getInt("phone"),
+				rs.getString("position"), warehouseWanted, rs.getBytes("photo"));
+	
+		if(id == warehouse.getId()) {
+			prep.close();
+			rs.close();
+			return warehouse;
+		}else {
+			prep.close();
+			rs.close();
+			return null;
+		}
+		
+	}
+	
+	public static Client extractClientById(Integer id)throws SQLException{
 		String sql="SELECT * FROM client WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
+		
+		prep.setInt(1, id);
+		
 		ResultSet rs = prep.executeQuery();
 		
 			int id_client=rs.getInt("id");
