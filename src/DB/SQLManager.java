@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import pojos.*;
 import pojos.User.UserClass;
 
@@ -403,18 +406,37 @@ public class SQLManager {
 		
 	}
 	
-	public static Arrival extractArrivalById(Integer arrivalId)throws SQLException{
+	public static Arrival extractArrivalById(Integer id)throws SQLException{
 		
 		String sql = "SELECT * FROM arrival WHERE id = ? ";
 		PreparedStatement prep= c.prepareStatement(sql);
-		prep.setInt(1, arrivalId);
+		prep.setInt(1, id);
 		ResultSet rs = prep.executeQuery();
 		
 		Provider providerWanted=extractProviderById(rs.getInt("id"));
-		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"),
-				rs.getDate("date"),providerWanted);
+		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"), rs.getDate("date"),providerWanted);
 		
-		if(arrivalId==arrival.getArrivalId()) {
+		String sql2 = "SELECT * FROM arrives WHERE transaction_id = ?";
+		PreparedStatement prep2= c.prepareStatement(sql);
+		prep.setInt(1, arrival.getArrivalId());
+		
+		List<Drug> drugs = new ArrayList<Drug>();
+		List<Integer> amounts = new ArrayList<Integer>();
+		
+		ResultSet rs2 = prep.executeQuery();
+		while(rs2.next()) {
+			Drug drug = extractDrugById(rs.getInt("drug_id"));
+			Integer amount = rs.getInt("amount");
+			
+			drugs.add(drug);
+			amounts.add(amount);
+		}
+		
+		arrival.setDrugs(drugs);
+		arrival.setAmount(amounts);
+		
+		
+		if(id==arrival.getArrivalId()) {
 			prep.close();
 			rs.close();
 			return arrival;
