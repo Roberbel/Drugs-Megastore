@@ -1,6 +1,7 @@
 package gui.adminPanel;
 
 import pojos.*;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -12,7 +13,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.converter.IntegerStringConverter;
-import pojos.Warehouse;
 
 public class WarehouseTable extends VBox{
 
@@ -63,7 +63,7 @@ public class WarehouseTable extends VBox{
 		addBut=new Button("Add");
 		addBut.setOnAction(e->addClicked());
 		delBut=new Button("Delete");
-		delBut.setOnAction(e->delClicked);
+		delBut.setOnAction(e->delClicked());
 		
 		addPan.getChildren().addAll(pcField,countryField,cityField,adressField,phoneField,addBut,delBut);
 		this.getChildren().addAll(table,addPan);
@@ -72,30 +72,58 @@ public class WarehouseTable extends VBox{
 	public void addClicked() {
 		pojos.Warehouse newWarehouse=new Warehouse();
 		newWarehouse.setPc(Integer.parseInt(pcField.getText()));
+		newWarehouse.setCountry(cityField.getText());
+		newWarehouse.setAdress(adressField.getText());
+		newWarehouse.setPhone(Integer.parseInt(phoneField.getText()));
+		table.getItems().add(newWarehouse);
+		pcField.clear();
+		cityField.clear();
+		adressField.clear();
+		phoneField.clear();
 	}
 	
-	private Object phone_onEditCommit(CellEditEvent<Warehouse, Integer> e) {
-		// TODO Auto-generated method stub
-		return null;
+	public void delClicked() {
+		ObservableList <pojos.Warehouse> items,sel;
+		items=table.getItems();
+		sel=table.getSelectionModel().getSelectedItems();
+		
+		for(pojos.Warehouse w:sel) {
+			items.remove(w);
+		}
+	}
+	
+	private void phone_onEditCommit(Event e) {
+		CellEditEvent<Warehouse, Integer> ce;
+		ce= (TableColumn.CellEditEvent<Warehouse,Integer>)e;
+		Warehouse ex=ce.getRowValue();
+		ex.setPhone(ce.getNewValue());
 	}
 
-	private Object adress_onEditCommit(CellEditEvent<Warehouse, String> e) {
-		// TODO Auto-generated method stub
-		return null;
+	private void adress_onEditCommit(Event e) {
+		CellEditEvent<Warehouse,String> ce;
+		ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+		Warehouse ex=ce.getRowValue();
+		ex.setAdress(ce.getNewValue());
 	}
 
-	private Object city_onEditCommit(CellEditEvent<Warehouse, String> e) {
-		// TODO Auto-generated method stub
-		return null;
+	private void city_onEditCommit(Event e) {
+		CellEditEvent <Warehouse,String> ce;
+		ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+		Warehouse ex=ce.getRowValue();
+		ex.setAdress(ce.getNewValue());
 	}
 
-	private Object country_onEditCommit(CellEditEvent<Warehouse, String> e) {
-		// TODO Auto-generated method stub
-		return null;
+	private void country_onEditCommit(Event e) {
+		CellEditEvent <Warehouse,String> ce;
+		ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+		Warehouse ex=ce.getRowValue();
+		ex.setAdress(ce.getNewValue());
 	}
 
 	public void pc_onEditCommit(Event e) {
-		// TODO Auto-generated method stub
-	
+		CellEditEvent <Warehouse,String> ce;
+		ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+		Warehouse ex=ce.getRowValue();
+		ex.setAdress(ce.getNewValue());
 	}
 }
