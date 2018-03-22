@@ -1,8 +1,10 @@
 package gui.adminPanel;
 
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -55,21 +57,55 @@ public class ProviderTable extends VBox {
 		delBut.setOnAction(e->delClicked());
 		addBox.getChildren().addAll(nameField,adressField,phoneField,mailField,addBut,delBut);
 		
+		this.getChildren().addAll(table,addBox);
+		
+	}
+	public void addClicked() {
+		pojos.Provider newProvider=new pojos.Provider();
+		newProvider.setName(nameField.getText());
+		newProvider.setAdress(adressField.getText());
+		newProvider.setTelephone(Integer.parseInt(phoneField.getText()));
+		newProvider.setEmail(mailField.getText());
+		nameField.clear();
+		adressField.clear();
+		phoneField.clear();
+		mailField.clear();
+	}
+	public void delClicked() {
+		ObservableList <pojos.Corridor> sel,items;
+		items=table.getItems();
+		sel=table.getSelectionModel().getSelectedItems();
+		for(pojos.Corridor c:sel) {
+			items.remove(c);
+		}
 	}
 	
+	
 	public void mail_onEditCommit(Event e) {
-		
+		CellEditEvent <pojos.Provider,String> ce;
+		ce=(TableColumn.CellEditEvent<Provider, String>)e;
+		Provider ex=ce.getRowValue();
+		ex.setEmail(ce.getNewValue());
 	}
 	
 	public void phone_onEditCommit(Event e) {
-		
+		CellEditEvent <pojos.Provider,Integer> ce;
+		ce=(TableColumn.CellEditEvent<Provider, Integer>)e;
+		Provider ex=ce.getRowValue();
+		ex.setTelephone(ce.getNewValue());
 	}
 	
 	public void name_onEditCommit(Event e) {
-		
+		CellEditEvent <pojos.Provider,String> ce;
+		ce=(TableColumn.CellEditEvent<Provider, String>)e;
+		Provider ex=ce.getRowValue();
+		ex.setName(ce.getNewValue());
 	}
 	
 	public void adress_onEditCommit(Event e) {
-		
+		CellEditEvent <pojos.Provider,String> ce;
+		ce=(TableColumn.CellEditEvent<Provider, String>)e;
+		Provider ex=ce.getRowValue();
+		ex.setAdress(ce.getNewValue());
 	}
 }
