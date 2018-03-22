@@ -66,6 +66,7 @@ public class ProviderTable extends VBox {
 		newProvider.setAdress(adressField.getText());
 		newProvider.setTelephone(Integer.parseInt(phoneField.getText()));
 		newProvider.setEmail(mailField.getText());
+		table.getItems().add(newProvider);
 		nameField.clear();
 		adressField.clear();
 		phoneField.clear();

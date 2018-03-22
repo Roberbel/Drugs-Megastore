@@ -57,7 +57,7 @@ public class AdminPane extends FlowPane {
 			mainPanel.setCenter(deliveriesTable());
 			break;
 		case "Users":
-			mainPanel.setCenter(usersTable());
+			mainPanel.setCenter(new UserTable());
 			break;
 		case "Providers":
 			mainPanel.setCenter(new ProviderTable());
