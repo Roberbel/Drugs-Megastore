@@ -417,8 +417,8 @@ public class SQLManager {
 		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"), rs.getDate("date"),providerWanted);
 		
 		String sql2 = "SELECT * FROM arrives WHERE transaction_id = ?";
-		PreparedStatement prep2= c.prepareStatement(sql);
-		prep.setInt(1, arrival.getArrivalId());
+		PreparedStatement prep2= c.prepareStatement(sql2);
+		prep2.setInt(1, arrival.getArrivalId());
 		
 		List<Drug> drugs = new ArrayList<Drug>();
 		List<Integer> amounts = new ArrayList<Integer>();
