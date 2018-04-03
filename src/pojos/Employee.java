@@ -2,6 +2,11 @@ package pojos;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Employee")
 public class Employee extends User implements Serializable {
 
 	/**
@@ -36,8 +41,7 @@ public class Employee extends User implements Serializable {
 
 
 	public Employee(Integer id, String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[]photo, String userName, String password) {
-		super(userName, password);
-		this.id = id;
+		super(id, userName, password);
 		this.name = name;
 		this.salary = salary;
 		this.phone = phone;
@@ -52,7 +56,7 @@ public class Employee extends User implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((super.getId() == null) ? 0 : super.getId().hashCode());
 		return result;
 	}
 
@@ -65,26 +69,26 @@ public class Employee extends User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (super.getId() == null) {
+			if (other.getId() != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!super.getId().equals(other.getId()))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + ", phone=" + phone + ", position="
+		return "Employee [id=" + super.getId() + ", name=" + name + ", salary=" + salary + ", phone=" + phone + ", position="
 				+ position + ", warehouseId=" + warehouseId + "]";
 	}
 
 	public Integer getId() {
-		return id;
+		return super.getId();
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		super.setId(id);
 	}
 
 	public String getName() {

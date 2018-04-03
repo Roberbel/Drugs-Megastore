@@ -2,7 +2,15 @@ package pojos;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class User implements Serializable {
 
 	/**
 	 * 
@@ -16,7 +24,8 @@ public class User implements Serializable {
 	private String userName;
 	private String password;
 	private UserClass type;
-	protected Integer id;
+	@Id
+	private Integer id;
 
 	public User() {
 		super();
@@ -26,6 +35,14 @@ public class User implements Serializable {
 		super();
 		this.userName = userName;
 		this.password = password;
+	}
+	
+	public User(int id, String userName, String password) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+		
 	}
 
 	public User(String userName, String password, UserClass type, Integer id) {

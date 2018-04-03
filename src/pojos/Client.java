@@ -3,7 +3,11 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Client")
 public class Client extends User implements Serializable {
 
 	/**
@@ -11,7 +15,6 @@ public class Client extends User implements Serializable {
 	*/
 	private static final long serialVersionUID = 2116743967910216027L;
 
-	private Integer id;
 	private String name;
 	private String adress;
 	private Integer telephone;
@@ -53,8 +56,7 @@ public class Client extends User implements Serializable {
 
 
 	public Client(Integer id, String name, String adress,Date date, String paymentMethod, ArrayList<Delivery> deliveries, String userName, String password) {
-		super(userName, password);
-		this.id = id;
+		super(id, userName, password);
 		this.name = name;
 		this.adress = adress;
 		if (paymentMethod.equals("PAYPAL")) {
@@ -73,8 +75,7 @@ public class Client extends User implements Serializable {
 
 	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod,
 			ArrayList<Delivery> deliveries, String userName, String password) {
-		super(userName, password);
-		this.id = id;
+		super(id ,userName, password);
 		this.name = name;
 		this.adress = adress;
 		this.telephone = telephone;
@@ -94,8 +95,7 @@ public class Client extends User implements Serializable {
 
 	}
 	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod, String userName, String password) {
-		super(userName, password);
-		this.id = id;
+		super(id, userName, password);
 		this.name = name;
 		this.adress = adress;
 		this.telephone = telephone;
@@ -120,7 +120,7 @@ public class Client extends User implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
 		return result;
 	}
 
@@ -133,10 +133,10 @@ public class Client extends User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Client other = (Client) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (getId() == null) {
+			if (other.getId()!= null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!super.getId().equals(other.getId()))
 			return false;
 		return true;
 	}
@@ -144,16 +144,16 @@ public class Client extends User implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", name=" + name + ", adress=" + adress + ", telephone=" + telephone + ", email="
+		return "Client [id=" + super.getId() + ", name=" + name + ", adress=" + adress + ", telephone=" + telephone + ", email="
 				+ email + ", paymentMethod=" + paymentMethod + ", deliveries=" + deliveries + "]";
 	}
 
 	public Integer getId() {
-		return id;
+		return super.getId();
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		super.setId(id);
 	}
 
 
