@@ -2,14 +2,14 @@ package pojos;
 
 import java.io.Serializable;
 
-public class Employee implements Serializable {
+public class Employee extends User implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1163919074127055299L;
 	
-	private Integer id;
+
 	private String name;
 	private float salary;
 	private Integer phone;

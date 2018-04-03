@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 
-public class Client implements Serializable {
+public class Client extends User implements Serializable {
 
 	/**
 	* 

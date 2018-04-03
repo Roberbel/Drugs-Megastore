@@ -92,7 +92,7 @@ public class SQLManager {
 			createArrivesTable();
 			createArrivalsTable();
 			createProvidersTable();
-
+			createUsersTable();
 			disconnect();
 
 		} catch (Exception e) {
@@ -101,7 +101,7 @@ public class SQLManager {
 
 	}
 
-	public static void generateUsersDataBase(String directory) {
+	/*public static void generateUsersDataBase(String directory) {
 		try {
 			connect(directory);
 
@@ -112,15 +112,15 @@ public class SQLManager {
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
 	// ===================================CREATE TABLE
 	// METHODS.===============================================
 
 	public static void createUsersTable() throws SQLException {
 		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE user" + "(username STRING PRIMARY KEY," + "password STRING NOT NULL,"
-				+ "type STRING," + "id INTEGER)";
+		String sql1 = "CREATE TABLE user" + "(id INTEGER PRIMARY KEY AUTOINCREMENT,"+"username STRING NOT NULL UNIQUE," + "password STRING NOT NULL,"
+				+ "type STRING)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
@@ -128,7 +128,8 @@ public class SQLManager {
 	public static void createClientTable() throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT, payment_method TEXT NOT NULL)";
+				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT, payment_method TEXT NOT NULL, username STRING NOT NULL UNIQUE,"
+				+"password STRING NOT NULL,"+ "type STRING)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
@@ -137,7 +138,7 @@ public class SQLManager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE employee" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 				+ "photo BLOB," + "salary FLOAT NOT NULL," + "phone INT NOT NULL," + "position TEXT NOT NULL,"
-				+ "warehouse_id REFERENCES warehouse (id))";
+				+ "warehouse_id REFERENCES warehouse (id), username STRING NOT NULL UNIQUE,password STRING NOT NULL,type STRING)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
