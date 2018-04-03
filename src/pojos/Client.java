@@ -30,8 +30,8 @@ public class Client extends User implements Serializable {
 	
 	
 	public Client(String name, String adress, Integer telephone, String email, String paymentMethod,
-			List<Delivery> deliveries) {
-		super();
+			List<Delivery> deliveries, String userName, String password) {
+		super(userName, password);
 		this.name = name;
 		this.adress = adress;
 		this.telephone = telephone;
@@ -52,8 +52,8 @@ public class Client extends User implements Serializable {
 
 
 
-	public Client(Integer id, String name, String adress,Date date, String paymentMethod, ArrayList<Delivery> deliveries) {
-		super();
+	public Client(Integer id, String name, String adress,Date date, String paymentMethod, ArrayList<Delivery> deliveries, String userName, String password) {
+		super(userName, password);
 		this.id = id;
 		this.name = name;
 		this.adress = adress;
@@ -72,8 +72,8 @@ public class Client extends User implements Serializable {
 	}
 
 	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod,
-			ArrayList<Delivery> deliveries) {
-		super();
+			ArrayList<Delivery> deliveries, String userName, String password) {
+		super(userName, password);
 		this.id = id;
 		this.name = name;
 		this.adress = adress;
@@ -93,8 +93,8 @@ public class Client extends User implements Serializable {
 		this.deliveries = deliveries;
 
 	}
-	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod) {
-		super();
+	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod, String userName, String password) {
+		super(userName, password);
 		this.id = id;
 		this.name = name;
 		this.adress = adress;

@@ -23,8 +23,8 @@ public class Employee extends User implements Serializable {
 	
 	
 
-	public Employee(String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[] photo) {
-		super();
+	public Employee(String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[] photo, String userName, String password) {
+		super(userName, password);
 		this.name = name;
 		this.salary = salary;
 		this.phone = phone;
@@ -35,8 +35,8 @@ public class Employee extends User implements Serializable {
 
 
 
-	public Employee(Integer id, String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[]photo) {
-		super();
+	public Employee(Integer id, String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[]photo, String userName, String password) {
+		super(userName, password);
 		this.id = id;
 		this.name = name;
 		this.salary = salary;
