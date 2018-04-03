@@ -16,7 +16,7 @@ public class User implements Serializable {
 	private String userName;
 	private String password;
 	private UserClass type;
-	private Integer id;
+	protected Integer id;
 
 	public User() {
 		super();
