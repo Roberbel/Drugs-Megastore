@@ -3,6 +3,8 @@ package pojos;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,7 +21,9 @@ public class Employee extends User implements Serializable {
 	private Integer phone;
 	private String position;
 	private boolean isAdmin;
+	@ManyToOne
 	private Warehouse warehouse;
+	@Lob
 	private byte[] photo;
 
 	public Employee() {
@@ -137,11 +141,11 @@ public class Employee extends User implements Serializable {
 		this.photo = photo;
 	}
 
-	public boolean isAdmin() {
+	public boolean getIsAdmin() {
 		return isAdmin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
+	public void setIsAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 	

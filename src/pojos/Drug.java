@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,23 +23,29 @@ public class Drug implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 4590682648561951620L;
+	
 	@Id
 	private Integer id;
 	private String name;
 	private Integer stock;
 	private Integer sellingPrice;
+	
 	@Column(name = "active_principle")
 	private String activePrinciple;
+	
 	@ManyToOne
 	@JoinColumn(name="corridor_id")
 	@Basic(fetch = FetchType.LAZY)
 	private Corridor corridor;
-	@ManyToMany(mappedBy = "drugs")
+	
+	@OneToMany(mappedBy = "deliveryId")
 	@Basic(fetch = FetchType.LAZY)
 	private List<Delivery> deliveries;
-	@ManyToMany(mappedBy = "drugs")
+	
+	@OneToMany(mappedBy = "arrivalId")
 	@Basic(fetch = FetchType.LAZY)
 	private List<Arrival> arrivals;
+	
 	@Lob
 	private byte[] photo;
 
@@ -77,10 +84,8 @@ public class Drug implements Serializable {
 		this.photo=photo;
 	}
 	
-	public Drug(Integer id, String name, Integer stock, Integer sellingPrice, Corridor corridor,
-			byte[] photo) {
+	public Drug( String name, Integer stock, Integer sellingPrice, String activePrinciple, Corridor corridor,byte[] photo) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.stock = stock;
 		this.sellingPrice = sellingPrice;

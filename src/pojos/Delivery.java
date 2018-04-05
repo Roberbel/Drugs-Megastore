@@ -4,6 +4,16 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.*;
 
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+
+@Entity
+@Table(name = "deliveries")
 public class Delivery implements Serializable {
 
 	/**
@@ -11,12 +21,17 @@ public class Delivery implements Serializable {
 	 */
 	private static final long serialVersionUID = -2324788895880344002L;
 
-	private Integer transactionId;
+	private Integer id;
 	private Integer sellingPrice;
-	private List<Integer> ammount;
-	private Date transactionDate;
-	private List<Drug> drugs;
+	
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	private Client client;
+	private Date transactionDate;
+
+	@OneToMany(mappedBy = "drugId")
+	private List<Drug> drugs;
+	
 
 	public Delivery() {
 		super();
@@ -39,7 +54,7 @@ public class Delivery implements Serializable {
 	public Delivery(Integer transactionId, Integer sellingPrice, List<Integer> ammount, Date transactionDate,
 			List<Drug> drugId, Client client) {
 		super();
-		this.transactionId = transactionId;
+		this.id = transactionId;
 		this.sellingPrice = sellingPrice;
 		this.ammount = ammount;
 		this.transactionDate = transactionDate;
@@ -51,7 +66,7 @@ public class Delivery implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((transactionId == null) ? 0 : transactionId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -64,26 +79,26 @@ public class Delivery implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Delivery other = (Delivery) obj;
-		if (transactionId == null) {
-			if (other.transactionId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!transactionId.equals(other.transactionId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Deliveries [transactionId=" + transactionId + ", sellingPrice=" + sellingPrice + ", ammount=" + ammount
+		return "Deliveries [transactionId=" + id + ", sellingPrice=" + sellingPrice + ", ammount=" + ammount
 				+ ", transactionDate=" + transactionDate + ", drugId=" + drugs + ", client=" + client + "]";
 	}
 
 	public Integer getTransactionId() {
-		return transactionId;
+		return id;
 	}
 
 	public void setTransactionId(Integer transactionId) {
-		this.transactionId = transactionId;
+		this.id = transactionId;
 	}
 
 	public Integer getSellingPrice() {
