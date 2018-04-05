@@ -15,12 +15,12 @@ public class Delivery implements Serializable {
 	private Integer sellingPrice;
 	private List<Integer> ammount;
 	private Date transactionDate;
-	private List<Drug> drugId;
+	private List<Drug> drugs;
 	private Client client;
 
 	public Delivery() {
 		super();
-		drugId = new ArrayList<Drug>();
+		drugs = new ArrayList<Drug>();
 	}
 
 	
@@ -30,7 +30,7 @@ public class Delivery implements Serializable {
 		this.sellingPrice = sellingPrice;
 		this.ammount = ammount;
 		this.transactionDate = transactionDate;
-		this.drugId = drugId;
+		this.drugs = drugId;
 		this.client = client;
 	}
 
@@ -43,7 +43,7 @@ public class Delivery implements Serializable {
 		this.sellingPrice = sellingPrice;
 		this.ammount = ammount;
 		this.transactionDate = transactionDate;
-		this.drugId = drugId;
+		this.drugs = drugId;
 		this.client = client;
 	}
 
@@ -75,7 +75,7 @@ public class Delivery implements Serializable {
 	@Override
 	public String toString() {
 		return "Deliveries [transactionId=" + transactionId + ", sellingPrice=" + sellingPrice + ", ammount=" + ammount
-				+ ", transactionDate=" + transactionDate + ", drugId=" + drugId + ", client=" + client + "]";
+				+ ", transactionDate=" + transactionDate + ", drugId=" + drugs + ", client=" + client + "]";
 	}
 
 	public Integer getTransactionId() {
@@ -111,11 +111,11 @@ public class Delivery implements Serializable {
 	}
 
 	public List<Drug> getDrugId() {
-		return drugId;
+		return drugs;
 	}
 
 	public void setDrugId(List<Drug> clientId) {
-		this.drugId = clientId;
+		this.drugs = clientId;
 	}
 
 	public Client getClient() {
@@ -126,15 +126,15 @@ public class Delivery implements Serializable {
 		this.client = client;
 	}
 	public void addDrug(Drug drug) {
-		if (!drugId.contains(drug)) {
-			this.drugId.add(drug);
+		if (!drugs.contains(drug)) {
+			this.drugs.add(drug);
 		}
 	}
 
 
 	public void removeDrug(Drug drug) {
-		if (drugId.contains(drug)) {
-			this.drugId.remove(drug);
+		if (drugs.contains(drug)) {
+			this.drugs.remove(drug);
 		}
 	}
 

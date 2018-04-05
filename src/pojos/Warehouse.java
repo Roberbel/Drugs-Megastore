@@ -4,19 +4,33 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "warehouse")
 public class Warehouse implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3781798634843187795L;
+	@Id
 	private Integer id;
 	private Integer pc;
 	private String country;
 	private String city;
 	private String adress;
 	private Integer phone;
+	@OneToMany(mappedBy="warehouse")
+	@Basic(fetch = FetchType.LAZY)
 	private List<Employee> employees;
+	@OneToMany(mappedBy="warehouse")
+	@Basic(fetch = FetchType.LAZY)
 	private List<Corridor> corridor;
 
 	public Warehouse() {
