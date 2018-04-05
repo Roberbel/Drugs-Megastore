@@ -3,8 +3,15 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "provider")
 public class Provider implements Serializable {
 
 	/**
@@ -12,11 +19,13 @@ public class Provider implements Serializable {
 	 */
 	private static final long serialVersionUID = -7246472106057374482L;
 	@Id
-	private Integer providerId;
+	private Integer id;
 	private String name;
 	private String adress;
 	private Integer telephone;
 	private String email;
+	@OneToMany(mappedBy = "provider")
+	@Basic(fetch = FetchType.LAZY)
 	private List<Arrival> arrivals;
 
 	public Provider() {
@@ -39,7 +48,7 @@ public class Provider implements Serializable {
 
 	public Provider(Integer providerId, String name, String adress, List<Arrival> arrivals) {
 		super();
-		this.providerId = providerId;
+		this.id = providerId;
 		this.name = name;
 		this.adress = adress;
 		this.arrivals = arrivals;
@@ -48,7 +57,7 @@ public class Provider implements Serializable {
 	public Provider(Integer providerId, String name, String adress, Integer telephone, String email,
 			List<Arrival> arrivals) {
 		super();
-		this.providerId = providerId;
+		this.id = providerId;
 		this.name = name;
 		this.adress = adress;
 		this.telephone = telephone;
@@ -58,7 +67,7 @@ public class Provider implements Serializable {
 
 	public Provider(Integer providerId, String name, String adress, Integer telephone, String email) {
 		super();
-		this.providerId = providerId;
+		this.id = providerId;
 		this.name = name;
 		this.adress = adress;
 		this.telephone = telephone;
@@ -71,7 +80,7 @@ public class Provider implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((providerId == null) ? 0 : providerId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -84,26 +93,26 @@ public class Provider implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Provider other = (Provider) obj;
-		if (providerId == null) {
-			if (other.providerId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!providerId.equals(other.providerId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Provider [providerId=" + providerId + ", name=" + name + ", adress=" + adress + ", telephone="
+		return "Provider [providerId=" + id + ", name=" + name + ", adress=" + adress + ", telephone="
 				+ telephone + ", email=" + email + ", arrivals=" + arrivals + "]";
 	}
 
 	public Integer getProviderId() {
-		return providerId;
+		return id;
 	}
 
 	public void setProviderId(Integer providerId) {
-		this.providerId = providerId;
+		this.id = providerId;
 	}
 
 	public String getName() {

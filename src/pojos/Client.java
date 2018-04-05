@@ -3,7 +3,10 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +23,8 @@ public class Client extends User implements Serializable {
 	private Integer telephone;
 	private String email;
 	private PaymentMethod paymentMethod;
+	@OneToMany
+	@Basic(fetch = FetchType.LAZY)
 	private List<Delivery> deliveries;
 	
 	public enum PaymentMethod {PAYPAL, VISA, MASTERCARD, AMERICAN_EXPRESS, ORGANS};
