@@ -23,11 +23,7 @@ public class SQLManager {
 
 			
 			  generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
-			  
-			  connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
-			  
-			  
-			  disconnect();
+			 
 			 
 
 			// generateUsersDataBase("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
@@ -472,6 +468,60 @@ public class SQLManager {
 		}	
 	}
 	
+	public static Employee extractEmployeeByUsername(String username) throws SQLException {
+		String sql = "SELECT * FROM employee WHERE username = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		
+		prep.setString(1, username);
+		
+		ResultSet rs = prep.executeQuery();
+		
+		Warehouse warehouseWanted = extractWarehouseById(rs.getInt("warehouse_id"));
+		Employee employee = new Employee(rs.getInt("id"), rs.getString("name"), rs.getFloat("salary"), rs.getInt("phone"),
+				rs.getString("position"), warehouseWanted, rs.getBytes("photo"), rs.getString("username"), rs.getString("password"),
+				rs.getBoolean("isAdmin"));
+	
+		if(username == employee.getUserName()) {
+			prep.close();
+			rs.close();
+			return employee;
+		}else {
+			prep.close();
+			rs.close();
+			return null;
+		}
+		
+	}
+
+	public static Client extractClientByUsername(String username) throws SQLException {
+		String sql="SELECT * FROM client WHERE username = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		
+		prep.setString(1, username);
+		
+		ResultSet rs = prep.executeQuery();
+		
+			int id_client=rs.getInt("id");
+			String name=rs.getString("name");
+			String adress=rs.getString("adress");
+			int telephone=rs.getInt("telephone");
+			String email=rs.getString("email");
+			String payMethod=rs.getString("payMethod");
+			String username1 = rs.getString("username");
+			String password = rs.getString("password");
+			Client client=new Client(id_client,name,adress, telephone, email, payMethod,username1,password);
+		
+		if	(username == client.getUserName()) {
+			prep.close();
+			rs.close();
+			return client;
+		}else {
+			
+		prep.close();
+		rs.close();
+		return null;
+		}	
+	}
 
 	// ===========================================================================================================
 
@@ -480,4 +530,6 @@ public class SQLManager {
 		stmt1.executeUpdate(statement);
 		stmt1.close();
 	}
+
+	
 }

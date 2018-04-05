@@ -3,60 +3,132 @@ package model;
 import java.sql.SQLException;
 
 import DB.SQLManager;
-import pojos.User;
+import pojos.Client;
+import pojos.Employee;
 
 public class LogInManager {
 
 	
-		private User trialUser;
-		private User completeUser;
+		private String username;
+		private String password;
+		private Employee extractedEmployee;
+		private Client extractedClient;
 		
+		public enum TYPE{
+			ADMIN,EMPLOYEE,CLIENT
+		}
 		
 		
 		public LogInManager() {
 			super();
 		}
 
-		public LogInManager(User trialUser) {
-			super();
-			this.trialUser=trialUser;
-		}
-
-		public User getTrialUser() {
-			return trialUser;
-		}
-
-		public void setTrialUser(User trialUser) {
-			this.trialUser = trialUser;
-		}
-
-		public User getCompleteUser() {
-			return completeUser;
-		}
-
-		public void setCompleteUser(User completeUser) {
-			this.completeUser = completeUser;
-		}
 		
 		
+		
+		public String getUsername() {
+			return username;
+		}
+
+
+
+
+		public void setUsername(String username) {
+			this.username = username;
+		}
+
+
+
+
+		public String getPassword() {
+			return password;
+		}
+
+
+
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
+
+
+
+		public Employee getExtractedEmployee() {
+			return extractedEmployee;
+		}
+
+
+
+
+		public void setExtractedEmployee(Employee extractedEmployee) {
+			this.extractedEmployee = extractedEmployee;
+		}
+
+
+
+
+		public Client getExtractedClient() {
+			return extractedClient;
+		}
+
+
+
+
+		public void setExtractedClient(Client extractedClient) {
+			this.extractedClient = extractedClient;
+		}
+
+
+
+
 		public boolean checkExistance() throws SQLException, ClassNotFoundException{
-			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
+			extractedClient = null;
+			extractedEmployee = null;
 			
-			completeUser=SQLManager.extractUserByName(trialUser);
-			if(completeUser!=null){	
-				SQLManager.disconnect();
-				return true;
+			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
+			
+			extractedEmployee = SQLManager.extractEmployeeByUsername(username);
+			
+			if(extractedEmployee == null) {
+				extractedClient = SQLManager.extractClientByUsername(username);
+				
+				if(extractedClient == null) {
+					return false;
+				}else {
+					return true;
+				}
 			}else {
-				SQLManager.disconnect();
-				return false;
+				return true;
 			}
+			
 		}
 		
 		public boolean checkPassword () {
-			if(trialUser.getPassword().equals(completeUser.getPassword())) {
-				return true;
+			if(extractedEmployee != null) {
+				if(extractedEmployee.getPassword()==password) {
+					return true;
+				}else {
+					return false;
+				}
+			} else {
+				if(extractedClient.getPassword()==password) {
+					return true;
+				}else {
+					return false;
+				}
+			}
+		}
+		
+		public TYPE getType(){
+			if(extractedClient != null) {
+				return TYPE.CLIENT;
 			}else {
-				return false;
+				if(extractedEmployee.getIsAdmin()) {
+					return TYPE.ADMIN;
+				}else{
+					return TYPE.EMPLOYEE;
+				}
 			}
 		}
 		
