@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pojos.*;
-import pojos.User.UserClass;
+
 
 public class SQLManager {
 
@@ -21,23 +21,14 @@ public class SQLManager {
 
 		try {
 
-			/*
-			 * generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
-			 * 
-			 * Provider testProvider = new Provider(); testProvider.setProviderId(1); Client
-			 * testClient = new Client();
-			 * 
-			 * testClient.setAdress("Avenida Monasterio de Silos 36");
-			 * testClient.setName("Jaime"); testClient.setEmail("Jimmyviniegra@gmail.com");
-			 * testClient.setTelephone(638079977);
-			 * testClient.setPaymentMethod("Credit card");
-			 * 
-			 * connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
-			 * 
-			 * insertClientEntrance(testClient);
-			 * 
-			 * disconnect();
-			 */
+			
+			  generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
+			  
+			  connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST.db");
+			  
+			  
+			  disconnect();
+			 
 
 			// generateUsersDataBase("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
 
@@ -80,7 +71,6 @@ public class SQLManager {
 			createArrivesTable();
 			createArrivalsTable();
 			createProvidersTable();
-			createUsersTable();
 			disconnect();
 
 		} catch (Exception e) {
@@ -88,36 +78,14 @@ public class SQLManager {
 		}
 
 	}
-
-	/*public static void generateUsersDataBase(String directory) {
-		try {
-			connect(directory);
-
-			createUsersTable();
-
-			disconnect();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}*/
-
 	// ===================================CREATE TABLE
 	// METHODS.===============================================
-
-	public static void createUsersTable() throws SQLException {
-		Statement stmt1 = c.createStatement();
-		String sql1 = "CREATE TABLE user" + "(id INTEGER PRIMARY KEY AUTOINCREMENT,"+"username STRING NOT NULL UNIQUE," + "password STRING NOT NULL,"
-				+ "type STRING)";
-		stmt1.executeUpdate(sql1);
-		stmt1.close();
-	}
 
 	public static void createClientTable() throws SQLException {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT, payment_method TEXT NOT NULL, username STRING NOT NULL UNIQUE,"
-				+"password STRING NOT NULL,"+ "type STRING)";
+				+"password STRING NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
@@ -126,7 +94,7 @@ public class SQLManager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE employee" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 				+ "photo BLOB," + "salary FLOAT NOT NULL," + "phone INT NOT NULL," + "position TEXT NOT NULL,"
-				+ "warehouse_id REFERENCES warehouse (id), username STRING NOT NULL UNIQUE,password STRING NOT NULL,type STRING)";
+				+ "warehouse_id REFERENCES warehouse (id), username STRING NOT NULL UNIQUE,password STRING NOT NULL,isAdmin BOOLEAN)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	}
@@ -322,13 +290,16 @@ public class SQLManager {
 
 	public static void insertEmployeesEntrance(Employee employees) throws SQLException {
 
-		String sql1 = "INSERT INTO employee(name,salary, phone,position,warehouse_id)" + "VALUES(?,?,?,?,?);";
+		String sql1 = "INSERT INTO employee(name,salary, phone,position,warehouse_id,username,password,type)" + "VALUES(?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, employees.getName());
 		prep.setFloat(2, employees.getSalary());
 		prep.setInt(3, employees.getPhone());
 		prep.setString(4, employees.getPosition());
 		prep.setInt(5, employees.getWarehouseId().getId());
+		prep.setString(6, employees.getUserName());
+		prep.setString(7, employees.getPassword());
+		prep.setBoolean(8, employees.getIsAdmin());
 		prep.executeUpdate();
 
 		prep.close();
