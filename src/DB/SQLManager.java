@@ -41,18 +41,6 @@ public class SQLManager {
 
 			// generateUsersDataBase("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
 
-			User testUser = new User();
-
-			testUser.setUserName("Gonka98");
-			testUser.setPassword("Testeo2");
-			testUser.setType(UserClass.EMPLOYEE);
-			testUser.setId(1);
-
-			connect("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
-
-			insertUserEntrance(testUser);
-
-			disconnect();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -529,27 +517,6 @@ public class SQLManager {
 		Statement stmt1 = c.createStatement();
 		stmt1.executeUpdate(statement);
 		stmt1.close();
-	}
-
-	public static User extractUserByName(User userWanted) throws SQLException {
-		String sql = "SELECT * FROM user WHERE username  = ?";
-		PreparedStatement prep = c.prepareStatement(sql);
-		
-		prep.setString(1, userWanted.getUserName());
-		
-		ResultSet rs = prep.executeQuery();
-
-		UserClass type = setUserEnum(rs.getString("type"));
-		User userObtained = new User(rs.getString("username"), rs.getString("password"), type, rs.getInt("id"));
-
-		if (userWanted.equals(userObtained)) {
-			rs.close();
-			prep.close();
-			return userObtained;
-		}
-		rs.close();
-		prep.close();
-		return null;
 	}
 
 	public static UserClass setUserEnum(String type) {
