@@ -73,6 +73,18 @@ public class Drug implements Serializable {
 		this.arrivals = arrivals;
 		this.photo=photo;
 	}
+	
+	public Drug(Integer id, String name, Integer stock, Integer sellingPrice, Corridor corridor,
+			byte[] photo) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.stock = stock;
+		this.sellingPrice = sellingPrice;
+		this.corridor = corridor;
+		this.photo=photo;
+	}
+
 
 	public Drug(Integer id, String name, Integer stock, Integer sellingPrice, String activePrinciple,
 			Corridor corridor, List<Delivery> deliveries, List<Arrival> arrivals, byte[]photo) {

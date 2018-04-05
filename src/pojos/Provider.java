@@ -3,12 +3,15 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.Id;
+
 public class Provider implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7246472106057374482L;
+	@Id
 	private Integer providerId;
 	private String name;
 	private String adress;
