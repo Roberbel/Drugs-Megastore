@@ -3,20 +3,40 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "drug")
 public class Drug implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4590682648561951620L;
+	@Id
 	private Integer id;
 	private String name;
 	private Integer stock;
 	private Integer sellingPrice;
+	@Column(name = "active_principle")
 	private String activePrinciple;
+	@ManyToOne
+	@JoinColumn(name="corridor_id")
+	@Basic(fetch = FetchType.LAZY)
 	private Corridor corridor;
+	@ManyToMany(mappedBy = "drugs")
 	private List<Delivery> deliveries;
 	private List<Arrival> arrivals;
+	@Lob
 	private byte[] photo;
 
 	public Drug() {

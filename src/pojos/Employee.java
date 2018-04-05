@@ -19,7 +19,7 @@ public class Employee extends User implements Serializable {
 	private Integer phone;
 	private String position;
 	private boolean isAdmin;
-	private Warehouse warehouseId;
+	private Warehouse warehouses;
 	private byte[] photo;
 
 	public Employee() {
@@ -33,7 +33,7 @@ public class Employee extends User implements Serializable {
 		this.salary = salary;
 		this.phone = phone;
 		this.position = position;
-		this.warehouseId = warehouseId;
+		this.warehouses = warehouseId;
 		this.photo = photo;
 		this.isAdmin = admin;
 	}
@@ -45,7 +45,7 @@ public class Employee extends User implements Serializable {
 		this.salary = salary;
 		this.phone = phone;
 		this.position = position;
-		this.warehouseId = warehouseId;
+		this.warehouses = warehouseId;
 		this.photo = photo;
 		this.isAdmin = admin;
 	}
@@ -78,7 +78,7 @@ public class Employee extends User implements Serializable {
 	@Override
 	public String toString() {
 		return "Employee [id=" + super.getId() + ", name=" + name + ", salary=" + salary + ", phone=" + phone
-				+ ", position=" + position + ", warehouseId=" + warehouseId + "]";
+				+ ", position=" + position + ", warehouseId=" + warehouses + "]";
 	}
 
 	public Integer getId() {
@@ -122,11 +122,11 @@ public class Employee extends User implements Serializable {
 	}
 
 	public Warehouse getWarehouseId() {
-		return warehouseId;
+		return warehouses;
 	}
 
 	public void setWarehouseId(Warehouse warehouseId) {
-		this.warehouseId = warehouseId;
+		this.warehouses = warehouseId;
 	}
 
 	public byte[] getPhoto() {
