@@ -10,14 +10,20 @@
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
  
 		<!-- Entity Class -->
-		<class>sample.db.pojos.Employee</class>
-		<class>sample.db.pojos.Department</class>
-		<class>sample.db.pojos.Report</class>
- 
+		<class>sample.db.pojos.Arrival</class>
+		<class>sample.db.pojos.Client</class>
+		<class>sample.db.pojos.Corridor</class>
+ 		<class>sample.db.pojos.Delivery</class>
+ 		<class>sample.db.pojos.Drug</class>
+ 		<class>sample.db.pojos.Employee</class>
+ 		<class>sample.db.pojos.Provider</class>
+ 		<class>sample.db.pojos.User</class>
+ 		<class>sample.db.pojos.Warehouse</class>
+ 		
 		<properties>	
 			<!-- Connection properties -->
 			<property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC" />
-		    <property name="javax.persistence.jdbc.url"	value="jdbc:sqlite:./db/company.db" />
+		    <property name="javax.persistence.jdbc.url"	value="jdbc:sqlite:./db/Drug Megastore Users TEST.db" />
 			<!-- Fill if we need user and password -->
 			<property name="javax.persistence.jdbc.user" value="" />
 			<property name="javax.persistence.jdbc.password" value="" />
