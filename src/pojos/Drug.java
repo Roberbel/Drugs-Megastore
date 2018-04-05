@@ -34,7 +34,10 @@ public class Drug implements Serializable {
 	@Basic(fetch = FetchType.LAZY)
 	private Corridor corridor;
 	@ManyToMany(mappedBy = "drugs")
+	@Basic(fetch = FetchType.LAZY)
 	private List<Delivery> deliveries;
+	@ManyToMany(mappedBy = "drugs")
+	@Basic(fetch = FetchType.LAZY)
 	private List<Arrival> arrivals;
 	@Lob
 	private byte[] photo;
