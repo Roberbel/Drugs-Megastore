@@ -17,13 +17,9 @@ public abstract class User implements Serializable {
 	 */
 	private static final long serialVersionUID = -2459371836299683662L;
 
-	public enum UserClass {
-		EMPLOYEE, ADMIN
-	}
-
 	private String userName;
 	private String password;
-	private UserClass type;
+
 	@Id
 	private Integer id;
 
@@ -45,11 +41,10 @@ public abstract class User implements Serializable {
 		
 	}
 
-	public User(String userName, String password, UserClass type, Integer id) {
+	public User(String userName, String password, Integer id) {
 		super();
 		this.userName = userName;
 		this.password = password;
-		this.type = type;
 		this.id = id;
 	}
 
@@ -80,7 +75,7 @@ public abstract class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", password=" + password + ", type=" + type + ", id=" + id + "]";
+		return "User [userName=" + userName + ", password=" + password + ", id=" + id + "]";
 	}
 
 	public String getUserName() {
@@ -99,13 +94,7 @@ public abstract class User implements Serializable {
 		this.password = password;
 	}
 
-	public UserClass getType() {
-		return type;
-	}
-
-	public void setType(UserClass type) {
-		this.type = type;
-	}
+	
 
 	public Integer getId() {
 		return id;

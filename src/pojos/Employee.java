@@ -13,22 +13,21 @@ public class Employee extends User implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -1163919074127055299L;
-	
 
 	private String name;
 	private float salary;
 	private Integer phone;
 	private String position;
+	private boolean isAdmin;
 	private Warehouse warehouseId;
 	private byte[] photo;
 
 	public Employee() {
 		super();
 	}
-	
-	
 
-	public Employee(String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[] photo, String userName, String password) {
+	public Employee(String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[] photo,
+			String userName, String password, boolean admin) {
 		super(userName, password);
 		this.name = name;
 		this.salary = salary;
@@ -36,21 +35,20 @@ public class Employee extends User implements Serializable {
 		this.position = position;
 		this.warehouseId = warehouseId;
 		this.photo = photo;
+		this.isAdmin = admin;
 	}
 
-
-
-	public Employee(Integer id, String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[]photo, String userName, String password) {
+	public Employee(Integer id, String name, float salary, Integer phone, String position, Warehouse warehouseId,
+			byte[] photo, String userName, String password, boolean admin) {
 		super(id, userName, password);
 		this.name = name;
 		this.salary = salary;
 		this.phone = phone;
 		this.position = position;
 		this.warehouseId = warehouseId;
-		this.photo=photo;
+		this.photo = photo;
+		this.isAdmin = admin;
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -79,8 +77,8 @@ public class Employee extends User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + super.getId() + ", name=" + name + ", salary=" + salary + ", phone=" + phone + ", position="
-				+ position + ", warehouseId=" + warehouseId + "]";
+		return "Employee [id=" + super.getId() + ", name=" + name + ", salary=" + salary + ", phone=" + phone
+				+ ", position=" + position + ", warehouseId=" + warehouseId + "]";
 	}
 
 	public Integer getId() {
@@ -138,4 +136,13 @@ public class Employee extends User implements Serializable {
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
 }

@@ -334,18 +334,6 @@ public class SQLManager {
 		prep.close();
 	}
 
-	public static void insertUserEntrance(User user) throws SQLException {
-
-		String sql1 = "INSERT INTO user(username,password,type,id)" + " VALUES(?,?,?,?);";
-		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setString(1, user.getUserName());
-		prep.setString(2, user.getPassword());
-		prep.setString(3, user.getType().toString());
-		prep.setInt(4, user.getId());
-		prep.executeUpdate();
-
-		prep.close();
-	}
 	// ===========================================================================================================
 	public static Employee extractEmployeeById(Integer id) throws SQLException {
 		String sql = "SELECT * FROM employee WHERE id = ? ";
@@ -357,7 +345,8 @@ public class SQLManager {
 		
 		Warehouse warehouseWanted = extractWarehouseById(rs.getInt("warehouse_id"));
 		Employee employee = new Employee(rs.getInt("id"), rs.getString("name"), rs.getFloat("salary"), rs.getInt("phone"),
-				rs.getString("position"), warehouseWanted, rs.getBytes("photo"));
+				rs.getString("position"), warehouseWanted, rs.getBytes("photo"), rs.getString("username"), rs.getString("password"),
+				rs.getBoolean("isAdmin"));
 	
 		if(id == employee.getId()) {
 			prep.close();
@@ -496,7 +485,9 @@ public class SQLManager {
 			int telephone=rs.getInt("telephone");
 			String email=rs.getString("email");
 			String payMethod=rs.getString("payMethod");
-			Client client=new Client(id_client,name,adress, telephone, email, payMethod);
+			String username = rs.getString("username");
+			String password = rs.getString("password");
+			Client client=new Client(id_client,name,adress, telephone, email, payMethod,username,password);
 		
 		if	(id == id_client) {
 			prep.close();
@@ -517,23 +508,5 @@ public class SQLManager {
 		Statement stmt1 = c.createStatement();
 		stmt1.executeUpdate(statement);
 		stmt1.close();
-	}
-
-	public static UserClass setUserEnum(String type) {
-		switch (type) {
-		case "EMPLOYEE":
-
-			return UserClass.EMPLOYEE;
-
-		case "ADMIN":
-
-			return UserClass.ADMIN;
-
-		case "CLIENT":
-
-			return UserClass.CLIENT;
-		default:
-			return null;
-		}
 	}
 }
