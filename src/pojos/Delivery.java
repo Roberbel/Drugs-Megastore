@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.*;
 
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+
 public class Delivery implements Serializable {
 
 	/**
@@ -13,10 +18,18 @@ public class Delivery implements Serializable {
 
 	private Integer transactionId;
 	private Integer sellingPrice;
-	private List<Integer> ammount;
-	private Date transactionDate;
-	private List<Drug> drugs;
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	private Client client;
+	private Date transactionDate;
+	@ManyToMany
+	@JoinTable(
+			joinColumns = {@JoinColumn(name="transaction_id", referencedColumnName = "id")}, 
+			inverseJoinColumns = {@JoinColumn(name = "drug_id", referencedColumnName = "id")}
+			)
+	private List<Drug> drugs;
+	
+	private List<Integer> ammount;
 
 	public Delivery() {
 		super();
