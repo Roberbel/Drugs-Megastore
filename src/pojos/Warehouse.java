@@ -26,7 +26,7 @@ public class Warehouse implements Serializable {
 	private String city;
 	private String adress;
 	private Integer phone;
-	@OneToMany(mappedBy="warehouses")
+	@OneToMany(mappedBy="warehouse")
 	@Basic(fetch = FetchType.LAZY)
 	private List<Employee> employees;
 	@OneToMany(mappedBy="warehouse")
