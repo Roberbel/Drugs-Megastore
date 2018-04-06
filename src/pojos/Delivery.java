@@ -29,7 +29,7 @@ public class Delivery implements Serializable {
 	private Client client;
 	private Date transactionDate;
 
-	@OneToMany(mappedBy = "drugId")
+	@OneToMany(mappedBy = "drug")
 	private List<Drug> drugs;
 	
 
@@ -40,10 +40,9 @@ public class Delivery implements Serializable {
 
 	
 	
-	public Delivery(Integer sellingPrice, List<Integer> ammount, Date transactionDate, List<Drug> drugId, Client client) {
+	public Delivery(Integer sellingPrice, Date transactionDate, List<Drug> drugId, Client client) {
 		super();
 		this.sellingPrice = sellingPrice;
-		this.ammount = ammount;
 		this.transactionDate = transactionDate;
 		this.drugs = drugId;
 		this.client = client;
@@ -51,12 +50,11 @@ public class Delivery implements Serializable {
 
 
 
-	public Delivery(Integer transactionId, Integer sellingPrice, List<Integer> ammount, Date transactionDate,
+	public Delivery(Integer transactionId, Integer sellingPrice, Date transactionDate,
 			List<Drug> drugId, Client client) {
 		super();
 		this.id = transactionId;
 		this.sellingPrice = sellingPrice;
-		this.ammount = ammount;
 		this.transactionDate = transactionDate;
 		this.drugs = drugId;
 		this.client = client;
@@ -89,7 +87,7 @@ public class Delivery implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Deliveries [transactionId=" + id + ", sellingPrice=" + sellingPrice + ", ammount=" + ammount
+		return "Deliveries [transactionId=" + id + ", sellingPrice=" + sellingPrice + ", ammount="
 				+ ", transactionDate=" + transactionDate + ", drugId=" + drugs + ", client=" + client + "]";
 	}
 
@@ -107,14 +105,6 @@ public class Delivery implements Serializable {
 
 	public void setSellingPrice(Integer sellingPrice) {
 		this.sellingPrice = sellingPrice;
-	}
-
-	public List<Integer> getAmmount() {
-		return ammount;
-	}
-
-	public void setAmmount(List<Integer> ammount) {
-		this.ammount = ammount;
 	}
 
 	public Date getTransactionDate() {

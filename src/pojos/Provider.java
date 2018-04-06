@@ -24,6 +24,7 @@ public class Provider implements Serializable {
 	private String adress;
 	private Integer telephone;
 	private String email;
+	
 	@OneToMany(mappedBy = "provider")
 	@Basic(fetch = FetchType.LAZY)
 	private List<Arrival> arrivals;

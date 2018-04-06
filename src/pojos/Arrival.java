@@ -2,6 +2,10 @@ package pojos;
 
 import java.io.Serializable;
 import java.util.*;
+
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import java.sql.Date;
 
 public class Arrival implements Serializable{
@@ -10,11 +14,15 @@ public class Arrival implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 2841430439397985029L;
+	
 	private Integer arrivalId;
 	private Integer buyingPrice;
 	private Date date;
-	private List<Integer> amount;
+	
+	@ManyToOne
 	private Provider provider;
+	
+	@OneToMany(mappedBy = "drug")
 	private List<Drug> drugs;
 
 	public Arrival() {
@@ -24,24 +32,22 @@ public class Arrival implements Serializable{
 
 	
 	
-	public Arrival(Integer buyingPrice, Date date, List<Integer> amount, Provider provider, List<Drug> drugs) {
+	public Arrival(Integer buyingPrice, Date date, Provider provider, List<Drug> drugs) {
 		super();
 		this.buyingPrice = buyingPrice;
 		this.date = date;
-		this.amount = amount;
 		this.provider = provider;
 		this.drugs = drugs;
 	}
 
 
 
-	public Arrival(Integer arrivalId, Integer buyingPrice, Date date, List<Integer> amount, Provider provider,
+	public Arrival(Integer arrivalId, Integer buyingPrice, Date date, Provider provider,
 			List<Drug> drugs) {
 		super();
 		this.arrivalId = arrivalId;
 		this.buyingPrice = buyingPrice;
 		this.date = date;
-		this.amount = amount;
 		this.provider = provider;
 		this.drugs = drugs;
 	}
@@ -80,8 +86,7 @@ public class Arrival implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Arrivals [arrivalId=" + arrivalId + ", buyingPrice=" + buyingPrice + ", date=" + date + ", amount="
-				+ amount + ", provider=" + provider + ", drugs=" + drugs + "]";
+		return "Arrivals [arrivalId=" + arrivalId + ", buyingPrice=" + buyingPrice + ", date=" + date + ", provider=" + provider + ", drugs=" + drugs + "]";
 	}
 
 	public Integer getArrivalId() {
@@ -108,14 +113,6 @@ public class Arrival implements Serializable{
 		this.date = date;
 	}
 
-	public List<Integer> getAmount() {
-		return amount;
-	}
-
-	public void setAmount(List<Integer> amount) {
-		this.amount = amount;
-	}
-	
 	public Provider getProvider() {
 		return provider;
 	}

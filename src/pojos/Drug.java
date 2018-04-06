@@ -38,6 +38,7 @@ public class Drug implements Serializable {
 	@Basic(fetch = FetchType.LAZY)
 	private Corridor corridor;
 	
+	
 	@OneToMany(mappedBy = "deliveryId")
 	@Basic(fetch = FetchType.LAZY)
 	private List<Delivery> deliveries;
