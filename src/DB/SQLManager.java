@@ -56,8 +56,8 @@ public class SQLManager implements Manager {
 	public static void generateDataBase(String directory) {
 
 		try {
+			
 			connect(directory);
-
 			createClientTable();
 			createEmployeeTable();
 			createCorridorTable();
