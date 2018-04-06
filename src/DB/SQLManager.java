@@ -200,7 +200,7 @@ public class SQLManager {
 		for (int i = 0; delivery.getDrugId().size() > i; i++) {
 			prep.setInt(1, delivery.getDrugId().get(i).getId());
 			prep.setInt(2, delivery.getTransactionId());
-			prep.setInt(3, delivery.getAmmount().get(i)); // CHECK-> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN
+			//prep.setInt(3, delivery.getAmmount().get(i)); // CHECK-> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN
 															// A POJO AS A LIST
 			prep.executeUpdate();
 		}
@@ -231,6 +231,8 @@ public class SQLManager {
 		prep.close();
 	}
 
+	
+	//NOW WE HAVE A POJO for Arrives, so this should be redone, but should be easy
 	public static void insertArrivesEntrance(Arrival arrival) throws SQLException {
 
 		String sql1 = "INSERT INTO arrives(drug_id,transaction_id,amount)" + "VALUES(?,?,?);";
@@ -351,6 +353,8 @@ public class SQLManager {
 		
 	}
 	
+	
+	//We have tot alk how to do this 
 	public static Arrival extractArrivalById(Integer id)throws SQLException{
 		
 		String sql = "SELECT * FROM arrival WHERE id = ? ";
