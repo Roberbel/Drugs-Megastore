@@ -13,7 +13,7 @@ import java.util.List;
 import pojos.*;
 
 
-public class SQLManager {
+public class SQLManager implements Manager {
 
 	private static Connection c;
 
@@ -45,6 +45,7 @@ public class SQLManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	public static void disconnect() throws SQLException {
