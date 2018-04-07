@@ -527,6 +527,17 @@ public class SQLManager implements Manager {
 		return null;
 		}	
 	}
+	// ===========================================================================================================
+
+	
+	public static void deleteDrugById(int id) throws SQLException{
+		String sql = "DELETE FROM drugs WHERE id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,id);
+		prep.executeUpdate();
+		prep.close();
+		
+	}
 
 	// ===========================================================================================================
 
