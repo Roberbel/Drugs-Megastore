@@ -3,11 +3,15 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import java.sql.Date;
 
+@Entity
+@Table(name = "arrival")
 public class Arrival implements Serializable{
 
 	/**
