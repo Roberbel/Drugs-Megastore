@@ -10,7 +10,7 @@ public interface Manager {
 	
 	/*
 	 * This interface should have inserts and selects.
-	 * 
+	 * QUIERO MÉTODOS QUE ME DEVUELVAN TODOS LOS POJOS QUE QUERAIS MOSTRAR EN LA INTERFAZ
 	 */
 
 }
