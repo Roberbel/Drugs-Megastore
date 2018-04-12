@@ -486,7 +486,7 @@ public class SQLManager implements Manager {
 				rs.getString("position"), warehouseWanted, rs.getBytes("photo"), rs.getString("username"), rs.getString("password"),
 				rs.getBoolean("isAdmin"));
 	
-		if(username == employee.getUserName()) {
+		if(username.equals(employee.getUserName())) {
 			prep.close();
 			rs.close();
 			return employee;

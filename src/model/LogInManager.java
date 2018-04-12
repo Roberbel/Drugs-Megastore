@@ -106,13 +106,13 @@ public class LogInManager {
 		
 		public boolean checkPassword () {
 			if(extractedEmployee != null) {
-				if(extractedEmployee.getPassword()==password) {
+				if(extractedEmployee.getPassword().equals(password)) {
 					return true;
 				}else {
 					return false;
 				}
 			} else {
-				if(extractedClient.getPassword()==password) {
+				if(extractedClient.getPassword().equals(password)) {
 					return true;
 				}else {
 					return false;
