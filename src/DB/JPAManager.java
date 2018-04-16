@@ -15,16 +15,12 @@ public class JPAManager {
 
 		private static EntityManager em;
 		
-		public static void getEntityManager() {
-			try{
+		public static void getEntityManager(){
 			
 			em = Persistence.createEntityManagerFactory("company-provider").createEntityManager();
 			em.getTransaction().begin();
 			em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 			em.getTransaction().commit();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			
 		}
 		public static void disconnect()  {
