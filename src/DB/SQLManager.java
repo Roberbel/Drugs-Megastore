@@ -527,6 +527,28 @@ public class SQLManager implements Manager {
 		return null;
 		}	
 	}
+	
+	//Change client adress:
+		public static void updateClientAdress(int id, String newAdress) throws SQLException {
+		String sql="UPDATE client SET adress = ? WHERE id = ? ";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setString(1, newAdress);
+		prep.setInt(2, id);
+		prep.executeUpdate();
+		prep.close();
+		
+	}
+	//Change employee's salary
+		public static void updateAdmin(int id, boolean admin) throws SQLException{
+			String sql="UPDATE employee SET type= ? WHERE id = ?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setBoolean(1, admin);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		}
+			
+	
 	// ===========================================================================================================
 
 	
@@ -538,6 +560,7 @@ public class SQLManager implements Manager {
 		prep.close();
 		
 	}
+
 
 	// ===========================================================================================================
 
