@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.*;
 
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -20,7 +19,8 @@ public class Delivery implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -2324788895880344002L;
-
+	
+	@Id
 	private Integer id;
 	private Integer sellingPrice;
 	
@@ -30,33 +30,33 @@ public class Delivery implements Serializable {
 	private Date transactionDate;
 
 	@OneToMany(mappedBy = "drug")
-	private List<Drug> drugs;
+	private List<Packaged> packages;
 	
 
 	public Delivery() {
 		super();
-		drugs = new ArrayList<Drug>();
+		packages = new ArrayList<Packaged>();
 	}
 
 	
 	
-	public Delivery(Integer sellingPrice, Date transactionDate, List<Drug> drugId, Client client) {
+	public Delivery(Integer sellingPrice, Date transactionDate, List<Packaged> packages, Client client) {
 		super();
 		this.sellingPrice = sellingPrice;
 		this.transactionDate = transactionDate;
-		this.drugs = drugId;
+		this.packages = packages;
 		this.client = client;
 	}
 
 
 
 	public Delivery(Integer transactionId, Integer sellingPrice, Date transactionDate,
-			List<Drug> drugId, Client client) {
+			List<Packaged> packages, Client client) {
 		super();
 		this.id = transactionId;
 		this.sellingPrice = sellingPrice;
 		this.transactionDate = transactionDate;
-		this.drugs = drugId;
+		this.packages = packages;
 		this.client = client;
 	}
 
@@ -88,7 +88,7 @@ public class Delivery implements Serializable {
 	@Override
 	public String toString() {
 		return "Deliveries [transactionId=" + id + ", sellingPrice=" + sellingPrice + ", ammount="
-				+ ", transactionDate=" + transactionDate + ", drugId=" + drugs + ", client=" + client + "]";
+				+ ", transactionDate=" + transactionDate + ", drugId=" + packages + ", client=" + client + "]";
 	}
 
 	public Integer getTransactionId() {
@@ -115,12 +115,12 @@ public class Delivery implements Serializable {
 		this.transactionDate = transactionDate;
 	}
 
-	public List<Drug> getDrugId() {
-		return drugs;
+	public List<Packaged> getPackages() {
+		return packages;
 	}
 
-	public void setDrugId(List<Drug> clientId) {
-		this.drugs = clientId;
+	public void setPackages(List<Packaged> packages) {
+		this.packages = packages;
 	}
 
 	public Client getClient() {
@@ -130,16 +130,16 @@ public class Delivery implements Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public void addDrug(Drug drug) {
-		if (!drugs.contains(drug)) {
-			this.drugs.add(drug);
+	public void addPackaged(Packaged packaged) {
+		if (!packages.contains(packaged)) {
+			this.packages.add(packaged);
 		}
 	}
 
 
-	public void removeDrug(Drug drug) {
-		if (drugs.contains(drug)) {
-			this.drugs.remove(drug);
+	public void removePackaged(Packaged packaged) {
+		if (packages.contains(packaged)) {
+			this.packages.remove(packaged);
 		}
 	}
 

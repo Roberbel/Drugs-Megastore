@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -19,6 +20,7 @@ public class Arrival implements Serializable{
 	 */
 	private static final long serialVersionUID = 2841430439397985029L;
 	
+	@Id
 	private Integer arrivalId;
 	private Integer buyingPrice;
 	private Date date;
@@ -26,34 +28,34 @@ public class Arrival implements Serializable{
 	@ManyToOne
 	private Provider provider;
 	
-	@OneToMany(mappedBy = "drug")
-	private List<Drug> drugs;
+	@OneToMany(mappedBy = "arrivalId")
+	private List<Arrives> arrives;
 
 	public Arrival() {
 		super();
-		drugs = new ArrayList<Drug>();
+		arrives = new ArrayList<Arrives>();
 	}
 
 	
 	
-	public Arrival(Integer buyingPrice, Date date, Provider provider, List<Drug> drugs) {
+	public Arrival(Integer buyingPrice, Date date, Provider provider, List<Arrives> arrives) {
 		super();
 		this.buyingPrice = buyingPrice;
 		this.date = date;
 		this.provider = provider;
-		this.drugs = drugs;
+		this.arrives = arrives;
 	}
 
 
 
 	public Arrival(Integer arrivalId, Integer buyingPrice, Date date, Provider provider,
-			List<Drug> drugs) {
+			List<Arrives> arrives) {
 		super();
 		this.arrivalId = arrivalId;
 		this.buyingPrice = buyingPrice;
 		this.date = date;
 		this.provider = provider;
-		this.drugs = drugs;
+		this.arrives = arrives;
 	}
 	public Arrival(Integer arrivalId, Integer buyingPrice, Date date,  Provider provider) {
 		super();
@@ -90,7 +92,7 @@ public class Arrival implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Arrivals [arrivalId=" + arrivalId + ", buyingPrice=" + buyingPrice + ", date=" + date + ", provider=" + provider + ", drugs=" + drugs + "]";
+		return "Arrivals [arrivalId=" + arrivalId + ", buyingPrice=" + buyingPrice + ", date=" + date + ", provider=" + provider + ", drugs=" + arrives + "]";
 	}
 
 	public Integer getArrivalId() {
@@ -125,23 +127,23 @@ public class Arrival implements Serializable{
 		this.provider = provider;
 	}
 
-	public List<Drug> getDrugs() {
-		return drugs;
+	public List<Arrives> getArrives() {
+		return arrives;
 	}
 
-	public void setDrugs(List<Drug> drugs) {
-		this.drugs = drugs;
+	public void setArrives(List<Arrives> arrives) {
+		this.arrives = arrives;
 	}
 
-	public void addDrug(Drug drug) {
-		if(!drugs.contains(drug)) {
-			drugs.add(drug);
+	public void addArrive(Arrives arrive) {
+		if(!arrives.contains(arrive)) {
+			arrives.add(arrive);
 		}
 	}
 	
-	public void removeDrug(Drug drug) {
-		if(drugs.contains(drug)) {
-			drugs.remove(drug);
+	public void removeArrive(Arrives arrive) {
+		if(arrives.contains(arrive)) {
+			arrives.remove(arrive);
 		}
 	}
 }

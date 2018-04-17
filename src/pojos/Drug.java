@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -41,47 +40,47 @@ public class Drug implements Serializable {
 	
 	@OneToMany(mappedBy = "deliveryId")
 	@Basic(fetch = FetchType.LAZY)
-	private List<Delivery> deliveries;
+	private List<Packaged> packaged;
 	
-	@OneToMany(mappedBy = "arrivalId")
+	@OneToMany(mappedBy = "drugId")
 	@Basic(fetch = FetchType.LAZY)
-	private List<Arrival> arrivals;
+	private List<Arrives> arrives;
 	
 	@Lob
 	private byte[] photo;
 
 	public Drug() {
 		super();
-		deliveries = new ArrayList<Delivery>();
-		arrivals = new ArrayList<Arrival>();
+		packaged = new ArrayList<Packaged>();
+		arrives = new ArrayList<Arrives>();
 	}
 	
 
 	public Drug(String name, Integer stock, Integer sellingPrice, String activePrinciple, Corridor corridor,
-			List<Delivery> deliveries, List<Arrival> arrivals, byte[] photo) {
+			List<Packaged> packaged, List<Arrives> arrives, byte[] photo) {
 		super();
 		this.name = name;
 		this.stock = stock;
 		this.sellingPrice = sellingPrice;
 		this.activePrinciple = activePrinciple;
 		this.corridor = corridor;
-		this.deliveries = deliveries;
-		this.arrivals = arrivals;
+		this.packaged = packaged;
+		this.arrives = arrives;
 		this.photo = photo;
 	}
 
 
 
 	public Drug(Integer id, String name, Integer stock, Integer sellingPrice, Corridor corridor,
-			List<Delivery> deliveries, List<Arrival> arrivals, byte[] photo) {
+			List<Packaged> deliveries, List<Arrives> arrives, byte[] photo) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.stock = stock;
 		this.sellingPrice = sellingPrice;
 		this.corridor = corridor;
-		this.deliveries = deliveries;
-		this.arrivals = arrivals;
+		this.packaged = deliveries;
+		this.arrives = arrives;
 		this.photo=photo;
 	}
 	
@@ -96,7 +95,7 @@ public class Drug implements Serializable {
 
 
 	public Drug(Integer id, String name, Integer stock, Integer sellingPrice, String activePrinciple,
-			Corridor corridor, List<Delivery> deliveries, List<Arrival> arrivals, byte[]photo) {
+			Corridor corridor, List<Packaged> deliveries, List<Arrives> arrives, byte[]photo) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -104,8 +103,8 @@ public class Drug implements Serializable {
 		this.sellingPrice = sellingPrice;
 		this.activePrinciple = activePrinciple;
 		this.corridor = corridor;
-		this.deliveries = deliveries;
-		this.arrivals = arrivals;
+		this.packaged = deliveries;
+		this.arrives = arrives;
 		this.photo=photo;
 	}
 
@@ -180,43 +179,43 @@ public class Drug implements Serializable {
 		this.activePrinciple = activePrinciple;
 	}
 
-	public List<Delivery> getDeliveries() {
-		return deliveries;
+	public List<Packaged> getPackaged() {
+		return packaged;
 	}
 
-	public void setDeliveries(List<Delivery> deliveries) {
-		this.deliveries = deliveries;
+	public void setPackaged(List<Packaged> packaged) {
+		this.packaged = packaged;
 	}
 
-	public List<Arrival> getArrivals() {
-		return arrivals;
+	public List<Arrives> getArrives() {
+		return arrives;
 	}
 
-	public void setArrivals(List<Arrival> arrivals) {
-		this.arrivals = arrivals;
+	public void setArrives(List<Arrives> arrives) {
+		this.arrives = arrives;
 	}
 
-	public void addDelivery(Delivery delivery) {
-		if (!deliveries.contains(delivery)) {
-			deliveries.add(delivery);
+	public void addPackaged(Packaged packaged) {
+		if (!this.packaged.contains(packaged)) {
+			this.packaged.add(packaged);
 		}
 	}
 
-	public void removeDelivery(Delivery delivery) {
-		if (deliveries.contains(delivery)) {
-			deliveries.remove(delivery);
+	public void removePackaged(Packaged packaged) {
+		if (this.packaged.contains(packaged)) {
+			this.packaged.remove(packaged);
 		}
 	}
 
-	public void addArrival(Arrival arrival) {
-		if (!arrivals.contains(arrival)) {
-			arrivals.add(arrival);
+	public void addArrive(Arrives arrive) {
+		if (!arrives.contains(arrive)) {
+			arrives.add(arrive);
 		}
 	}
 
-	public void removeArrival(Arrival arrival) {
-		if (arrivals.contains(arrival)) {
-			arrivals.remove(arrival);
+	public void removeArrive(Arrives arrive) {
+		if (arrives.contains(arrive)) {
+			arrives.remove(arrive);
 		}
 	}
 
