@@ -1,9 +1,15 @@
 package gui.adminPanel;
 
-import com.jfoenix.controls.JFXButton;
+import java.net.URL;
+import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+import pojos.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -13,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
-public class AdminWindow {
+public class AdminWindow implements Initializable {
 
     @FXML
     private TabPane pojosTabPane;
@@ -50,6 +56,9 @@ public class AdminWindow {
 
     @FXML
     private TextField clientPhoneField;
+    
+    @FXML
+    private TextField clientEmailField;
 
     @FXML
     private ComboBox<?> comboPayment;
@@ -221,6 +230,11 @@ public class AdminWindow {
 
     @FXML
     void addClientClicked(ActionEvent event) {
+    	Client newClient =new Client();
+    	newClient.setName(clientNameField.getText());
+    	newClient.setAdress(clientAdressField.getText());
+    	newClient.setEmail(clientEmailField.getText());
+    	newClient.setTelephone(Integer.parseInt(clientPhoneField.getText()));
     	
     }
 
@@ -273,5 +287,15 @@ public class AdminWindow {
     void loadEmployeeImage(MouseEvent event) {
 
     }
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		ObservableList methods=FXCollections.observableArrayList();
+		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");
+		comboPayment.getItems().addAll(methods);
+		
+	}
+    
+    
 
 }

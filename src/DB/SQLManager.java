@@ -481,12 +481,12 @@ public class SQLManager implements Manager {
 		
 		ResultSet rs = prep.executeQuery();
 		
-		Warehouse warehouseWanted = extractWarehouseById(rs.getInt("warehouse_id"));
+		//Warehouse warehouseWanted = extractWarehouseById(rs.getInt("warehouse_id"));
 		Employee employee = new Employee(rs.getInt("id"), rs.getString("name"), rs.getFloat("salary"), rs.getInt("phone"),
-				rs.getString("position"), warehouseWanted, rs.getBytes("photo"), rs.getString("username"), rs.getString("password"),
+				rs.getString("position"), rs.getBytes("photo"), rs.getString("username"), rs.getString("password"),
 				rs.getBoolean("isAdmin"));
 	
-		if(username == employee.getUserName()) {
+		if(username.equals(employee.getUserName())) {
 			prep.close();
 			rs.close();
 			return employee;

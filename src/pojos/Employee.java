@@ -30,6 +30,17 @@ public class Employee extends User implements Serializable {
 		super();
 	}
 
+	public Employee(int id,String name, float salary, Integer phone, String position, byte[] photo,
+			String userName, String password, boolean admin) {
+		super(id, userName, password);
+		this.name = name;
+		this.salary = salary;
+		this.phone = phone;
+		this.position = position;
+		this.photo = photo;
+		this.isAdmin = admin;
+	}
+
 	public Employee(String name, float salary, Integer phone, String position, Warehouse warehouseId, byte[] photo,
 			String userName, String password, boolean admin) {
 		super(userName, password);

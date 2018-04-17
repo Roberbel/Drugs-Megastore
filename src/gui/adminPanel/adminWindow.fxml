@@ -2,9 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -20,33 +17,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane prefHeight="649.0" prefWidth="953.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.adminPanel.AdminWindow">
-   <top>
-      <MenuBar BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
    <center>
       <GridPane snapToPixel="false">
         <columnConstraints>
-          <ColumnConstraints maxWidth="741.2" minWidth="10.0" prefWidth="741.2" />
-            <ColumnConstraints hgrow="NEVER" maxWidth="261.59999999999997" minWidth="0.0" prefWidth="0.0" />
-          <ColumnConstraints maxWidth="450.4" minWidth="10.0" prefWidth="212.0" />
+          <ColumnConstraints maxWidth="805.6000244140625" minWidth="10.0" prefWidth="739.9999267578125" />
+          <ColumnConstraints maxWidth="450.4" minWidth="10.0" prefWidth="194.4000244140625" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -61,12 +36,11 @@
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="564.8" minHeight="10.0" prefHeight="564.8" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="188.1999855041504" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="26.600024414062545" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="602.2000122070312" minHeight="10.0" prefHeight="592.5999755859375" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="60.79998779296875" minHeight="0.0" prefHeight="27.200024414062455" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TableView fx:id="clientTable" prefHeight="457.0" prefWidth="530.0">
+                              <TableView fx:id="clientTable" prefHeight="576.0" prefWidth="741.0">
                                 <columns>
                                   <TableColumn fx:id="clientName" prefWidth="84.00000309944153" text="Name" />
                                   <TableColumn fx:id="clientAdress" prefWidth="136.00003051757812" text="Adress" />
@@ -76,12 +50,12 @@
                                     <TableColumn fx:id="clientDeliveries" prefWidth="120.4000244140625" text="Deliveries" />
                                 </columns>
                               </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
                                     <TextField fx:id="clientNameField" prefHeight="25.0" prefWidth="95.0" promptText="Name" />
                                     <TextField fx:id="clientAdressField" prefHeight="25.0" prefWidth="134.0" promptText="Adress" />
                                     <TextField fx:id="clientPhoneField" prefHeight="25.0" prefWidth="116.0" promptText="Phone Number" />
-                                    <TextField fx:id="clientPhoneField" prefHeight="25.0" prefWidth="160.0" promptText="Email" />
+                                    <TextField fx:id="clientEmailField" prefHeight="25.0" prefWidth="160.0" promptText="Email" />
                                     <ComboBox fx:id="comboPayment" prefWidth="150.0" promptText="Payment Method" />
                                     <JFXButton fx:id="addClientButton" onAction="#addClientClicked" style="-fx-background-color: GREY;" text="Add" />
                                     <JFXButton fx:id="deleteClientButton" onAction="#deleteClientClicked" style="-fx-background-color: grey;" text="Delete" />
@@ -98,9 +72,8 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="564.8" minHeight="10.0" prefHeight="564.8" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="188.1999855041504" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="26.600024414062545" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="598.3999755859375" minHeight="10.0" prefHeight="593.1999633789062" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="26.400036621093705" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <TableView fx:id="drugTable" prefHeight="457.0" prefWidth="530.0">
@@ -111,7 +84,7 @@
                                     <TableColumn fx:id="drugStock" prefWidth="83.199951171875" text="Stock" />
                                  </columns>
                               </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
                                     <TextField fx:id="drugNameField" prefHeight="25.0" prefWidth="180.0" promptText="Name" />
                                     <TextField fx:id="drugPrincipleField" prefHeight="25.0" prefWidth="229.0" promptText="Active Principle" />
@@ -132,9 +105,8 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="564.8" minHeight="10.0" prefHeight="564.8" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="188.1999855041504" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="26.600024414062545" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="596.3999755859375" minHeight="10.0" prefHeight="594.8" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="24.799999999999955" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <TableView fx:id="warehouseTable" prefHeight="457.0" prefWidth="530.0">
@@ -146,7 +118,7 @@
                                     <TableColumn fx:id="warePhone" prefWidth="160.4000244140625" text="Phone Number" />
                                  </columns>
                               </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
                                     <TextField fx:id="warePcField" prefHeight="25.0" prefWidth="95.0" promptText="Zip Code" />
                                     <TextField fx:id="wareCountryField" prefHeight="25.0" prefWidth="134.0" promptText="Country" />
@@ -178,9 +150,8 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="564.8" minHeight="10.0" prefHeight="564.8" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="188.1999855041504" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="26.600024414062545" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="594.0000122070312" minHeight="10.0" prefHeight="594.0000122070312" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="25.599987792968705" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <TableView fx:id="employeeTable" onMouseClicked="#loadEmployeeImage" prefHeight="457.0" prefWidth="530.0">
@@ -192,7 +163,7 @@
                                     <TableColumn fx:id="employeeWare" prefWidth="151.5999755859375" text="Warehouse Assignated" />
                                  </columns>
                               </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
                                     <TextField fx:id="employeeNameField" prefHeight="25.0" prefWidth="118.0" promptText="Name" />
                                     <TextField fx:id="employeeSalaryField" prefHeight="25.0" prefWidth="134.0" promptText="Salary" />
@@ -214,9 +185,8 @@
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="564.8" minHeight="10.0" prefHeight="564.8" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="188.1999855041504" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="26.600024414062545" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="593.1999633789062" minHeight="10.0" prefHeight="593.1999633789062" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="26.400036621093705" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
                               <TableView fx:id="corridorsTable" prefHeight="457.0" prefWidth="530.0">
@@ -226,7 +196,7 @@
                                     <TableColumn fx:id="corridorTemperature" prefWidth="248.39990234375" text="Temperature" />
                                  </columns>
                               </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <children>
                                     <TextField fx:id="corridorIdField" prefHeight="25.0" prefWidth="151.0" promptText="CorridorID" />
                                     <ComboBox fx:id="comboWare" prefWidth="150.0" promptText="Warehouse" />
@@ -241,7 +211,7 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <GridPane GridPane.columnIndex="2">
+            <GridPane GridPane.columnIndex="1">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
