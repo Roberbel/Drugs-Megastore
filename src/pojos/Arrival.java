@@ -3,6 +3,7 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -21,14 +22,18 @@ public class Arrival implements Serializable{
 	private static final long serialVersionUID = 2841430439397985029L;
 	
 	@Id
+	@Column(name = "transaction_id")
 	private Integer arrivalId;
+	@Column(name = "buying_price")
 	private Integer buyingPrice;
+	@Column(name = "transaction_date") 
 	private Date date;
 	
 	@ManyToOne
+	@Column(name = "provider_id")
 	private Provider provider;
 	
-	@OneToMany(mappedBy = "arrivalId")
+	@OneToMany(mappedBy = "arrival")
 	private List<Arrives> arrives;
 
 	public Arrival() {

@@ -38,11 +38,11 @@ public class Drug implements Serializable {
 	private Corridor corridor;
 	
 	
-	@OneToMany(mappedBy = "deliveryId")
+	@OneToMany(mappedBy = "drug")
 	@Basic(fetch = FetchType.LAZY)
 	private List<Packaged> packaged;
 	
-	@OneToMany(mappedBy = "drugId")
+	@OneToMany(mappedBy = "drug")
 	@Basic(fetch = FetchType.LAZY)
 	private List<Arrives> arrives;
 	

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -22,6 +23,7 @@ public class Client extends User implements Serializable {
 	private String adress;
 	private Integer telephone;
 	private String email;
+	@Column(name = "payment_method")
 	private PaymentMethod paymentMethod;
 	@OneToMany
 	@Basic(fetch = FetchType.LAZY)

@@ -7,6 +7,7 @@ import java.util.*;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,15 +22,18 @@ public class Delivery implements Serializable {
 	private static final long serialVersionUID = -2324788895880344002L;
 	
 	@Id
+	@Column (name = "transaction_id")
 	private Integer id;
+	@Column (name = "selling_price")
 	private Integer sellingPrice;
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
+	@Column (name = "transaction_date")
 	private Date transactionDate;
 
-	@OneToMany(mappedBy = "drug")
+	@OneToMany(mappedBy = "delivery")
 	private List<Packaged> packages;
 	
 

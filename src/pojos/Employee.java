@@ -2,6 +2,7 @@ package pojos;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -22,6 +23,7 @@ public class Employee extends User implements Serializable {
 	private String position;
 	private boolean isAdmin;
 	@ManyToOne
+	@Column (name = "warehouse_id")
 	private Warehouse warehouse;
 	@Lob
 	private byte[] photo;

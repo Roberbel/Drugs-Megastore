@@ -2,6 +2,7 @@ package pojos;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -17,8 +18,11 @@ public class Packaged implements Serializable{
 	private static final long serialVersionUID = 3515016001673617510L;
 
 	@Id
+	@Column(name="transaction_id")
 	private Integer deliveryId;
+	
 	@Id
+	@Column(name="drug_id")
 	private Integer drugId;
 	
 	@ManyToOne

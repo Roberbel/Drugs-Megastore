@@ -17,7 +17,7 @@ public abstract class User implements Serializable {
 	 */
 	private static final long serialVersionUID = -2459371836299683662L;
 
-	private String userName;
+	private String username;
 	private String password;
 
 	@Id
@@ -29,21 +29,21 @@ public abstract class User implements Serializable {
 
 	public User(String userName, String password) {
 		super();
-		this.userName = userName;
+		this.username = userName;
 		this.password = password;
 	}
 	
 	public User(int id, String userName, String password) {
 		super();
 		this.id = id;
-		this.userName = userName;
+		this.username = userName;
 		this.password = password;
 		
 	}
 
 	public User(String userName, String password, Integer id) {
 		super();
-		this.userName = userName;
+		this.username = userName;
 		this.password = password;
 		this.id = id;
 	}
@@ -52,7 +52,7 @@ public abstract class User implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -65,25 +65,25 @@ public abstract class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (userName == null) {
-			if (other.userName != null)
+		if (username == null) {
+			if (other.username != null)
 				return false;
-		} else if (!userName.equals(other.userName))
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", password=" + password + ", id=" + id + "]";
+		return "User [userName=" + username + ", password=" + password + ", id=" + id + "]";
 	}
 
 	public String getUserName() {
-		return userName;
+		return username;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.username = userName;
 	}
 
 	public String getPassword() {

@@ -1,6 +1,5 @@
 package DB;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -25,12 +24,13 @@ public class JPAManager {
 		public static void main(String[] args) {
 			
 			JPAManager.connect();
+			
 			List<Corridor> list = JPAManager.getAllCorridors();
 			for(Corridor d: list) {
 				System.out.println(d.toString());
 				
 			}
-			
+			System.out.println("Finished Corridors");
 		}
 		
 		public static void connect(){
