@@ -221,7 +221,7 @@ public class AdminWindow {
 
     @FXML
     void addClientClicked(ActionEvent event) {
-
+    	
     }
 
     @FXML
