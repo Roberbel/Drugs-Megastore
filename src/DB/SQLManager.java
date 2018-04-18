@@ -20,122 +20,122 @@ public class SQLManager implements Manager {
 	public static void main(String[] args) {
 
 		try {
-
 			
-			  generateDataBase("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
-			 
-			 
-
-			// generateUsersDataBase("jdbc:sqlite:./db/Drug Megastore Users TEST.db");
-
+			connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
+			generateDataBase();
 
 		} catch (Exception e) {
+			
 			e.printStackTrace();
+		
 		}
 	}
 
 	public static void connect(String directory) throws ClassNotFoundException, SQLException {
 
-		try {
-
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection(directory);
-			c.createStatement().execute("PRAGMA foreign_keys=ON");
-			System.out.println("Database connection opened.");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		Class.forName("org.sqlite.JDBC");
+		c = DriverManager.getConnection(directory);
+		c.createStatement().execute("PRAGMA foreign_keys=ON");
+		System.out.println("Database connection opened.");
 		
 	}
 
 	public static void disconnect() throws SQLException {
+		
 		c.close();
 		System.out.println("Database connection closed.");
+		
 	}
 
-	public static void generateDataBase(String directory) {
+	public static void generateDataBase() throws SQLException {
 
-		try {
+		createClientTable();
+		createEmployeeTable();
+		createCorridorTable();
+		createWarehouseTable();
+		createDeliveriesTable();
+		createPackagedTable();
+		createDrugTable();
+		createArrivesTable();
+		createArrivalsTable();
+		createProvidersTable();
 			
-			connect(directory);
-			createClientTable();
-			createEmployeeTable();
-			createCorridorTable();
-			createWarehouseTable();
-			createDeliveriesTable();
-			createPackagedTable();
-			createDrugTable();
-			createArrivesTable();
-			createArrivalsTable();
-			createProvidersTable();
-			disconnect();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 	// ===================================CREATE TABLE
 	// METHODS.===============================================
 
 	public static void createClientTable() throws SQLException {
+		
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT, payment_method TEXT NOT NULL, username STRING NOT NULL UNIQUE,"
 				+"password STRING NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+		
 	}
 
 	public static void createEmployeeTable() throws SQLException {
+		
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE employee" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 				+ "photo BLOB," + "salary FLOAT NOT NULL," + "phone INT NOT NULL," + "position TEXT NOT NULL,"
 				+ "warehouse_id REFERENCES warehouse (id), username STRING NOT NULL UNIQUE,password STRING NOT NULL,isAdmin BOOLEAN)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+	
 	}
 
 	public static void createCorridorTable() throws SQLException {
+		
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE corridor" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "temperature FLOAT NOT NULL,"
 				+ "warehouse_id REFERENCES warehouse (id))";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+	
 	}
-
+	
 	public static void createWarehouseTable() throws SQLException {
+	
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE warehouse" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "phone INT NOT NULL,"
 				+ "city TEXT NOT NULL," + "country TEXT NOT NULL," + "address TEXT NOT NULL," + "pc INT NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+	
 	}
 
 	public static void createDeliveriesTable() throws SQLException {
+		
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE deliveries  " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " selling_price INT NOT NULL," + " transaction_date DATE NOT NULL,"
 				+ " client_id INT REFERENCES client (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+	
 	}
 
 	public static void createPackagedTable() throws SQLException {
+	
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE packaged " + "(drug_id INT," + " transaction_id INT," + " amount INT NOT NULL,"
 				+ " PRIMARY KEY (drug_id," + " transaction_id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+	
 	}
 
 	public static void createDrugTable() throws SQLException {
+	
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE drug " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL UNIQUE,"
-				+ " photo BLOB," + " stock INT NOT NULL," + " active_principle TEXT,"
+				+ " photo BLOB," + " stock INT NOT NULL," + " active_principle TEXT," + " selling_price INTEGER NOT NULL"
 				+ " corridor_id INT REFERENCES corridor (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+	
 	}
 
 	public static void createArrivesTable() throws SQLException {
