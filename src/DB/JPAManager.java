@@ -1,5 +1,6 @@
 package DB;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -24,6 +25,7 @@ public class JPAManager {
 		public static void main(String[] args) {
 			
 			JPAManager.connect();
+			JPAManager.insertCorridor(new Corridor());
 			
 			List<Corridor> list = JPAManager.getAllCorridors();
 			for(Corridor d: list) {

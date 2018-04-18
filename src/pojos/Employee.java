@@ -2,8 +2,11 @@ package pojos;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,9 +26,10 @@ public class Employee extends User implements Serializable {
 	private String position;
 	private boolean isAdmin;
 	@ManyToOne
-	@Column (name = "warehouse_id")
+	@JoinColumn (name = "warehouse_id")
 	private Warehouse warehouse;
 	@Lob
+	@Basic(fetch = FetchType.LAZY)
 	private byte[] photo;
 
 	public Employee() {

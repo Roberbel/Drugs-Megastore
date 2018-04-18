@@ -3,9 +3,12 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -30,10 +33,11 @@ public class Arrival implements Serializable{
 	private Date date;
 	
 	@ManyToOne
-	@Column(name = "provider_id")
+	@JoinColumn(name = "provider_id")
 	private Provider provider;
 	
 	@OneToMany(mappedBy = "arrival")
+	@Basic(fetch = FetchType.LAZY)
 	private List<Arrives> arrives;
 
 	public Arrival() {

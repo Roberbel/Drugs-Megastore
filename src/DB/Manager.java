@@ -15,7 +15,7 @@ public interface Manager {
 	 * QUIERO M�TODOS QUE ME DEVUELVAN TODOS LOS POJOS QUE QUERAIS MOSTRAR EN LA INTERFAZ
 	 */
      public static Employee extractEmployeeById() {
-    	 
+		return null;
      }
 
 }
