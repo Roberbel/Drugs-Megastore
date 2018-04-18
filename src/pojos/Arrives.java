@@ -31,15 +31,92 @@ public class Arrives implements Serializable{
 	@PrimaryKeyJoinColumn(name = "transaction_id", referencedColumnName = "transaction_id")
 	private Arrival arrival;
 	
-	
 	private Integer amount;
+
+	Arrives(){
 	
+		super();
 	
-	/*
-	 * TODO:
-	 * constructors
-	 * getters and setters
-	 */
+	}
 	
+	Arrives(Drug drug, Arrival arrival, Integer ammount){
+		
+		super();
+		this.drug = drug;
+		this.arrival = arrival;
+		this.drugId = drug.getId();
+		this.arrivalId = arrival.getArrivalId();
+		this.amount = ammount;
+	
+	}
+
+	public Integer getDrugId() {
+	
+		return drugId;
+	
+	}
+
+
+	public void setDrugId(Integer drugId) {
+	
+		this.drugId = drugId;
+	
+	}
+
+
+	public Integer getArrivalId() {
+	
+		return arrivalId;
+	
+	}
+
+
+	public void setArrivalId(Integer arrivalId) {
+	
+		this.arrivalId = arrivalId;
+	
+	}
+
+
+	public Drug getDrug() {
+	
+		return drug;
+	
+	}
+
+
+	public void setDrug(Drug drug) {
+	
+		this.drug = drug;
+	
+	}
+
+
+	public Arrival getArrival() {
+	
+		return arrival;
+	
+	}
+
+
+	public void setArrival(Arrival arrival) {
+	
+		this.arrival = arrival;
+	
+	}
+
+
+	public Integer getAmount() {
+	
+		return amount;
+	
+	}
+
+
+	public void setAmount(Integer amount) {
+	
+		this.amount = amount;
+	
+	}
 	
 }

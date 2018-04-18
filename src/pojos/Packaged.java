@@ -34,12 +34,78 @@ public class Packaged implements Serializable{
 	private Delivery delivery;
 	
 	private Integer ammount;
+
 	
-	/*
-	 * TODO:
-	 * constructors
-	 * getters and setters
-	 */
 	
+	public Packaged(Drug drug, Delivery delivery, Integer ammount) {
+		
+		super();
+		this.deliveryId = delivery.getTransactionId();
+		this.drugId = drug.getId();
+		this.drug = drug;
+		this.delivery = delivery;
+		this.ammount = ammount;
+	
+	}
+
+	public Integer getDeliveryId() {
+	
+		return deliveryId;
+	}
+
+	public void setDeliveryId(Integer deliveryId) {
+
+		this.deliveryId = deliveryId;
+	
+	}
+
+	public Integer getDrugId() {
+	
+		return drugId;
+	
+	}
+
+	public void setDrugId(Integer drugId) {
+	
+		this.drugId = drugId;
+	
+	}
+
+	public Drug getDrug() {
+	
+		return drug;
+	
+	}
+
+	public void setDrug(Drug drug) {
+	
+		this.drug = drug;
+	
+	}
+
+	public Delivery getDelivery() {
+	
+		return delivery;
+	
+	}
+
+	public void setDelivery(Delivery delivery) {
+	
+		this.delivery = delivery;
+	
+	}
+
+	public Integer getAmmount() {
+		
+		return ammount;
+	
+	}
+
+	public void setAmmount(Integer ammount) {
+	
+		this.ammount = ammount;
+	
+	}
+		
 	
 }

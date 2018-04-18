@@ -27,6 +27,7 @@ public class Drug implements Serializable {
 	private Integer id;
 	private String name;
 	private Integer stock;
+	@Column (name = "selling_price")
 	private Integer sellingPrice;
 	
 	@Column(name = "active_principle")
