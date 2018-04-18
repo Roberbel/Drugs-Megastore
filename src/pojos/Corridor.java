@@ -34,7 +34,7 @@ public class Corridor implements Serializable {
 	
 	@OneToMany(mappedBy="corridor")
 	@Basic(fetch = FetchType.LAZY)
-	private List<Drug>drugs;
+	private List<Drug> drugs;
 	
 	
 	public Corridor() {

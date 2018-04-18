@@ -1,5 +1,6 @@
 package DB;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -192,7 +193,199 @@ public class JPAManager {
 			
 		}
 		
+
+/*
+ * =====================================================================================================
+ * 								UPDATES
+ * =====================================================================================================
+ */
 		
+		/*
+		 * Arrival updates
+		 */
+		
+		//this is the way that Gonzalo thinks it should be done.
+		public void updateArrivalDate(Integer id, Date date) {
+			
+			Arrival arrival = this.searchArrivalById(id);
+			em.getTransaction().begin();
+			arrival.setDate(date);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void updateArrivalBuyingPrice() {
+			
+			
+		}
+		
+		//not sure yet if this should be done
+		public void updateArrival() {
+			
+			
+		}
+		
+
+		
+/*
+ * =====================================================================================================
+ * 								DELETE
+ * 
+ * Might be missing Arrives and Packaged delete, not sure yet how to do it
+ * =====================================================================================================
+ */
+		
+		public void deleteArrival(Integer id) {
+			
+			Arrival toDelete = searchArrivalById(id);
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteArrival(Arrival arrival) {
+			
+			Arrival toDelete = searchArrivalById(arrival.getArrivalId());
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteArrive(Arrives toDelete) {
+			
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteClient(Integer id) {
+			
+			Client toDelete = searchClientById(id);
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteClient(Client client) {
+			
+			Client toDelete = searchClientById(client.getId());
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteCorridor(Integer id) {
+			
+			Corridor toDelete = searchCorridorById(id);
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+		
+		}
+		
+		public void deleteCorridor(Corridor corridor) {
+			
+			Corridor toDelete = searchCorridorById(corridor.getId());
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteDelivery(Integer id) {
+			
+			Delivery toDelete = searchDeliveryById(id);
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteDelivery(Delivery delivery) {
+			
+			Delivery toDelete = searchDeliveryById(delivery.getTransactionId());
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+		
+		}
+		
+		public void deleteDrug(Integer id) {
+			
+			Drug toDelete = searchDrugById(id);
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteDrug(Drug drug) {
+			
+			Drug toDelete = searchDrugById(drug.getId());
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteEmployee(Integer id) {
+			
+			Employee toDelete = searchEmployeeById(id);
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteEmployee(Employee employee) {
+			
+			Employee toDelete = searchEmployeeById(employee.getId());
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteProvider(Integer id) {
+			
+			Provider toDelete = searchProviderById(id);
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteProvider(Provider provider) {
+			
+			Provider toDelete = searchProviderById(provider.getProviderId());
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteWarehouse(Integer id) {
+			
+			Warehouse toDelete = searchWarehouseById(id);
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void deleteWarehouse(Warehouse warehouse) {
+			
+			Warehouse toDelete = searchWarehouseById(warehouse.getId());			
+			em.getTransaction().begin();
+			em.remove(toDelete);
+			em.getTransaction().commit();
+			
+		}
 		
 		
 /*
