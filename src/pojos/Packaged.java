@@ -106,6 +106,47 @@ public class Packaged implements Serializable{
 		this.ammount = ammount;
 	
 	}
-		
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((ammount == null) ? 0 : ammount.hashCode());
+		result = prime * result + ((deliveryId == null) ? 0 : deliveryId.hashCode());
+		result = prime * result + ((drugId == null) ? 0 : drugId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Packaged other = (Packaged) obj;
+		if (ammount == null) {
+			if (other.ammount != null)
+				return false;
+		} else if (!ammount.equals(other.ammount))
+			return false;
+		if (deliveryId == null) {
+			if (other.deliveryId != null)
+				return false;
+		} else if (!deliveryId.equals(other.deliveryId))
+			return false;
+		if (drugId == null) {
+			if (other.drugId != null)
+				return false;
+		} else if (!drugId.equals(other.drugId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Packaged [drug=" + drug + ", delivery=" + delivery + ", ammount=" + ammount + "]";
+	}
+			
 }

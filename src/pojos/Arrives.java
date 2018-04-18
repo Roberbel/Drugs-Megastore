@@ -118,5 +118,48 @@ public class Arrives implements Serializable{
 		this.amount = amount;
 	
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
+		result = prime * result + ((arrivalId == null) ? 0 : arrivalId.hashCode());
+		result = prime * result + ((drugId == null) ? 0 : drugId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Arrives other = (Arrives) obj;
+		if (amount == null) {
+			if (other.amount != null)
+				return false;
+		} else if (!amount.equals(other.amount))
+			return false;
+		if (arrivalId == null) {
+			if (other.arrivalId != null)
+				return false;
+		} else if (!arrivalId.equals(other.arrivalId))
+			return false;
+		if (drugId == null) {
+			if (other.drugId != null)
+				return false;
+		} else if (!drugId.equals(other.drugId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Arrives [drug=" + drug + ", arrival=" + arrival + ", amount=" + amount + "]";
+	}
+	
 	
 }
