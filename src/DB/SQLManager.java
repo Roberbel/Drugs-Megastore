@@ -139,28 +139,34 @@ public class SQLManager implements Manager {
 	}
 
 	public static void createArrivesTable() throws SQLException {
+		
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE arrives " + "(drug_id INT," + " transaction_id INT," + " amount INT NOT NULL,"
 				+ " PRIMARY KEY (drug_id, transaction_id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+	
 	}
 
 	public static void createArrivalsTable() throws SQLException {
+	
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE arrivals " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " buying_price INT NOT NULL," + " transaction_date DATE NOT NULL,"
 				+ " provider_id REFERENCES provider (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
-	}
 
+	}
+	
 	public static void createProvidersTable() throws SQLException {
+
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE provider" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 				+ "adress TEXT NOT NULL," + "telephone INTEGER," + "email TEXT)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
+	
 	}
 
 	// ===========================================================================================================
@@ -206,6 +212,7 @@ public class SQLManager implements Manager {
 			prep.executeUpdate();
 		}
 		prep.close();
+	
 	}
 
 	public static void insertProviderEntrance(Provider provider) throws SQLException {
@@ -230,6 +237,7 @@ public class SQLManager implements Manager {
 		prep.setInt(3, arrival.getProvider().getProviderId());
 		prep.executeUpdate();
 		prep.close();
+	
 	}
 
 	
@@ -260,6 +268,7 @@ public class SQLManager implements Manager {
 
 		prep.executeUpdate();
 		prep.close();
+	
 	}
 
 	public static void insertCorridorEntrance(Corridor corridor) throws SQLException {
@@ -285,6 +294,7 @@ public class SQLManager implements Manager {
 		prep.setInt(5, warehouse.getPc());
 		prep.executeUpdate();
 		prep.close();
+	
 	}
 
 	public static void insertEmployeesEntrance(Employee employees) throws SQLException {
@@ -302,10 +312,12 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 
 		prep.close();
+	
 	}
 
 	// ===========================================================================================================
 	public static Employee extractEmployeeById(Integer id) throws SQLException {
+	
 		String sql = "SELECT * FROM employee WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
@@ -328,10 +340,10 @@ public class SQLManager implements Manager {
 			return null;
 		}
 		
-		
 	}
 	
 	public static Warehouse extractWarehouseById(Integer id) throws SQLException {
+		
 		String sql = "SELECT * FROM warehouse WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
@@ -355,7 +367,7 @@ public class SQLManager implements Manager {
 	}
 	
 	
-	//We have tot alk how to do this 
+	//We have to talk how to do this 
 	public static Arrival extractArrivalById(Integer id)throws SQLException{
 		
 		String sql = "SELECT * FROM arrival WHERE id = ? ";
@@ -399,6 +411,7 @@ public class SQLManager implements Manager {
 	}
 	
 	public static Corridor extractCorridorById(Integer id) throws SQLException {
+	
 		String sql = "SELECT * FROM corridor WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
@@ -419,7 +432,9 @@ public class SQLManager implements Manager {
 		}
 		
 	}
+	
 	public static Provider extractProviderById(Integer id)throws SQLException{
+	
 		String sql="SELECT * FROM provider WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
@@ -440,10 +455,12 @@ public class SQLManager implements Manager {
 		rs.close();
 		return null;
 		}	
+	
 	}
 	
 	
 	public static Client extractClientById(Integer id)throws SQLException{
+	
 		String sql="SELECT * FROM client WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
@@ -471,9 +488,11 @@ public class SQLManager implements Manager {
 		rs.close();
 		return null;
 		}	
+	
 	}
 	
 	public static Employee extractEmployeeByUsername(String username) throws SQLException {
+	
 		String sql = "SELECT * FROM employee WHERE username = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
@@ -499,6 +518,7 @@ public class SQLManager implements Manager {
 	}
 
 	public static Client extractClientByUsername(String username) throws SQLException {
+		
 		String sql="SELECT * FROM client WHERE username = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
@@ -526,10 +546,12 @@ public class SQLManager implements Manager {
 		rs.close();
 		return null;
 		}	
+	
 	}
 	
 	//Change client adress:
-		public static void updateClientAdress(int id, String newAdress) throws SQLException {
+	public static void updateClientAdress(int id, String newAdress) throws SQLException {
+	
 		String sql="UPDATE client SET adress = ? WHERE id = ? ";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, newAdress);
@@ -537,22 +559,27 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();
 		
+	
 	}
+	
 	//Change employee's salary
-		public static void updateAdmin(int id, boolean admin) throws SQLException{
-			String sql="UPDATE employee SET type= ? WHERE id = ?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setBoolean(1, admin);
-			prep.setInt(2, id);
-			prep.executeUpdate();
-			prep.close();
-		}
+	public static void updateAdmin(int id, boolean admin) throws SQLException{
+	
+		String sql="UPDATE employee SET type= ? WHERE id = ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setBoolean(1, admin);
+		prep.setInt(2, id);
+		prep.executeUpdate();
+		prep.close();
+		
+	}
 			
 	
 	// ===========================================================================================================
 
 	
 	public static void deleteDrugById(int id) throws SQLException{
+	
 		String sql = "DELETE FROM drugs WHERE id=?";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
@@ -565,9 +592,11 @@ public class SQLManager implements Manager {
 	// ===========================================================================================================
 
 	public static void createTable(String statement) throws SQLException {
+		
 		Statement stmt1 = c.createStatement();
 		stmt1.executeUpdate(statement);
 		stmt1.close();
+	
 	}
 
 	
