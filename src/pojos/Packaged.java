@@ -26,11 +26,11 @@ public class Packaged implements Serializable{
 	private Integer drugId;
 	
 	@ManyToOne
-	@PrimaryKeyJoinColumn(name = "drugId", referencedColumnName = "id")
+	@PrimaryKeyJoinColumn(name = "drug_id", referencedColumnName = "id")
 	private Drug drug;
 	
 	@ManyToOne
-	@PrimaryKeyJoinColumn(name = "deliveryId", referencedColumnName = "id")
+	@PrimaryKeyJoinColumn(name = "transaction_id", referencedColumnName = "transaction_id")
 	private Delivery delivery;
 	
 	private Integer ammount;
