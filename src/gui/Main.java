@@ -18,7 +18,8 @@ public class Main extends Application{
 	public void start(Stage stage) {
 		try {
 			this.window=stage;
-			Parent root=FXMLLoader.load(getClass().getResource("/gui/MainWindow.fxml"));
+			//Remember remember the fifth of November and to change the resource to MainWindow
+			Parent root=FXMLLoader.load(getClass().getResource("/gui/adminPanel/AdminWindow.fxml"));
 			this.window.setScene(new Scene(root));
 			this.window.setResizable(true);
 			this.window.show();

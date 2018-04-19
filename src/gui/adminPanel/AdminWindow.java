@@ -1,26 +1,34 @@
 package gui.adminPanel;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
-
 import com.jfoenix.controls.JFXButton;
 import pojos.*;
+import pojos.Client.PaymentMethod;
+import model.*;
+import DB.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class AdminWindow implements Initializable {
 
+	SQLManager manager;
+	
     @FXML
     private TabPane pojosTabPane;
 
@@ -28,25 +36,25 @@ public class AdminWindow implements Initializable {
     private Tab tabClients;
 
     @FXML
-    private TableView<?> clientTable;
+    private TableView<Client> clientTable;
 
     @FXML
-    private TableColumn<?, ?> clientName;
+    private TableColumn<Client, String> clientName;
 
     @FXML
-    private TableColumn<?, ?> clientAdress;
+    private TableColumn<Client, String> clientAdress;
 
     @FXML
-    private TableColumn<?, ?> clientPhone;
+    private TableColumn<Client,Integer> clientPhone;
 
     @FXML
-    private TableColumn<?, ?> clientMail;
+    private TableColumn<Client,String> clientMail;
 
     @FXML
-    private TableColumn<?, ?> clientPayment;
+    private TableColumn<Client,PaymentMethod> clientPayment;
 
     @FXML
-    private TableColumn<?, ?> clientDeliveries;
+    private TableColumn<Client, ?> clientDeliveries;
 
     @FXML
     private TextField clientNameField;
@@ -231,11 +239,35 @@ public class AdminWindow implements Initializable {
     @FXML
     void addClientClicked(ActionEvent event) {
     	Client newClient =new Client();
-    	newClient.setName(clientNameField.getText());
-    	newClient.setAdress(clientAdressField.getText());
-    	newClient.setEmail(clientEmailField.getText());
-    	newClient.setTelephone(Integer.parseInt(clientPhoneField.getText()));
+    	try {
+    		newClient.setName(clientNameField.getText());
+	    	newClient.setAdress(clientAdressField.getText());
+	    	newClient.setEmail(clientEmailField.getText());
+	    	newClient.setTelephone(Integer.parseInt(clientPhoneField.getText()));
+	    	if(comboPayment.getSelectionModel().getSelectedItem().equals("PAYPAL")) {
+	    		newClient.setPaymentMethod(PaymentMethod.PAYPAL);
+	    	}else if(comboPayment.getSelectionModel().getSelectedItem().equals("VISA")) {
+	    		newClient.setPaymentMethod(PaymentMethod.VISA);
+	    	}else if(comboPayment.getSelectionModel().getSelectedItem().equals("MASTERCARD")) {
+	    		newClient.setPaymentMethod(PaymentMethod.MASTERCARD);
+	    	}else if(comboPayment.getSelectionModel().getSelectedItem().equals("AMERICAN EXPRESS")) {
+	    		newClient.setPaymentMethod(PaymentMethod.AMERICAN_EXPRESS);
+	    	}else {
+	    		newClient.setPaymentMethod(PaymentMethod.ORGANS);
+	    	}
+	    	clientTable.getItems().add(newClient);
+    	}catch(NumberFormatException | NullPointerException ex) {
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();		
+    	}
     	
+    	
+    	try {
+			manager.insertClientEntrance(newClient);
+		} catch (SQLException e) {
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();
+		}
     }
 
     @FXML
@@ -290,9 +322,16 @@ public class AdminWindow implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//Clients List
 		ObservableList methods=FXCollections.observableArrayList();
 		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");
 		comboPayment.getItems().addAll(methods);
+		
+		clientName.setCellValueFactory(new PropertyValueFactory <Client,String>("name"));
+		clientAdress.setCellValueFactory(new PropertyValueFactory <Client,String>("adress"));
+		clientPhone.setCellValueFactory(new PropertyValueFactory <Client,Integer>("telephone"));
+		clientMail.setCellValueFactory(new PropertyValueFactory <Client,String>("email"));
+		clientPayment.setCellValueFactory(new PropertyValueFactory <Client,PaymentMethod>("paymentMethod"));
 		
 	}
     
