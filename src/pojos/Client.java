@@ -178,11 +178,11 @@ public class Client extends User implements Serializable {
 		this.name = name;
 	}
 
-	public String getAdress() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAdress(String adress) {
+	public void setAddress(String adress) {
 		this.address = adress;
 	}
 

@@ -292,28 +292,99 @@ public class JPAManager implements Manager{
 		 * Arrival updates
 		 */
 		
-		//this is the way that Gonzalo thinks it should be done.
-		public void updateArrivalDate(Integer id, Date date) {
+		/*
+		 * this is the way that Gonzalo thinks it should be done.
+		 * maybe also return the object that has been updated
+		 */
+		
+		public void updateArrivalDate(Arrival arrival, Date date) {
 			
-			Arrival arrival = this.searchArrivalById(id);
+			arrival = searchArrivalById(arrival.getArrivalId());
 			em.getTransaction().begin();
 			arrival.setDate(date);
 			em.getTransaction().commit();
 			
 		}
 		
-		public void updateArrivalBuyingPrice() {
+		public void updateArrivalBuyingPrice(Arrival arrival, Integer buyingPrice) {
 			
-			
-		}
-		
-		//not sure yet if this should be done
-		public void updateArrival() {
-			
+			arrival = searchArrivalById(arrival.getArrivalId());
+			em.getTransaction().begin();
+			arrival.setBuyingPrice(buyingPrice);
+			em.getTransaction().commit();
 			
 		}
 		
+		public void updateArrivalProvider(Arrival arrival, Provider provider) {
+			
+			arrival = searchArrivalById(arrival.getArrivalId());
+			em.getTransaction().begin();
+			arrival.setProvider(provider);
+			em.getTransaction().commit();
+			
+		}
+		
+		/*
+		 * It doesn't make sense to update the N end of a relation
+		 */
+		
+		/*
+		 * Arrives update
+		 */
 
+		public void updateArrivesAmount(Arrives arrive, Integer ammount) {
+			
+			
+			
+		}
+		
+		/*
+		 * Client updates
+		 */
+		public void updateClientAddress(Client client, String address) {
+			
+			client = searchClientById(client.getId());
+			em.getTransaction().begin();
+			client.setAddress(address);
+			em.getTransaction().commit();
+			
+		}
+		public void updateClientName(Client client, String name) {
+			
+			client = searchClientById(client.getId());
+			em.getTransaction().begin();
+			client.setName(name);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void updateClientEmail(Client client, String email) {
+			
+			client = searchClientById(client.getId());
+			em.getTransaction().begin();
+			client.setEmail(email);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void updateClientPaymentMethod(Client client, String paymentMethod) {
+			
+			System.out.println("UPDATE CLIENTPAYMENT METHOD NOT IMPLEMENTED YET");
+			client = searchClientById(client.getId());
+			em.getTransaction().begin();
+			//client.setPaymentMethod(paymentMethod);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void updateClientTelephone(Client client, Integer phone) {
+			
+			client = searchClientById(client.getId());
+			em.getTransaction().begin();
+			client.setTelephone(phone);
+			em.getTransaction().commit();
+			
+		}
 		
 /*
  * =====================================================================================================
