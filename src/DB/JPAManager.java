@@ -18,7 +18,7 @@ import pojos.Packaged;
 import pojos.Provider;
 import pojos.Warehouse;
 
-public class JPAManager {
+public class JPAManager implements Manager{
 
 		private static EntityManager em;
 
@@ -46,6 +46,92 @@ public class JPAManager {
 		public static void disconnect()  {
 			em.close();
 			System.out.println("Database connection closed.");
+		}
+		
+/*
+ * =====================================================================================================
+ * 								Creates
+ * =====================================================================================================
+ */		
+		
+		public static void insertArrival(Arrival arrival) {
+			
+			em.getTransaction().begin();
+			em.persist(arrival);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertArrive(Arrives arrive) {
+			
+			em.getTransaction().begin();
+			em.persist(arrive);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertClient(Client client) {
+			
+			em.getTransaction().begin();
+			em.persist(client);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertCorridor(Corridor corridor) {
+			
+			em.getTransaction().begin();
+			em.persist(corridor);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertDelivery(Delivery delivery){
+			
+			em.getTransaction().begin();
+			em.persist(delivery);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertDrug(Drug drug){
+			
+			em.getTransaction().begin();
+			em.persist(drug);
+			em.getTransaction().commit();
+	
+		}
+		
+		public static void insertEmployee(Employee employee) {
+			
+			em.getTransaction().begin();
+			em.persist(employee);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertPackaged(Packaged packaged) {
+			
+			em.getTransaction().begin();
+			em.persist(packaged);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertProvider(Provider provider) {
+			
+			em.getTransaction().begin();
+			em.persist(provider);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertWarehouse(Warehouse warehouse) {
+			
+			em.getTransaction().begin();
+			em.persist(warehouse);
+			em.getTransaction().commit();
+			
 		}
 		
 /*
@@ -385,92 +471,7 @@ public class JPAManager {
 			em.remove(toDelete);
 			em.getTransaction().commit();
 			
-		}
+		}	
 		
-		
-/*
- * =====================================================================================================
- * 								INSERTS
- * =====================================================================================================
- */		
-		public static void insertArrival(Arrival arrival) {
-			
-			em.getTransaction().begin();
-			em.persist(arrival);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertArrive(Arrives arrive) {
-			
-			em.getTransaction().begin();
-			em.persist(arrive);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertClient(Client client) {
-			
-			em.getTransaction().begin();
-			em.persist(client);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertCorridor(Corridor corridor) {
-			
-			em.getTransaction().begin();
-			em.persist(corridor);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertDelivery(Delivery delivery){
-			
-			em.getTransaction().begin();
-			em.persist(delivery);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertDrug(Drug drug){
-			
-			em.getTransaction().begin();
-			em.persist(drug);
-			em.getTransaction().commit();
-	
-		}
-		
-		public static void insertEmployee(Employee employee) {
-			
-			em.getTransaction().begin();
-			em.persist(employee);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertPackaged(Packaged packaged) {
-			
-			em.getTransaction().begin();
-			em.persist(packaged);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertProvider(Provider provider) {
-			
-			em.getTransaction().begin();
-			em.persist(provider);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertWarehouse(Warehouse warehouse) {
-			
-			em.getTransaction().begin();
-			em.persist(warehouse);
-			em.getTransaction().commit();
-			
-		}
 
 }

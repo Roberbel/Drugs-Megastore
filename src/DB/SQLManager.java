@@ -23,7 +23,8 @@ public class SQLManager implements Manager {
 			
 			connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 			generateDataBase();
-
+			disconnect();
+			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -599,5 +600,112 @@ public class SQLManager implements Manager {
 	
 	}
 
+/*
+ *=====================================================================================================
+ * 						Delete
+ * =====================================================================================================
+ * 
+ */
 	
+	public static void deleteArrival(Integer id) {
+		
+		
+		
+	}
+	
+    public static void deleteArrival(Arrival arrival) {
+		
+		
+		
+	}
+    
+    public static void deleteClient(Integer id) {
+    	
+    	
+    	
+    }
+
+    public static void deleteClient(Client client) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteCorridor(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteCorridor(Corridor corridor) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteDelivery(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteDelivery(Delivery delivery) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteDrug(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteDrug(Drug drug) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteEmployee(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteEmployee(Employee employee) {
+    		
+    	
+    	
+    }
+    
+    public static void deleteProvider(Integer id) {
+    	
+    	
+    		
+    }
+    
+    public static void deleteProvider(Provider provider) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteWarehouse(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteWarehouse(Warehouse warehouse) {
+    	
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
 }
