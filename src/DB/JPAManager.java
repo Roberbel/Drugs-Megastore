@@ -25,14 +25,15 @@ public class JPAManager implements Manager{
 		public static void main(String[] args) {
 			
 			JPAManager.connect();
-			JPAManager.insertCorridor(new Corridor());
-			
-			List<Corridor> list = JPAManager.getAllCorridors();
-			for(Corridor d: list) {
+			JPAManager.insertEmployee(new Employee());
+			System.out.println("Inserted");
+			List<Employee> list = JPAManager.getAllEmployees();
+			for(Employee d: list) {
 				System.out.println(d.toString());
 				
 			}
-			System.out.println("Finished Corridors");
+			System.out.println("Finished listing");
+			JPAManager.disconnect();
 		}
 		
 		public static void connect(){
@@ -41,6 +42,7 @@ public class JPAManager implements Manager{
 			em.getTransaction().begin();
 			em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 			em.getTransaction().commit();
+			System.out.println("Database connection started");
 			
 		}
 		public static void disconnect()  {

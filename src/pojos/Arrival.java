@@ -3,7 +3,6 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +15,7 @@ import javax.persistence.Table;
 import java.sql.Date;
 
 @Entity
-@Table(name = "arrival")
+@Table(name = "arrivals")
 public class Arrival implements Serializable{
 
 	/**
@@ -42,6 +41,8 @@ public class Arrival implements Serializable{
 	public Arrival() {
 		super();
 		arrives = new ArrayList<Arrives>();
+		buyingPrice = 100;
+		date = new Date(System.currentTimeMillis());
 	}
 
 	

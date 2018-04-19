@@ -34,13 +34,14 @@ public class Arrives implements Serializable{
 	
 	private Integer amount;
 
-	Arrives(){
+	public Arrives(){
 	
 		super();
+		amount = 90;
 	
 	}
 	
-	Arrives(Drug drug, Arrival arrival, Integer ammount){
+	public Arrives(Drug drug, Arrival arrival, Integer ammount){
 		
 		super();
 		this.drug = drug;

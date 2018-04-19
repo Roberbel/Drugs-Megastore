@@ -51,6 +51,9 @@ public class Drug implements Serializable {
 		super();
 		packaged = new ArrayList<Packaged>();
 		arrives = new ArrayList<Arrives>();
+		name = "Droga"+(int)(Math.random()*100);
+		stock = 1000;
+		sellingPrice = 10000;
 	}
 	
 

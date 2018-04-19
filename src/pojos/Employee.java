@@ -34,6 +34,13 @@ public class Employee extends User implements Serializable {
 
 	public Employee() {
 		super();
+		name = "Tzeench";
+		salary = 10000000;/*we better pay well the God of change and manipulation*/
+		isAdmin = true;
+		position = "Scheemer";
+		super.setUserName(name+(int)(Math.random()*10));
+		super.setPassword("SoloElCambioEsConstante");
+		phone = 9;
 	}
 
 	public Employee(int id,String name, float salary, Integer phone, String position, byte[] photo,
