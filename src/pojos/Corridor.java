@@ -27,13 +27,11 @@ public class Corridor implements Serializable {
 	@Id
 	private Integer id;
 	private float temperature;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="warehouse_id")
-	@Basic(fetch = FetchType.LAZY)
 	private Warehouse warehouse;
 	
-	@OneToMany(mappedBy="corridor")
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="corridor",fetch = FetchType.LAZY)
 	private List<Drug> drugs;
 	
 	

@@ -36,8 +36,7 @@ public class Arrival implements Serializable{
 	@JoinColumn(name = "provider_id")
 	private Provider provider;
 	
-	@OneToMany(mappedBy = "arrival")
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "arrival", fetch = FetchType.LAZY)
 	private List<Arrives> arrives;
 
 	public Arrival() {

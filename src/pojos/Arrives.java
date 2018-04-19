@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
@@ -23,11 +24,11 @@ public class Arrives implements Serializable{
 	@Column(name = "transaction_id")
 	private Integer arrivalId;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn(name = "drug_id", referencedColumnName = "id")	
 	private Drug drug;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn(name = "transaction_id", referencedColumnName = "transaction_id")
 	private Arrival arrival;
 	

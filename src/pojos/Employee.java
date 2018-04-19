@@ -25,7 +25,7 @@ public class Employee extends User implements Serializable {
 	private Integer phone;
 	private String position;
 	private boolean isAdmin;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn (name = "warehouse_id")
 	private Warehouse warehouse;
 	@Lob

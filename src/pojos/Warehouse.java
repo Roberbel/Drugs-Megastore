@@ -27,12 +27,10 @@ public class Warehouse implements Serializable {
 	private String adress;
 	private Integer phone;
 	
-	@OneToMany(mappedBy="warehouse")
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="warehouse", fetch = FetchType.LAZY)
 	private List<Employee> employees;
 	
-	@OneToMany(mappedBy="warehouse")
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="warehouse", fetch = FetchType.LAZY)
 	private List<Corridor> corridor;
 
 	public Warehouse() {

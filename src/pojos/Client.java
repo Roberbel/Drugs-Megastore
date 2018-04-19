@@ -25,8 +25,7 @@ public class Client extends User implements Serializable {
 	private String email;
 	@Column(name = "payment_method")
 	private PaymentMethod paymentMethod;
-	@OneToMany
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	private List<Delivery> deliveries;
 	
 	public enum PaymentMethod {PAYPAL, VISA, MASTERCARD, AMERICAN_EXPRESS, ORGANS};
