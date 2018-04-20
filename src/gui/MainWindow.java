@@ -46,7 +46,7 @@ public class MainWindow {
 					switch(user.getType().toString()) {
 					case "ADMIN":
 						try {
-							Parent root = FXMLLoader.load(getClass().getResource("/gui/adminPanel/adminWindow.fxml"));
+							Parent root =FXMLLoader.load(getClass().getResource("/gui/adminPanel/adminWindow.fxml"));
 							this.stage.setScene(new Scene(root));
 							this.stage.setResizable(true);
 							this.stage.show();

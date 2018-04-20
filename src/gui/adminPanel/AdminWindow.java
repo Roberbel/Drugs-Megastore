@@ -26,8 +26,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 public class AdminWindow implements Initializable {
-
-	SQLManager manager;
+	
+	JPAManager manager;
 	
     @FXML
     private TabPane pojosTabPane;
@@ -255,24 +255,23 @@ public class AdminWindow implements Initializable {
 	    	}else {
 	    		newClient.setPaymentMethod(PaymentMethod.ORGANS);
 	    	}
+	    	newClient.setUserName("Morgoth");
+	    	newClient.setPassword("Sauron");
 	    	clientTable.getItems().add(newClient);
+	    	
+	    	JPAManager.insertClient(newClient);
     	}catch(NumberFormatException | NullPointerException ex) {
     		Alert alert=new Alert(AlertType.ERROR);
     		alert.show();		
     	}
-    	
-    	
-    	try {
-			manager.insertClientEntrance(newClient);
-		} catch (SQLException e) {
-			Alert alert=new Alert(AlertType.ERROR);
-    		alert.show();
-		}
+  	
     }
 
     @FXML
     void addCorridorClicked(ActionEvent event) {
-
+    	Corridor newCorridor=new Corridor();
+    	newCorridor.setTemperature(Float.parseFloat(corridorTempField.getText()));
+    	
     }
 
     @FXML
@@ -292,7 +291,13 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void deleteClientClicked(ActionEvent event) {
-
+    	ObservableList <Client> items,sel;
+    	items=clientTable.getItems();
+    	sel=clientTable.getSelectionModel().getSelectedItems();
+    	for(Client c:sel) {
+    		items.remove(c);
+    	}
+    	
     }
 
     @FXML
@@ -319,9 +324,11 @@ public class AdminWindow implements Initializable {
     void loadEmployeeImage(MouseEvent event) {
 
     }
-
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//Starts Connection with Database
+		JPAManager.connect();
 		//Clients List
 		ObservableList methods=FXCollections.observableArrayList();
 		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");

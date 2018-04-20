@@ -36,6 +36,7 @@ public class Packaged implements Serializable{
 	private Integer ammount;
 
 	
+
 	
 	public Packaged(Drug drug, Delivery delivery, Integer ammount) {
 		
