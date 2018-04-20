@@ -18,21 +18,22 @@ import pojos.Packaged;
 import pojos.Provider;
 import pojos.Warehouse;
 
-public class JPAManager {
+public class JPAManager implements Manager{
 
 		private static EntityManager em;
 
 		public static void main(String[] args) {
 			
 			JPAManager.connect();
-			JPAManager.insertCorridor(new Corridor());
-			
-			List<Corridor> list = JPAManager.getAllCorridors();
-			for(Corridor d: list) {
+			JPAManager.insertEmployee(new Employee());
+			System.out.println("Inserted");
+			List<Employee> list = JPAManager.getAllEmployees();
+			for(Employee d: list) {
 				System.out.println(d.toString());
 				
 			}
-			System.out.println("Finished Corridors");
+			System.out.println("Finished listing");
+			JPAManager.disconnect();
 		}
 		
 		public static void connect(){
@@ -41,11 +42,98 @@ public class JPAManager {
 			em.getTransaction().begin();
 			em.createNativeQuery("PRAGMA foreign_keys=ON").executeUpdate();
 			em.getTransaction().commit();
+			System.out.println("Database connection started");
 			
 		}
 		public static void disconnect()  {
 			em.close();
 			System.out.println("Database connection closed.");
+		}
+		
+/*
+ * =====================================================================================================
+ * 								Creates
+ * =====================================================================================================
+ */		
+		
+		public static void insertArrival(Arrival arrival) {
+			
+			em.getTransaction().begin();
+			em.persist(arrival);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertArrive(Arrives arrive) {
+			
+			em.getTransaction().begin();
+			em.persist(arrive);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertClient(Client client) {
+			
+			em.getTransaction().begin();
+			em.persist(client);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertCorridor(Corridor corridor) {
+			
+			em.getTransaction().begin();
+			em.persist(corridor);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertDelivery(Delivery delivery){
+			
+			em.getTransaction().begin();
+			em.persist(delivery);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertDrug(Drug drug){
+			
+			em.getTransaction().begin();
+			em.persist(drug);
+			em.getTransaction().commit();
+	
+		}
+		
+		public static void insertEmployee(Employee employee) {
+			
+			em.getTransaction().begin();
+			em.persist(employee);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertPackaged(Packaged packaged) {
+			
+			em.getTransaction().begin();
+			em.persist(packaged);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertProvider(Provider provider) {
+			
+			em.getTransaction().begin();
+			em.persist(provider);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void insertWarehouse(Warehouse warehouse) {
+			
+			em.getTransaction().begin();
+			em.persist(warehouse);
+			em.getTransaction().commit();
+			
 		}
 		
 /*
@@ -204,28 +292,91 @@ public class JPAManager {
 		 * Arrival updates
 		 */
 		
-		//this is the way that Gonzalo thinks it should be done.
-		public void updateArrivalDate(Integer id, Date date) {
+		/*
+		 * this is the way that Gonzalo thinks it should be done.
+		 * maybe also return the object that has been updated
+		 */
+		
+		public void updateArrivalDate(Arrival arrival, Date date) {
 			
-			Arrival arrival = this.searchArrivalById(id);
 			em.getTransaction().begin();
 			arrival.setDate(date);
 			em.getTransaction().commit();
 			
 		}
 		
-		public void updateArrivalBuyingPrice() {
+		public void updateArrivalBuyingPrice(Arrival arrival, Integer buyingPrice) {
 			
-			
-		}
-		
-		//not sure yet if this should be done
-		public void updateArrival() {
-			
+			em.getTransaction().begin();
+			arrival.setBuyingPrice(buyingPrice);
+			em.getTransaction().commit();
 			
 		}
 		
-
+		public void updateArrivalProvider(Arrival arrival, Provider provider) {
+			
+			em.getTransaction().begin();
+			arrival.setProvider(provider);
+			em.getTransaction().commit();
+			
+		}
+		
+		/*
+		 * It doesn't make sense to update the N end of a relation
+		 */
+		
+		/*
+		 * Drug updates
+		 */
+		
+		public void updateDrug()
+		
+		
+		/*
+		 * Warehouse updates
+		 */
+		public void updateWarehousePc(Warehouse warehouse, Integer pc) {
+			
+			em.getTransaction().begin();
+			warehouse.setPc(pc);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void updateWarehouseCountry(Warehouse warehouse, String  country) {
+			
+			em.getTransaction().begin();
+			warehouse.setCountry(country);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void updateWarehouseCity(Warehouse warehouse, String city) {
+			
+			em.getTransaction().begin();
+			warehouse.setCity(city);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void updateWarehouseAddress(Warehouse warehouse, String address) {
+			
+			em.getTransaction().begin();
+			warehouse.setAdress(address);
+			em.getTransaction().commit();
+			
+		}
+		
+		public void updateWarehousePhone(Warehouse warehouse, Integer phone) {
+			
+			em.getTransaction().begin();
+			warehouse.setPhone(phone);
+			em.getTransaction().commit();
+			
+		}
+		
+		
+		
 		
 /*
  * =====================================================================================================
@@ -385,92 +536,7 @@ public class JPAManager {
 			em.remove(toDelete);
 			em.getTransaction().commit();
 			
-		}
+		}	
 		
-		
-/*
- * =====================================================================================================
- * 								INSERTS
- * =====================================================================================================
- */		
-		public static void insertArrival(Arrival arrival) {
-			
-			em.getTransaction().begin();
-			em.persist(arrival);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertArrive(Arrives arrive) {
-			
-			em.getTransaction().begin();
-			em.persist(arrive);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertClient(Client client) {
-			
-			em.getTransaction().begin();
-			em.persist(client);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertCorridor(Corridor corridor) {
-			
-			em.getTransaction().begin();
-			em.persist(corridor);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertDelivery(Delivery delivery){
-			
-			em.getTransaction().begin();
-			em.persist(delivery);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertDrug(Drug drug){
-			
-			em.getTransaction().begin();
-			em.persist(drug);
-			em.getTransaction().commit();
-	
-		}
-		
-		public static void insertEmployee(Employee employee) {
-			
-			em.getTransaction().begin();
-			em.persist(employee);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertPackaged(Packaged packaged) {
-			
-			em.getTransaction().begin();
-			em.persist(packaged);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertProvider(Provider provider) {
-			
-			em.getTransaction().begin();
-			em.persist(provider);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void insertWarehouse(Warehouse warehouse) {
-			
-			em.getTransaction().begin();
-			em.persist(warehouse);
-			em.getTransaction().commit();
-			
-		}
 
 }
