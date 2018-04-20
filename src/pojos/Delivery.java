@@ -137,7 +137,8 @@ public class Delivery implements Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public void addPackaged(Packaged packaged) {
+	public void addPackaged(Drug drug, Integer amount) {
+		Packaged packaged = new Packaged(drug, this, amount);
 		if (!packages.contains(packaged)) {
 			this.packages.add(packaged);
 		}

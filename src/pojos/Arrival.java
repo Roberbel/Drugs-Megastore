@@ -144,7 +144,8 @@ public class Arrival implements Serializable{
 		this.arrives = arrives;
 	}
 
-	public void addArrive(Arrives arrive) {
+	public void addArrive(Drug drug, Integer amount) {
+		Arrives arrive = new Arrives(drug, this, amount);
 		if(!arrives.contains(arrive)) {
 			arrives.add(arrive);
 		}

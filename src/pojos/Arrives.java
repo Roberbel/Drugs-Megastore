@@ -44,6 +44,7 @@ public class Arrives implements Serializable{
 	public Arrives(Drug drug, Arrival arrival, Integer ammount){
 		
 		super();
+		drug.addArrive(this);
 		this.drug = drug;
 		this.arrival = arrival;
 		this.drugId = drug.getId();
