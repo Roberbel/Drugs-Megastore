@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Client")
@@ -20,21 +21,26 @@ public class Client extends User implements Serializable {
 	private static final long serialVersionUID = 2116743967910216027L;
 
 	private String name;
-	private String adress;
+	private String address;
 	private Integer telephone;
 	private String email;
 	@Column(name = "payment_method")
 	private PaymentMethod paymentMethod;
-	@OneToMany
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY)
 	private List<Delivery> deliveries;
 	
 	public enum PaymentMethod {PAYPAL, VISA, MASTERCARD, AMERICAN_EXPRESS, ORGANS};
 	
 	
 	public Client() {
+		
 		super();
 		setDeliveries(new ArrayList<Delivery>());
+		name = "Khorne";
+		address = "c/Viena 17 cabanillas del campo";
+		paymentMethod = PaymentMethod.ORGANS;
+		super.setUserName(name+(int)(Math.random()*10));
+		super.setPassword("Cualquier_cosa");
 	}
 	
 	
@@ -43,7 +49,7 @@ public class Client extends User implements Serializable {
 			List<Delivery> deliveries, String userName, String password) {
 		super(userName, password);
 		this.name = name;
-		this.adress = adress;
+		this.address = adress;
 		this.telephone = telephone;
 		this.email = email;
 		if (paymentMethod.equals("PAYPAL")) {
@@ -65,7 +71,7 @@ public class Client extends User implements Serializable {
 	public Client(Integer id, String name, String adress,Date date, String paymentMethod, ArrayList<Delivery> deliveries, String userName, String password) {
 		super(id, userName, password);
 		this.name = name;
-		this.adress = adress;
+		this.address = adress;
 		if (paymentMethod.equals("PAYPAL")) {
 			this.paymentMethod = PaymentMethod.PAYPAL;
 		}else if(paymentMethod.equals("VISA")) {
@@ -84,7 +90,7 @@ public class Client extends User implements Serializable {
 			ArrayList<Delivery> deliveries, String userName, String password) {
 		super(id ,userName, password);
 		this.name = name;
-		this.adress = adress;
+		this.address = adress;
 		this.telephone = telephone;
 		this.email = email;
 		if (paymentMethod.equals("PAYPAL")) {
@@ -104,7 +110,7 @@ public class Client extends User implements Serializable {
 	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod, String userName, String password) {
 		super(id, userName, password);
 		this.name = name;
-		this.adress = adress;
+		this.address = adress;
 		this.telephone = telephone;
 		this.email = email;
 		if (paymentMethod.equals("PAYPAL")) {
@@ -151,7 +157,7 @@ public class Client extends User implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Client [id=" + super.getId() + ", name=" + name + ", adress=" + adress + ", telephone=" + telephone + ", email="
+		return "Client [id=" + super.getId() + ", name=" + name + ", adress=" + address + ", telephone=" + telephone + ", email="
 				+ email + ", paymentMethod=" + paymentMethod + ", deliveries=" + deliveries + "]";
 	}
 
@@ -172,12 +178,12 @@ public class Client extends User implements Serializable {
 		this.name = name;
 	}
 
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String adress) {
+		this.address = adress;
 	}
 
 	public Integer getTelephone() {

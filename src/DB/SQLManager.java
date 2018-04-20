@@ -23,10 +23,16 @@ public class SQLManager implements Manager {
 			
 			connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 			generateDataBase();
-
+			disconnect();
+			
 		} catch (Exception e) {
 			
 			e.printStackTrace();
+			try {
+				disconnect();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
 		
 		}
 	}
@@ -68,7 +74,7 @@ public class SQLManager implements Manager {
 		
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-				+ "adress TEXT NOT NULL," + "telephone INT," + "email TEXT, payment_method TEXT NOT NULL, username STRING NOT NULL UNIQUE,"
+				+ "address TEXT NOT NULL," + "telephone INT," + "email TEXT, payment_method TEXT NOT NULL, username STRING NOT NULL UNIQUE,"
 				+"password STRING NOT NULL)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -131,7 +137,7 @@ public class SQLManager implements Manager {
 	
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE drug " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL UNIQUE,"
-				+ " photo BLOB," + " stock INT NOT NULL," + " active_principle TEXT," + " selling_price INTEGER NOT NULL"
+				+ " photo BLOB," + " stock INT NOT NULL," + " active_principle TEXT," + " selling_price INTEGER NOT NULL,"
 				+ " corridor_id INT REFERENCES corridor (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
@@ -163,7 +169,7 @@ public class SQLManager implements Manager {
 
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE provider" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-				+ "adress TEXT NOT NULL," + "telephone INTEGER," + "email TEXT)";
+				+ "address TEXT NOT NULL," + "telephone INTEGER," + "email TEXT)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -599,5 +605,112 @@ public class SQLManager implements Manager {
 	
 	}
 
+/*
+ *=====================================================================================================
+ * 						Delete
+ * =====================================================================================================
+ * 
+ */
 	
+	public static void deleteArrival(Integer id) {
+		
+		
+		
+	}
+	
+    public static void deleteArrival(Arrival arrival) {
+		
+		
+		
+	}
+    
+    public static void deleteClient(Integer id) {
+    	
+    	
+    	
+    }
+
+    public static void deleteClient(Client client) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteCorridor(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteCorridor(Corridor corridor) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteDelivery(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteDelivery(Delivery delivery) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteDrug(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteDrug(Drug drug) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteEmployee(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteEmployee(Employee employee) {
+    		
+    	
+    	
+    }
+    
+    public static void deleteProvider(Integer id) {
+    	
+    	
+    		
+    }
+    
+    public static void deleteProvider(Provider provider) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteWarehouse(Integer id) {
+    	
+    	
+    	
+    }
+    
+    public static void deleteWarehouse(Warehouse warehouse) {
+    	
+    	
+    	
+    }
+    
+    
+    
+    
+    
+    
 }

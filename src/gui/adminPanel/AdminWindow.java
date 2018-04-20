@@ -241,7 +241,7 @@ public class AdminWindow implements Initializable {
     	Client newClient =new Client();
     	try {
     		newClient.setName(clientNameField.getText());
-	    	newClient.setAdress(clientAdressField.getText());
+	    	newClient.setAddress(clientAdressField.getText());
 	    	newClient.setEmail(clientEmailField.getText());
 	    	newClient.setTelephone(Integer.parseInt(clientPhoneField.getText()));
 	    	if(comboPayment.getSelectionModel().getSelectedItem().equals("PAYPAL")) {

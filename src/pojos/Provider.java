@@ -21,17 +21,18 @@ public class Provider implements Serializable {
 	@Id
 	private Integer id;
 	private String name;
-	private String adress;
+	private String address;
 	private Integer telephone;
 	private String email;
 	
-	@OneToMany(mappedBy = "provider")
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "provider", fetch = FetchType.LAZY)
 	private List<Arrival> arrivals;
 
 	public Provider() {
 		super();
 		arrivals = new ArrayList<Arrival>();
+		name = "Provider";
+		address = "C/Del recuerdo 45";
 	}
 
 	
@@ -39,7 +40,7 @@ public class Provider implements Serializable {
 	public Provider(String name, String adress, Integer telephone, String email, List<Arrival> arrivals) {
 		super();
 		this.name = name;
-		this.adress = adress;
+		this.address = adress;
 		this.telephone = telephone;
 		this.email = email;
 		this.arrivals = arrivals;
@@ -51,7 +52,7 @@ public class Provider implements Serializable {
 		super();
 		this.id = providerId;
 		this.name = name;
-		this.adress = adress;
+		this.address = adress;
 		this.arrivals = arrivals;
 	}
 
@@ -60,7 +61,7 @@ public class Provider implements Serializable {
 		super();
 		this.id = providerId;
 		this.name = name;
-		this.adress = adress;
+		this.address = adress;
 		this.telephone = telephone;
 		this.email = email;
 		this.arrivals = arrivals;
@@ -70,7 +71,7 @@ public class Provider implements Serializable {
 		super();
 		this.id = providerId;
 		this.name = name;
-		this.adress = adress;
+		this.address = adress;
 		this.telephone = telephone;
 		this.email = email;
 	}
@@ -104,7 +105,7 @@ public class Provider implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Provider [providerId=" + id + ", name=" + name + ", adress=" + adress + ", telephone="
+		return "Provider [providerId=" + id + ", name=" + name + ", adress=" + address + ", telephone="
 				+ telephone + ", email=" + email + ", arrivals=" + arrivals + "]";
 	}
 
@@ -125,11 +126,11 @@ public class Provider implements Serializable {
 	}
 
 	public String getAdress() {
-		return adress;
+		return address;
 	}
 
 	public void setAdress(String adress) {
-		this.adress = adress;
+		this.address = adress;
 	}
 
 	public Integer getTelephone() {

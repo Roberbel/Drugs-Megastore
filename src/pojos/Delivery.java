@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
@@ -33,13 +34,15 @@ public class Delivery implements Serializable {
 	@Column (name = "transaction_date")
 	private Date transactionDate;
 
-	@OneToMany(mappedBy = "delivery")
+	@OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
 	private List<Packaged> packages;
 	
 
 	public Delivery() {
 		super();
 		packages = new ArrayList<Packaged>();
+		sellingPrice = 1000000;
+		transactionDate = new Date(System.currentTimeMillis());
 	}
 
 	
@@ -134,7 +137,8 @@ public class Delivery implements Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public void addPackaged(Packaged packaged) {
+	public void addPackaged(Drug drug, Integer amount) {
+		Packaged packaged = new Packaged(drug, this, amount);
 		if (!packages.contains(packaged)) {
 			this.packages.add(packaged);
 		}

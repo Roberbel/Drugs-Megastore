@@ -3,7 +3,6 @@ package pojos;
 import java.io.Serializable;
 import java.util.*;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +15,7 @@ import javax.persistence.Table;
 import java.sql.Date;
 
 @Entity
-@Table(name = "arrival")
+@Table(name = "arrivals")
 public class Arrival implements Serializable{
 
 	/**
@@ -36,13 +35,14 @@ public class Arrival implements Serializable{
 	@JoinColumn(name = "provider_id")
 	private Provider provider;
 	
-	@OneToMany(mappedBy = "arrival")
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "arrival", fetch = FetchType.LAZY)
 	private List<Arrives> arrives;
 
 	public Arrival() {
 		super();
 		arrives = new ArrayList<Arrives>();
+		buyingPrice = 100;
+		date = new Date(System.currentTimeMillis());
 	}
 
 	
@@ -144,7 +144,8 @@ public class Arrival implements Serializable{
 		this.arrives = arrives;
 	}
 
-	public void addArrive(Arrives arrive) {
+	public void addArrive(Drug drug, Integer amount) {
+		Arrives arrive = new Arrives(drug, this, amount);
 		if(!arrives.contains(arrive)) {
 			arrives.add(arrive);
 		}

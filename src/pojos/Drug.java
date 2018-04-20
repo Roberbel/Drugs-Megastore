@@ -33,18 +33,15 @@ public class Drug implements Serializable {
 	@Column(name = "active_principle")
 	private String activePrinciple;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="corridor_id")
-	@Basic(fetch = FetchType.LAZY)
 	private Corridor corridor;
 	
 	
-	@OneToMany(mappedBy = "drug")
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "drug", fetch = FetchType.LAZY)
 	private List<Packaged> packaged;
 	
-	@OneToMany(mappedBy = "drug")
-	@Basic(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "drug", fetch = FetchType.LAZY)
 	private List<Arrives> arrives;
 	
 	@Lob
@@ -54,6 +51,9 @@ public class Drug implements Serializable {
 		super();
 		packaged = new ArrayList<Packaged>();
 		arrives = new ArrayList<Arrives>();
+		name = "Droga"+(int)(Math.random()*100);
+		stock = 1000;
+		sellingPrice = 10000;
 	}
 	
 
