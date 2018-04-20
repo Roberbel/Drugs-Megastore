@@ -555,9 +555,23 @@ public class SQLManager implements Manager {
 	
 	}
 	
-	//Change client adress:
-	public static void updateClientAdress(int id, String newAdress) throws SQLException {
+	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple)throws SQLException{
+		String sql="SELECT * FROM drug WHERE activePrinciple LIKE ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setString(1, activePrinciple);
+		ResultSet rs=prep.executeQuery();
+		List<Drug> drugs= new ArrayList<Drug>();
+		while(rs.next()) {
+			Corridor corridorWanted = extractCorridorById(rs.getInt("id"));
+			Drug drug=new Drug(rs.getInt("id"), rs.getString("name"), rs.getInt("stock"), rs.getInt("sellingPrice"),
+					rs.getString("activePrinciple"), corridorWanted, rs.getBytes("photo"));
+			drugs.add(drug);
+		}
+		return drugs;
+	}
 	
+	//Update Client:
+		public static void updateClientAdress(int id, String newAdress) throws SQLException {
 		String sql="UPDATE client SET adress = ? WHERE id = ? ";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, newAdress);
@@ -565,8 +579,41 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();
 		
-	
 	}
+		public static void updateClientPhone(int id, int phone)throws SQLException{
+			String sql="UPDATE client SET telephone = ? WHERE id=?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1,phone);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		}
+		
+		public static void updateClientEmail(int id, String email)throws SQLException{
+			String sql="UPDATE client SET email = ? WHERE id = ? ";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setString(1, email);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		}
+		public static void updateClientPaymethod(int id, String paymethod)throws SQLException{
+			String sql="UPDATE client SET payMethod = ? WHERE id = ? ";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setString(1, paymethod);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		}
+		public static void updateClientPassword(int id, String password)throws SQLException{
+			String sql="UPDATE client SET password = ? WHERE id = ? ";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setString(1, password);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		}
+
 	
 	//Change employee's salary
 	public static void updateAdmin(int id, boolean admin) throws SQLException{
