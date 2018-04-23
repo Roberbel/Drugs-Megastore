@@ -291,24 +291,18 @@ public class JPAManager implements Manager{
 		/*
 		 * Arrival updates
 		 */
-		
-		/*
-		 * this is the way that Gonzalo thinks it should be done.
-		 * maybe also return the object that has been updated
-		 */
+		public void updateArrivalBuyingPrice(Arrival arrival, Integer buyingPrice) {
+			
+			em.getTransaction().begin();
+			arrival.setBuyingPrice(buyingPrice);
+			em.getTransaction().commit();
+			
+		}
 		
 		public void updateArrivalDate(Arrival arrival, Date date) {
 			
 			em.getTransaction().begin();
 			arrival.setDate(date);
-			em.getTransaction().commit();
-			
-		}
-		
-		public void updateArrivalBuyingPrice(Arrival arrival, Integer buyingPrice) {
-			
-			em.getTransaction().begin();
-			arrival.setBuyingPrice(buyingPrice);
 			em.getTransaction().commit();
 			
 		}
@@ -328,6 +322,41 @@ public class JPAManager implements Manager{
 		/*
 		 * Drug updates
 		 */
+		public void updateDrugActivePrinciple(Drug drug, String activePrinciple) {
+			
+			
+			
+		}
+		
+		public void updateDrugCorridor(Drug drug, Corridor corridor) {
+			
+			
+			
+		}
+		
+		public void updateDrugName(Drug drug, String name) {
+			
+			
+			
+		}
+		
+		public void updateDrugSellingPrice(Drug drug, Integer sellingPrice) {
+			
+			
+			
+		}
+		
+		public void updateDrugStock(Drug drug, Integer stock) {
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+		
 		
 		/*
 		 * Warehouse updates

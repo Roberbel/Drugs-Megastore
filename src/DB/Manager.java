@@ -1,5 +1,7 @@
 package DB;
 
+import java.sql.Date;
+
 import pojos.Arrival;
 import pojos.Client;
 import pojos.Corridor;
@@ -45,7 +47,22 @@ public interface Manager {
  * 					Updates
  * =====================================================================================================
  */    
+     public static void updateArrivalBuyingPrice(Arrival arrival, Integer buyingPrice) {}
      
+     public static void updateArrivalDate(Arrival arrival, Date date) {}
+     
+     public static void updateArrivalProvider(Arrival arrival, Provider provider) {}
+     
+     
+     public static void updateDrugActivePrinciple(Drug drug, String activePrinciple) {}
+     
+     public static void updateDrugCorridor(Drug drug, Corridor corridor) {}
+     
+     public static void updateDrugName(Drug drug, String name) {}
+     
+     public static void updateDrugSellingPrice(Drug drug, Integer sellingPrice) {}
+     
+     public static void updateDrugStock(Drug drug, Integer stock) {}
 /*
  * =====================================================================================================
  * 					Deletes
@@ -53,7 +70,7 @@ public interface Manager {
  */
      
      
- 	public static void deleteArrival(Integer id) {}
+ 	 public static void deleteArrival(Integer id) {}
  	
      public static void deleteArrival(Arrival arrival) {}
      
