@@ -279,7 +279,7 @@ public class SQLManager implements Manager {
 
 	public static void insertCorridorEntrance(Corridor corridor) throws SQLException {
 
-		String sql1 = "INSERT INTO corridors(temperature, warehouse_id)" + "VALUES(?,?);";
+		String sql1 = "INSERT INTO corridor(temperature, warehouse_id)" + "VALUES(?,?);";
 
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setFloat(1, corridor.getTemperature());
@@ -376,7 +376,7 @@ public class SQLManager implements Manager {
 	//We have to talk how to do this 
 	public static Arrival extractArrivalById(Integer id)throws SQLException{
 		
-		String sql = "SELECT * FROM arrival WHERE id = ? ";
+		String sql = "SELECT * FROM arrivals WHERE id = ? ";
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, id);
 		ResultSet rs = prep.executeQuery();
@@ -555,9 +555,29 @@ public class SQLManager implements Manager {
 	
 	}
 	
-	//Change client adress:
-	public static void updateClientAdress(int id, String newAdress) throws SQLException {
+	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple)throws SQLException{
+		String sql="SELECT * FROM drug WHERE activePrinciple LIKE ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setString(1, activePrinciple);
+		ResultSet rs=prep.executeQuery();
+		List<Drug> drugs= new ArrayList<Drug>();
+		while(rs.next()) {
+			Corridor corridorWanted = extractCorridorById(rs.getInt("id"));
+			Drug drug=new Drug(rs.getInt("id"), rs.getString("name"), rs.getInt("stock"), rs.getInt("sellingPrice"),
+					rs.getString("activePrinciple"), corridorWanted, rs.getBytes("photo"));
+			drugs.add(drug);
+		}
+		return drugs;
+	}
 	
+	/*
+	 * =====================================================================================================
+	 * 								Updates
+	 * =====================================================================================================
+	 */	
+	
+	//CLIENT
+		public static void updateClientAdress(int id, String newAdress) throws SQLException {
 		String sql="UPDATE client SET adress = ? WHERE id = ? ";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, newAdress);
@@ -565,10 +585,98 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();
 		
-	
 	}
-	
-	//Change employee's salary
+		public static void updateClientPhone(int id, int phone)throws SQLException{
+			String sql="UPDATE client SET telephone = ? WHERE id=?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1,phone);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		}
+		
+		public static void updateClientEmail(int id, String email)throws SQLException{
+			String sql="UPDATE client SET email = ? WHERE id = ? ";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setString(1, email);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		}
+		public static void updateClientPaymethod(int id, String paymethod)throws SQLException{
+			String sql="UPDATE client SET payMethod = ? WHERE id = ? ";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setString(1, paymethod);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		}
+		public static void updateClientPassword(int id, String password)throws SQLException{
+			String sql="UPDATE client SET password = ? WHERE id = ? ";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setString(1, password);
+			prep.setInt(2, id);
+			prep.executeUpdate();
+			prep.close();
+		}
+
+		
+	//Employee
+		
+		
+		public static void updateEmployeePhoto(Employee employee, byte[] photo)throws SQLException{
+			String sql="UPDATE employee SET photo =? WHERE id =?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setBytes(1, photo);
+			prep.setInt(2, employee.getId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		
+		public static void updateEmployeePhone(Employee employee, int phone)throws SQLException{
+			String sql="UPDATE employee SET phone =? WHERE id =?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1, phone);
+			prep.setInt(2, employee.getId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		
+		public static void updateEmployeeSalary(Employee employee, int salary)throws SQLException{
+			String sql="UPDATE employee SET salary =? WHERE id =?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1, salary);
+			prep.setInt(2, employee.getId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		public static void updateEmployeePosition(Employee employee, String position)throws SQLException{
+			String sql="UPDATE employee SET position =? WHERE id =?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setString(1, position);
+			prep.setInt(2, employee.getId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		
+		public static void updateEmployeeWarehouse(Employee employee, Warehouse warehouse)throws SQLException{
+			String sql="UPDATE employee SET warehouse =? WHERE id =?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1, warehouse.getId());
+			prep.setInt(2, employee.getId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		
+		public static void updateEmployeePassword(Employee employee, int password)throws SQLException{
+			String sql="UPDATE employee SET password =? WHERE id =?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1, password);
+			prep.setInt(2, employee.getId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		
 	public static void updateAdmin(int id, boolean admin) throws SQLException{
 	
 		String sql="UPDATE employee SET type= ? WHERE id = ?";
@@ -579,23 +687,49 @@ public class SQLManager implements Manager {
 		prep.close();
 		
 	}
-			
-	
-	// ===========================================================================================================
-
-	
-	public static void deleteDrugById(int id) throws SQLException{
-	
-		String sql = "DELETE FROM drugs WHERE id=?";
-		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setInt(1,id);
+		//Arrives 
+		
+	public static void updateArrivesAmmount(Arrives arrives, int ammount)throws SQLException{
+		String sql="UPDATE arrives SET ammount= ? WHERE transaction_id = ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setInt(1,ammount);
+		prep.setInt(2, arrives.getArrivalId());
 		prep.executeUpdate();
 		prep.close();
-		
 	}
-
-
+	//Packaged
+	
+		public static void updatePackagedAmmount(Packaged packaged, int ammount)throws SQLException{
+			String sql="UPDATE packaged SET ammount= ? WHERE id = ?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1,ammount);
+			prep.setInt(2, packaged.getDeliveryId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		
+		
+		
+	//Deliveries
+		public static void updateDeliverySellingPrice(Delivery delivery, int sellingPrice)throws SQLException{
+			String sql="UPDATE deliveries SET sellingPrice=? WHERE id=?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1,sellingPrice);
+			prep.setInt(2,delivery.getTransactionId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		public static void updateDeliveryDate(Delivery delivery, Date date)throws SQLException{
+			String sql="UPDATE deliveries SET transaction_date=? WHERE id=?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setDate(1,date);
+			prep.setInt(2, delivery.getTransactionId());
+			prep.executeUpdate();
+			prep.close();
+		}
+			
 	// ===========================================================================================================
+
 
 	public static void createTable(String statement) throws SQLException {
 		
@@ -612,9 +746,15 @@ public class SQLManager implements Manager {
  * 
  */
 	
-	public static void deleteArrival(Integer id) {
+	public static void deleteArrival(Integer id)  throws SQLException {
+    	
+    	String sql = "DELETE FROM arrivals WHERE transaction_id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,id);
+		prep.executeUpdate();
+		prep.close();
 		
-		
+    	
 		
 	}
 	
@@ -624,8 +764,14 @@ public class SQLManager implements Manager {
 		
 	}
     
-    public static void deleteClient(Integer id) {
+    public static void deleteClient(Integer id) throws SQLException {
     	
+    	String sql = "DELETE FROM client WHERE id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,id);
+		prep.executeUpdate();
+		prep.close();
+		
     	
     	
     }
@@ -636,8 +782,14 @@ public class SQLManager implements Manager {
     	
     }
     
-    public static void deleteCorridor(Integer id) {
+    public static void deleteCorridor(Integer id)  throws SQLException {
     	
+    	String sql = "DELETE FROM corridor WHERE id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,id);
+		prep.executeUpdate();
+		prep.close();
+		
     	
     	
     }
@@ -648,8 +800,14 @@ public class SQLManager implements Manager {
     	
     }
     
-    public static void deleteDelivery(Integer id) {
+    public static void deleteDelivery(Integer id)  throws SQLException {
     	
+    	String sql = "DELETE FROM deliveries WHERE transactionId=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,id);
+		prep.executeUpdate();
+		prep.close();
+		
     	
     	
     }
@@ -660,9 +818,14 @@ public class SQLManager implements Manager {
     	
     }
     
-    public static void deleteDrug(Integer id) {
+    public static void deleteDrug(Integer id) throws SQLException {
     	
-    	
+    	String sql = "DELETE FROM drug WHERE id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,id);
+		prep.executeUpdate();
+		prep.close();
+		
     	
     }
     
@@ -672,8 +835,13 @@ public class SQLManager implements Manager {
     	
     }
     
-    public static void deleteEmployee(Integer id) {
-    	
+    public static void deleteEmployee(Integer id) throws SQLException {
+    	String sql = "DELETE FROM employee WHERE id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,id);
+		prep.executeUpdate();
+		prep.close();
+		
     	
     	
     }
@@ -684,8 +852,13 @@ public class SQLManager implements Manager {
     	
     }
     
-    public static void deleteProvider(Integer id) {
-    	
+    public static void deleteProvider(Integer id) throws SQLException{
+    	String sql = "DELETE FROM provider WHERE id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,id);
+		prep.executeUpdate();
+		prep.close();
+		
     	
     		
     }
@@ -696,8 +869,13 @@ public class SQLManager implements Manager {
     	
     }
     
-    public static void deleteWarehouse(Integer id) {
-    	
+    public static void deleteWarehouse(Integer id) throws SQLException {
+    	String sql = "DELETE FROM warehouse WHERE id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,id);
+		prep.executeUpdate();
+		prep.close();
+		
     	
     	
     }
