@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,6 +26,7 @@ public class Corridor implements Serializable {
 	
 	private static final long serialVersionUID = 4227526298151577502L;
 	@Id
+	@GeneratedValue(generator = "corridor")
 	private Integer id;
 	private float temperature;
 	@ManyToOne(fetch = FetchType.LAZY)

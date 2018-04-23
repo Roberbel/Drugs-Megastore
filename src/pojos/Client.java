@@ -39,7 +39,7 @@ public class Client extends User implements Serializable {
 		name = "Khorne";
 		address = "c/Viena 17 cabanillas del campo";
 		paymentMethod = PaymentMethod.ORGANS;
-		super.setUserName(name+(int)(Math.random()*10));
+		super.setUsername(name+(int)(Math.random()*10));
 		super.setPassword("Cualquier_cosa");
 	}
 	
@@ -68,8 +68,8 @@ public class Client extends User implements Serializable {
 
 
 
-	public Client(Integer id, String name, String adress,Date date, String paymentMethod, ArrayList<Delivery> deliveries, String userName, String password) {
-		super(id, userName, password);
+	public Client(Integer id, String name, String adress,Date date, String paymentMethod, ArrayList<Delivery> deliveries, String username, String password) {
+		super(username, password, id);
 		this.name = name;
 		this.address = adress;
 		if (paymentMethod.equals("PAYPAL")) {
@@ -87,8 +87,8 @@ public class Client extends User implements Serializable {
 	}
 
 	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod,
-			ArrayList<Delivery> deliveries, String userName, String password) {
-		super(id ,userName, password);
+			ArrayList<Delivery> deliveries, String username, String password) {
+		super(username, password, id);
 		this.name = name;
 		this.address = adress;
 		this.telephone = telephone;
@@ -107,8 +107,8 @@ public class Client extends User implements Serializable {
 		this.deliveries = deliveries;
 
 	}
-	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod, String userName, String password) {
-		super(id, userName, password);
+	public Client(Integer id, String name, String adress, Integer telephone, String email, String paymentMethod, String username, String password) {
+		super( username, password, id);
 		this.name = name;
 		this.address = adress;
 		this.telephone = telephone;

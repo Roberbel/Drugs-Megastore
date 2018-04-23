@@ -63,6 +63,21 @@ public interface Manager {
      public static void updateDrugSellingPrice(Drug drug, Integer sellingPrice) {}
      
      public static void updateDrugStock(Drug drug, Integer stock) {}
+     
+     
+     public static void updateEmployeeAdminRights(Employee employee, Boolean isAdmin) {}
+		
+	 public static void updateEmployeeName(Employee employee, String name) {}
+	 
+	 public static void updateEmployeePassword(Employee employee, String password) {}
+		
+	 public static void updateEmployeePhoto(Employee employee, byte[] photo) {}
+		
+	 public static void updateEmployeePosition(Employee employee, String position) {}
+	 
+	 public static void updateEmployeeUsername(Employee employee, String username) {}
+				
+	 public static void updateEmployeeWarehouse(Employee employee, Warehouse warehouse) {}
 /*
  * =====================================================================================================
  * 					Deletes

@@ -38,14 +38,14 @@ public class Employee extends User implements Serializable {
 		salary = 10000000;/*we better pay well the God of change and manipulation*/
 		isAdmin = true;
 		position = "Scheemer";
-		super.setUserName(name+(int)(Math.random()*10));
+		super.setUsername(name+(int)(Math.random()*1000));
 		super.setPassword("SoloElCambioEsConstante");
 		phone = 9;
 	}
 
-	public Employee(int id,String name, float salary, Integer phone, String position, byte[] photo,
-			String userName, String password, boolean admin) {
-		super(id, userName, password);
+	public Employee(Integer id,String name, float salary, Integer phone, String position, byte[] photo,
+			String username, String password, boolean admin) {
+		super(username, password, id);
 		this.name = name;
 		this.salary = salary;
 		this.phone = phone;
@@ -67,8 +67,8 @@ public class Employee extends User implements Serializable {
 	}
 
 	public Employee(Integer id, String name, float salary, Integer phone, String position, Warehouse warehouseId,
-			byte[] photo, String userName, String password, boolean admin) {
-		super(id, userName, password);
+			byte[] photo, String username, String password, boolean admin) {
+		super(username, password, id);
 		this.name = name;
 		this.salary = salary;
 		this.phone = phone;
@@ -149,12 +149,12 @@ public class Employee extends User implements Serializable {
 		this.position = position;
 	}
 
-	public Warehouse getWarehouseId() {
+	public Warehouse getWarehouse() {
 		return warehouse;
 	}
 
-	public void setWarehouseId(Warehouse warehouseId) {
-		this.warehouse = warehouseId;
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
 
 	public byte[] getPhoto() {

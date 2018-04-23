@@ -6,6 +6,7 @@ import java.util.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,6 +25,7 @@ public class Arrival implements Serializable{
 	private static final long serialVersionUID = 2841430439397985029L;
 	
 	@Id
+	@GeneratedValue(generator = "arrivals")
 	@Column(name = "transaction_id")
 	private Integer arrivalId;
 	@Column(name = "buying_price")

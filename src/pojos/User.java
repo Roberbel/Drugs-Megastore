@@ -3,6 +3,7 @@ package pojos;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -21,29 +22,23 @@ public abstract class User implements Serializable {
 	private String password;
 
 	@Id
+	@GeneratedValue(generator = "user")
 	private Integer id;
 
 	public User() {
 		super();
 	}
 
-	public User(String userName, String password) {
+	public User(String username, String password) {
 		super();
-		this.username = userName;
+		this.username = username;
 		this.password = password;
-	}
-	
-	public User(int id, String userName, String password) {
-		super();
-		this.id = id;
-		this.username = userName;
-		this.password = password;
-		
 	}
 
-	public User(String userName, String password, Integer id) {
+
+	public User(String username, String password, Integer id) {
 		super();
-		this.username = userName;
+		this.username = username;
 		this.password = password;
 		this.id = id;
 	}
@@ -78,12 +73,12 @@ public abstract class User implements Serializable {
 		return "User [userName=" + username + ", password=" + password + ", id=" + id + "]";
 	}
 
-	public String getUserName() {
+	public String getUsername() {
 		return username;
 	}
 
-	public void setUserName(String userName) {
-		this.username = userName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {

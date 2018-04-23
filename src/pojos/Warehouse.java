@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -20,6 +21,7 @@ public class Warehouse implements Serializable {
 	 */
 	private static final long serialVersionUID = -3781798634843187795L;
 	@Id
+	@GeneratedValue(generator = "warehouse")
 	private Integer id;
 	private Integer pc;
 	private String country;

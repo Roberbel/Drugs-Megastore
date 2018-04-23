@@ -3,7 +3,12 @@ package DB;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.EntityManager;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -27,12 +32,10 @@ public class JPAManager implements Manager{
 			JPAManager.connect();
 			JPAManager.insertEmployee(new Employee());
 			System.out.println("Inserted");
-			List<Employee> list = JPAManager.getAllEmployees();
-			for(Employee d: list) {
-				System.out.println(d.toString());
-				
-			}
-			System.out.println("Finished listing");
+			List<Employee> employees= JPAManager.getAllEmployees();
+			System.out.println("Read");
+			JPAManager.updateEmployeeUsername(employees.get(0), "LordOfChange");
+			System.out.println("Updated");
 			JPAManager.disconnect();
 		}
 		
@@ -45,6 +48,7 @@ public class JPAManager implements Manager{
 			System.out.println("Database connection started");
 			
 		}
+		
 		public static void disconnect()  {
 			em.close();
 			System.out.println("Database connection closed.");
@@ -206,10 +210,10 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		
 		/*
 		 *  SELECT EVERYTHING FROM EACH TABLE
 		 */
-		
 		
 		public static List<Arrival> getAllArrivals(){
 			
@@ -291,7 +295,7 @@ public class JPAManager implements Manager{
 		/*
 		 * Arrival updates
 		 */
-		public void updateArrivalBuyingPrice(Arrival arrival, Integer buyingPrice) {
+		public static void updateArrivalBuyingPrice(Arrival arrival, Integer buyingPrice) {
 			
 			em.getTransaction().begin();
 			arrival.setBuyingPrice(buyingPrice);
@@ -299,7 +303,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateArrivalDate(Arrival arrival, Date date) {
+		public static void updateArrivalDate(Arrival arrival, Date date) {
 			
 			em.getTransaction().begin();
 			arrival.setDate(date);
@@ -307,7 +311,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateArrivalProvider(Arrival arrival, Provider provider) {
+		public static void updateArrivalProvider(Arrival arrival, Provider provider) {
 			
 			em.getTransaction().begin();
 			arrival.setProvider(provider);
@@ -316,13 +320,9 @@ public class JPAManager implements Manager{
 		}
 		
 		/*
-		 * It doesn't make sense to update the N end of a relation
-		 */
-		
-		/*
 		 * Drug updates
 		 */
-		public void updateDrugActivePrinciple(Drug drug, String activePrinciple) {
+		public static void updateDrugActivePrinciple(Drug drug, String activePrinciple) {
 			
 			em.getTransaction().begin();
 			drug.setActivePrinciple(activePrinciple);
@@ -330,7 +330,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateDrugCorridor(Drug drug, Corridor corridor) {
+		public static void updateDrugCorridor(Drug drug, Corridor corridor) {
 			
 			em.getTransaction().begin();
 			drug.setCorridor(corridor);
@@ -338,7 +338,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateDrugName(Drug drug, String name) {
+		public static void updateDrugName(Drug drug, String name) {
 			
 			em.getTransaction().begin();
 			drug.setName(name);
@@ -346,7 +346,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateDrugSellingPrice(Drug drug, Integer sellingPrice) {
+		public static void updateDrugSellingPrice(Drug drug, Integer sellingPrice) {
 			
 			em.getTransaction().begin();
 			drug.setSellingPrice(sellingPrice);
@@ -354,7 +354,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateDrugStock(Drug drug, Integer stock) {
+		public static void updateDrugStock(Drug drug, Integer stock) {
 			
 			em.getTransaction().begin();
 			drug.setStock(stock);
@@ -363,7 +363,65 @@ public class JPAManager implements Manager{
 		}
 		
 		
+		/*
+		 * Employee updates
+		 */
+		public static void updateEmployeeAdminRights(Employee employee, Boolean isAdmin) {
+			
+			em.getTransaction().begin();
+			employee.setIsAdmin(isAdmin);
+			em.getTransaction().commit();
+			
+		}
 		
+		public static void updateEmployeeName(Employee employee, String name) {
+			
+			em.getTransaction().begin();
+			employee.setName(name);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void updateEmployeePassword(Employee employee, String password) {
+			
+			em.getTransaction().begin();
+			employee.setPassword(password);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void updateEmployeePhoto(Employee employee, byte[] photo) {
+			
+			em.getTransaction().begin();
+			employee.setPhoto(photo);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void updateEmployeePosition(Employee employee, String position) {
+			//lets hope he got promoted
+			
+			em.getTransaction().begin();
+			employee.setPosition(position);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void updateEmployeeUsername(Employee employee, String username) {
+			
+			em.getTransaction().begin();
+			employee.setUsername(username);
+			em.getTransaction().commit();
+			
+		}
+		
+		public static void updateEmployeeWarehouse(Employee employee, Warehouse warehouse) {
+			
+			em.getTransaction().begin();
+			employee.setWarehouse(warehouse);
+			em.getTransaction().commit();
+			
+		}
 		
 		
 		
@@ -371,7 +429,7 @@ public class JPAManager implements Manager{
 		/*
 		 * Warehouse updates
 		 */
-		public void updateWarehousePc(Warehouse warehouse, Integer pc) {
+		public static void updateWarehousePc(Warehouse warehouse, Integer pc) {
 			
 			em.getTransaction().begin();
 			warehouse.setPc(pc);
@@ -379,7 +437,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateWarehouseCountry(Warehouse warehouse, String  country) {
+		public static void updateWarehouseCountry(Warehouse warehouse, String  country) {
 			
 			em.getTransaction().begin();
 			warehouse.setCountry(country);
@@ -387,7 +445,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateWarehouseCity(Warehouse warehouse, String city) {
+		public static void updateWarehouseCity(Warehouse warehouse, String city) {
 			
 			em.getTransaction().begin();
 			warehouse.setCity(city);
@@ -395,7 +453,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateWarehouseAddress(Warehouse warehouse, String address) {
+		public static void updateWarehouseAddress(Warehouse warehouse, String address) {
 			
 			em.getTransaction().begin();
 			warehouse.setAdress(address);
@@ -403,7 +461,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void updateWarehousePhone(Warehouse warehouse, Integer phone) {
+		public static void updateWarehousePhone(Warehouse warehouse, Integer phone) {
 			
 			em.getTransaction().begin();
 			warehouse.setPhone(phone);
@@ -422,7 +480,7 @@ public class JPAManager implements Manager{
  * =====================================================================================================
  */
 		
-		public void deleteArrival(Integer id) {
+		public static void deleteArrival(Integer id) {
 			
 			Arrival toDelete = searchArrivalById(id);
 			em.getTransaction().begin();
@@ -431,7 +489,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteArrival(Arrival arrival) {
+		public static void deleteArrival(Arrival arrival) {
 			
 			Arrival toDelete = searchArrivalById(arrival.getArrivalId());
 			em.getTransaction().begin();
@@ -440,7 +498,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteArrive(Arrives toDelete) {
+		public static void deleteArrive(Arrives toDelete) {
 			
 			em.getTransaction().begin();
 			em.remove(toDelete);
@@ -448,7 +506,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteClient(Integer id) {
+		public static void deleteClient(Integer id) {
 			
 			Client toDelete = searchClientById(id);
 			em.getTransaction().begin();
@@ -457,7 +515,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteClient(Client client) {
+		public static void deleteClient(Client client) {
 			
 			Client toDelete = searchClientById(client.getId());
 			em.getTransaction().begin();
@@ -466,7 +524,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteCorridor(Integer id) {
+		public static void deleteCorridor(Integer id) {
 			
 			Corridor toDelete = searchCorridorById(id);
 			em.getTransaction().begin();
@@ -475,7 +533,7 @@ public class JPAManager implements Manager{
 		
 		}
 		
-		public void deleteCorridor(Corridor corridor) {
+		public static void deleteCorridor(Corridor corridor) {
 			
 			Corridor toDelete = searchCorridorById(corridor.getId());
 			em.getTransaction().begin();
@@ -484,7 +542,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteDelivery(Integer id) {
+		public static void deleteDelivery(Integer id) {
 			
 			Delivery toDelete = searchDeliveryById(id);
 			em.getTransaction().begin();
@@ -493,7 +551,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteDelivery(Delivery delivery) {
+		public static void deleteDelivery(Delivery delivery) {
 			
 			Delivery toDelete = searchDeliveryById(delivery.getTransactionId());
 			em.getTransaction().begin();
@@ -502,7 +560,7 @@ public class JPAManager implements Manager{
 		
 		}
 		
-		public void deleteDrug(Integer id) {
+		public static void deleteDrug(Integer id) {
 			
 			Drug toDelete = searchDrugById(id);
 			em.getTransaction().begin();
@@ -511,7 +569,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteDrug(Drug drug) {
+		public static void deleteDrug(Drug drug) {
 			
 			Drug toDelete = searchDrugById(drug.getId());
 			em.getTransaction().begin();
@@ -520,7 +578,8 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteEmployee(Integer id) {
+		//this poor guy getting fired....He worked so hard for us
+		public static void deleteEmployee(Integer id) {
 			
 			Employee toDelete = searchEmployeeById(id);
 			em.getTransaction().begin();
@@ -529,7 +588,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteEmployee(Employee employee) {
+		public static void deleteEmployee(Employee employee) {
 			
 			Employee toDelete = searchEmployeeById(employee.getId());
 			em.getTransaction().begin();
@@ -538,7 +597,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteProvider(Integer id) {
+		public static void deleteProvider(Integer id) {
 			
 			Provider toDelete = searchProviderById(id);
 			em.getTransaction().begin();
@@ -547,7 +606,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteProvider(Provider provider) {
+		public static void deleteProvider(Provider provider) {
 			
 			Provider toDelete = searchProviderById(provider.getProviderId());
 			em.getTransaction().begin();
@@ -556,7 +615,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteWarehouse(Integer id) {
+		public static void deleteWarehouse(Integer id) {
 			
 			Warehouse toDelete = searchWarehouseById(id);
 			em.getTransaction().begin();
@@ -565,7 +624,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public void deleteWarehouse(Warehouse warehouse) {
+		public static void deleteWarehouse(Warehouse warehouse) {
 			
 			Warehouse toDelete = searchWarehouseById(warehouse.getId());			
 			em.getTransaction().begin();
