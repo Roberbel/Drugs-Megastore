@@ -329,59 +329,6 @@ public class JPAManager implements Manager{
 		 * Drug updates
 		 */
 		
-<<<<<<< HEAD
-		public void updateDrug() {
-=======
-		public void updateDrugName(Drug drug, String name) {
-			
-			em.getTransaction().begin();
-			drug.setName(name);
-			em.getTransaction().commit();
-			
-		}
-		
-		public void updateDrugStock(Drug drug, Integer stock) {
-			
-			em.getTransaction().begin();
-			drug.setStock(stock);
-			em.getTransaction().commit();
-			
-		}
-		
-		public void updateDrugSellingPrice(Drug drug, Integer sellingPrice) {
-			
-			em.getTransaction().begin();
-			drug.setSellingPrice(sellingPrice);
-			em.getTransaction().commit();
-			
-		}
-		
-		public void updateDrugActivePrinciple(Drug drug, String activePrinciple) {
-			
-			em.getTransaction().begin();
-			drug.setActivePrinciple(activePrinciple);
-			em.getTransaction().commit();
-			
-		}
-		
-		public void updateDrugCorridor(Drug drug, Corridor corridor) {
-			
-			em.getTransaction().begin();
-			drug.setCorridor(corridor);
-			em.getTransaction().commit();
-			
-		}
-		
-		public void updateDrugPhoto(Drug drug, byte[] photo) {
-			
-			em.getTransaction().begin();
-			drug.setPhoto(photo);
-			em.getTransaction().commit();
->>>>>>> branch 'master' of https://github.com/Roberbel/Drugs-Megastore
-			
-		}
-		
-		
 		/*
 		 * Warehouse updates
 		 */
