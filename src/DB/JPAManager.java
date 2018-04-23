@@ -329,7 +329,9 @@ public class JPAManager implements Manager{
 		 * Drug updates
 		 */
 		
-		public void updateDrug()
+		public void updateDrug() {
+			
+		}
 		
 		
 		/*
