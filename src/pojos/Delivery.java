@@ -7,6 +7,7 @@ import java.util.*;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,8 +25,9 @@ public class Delivery implements Serializable {
 	private static final long serialVersionUID = -2324788895880344002L;
 	
 	@Id
-	@GeneratedValue(generator = "delivery")
-	@Column (name = "transaction_id")
+	@GeneratedValue(generator = "deliveries")
+	@TableGenerator(name="deliveries", table="sqlite_sequence",
+    pkColumnName="transaction_id", valueColumnName="seq", pkColumnValue="deliveries")
 	private Integer id;
 	@Column (name = "selling_price")
 	private Integer sellingPrice;

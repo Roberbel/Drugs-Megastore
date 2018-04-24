@@ -18,12 +18,11 @@ public abstract class User implements Serializable {
 	 */
 	private static final long serialVersionUID = -2459371836299683662L;
 
-	private String username;
-	private String password;
+	protected String username;
+	protected String password;
 
 	@Id
-	@GeneratedValue(generator = "user")
-	private Integer id;
+	protected Integer id;
 
 	public User() {
 		super();

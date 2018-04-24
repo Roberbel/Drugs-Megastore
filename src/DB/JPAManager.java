@@ -1,6 +1,7 @@
 package DB;
 
 import java.sql.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Basic;
@@ -30,11 +31,31 @@ public class JPAManager implements Manager{
 		public static void main(String[] args) {
 			
 			JPAManager.connect();
-			JPAManager.insertEmployee(new Employee());
+			Employee loler = new Employee();
+			em.getTransaction().begin();
+			em.persist(loler);
+			em.getTransaction().commit();
+//			JPAManager.disconnect();
+//			JPAManager.connect();
+
+			Drug drug = new Drug();
+			JPAManager.insertDrug(drug);
 			System.out.println("Inserted");
 			List<Employee> employees= JPAManager.getAllEmployees();
+			System.out.println(employees);
 			System.out.println("Read");
+			int i = 0;
+			for (Employee temp : employees) {
+				System.out.println(temp);
+				em.getTransaction().begin();
+				temp.setUsername("TEST" + i);
+				i++;
+				System.out.println("Fixed employee " + i);
+				em.getTransaction().commit();
+				
+			}
 			JPAManager.updateEmployeeUsername(employees.get(0), "LordOfChange");
+			System.out.println(employees);
 			System.out.println("Updated");
 			JPAManager.disconnect();
 		}
@@ -262,6 +283,7 @@ public class JPAManager implements Manager{
 			Query q1 = em.createNativeQuery("Select * FROM employee", Employee.class);
 			return (List<Employee>) q1.getResultList();
 			
+			
 		}
 		
 		public static List<Packaged> getAllPackaged(){
@@ -410,7 +432,9 @@ public class JPAManager implements Manager{
 		public static void updateEmployeeUsername(Employee employee, String username) {
 			
 			em.getTransaction().begin();
+			em.flush();
 			employee.setUsername(username);
+			//em.flush();
 			em.getTransaction().commit();
 			
 		}

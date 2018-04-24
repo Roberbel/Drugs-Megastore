@@ -6,13 +6,16 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
-@Table(name = "Employee")
+@Table(name = "employee")
 public class Employee extends User implements Serializable {
 
 	/**
@@ -20,6 +23,11 @@ public class Employee extends User implements Serializable {
 	 */
 	private static final long serialVersionUID = -1163919074127055299L;
 
+	@Id
+	@GeneratedValue(generator = "employee")
+	@TableGenerator(name="employee", table="sqlite_sequence",
+    pkColumnName="name", valueColumnName="seq", pkColumnValue="employee")
+	private Integer id;
 	private String name;
 	private float salary;
 	private Integer phone;
@@ -33,19 +41,20 @@ public class Employee extends User implements Serializable {
 	private byte[] photo;
 
 	public Employee() {
-		super();
 		name = "Tzeench";
 		salary = 10000000;/*we better pay well the God of change and manipulation*/
 		isAdmin = true;
 		position = "Scheemer";
-		super.setUsername(name+(int)(Math.random()*1000));
-		super.setPassword("SoloElCambioEsConstante");
+		username = (name+(int)(Math.random()*1000));
+		password = ("SoloElCambioEsConstante");
 		phone = 9;
 	}
 
 	public Employee(Integer id,String name, float salary, Integer phone, String position, byte[] photo,
 			String username, String password, boolean admin) {
+		
 		super(username, password, id);
+		this.id = id;
 		this.name = name;
 		this.salary = salary;
 		this.phone = phone;
@@ -68,7 +77,9 @@ public class Employee extends User implements Serializable {
 
 	public Employee(Integer id, String name, float salary, Integer phone, String position, Warehouse warehouseId,
 			byte[] photo, String username, String password, boolean admin) {
+		
 		super(username, password, id);
+		this.id = id;
 		this.name = name;
 		this.salary = salary;
 		this.phone = phone;
@@ -105,16 +116,17 @@ public class Employee extends User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + super.getId() + ", name=" + name + ", salary=" + salary + ", phone=" + phone
-				+ ", position=" + position + ", warehouseId=" + warehouse + "]";
+		return "Employee [id=" + id + ", name=" + name + ", salary=" + salary + ", phone=" + phone
+				+ ", position=" + position + ", warehouseId=" + warehouse + ", username = "+ username + ", password = "+password+"]";
 	}
 
 	public Integer getId() {
-		return super.getId();
+		return id;
 	}
 
 	public void setId(Integer id) {
 		super.setId(id);
+		this.id = id;
 	}
 
 	public String getName() {

@@ -14,6 +14,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name = "drug")
@@ -26,6 +27,8 @@ public class Drug implements Serializable {
 	
 	@Id
 	@GeneratedValue(generator = "drug")
+	@TableGenerator(name="drug", table="sqlite_sequence",
+    pkColumnName="name", valueColumnName="seq", pkColumnValue="drug")
 	private Integer id;
 	private String name;
 	private Integer stock;
