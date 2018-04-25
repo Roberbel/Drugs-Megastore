@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name = "provider")
@@ -21,6 +22,8 @@ public class Provider implements Serializable {
 	private static final long serialVersionUID = -7246472106057374482L;
 	@Id
 	@GeneratedValue(generator = "provider")
+	@TableGenerator(name="provider", table="sqlite_sequence",
+    pkColumnName="id", valueColumnName="seq", pkColumnValue="provider")
 	private Integer id;
 	private String name;
 	private String address;

@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import java.sql.Date;
 
@@ -26,7 +27,8 @@ public class Arrival implements Serializable{
 	
 	@Id
 	@GeneratedValue(generator = "arrivals")
-	@Column(name = "transaction_id")
+	@TableGenerator(name="arrivals", table="sqlite_sequence",
+    pkColumnName="transaction_id", valueColumnName="seq", pkColumnValue="arrivals")
 	private Integer arrivalId;
 	@Column(name = "buying_price")
 	private Integer buyingPrice;

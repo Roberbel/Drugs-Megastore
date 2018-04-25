@@ -7,12 +7,15 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "Client")
+@Table(name = "client")
 public class Client extends User implements Serializable {
 
 	/**
@@ -20,6 +23,11 @@ public class Client extends User implements Serializable {
 	*/
 	private static final long serialVersionUID = 2116743967910216027L;
 
+	@Id
+	@GeneratedValue(generator = "client")
+	@TableGenerator(name="client", table="sqlite_sequence",
+    pkColumnName="name", valueColumnName="seq", pkColumnValue="client")
+	private Integer id;
 	private String name;
 	private String address;
 	private Integer telephone;

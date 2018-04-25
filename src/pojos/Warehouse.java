@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name = "warehouse")
@@ -22,6 +23,8 @@ public class Warehouse implements Serializable {
 	private static final long serialVersionUID = -3781798634843187795L;
 	@Id
 	@GeneratedValue(generator = "warehouse")
+	@TableGenerator(name="warehouse", table="sqlite_sequence",
+    pkColumnName="id", valueColumnName="seq", pkColumnValue="warehouse")
 	private Integer id;
 	private Integer pc;
 	private String country;

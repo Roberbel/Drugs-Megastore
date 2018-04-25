@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 
 
@@ -27,6 +28,8 @@ public class Corridor implements Serializable {
 	private static final long serialVersionUID = 4227526298151577502L;
 	@Id
 	@GeneratedValue(generator = "corridor")
+	@TableGenerator(name="corridor", table="sqlite_sequence",
+    pkColumnName="id", valueColumnName="seq", pkColumnValue="corridor")
 	private Integer id;
 	private float temperature;
 	@ManyToOne(fetch = FetchType.LAZY)
