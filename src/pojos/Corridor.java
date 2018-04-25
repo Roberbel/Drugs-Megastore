@@ -29,7 +29,7 @@ public class Corridor implements Serializable {
 	@Id
 	@GeneratedValue(generator = "corridor")
 	@TableGenerator(name="corridor", table="sqlite_sequence",
-    pkColumnName="id", valueColumnName="seq", pkColumnValue="corridor")
+    pkColumnName="name", valueColumnName="seq", pkColumnValue="corridor")
 	private Integer id;
 	private float temperature;
 	@ManyToOne(fetch = FetchType.LAZY)

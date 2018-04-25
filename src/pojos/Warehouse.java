@@ -24,7 +24,7 @@ public class Warehouse implements Serializable {
 	@Id
 	@GeneratedValue(generator = "warehouse")
 	@TableGenerator(name="warehouse", table="sqlite_sequence",
-    pkColumnName="id", valueColumnName="seq", pkColumnValue="warehouse")
+    pkColumnName="name", valueColumnName="seq", pkColumnValue="warehouse")
 	private Integer id;
 	private Integer pc;
 	private String country;

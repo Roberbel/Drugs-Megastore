@@ -27,7 +27,7 @@ public class Delivery implements Serializable {
 	@Id
 	@GeneratedValue(generator = "deliveries")
 	@TableGenerator(name="deliveries", table="sqlite_sequence",
-    pkColumnName="transaction_id", valueColumnName="seq", pkColumnValue="deliveries")
+    pkColumnName="name", valueColumnName="seq", pkColumnValue="deliveries")
 	private Integer id;
 	@Column (name = "selling_price")
 	private Integer sellingPrice;

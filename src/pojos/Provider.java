@@ -23,7 +23,7 @@ public class Provider implements Serializable {
 	@Id
 	@GeneratedValue(generator = "provider")
 	@TableGenerator(name="provider", table="sqlite_sequence",
-    pkColumnName="id", valueColumnName="seq", pkColumnValue="provider")
+    pkColumnName="name", valueColumnName="seq", pkColumnValue="provider")
 	private Integer id;
 	private String name;
 	private String address;
