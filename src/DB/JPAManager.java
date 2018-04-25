@@ -31,12 +31,12 @@ public class JPAManager implements Manager{
 		public static void main(String[] args) {
 			
 			JPAManager.connect();
-			JPAManager.insertDrug(new Drug());
-			List<Drug> drugs = JPAManager.getAllDrugs();
-			for(Drug drug : drugs) {
-				System.out.println(drug);
+			JPAManager.insertEmployee(new Employee());
+			List<Employee> employees = JPAManager.getAllEmployees();
+			for(Employee e: employees) {
+				System.out.println(e);
 			}
-			JPAManager.updateDrugSellingPrice(drugs.get(0), 1);
+			JPAManager.updateEmployeeUsername(employees.get(0), "LordOfChange");
 			JPAManager.disconnect();
 		}
 		
