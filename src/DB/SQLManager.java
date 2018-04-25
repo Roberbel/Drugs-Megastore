@@ -555,7 +555,8 @@ public class SQLManager implements Manager {
 	
 	}
 	
-	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple)throws SQLException{
+	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple)throws SQLException{ 
+		
 		String sql="SELECT * FROM drug WHERE activePrinciple LIKE ?";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, activePrinciple);
