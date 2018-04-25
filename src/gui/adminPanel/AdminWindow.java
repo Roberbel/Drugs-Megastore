@@ -283,7 +283,9 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void addDrugClicked(ActionEvent event) {
-    	
+    	Drug newDrug=new Drug();
+    	newDrug.setName(drugNameField.getText());
+    	newDrug.set
     }
 
     @FXML
