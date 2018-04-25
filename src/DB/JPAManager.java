@@ -31,32 +31,12 @@ public class JPAManager implements Manager{
 		public static void main(String[] args) {
 			
 			JPAManager.connect();
-			Employee loler = new Employee();
-			em.getTransaction().begin();
-			em.persist(loler);
-			em.getTransaction().commit();
-//			JPAManager.disconnect();
-//			JPAManager.connect();
-
-			Drug drug = new Drug();
-			JPAManager.insertDrug(drug);
-			System.out.println("Inserted");
-			List<Employee> employees= JPAManager.getAllEmployees();
-			System.out.println(employees);
-			System.out.println("Read");
-			int i = 0;
-			for (Employee temp : employees) {
-				System.out.println(temp);
-				em.getTransaction().begin();
-				temp.setUsername("TEST" + i);
-				i++;
-				System.out.println("Fixed employee " + i);
-				em.getTransaction().commit();
-				
+			JPAManager.insertDrug(new Drug());
+			List<Drug> drugs = JPAManager.getAllDrugs();
+			for(Drug drug : drugs) {
+				System.out.println(drug);
 			}
-			JPAManager.updateEmployeeUsername(employees.get(0), "LordOfChange");
-			System.out.println(employees);
-			System.out.println("Updated");
+			JPAManager.updateDrugSellingPrice(drugs.get(0), 1);
 			JPAManager.disconnect();
 		}
 		

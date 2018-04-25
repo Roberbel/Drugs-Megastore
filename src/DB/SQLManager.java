@@ -65,6 +65,24 @@ public class SQLManager implements Manager {
 		createArrivesTable();
 		createArrivalsTable();
 		createProvidersTable();
+		Statement statement  = c.createStatement();
+		String query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('client', 1)";
+		statement.executeUpdate(query);
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('employee', 1)";
+		statement.executeUpdate(query);
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('corridor', 1)";
+		statement.executeUpdate(query);
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('warehouse', 1)";
+		statement.executeUpdate(query);
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('deliveries', 1)";
+		statement.executeUpdate(query);
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('drug', 1)";
+		statement.executeUpdate(query);
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('arrivals', 1)";
+		statement.executeUpdate(query);
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('provider', 1)";
+		statement.executeUpdate(query);
+		c.close();
 			
 	}
 	// ===================================CREATE TABLE
