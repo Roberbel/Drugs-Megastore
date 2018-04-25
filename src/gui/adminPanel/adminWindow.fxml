@@ -18,216 +18,197 @@
 
 <BorderPane prefHeight="649.0" prefWidth="953.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.adminPanel.AdminWindow">
    <center>
-      <GridPane snapToPixel="false">
+      <TabPane fx:id="pojosTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabClients" text="Clients">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <bottom>
+                        <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="clientNameField" prefHeight="25.0" prefWidth="95.0" promptText="Name" />
+                              <TextField fx:id="clientAdressField" prefHeight="25.0" prefWidth="134.0" promptText="Adress" />
+                              <TextField fx:id="clientPhoneField" prefHeight="25.0" prefWidth="116.0" promptText="Phone Number" />
+                              <TextField fx:id="clientEmailField" prefHeight="25.0" prefWidth="160.0" promptText="Email" />
+                              <ComboBox fx:id="comboPayment" prefWidth="150.0" promptText="Payment Method" />
+                              <JFXButton fx:id="addClientButton" onAction="#addClientClicked" prefHeight="25.0" prefWidth="67.0" style="-fx-background-color: GREY;" text="Add" />
+                              <JFXButton fx:id="deleteClientButton" onAction="#deleteClientClicked" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: grey;" text="Delete" />
+                           </children>
+                        </HBox>
+                     </bottom>
+                     <center>
+                        <TableView fx:id="clientTable" BorderPane.alignment="CENTER">
+                          <columns>
+                            <TableColumn fx:id="clientName" prefWidth="84.00000309944153" text="Name" />
+                            <TableColumn fx:id="clientAdress" prefWidth="136.00003051757812" text="Adress" />
+                              <TableColumn fx:id="clientPhone" prefWidth="100.39997863769531" text="Phone Number" />
+                              <TableColumn fx:id="clientMail" prefWidth="170.00006103515625" text="Email" />
+                              <TableColumn fx:id="clientPayment" prefWidth="130.0" text="Payment Method" />
+                              <TableColumn fx:id="clientDeliveries" prefWidth="120.4000244140625" text="Deliveries" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+                  </BorderPane>
+               </content>
+          </Tab>
+          <Tab fx:id="drugTab" text="Drugs">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="drugTable" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="drugName" prefWidth="292.7999756336212" text="Name" />
+                              <TableColumn fx:id="drugPrinciple" prefWidth="237.20004272460938" text="Active Principle" />
+                              <TableColumn fx:id="drugPrice" prefWidth="127.20001220703125" text="Selling Price" />
+                              <TableColumn fx:id="drugStock" prefWidth="83.199951171875" text="Stock" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+                     <bottom>
+                        <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="drugNameField" prefHeight="25.0" prefWidth="180.0" promptText="Name" />
+                              <TextField fx:id="drugPrincipleField" prefHeight="25.0" prefWidth="229.0" promptText="Active Principle" />
+                              <TextField fx:id="drugPriceField" prefHeight="25.0" prefWidth="106.0" promptText="Selling Price" />
+                              <TextField fx:id="drugStockField" prefHeight="25.0" prefWidth="99.0" promptText="Stock" />
+                              <JFXButton fx:id="addDrugButton" onAction="#addDrugClicked" style="-fx-background-color: GREY;" text="Add" />
+                              <JFXButton fx:id="deleteDrugButton" onAction="#deleteDrugClicked" style="-fx-background-color: grey;" text="Delete" />
+                           </children>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </content>
+          </Tab>
+            <Tab fx:id="warehouseTab" text="Warehouse">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="warehouseTable" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="warePc" prefWidth="94.3999969959259" text="Zip Code" />
+                              <TableColumn fx:id="wareCountry" prefWidth="149.59994506835938" text="Country" />
+                              <TableColumn fx:id="wareCity" prefWidth="158.3999481201172" text="City" />
+                              <TableColumn fx:id="wareAdress" prefWidth="179.5999755859375" text="Adress" />
+                              <TableColumn fx:id="warePhone" prefWidth="160.4000244140625" text="Phone Number" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+                     <bottom>
+                        <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="warePcField" prefHeight="25.0" prefWidth="95.0" promptText="Zip Code" />
+                              <TextField fx:id="wareCountryField" prefHeight="25.0" prefWidth="134.0" promptText="Country" />
+                              <TextField fx:id="wareCityField" prefHeight="25.0" prefWidth="116.0" promptText="City" />
+                              <TextField fx:id="wareAdressField" prefHeight="25.0" prefWidth="160.0" promptText="Adress" />
+                              <TextField fx:id="warePhoneField" prefHeight="25.0" prefWidth="148.0" promptText="Phone Number" />
+                              <JFXButton fx:id="addWareButton" onAction="#addWareClicked" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: GREY;" text="Add" />
+                              <JFXButton fx:id="deleteWareButton" onAction="#deleteWareClicked" prefHeight="25.0" prefWidth="74.0" style="-fx-background-color: grey;" text="Delete" />
+                           </children>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab fx:id="arrivalsTab" text="Arrivals">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab fx:id="deliveriesTab" text="Deliveries">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab fx:id="employeesTab" text="Employees">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="employeeTable" onMouseClicked="#loadEmployeeImage" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="employeeName" prefWidth="186.8000214099884" text="Name" />
+                              <TableColumn fx:id="employeeSalary" prefWidth="96.79997253417969" text="Salary" />
+                              <TableColumn fx:id="employeePhone" prefWidth="146.79998779296875" text="Phone Number" />
+                              <TableColumn fx:id="employeePosition" prefWidth="158.79998779296875" text="Position" />
+                              <TableColumn fx:id="employeeWare" prefWidth="151.5999755859375" text="Warehouse Assignated" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+                     <bottom>
+                        <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="employeeNameField" prefHeight="25.0" prefWidth="118.0" promptText="Name" />
+                              <TextField fx:id="employeeSalaryField" prefHeight="25.0" prefWidth="134.0" promptText="Salary" />
+                              <TextField fx:id="employeePhoneField" prefHeight="25.0" prefWidth="146.0" promptText="Phone Number" />
+                              <TextField fx:id="employeePositionField" prefHeight="25.0" prefWidth="133.0" promptText="Position" />
+                              <ComboBox fx:id="comboWarehouse" prefHeight="25.0" prefWidth="121.0" promptText="Warehouse" />
+                              <JFXButton fx:id="addEmployeeButton" onAction="#addEmployeeClicked" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: GREY;" text="Add" />
+                              <JFXButton fx:id="deleteEmployeeButton" onAction="#deleteEmployeeClicked" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: grey;" text="Delete" />
+                           </children>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab fx:id="corrdirorsTab" text="Corridors">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="corridorsTable" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="corridorId" prefWidth="220.3999969959259" text="CorridorID" />
+                              <TableColumn fx:id="corridorWarehouse" prefWidth="271.6000213623047" text="Warehouse" />
+                              <TableColumn fx:id="corridorTemperature" prefWidth="248.39990234375" text="Temperature" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </center>
+                     <bottom>
+                        <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="corridorIdField" prefHeight="25.0" prefWidth="151.0" promptText="CorridorID" />
+                              <ComboBox fx:id="comboWare" prefWidth="150.0" promptText="Warehouse" />
+                              <TextField fx:id="corridorTempField" prefHeight="25.0" prefWidth="168.0" promptText="Temperature" />
+                              <JFXButton fx:id="addCorridorButton" onAction="#addCorridorClicked" style="-fx-background-color: GREY;" text="Add" />
+                              <JFXButton fx:id="deleteCorridorButton" onAction="#deleteCorridorClicked" style="-fx-background-color: grey;" text="Delete" />
+                           </children>
+                        </HBox>
+                     </bottom>
+                  </BorderPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <right>
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="250.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints maxWidth="805.6000244140625" minWidth="10.0" prefWidth="739.9999267578125" />
-          <ColumnConstraints maxWidth="450.4" minWidth="10.0" prefWidth="194.4000244140625" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TabPane fx:id="pojosTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab fx:id="tabClients" text="Clients">
-                     <content>
-                        <GridPane>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="602.2000122070312" minHeight="10.0" prefHeight="592.5999755859375" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="60.79998779296875" minHeight="0.0" prefHeight="27.200024414062455" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <TableView fx:id="clientTable" prefHeight="576.0" prefWidth="741.0">
-                                <columns>
-                                  <TableColumn fx:id="clientName" prefWidth="84.00000309944153" text="Name" />
-                                  <TableColumn fx:id="clientAdress" prefWidth="136.00003051757812" text="Adress" />
-                                    <TableColumn fx:id="clientPhone" prefWidth="100.39997863769531" text="Phone Number" />
-                                    <TableColumn fx:id="clientMail" prefWidth="170.00006103515625" text="Email" />
-                                    <TableColumn fx:id="clientPayment" prefWidth="130.0" text="Payment Method" />
-                                    <TableColumn fx:id="clientDeliveries" prefWidth="120.4000244140625" text="Deliveries" />
-                                </columns>
-                              </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                 <children>
-                                    <TextField fx:id="clientNameField" prefHeight="25.0" prefWidth="95.0" promptText="Name" />
-                                    <TextField fx:id="clientAdressField" prefHeight="25.0" prefWidth="134.0" promptText="Adress" />
-                                    <TextField fx:id="clientPhoneField" prefHeight="25.0" prefWidth="116.0" promptText="Phone Number" />
-                                    <TextField fx:id="clientEmailField" prefHeight="25.0" prefWidth="160.0" promptText="Email" />
-                                    <ComboBox fx:id="comboPayment" prefWidth="150.0" promptText="Payment Method" />
-                                    <JFXButton fx:id="addClientButton" onAction="#addClientClicked" style="-fx-background-color: GREY;" text="Add" />
-                                    <JFXButton fx:id="deleteClientButton" onAction="#deleteClientClicked" style="-fx-background-color: grey;" text="Delete" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </content>
-                </Tab>
-                <Tab fx:id="drugTab" text="Drugs">
-                     <content>
-                        <GridPane>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="598.3999755859375" minHeight="10.0" prefHeight="593.1999633789062" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="26.400036621093705" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <TableView fx:id="drugTable" prefHeight="457.0" prefWidth="530.0">
-                                 <columns>
-                                    <TableColumn fx:id="drugName" prefWidth="292.7999756336212" text="Name" />
-                                    <TableColumn fx:id="drugPrinciple" prefWidth="237.20004272460938" text="Active Principle" />
-                                    <TableColumn fx:id="drugPrice" prefWidth="127.20001220703125" text="Selling Price" />
-                                    <TableColumn fx:id="drugStock" prefWidth="83.199951171875" text="Stock" />
-                                 </columns>
-                              </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                 <children>
-                                    <TextField fx:id="drugNameField" prefHeight="25.0" prefWidth="180.0" promptText="Name" />
-                                    <TextField fx:id="drugPrincipleField" prefHeight="25.0" prefWidth="229.0" promptText="Active Principle" />
-                                    <TextField fx:id="drugPriceField" prefHeight="25.0" prefWidth="106.0" promptText="Selling Price" />
-                                    <TextField fx:id="drugStockField" prefHeight="25.0" prefWidth="99.0" promptText="Stock" />
-                                    <JFXButton fx:id="addDrugButton" onAction="#addDrugClicked" style="-fx-background-color: GREY;" text="Add" />
-                                    <JFXButton fx:id="deleteDrugButton" onAction="#deleteDrugClicked" style="-fx-background-color: grey;" text="Delete" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </content>
-                </Tab>
-                  <Tab fx:id="warehouseTab" text="Warehouse">
-                     <content>
-                        <GridPane>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="596.3999755859375" minHeight="10.0" prefHeight="594.8" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="24.799999999999955" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <TableView fx:id="warehouseTable" prefHeight="457.0" prefWidth="530.0">
-                                 <columns>
-                                    <TableColumn fx:id="warePc" prefWidth="94.3999969959259" text="Zip Code" />
-                                    <TableColumn fx:id="wareCountry" prefWidth="149.59994506835938" text="Country" />
-                                    <TableColumn fx:id="wareCity" prefWidth="158.3999481201172" text="City" />
-                                    <TableColumn fx:id="wareAdress" prefWidth="179.5999755859375" text="Adress" />
-                                    <TableColumn fx:id="warePhone" prefWidth="160.4000244140625" text="Phone Number" />
-                                 </columns>
-                              </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                 <children>
-                                    <TextField fx:id="warePcField" prefHeight="25.0" prefWidth="95.0" promptText="Zip Code" />
-                                    <TextField fx:id="wareCountryField" prefHeight="25.0" prefWidth="134.0" promptText="Country" />
-                                    <TextField fx:id="wareCityField" prefHeight="25.0" prefWidth="116.0" promptText="City" />
-                                    <TextField fx:id="wareAdressField" prefHeight="25.0" prefWidth="160.0" promptText="Adress" />
-                                    <TextField fx:id="warePhoneField" prefHeight="25.0" prefWidth="148.0" promptText="Phone Number" />
-                                    <JFXButton fx:id="addWareButton" onAction="#addWareClicked" style="-fx-background-color: GREY;" text="Add" />
-                                    <JFXButton fx:id="deleteWareClicked" onAction="#deleteWareClicked" style="-fx-background-color: grey;" text="Delete" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="arrivalsTab" text="Arrivals">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-                  <Tab fx:id="deliveriesTab" text="Deliveries">
-                    <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                  </Tab>
-                  <Tab fx:id="employeesTab" text="Employees">
-                     <content>
-                        <GridPane>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="594.0000122070312" minHeight="10.0" prefHeight="594.0000122070312" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="25.599987792968705" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <TableView fx:id="employeeTable" onMouseClicked="#loadEmployeeImage" prefHeight="457.0" prefWidth="530.0">
-                                 <columns>
-                                    <TableColumn fx:id="employeeName" prefWidth="186.8000214099884" text="Name" />
-                                    <TableColumn fx:id="employeeSalary" prefWidth="96.79997253417969" text="Salary" />
-                                    <TableColumn fx:id="employeePhone" prefWidth="146.79998779296875" text="Phone Number" />
-                                    <TableColumn fx:id="employeePosition" prefWidth="158.79998779296875" text="Position" />
-                                    <TableColumn fx:id="employeeWare" prefWidth="151.5999755859375" text="Warehouse Assignated" />
-                                 </columns>
-                              </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                 <children>
-                                    <TextField fx:id="employeeNameField" prefHeight="25.0" prefWidth="118.0" promptText="Name" />
-                                    <TextField fx:id="employeeSalaryField" prefHeight="25.0" prefWidth="134.0" promptText="Salary" />
-                                    <TextField fx:id="employeePhoneField" prefHeight="25.0" prefWidth="146.0" promptText="Phone Number" />
-                                    <TextField fx:id="employeePositionField" prefHeight="25.0" prefWidth="133.0" promptText="Position" />
-                                    <ComboBox fx:id="comboWarehouse" prefHeight="25.0" prefWidth="121.0" promptText="Warehouse" />
-                                    <JFXButton fx:id="addEmployeeButton" onAction="#addEmployeeClicked" style="-fx-background-color: GREY;" text="Add" />
-                                    <JFXButton fx:id="deleteEmployeeButton" onAction="#deleteEmployeeClicked" style="-fx-background-color: grey;" text="Delete" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </content>
-                  </Tab>
-                  <Tab fx:id="corrdirorsTab" text="Corridors">
-                     <content>
-                        <GridPane>
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="593.1999633789062" minHeight="10.0" prefHeight="593.1999633789062" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="60.79998779296875" minHeight="10.0" prefHeight="26.400036621093705" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <TableView fx:id="corridorsTable" prefHeight="457.0" prefWidth="530.0">
-                                 <columns>
-                                    <TableColumn fx:id="corridorId" prefWidth="220.3999969959259" text="CorridorID" />
-                                    <TableColumn fx:id="corridorWarehouse" prefWidth="271.6000213623047" text="Warehouse" />
-                                    <TableColumn fx:id="corridorTemperature" prefWidth="248.39990234375" text="Temperature" />
-                                 </columns>
-                              </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                                 <children>
-                                    <TextField fx:id="corridorIdField" prefHeight="25.0" prefWidth="151.0" promptText="CorridorID" />
-                                    <ComboBox fx:id="comboWare" prefWidth="150.0" promptText="Warehouse" />
-                                    <TextField fx:id="corridorTempField" prefHeight="25.0" prefWidth="168.0" promptText="Temperature" />
-                                    <JFXButton fx:id="addCorridorButton" onAction="#addCorridorClicked" style="-fx-background-color: GREY;" text="Add" />
-                                    <JFXButton fx:id="deleteCorridorButton" onAction="#deleteCorridorClicked" style="-fx-background-color: grey;" text="Delete" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </GridPane>
-                     </content>
-                  </Tab>
-              </tabs>
-            </TabPane>
-            <GridPane GridPane.columnIndex="1">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
-                     <image>
-                        <Image url="@../../../../../../../../../../Downloads/pp,550x550.u1.jpg" />
-                     </image>
-                  </ImageView>
-               </children>
-            </GridPane>
+            <ImageView fx:id="imageView" fitHeight="199.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
+               <image>
+                  <Image url="@../../../../../../../../../../Pictures/jK3xqZo.jpg" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
-   </center>
+   </right>
 </BorderPane>

@@ -81,19 +81,19 @@ public class AdminWindow implements Initializable {
     private Tab drugTab;
 
     @FXML
-    private TableView<?> drugTable;
+    private TableView<Drug> drugTable;
 
     @FXML
-    private TableColumn<?, ?> drugName;
+    private TableColumn<Drug, String> drugName;
 
     @FXML
-    private TableColumn<?, ?> drugPrinciple;
+    private TableColumn<Drug, String> drugPrinciple;
 
     @FXML
-    private TableColumn<?, ?> drugPrice;
+    private TableColumn<Drug, Integer> drugPrice;
 
     @FXML
-    private TableColumn<?, ?> drugStock;
+    private TableColumn<Drug, Integer> drugStock;
 
     @FXML
     private TextField drugNameField;
@@ -207,22 +207,22 @@ public class AdminWindow implements Initializable {
     private Tab corrdirorsTab;
 
     @FXML
-    private TableView<?> corridorsTable;
+    private TableView<Corridor> corridorsTable;
 
     @FXML
-    private TableColumn<?, ?> corridorId;
+    private TableColumn<Corridor, Integer> corridorId;
 
     @FXML
-    private TableColumn<?, ?> corridorWarehouse;
+    private TableColumn<Corridor, Warehouse> corridorWarehouse;
 
     @FXML
-    private TableColumn<?, ?> corridorTemperature;
+    private TableColumn<Corridor, Float> corridorTemperature;
 
     @FXML
     private TextField corridorIdField;
 
     @FXML
-    private ComboBox<?> comboWare;
+    private ComboBox<Warehouse> comboWare;
 
     @FXML
     private TextField corridorTempField;
@@ -255,7 +255,7 @@ public class AdminWindow implements Initializable {
 	    	}else {
 	    		newClient.setPaymentMethod(PaymentMethod.ORGANS);
 	    	}
-	    	newClient.setUserName("Morgoth");
+	    	newClient.setUsername("Morgoth");
 	    	newClient.setPassword("Sauron");
 	    	clientTable.getItems().add(newClient);
 	    	
@@ -269,14 +269,23 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void addCorridorClicked(ActionEvent event) {
-    	Corridor newCorridor=new Corridor();
-    	newCorridor.setTemperature(Float.parseFloat(corridorTempField.getText()));
+    	
+    	try {
+    		Corridor newCorridor=new Corridor();
+    		newCorridor.setTemperature(Float.parseFloat(corridorTempField.getText()));
+    		newCorridor.setWarehouse(comboWare.getSelectionModel().getSelectedItem());
+    		corridorsTable.getItems().add(newCorridor);
+    		JPAManager.insertCorridor(newCorridor);
+    	}catch(NumberFormatException | NullPointerException ex) {
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
+    	}   	
     	
     }
 
     @FXML
     void addDrugClicked(ActionEvent event) {
-
+    	
     }
 
     @FXML
@@ -329,16 +338,22 @@ public class AdminWindow implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		//Starts Connection with Database
 		JPAManager.connect();
-		//Clients List
+		//Clients Table
 		ObservableList methods=FXCollections.observableArrayList();
 		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");
-		comboPayment.getItems().addAll(methods);
-		
+		comboPayment.getItems().addAll(methods);		
 		clientName.setCellValueFactory(new PropertyValueFactory <Client,String>("name"));
-		clientAdress.setCellValueFactory(new PropertyValueFactory <Client,String>("adress"));
+		clientAdress.setCellValueFactory(new PropertyValueFactory <Client,String>("address"));
 		clientPhone.setCellValueFactory(new PropertyValueFactory <Client,Integer>("telephone"));
 		clientMail.setCellValueFactory(new PropertyValueFactory <Client,String>("email"));
 		clientPayment.setCellValueFactory(new PropertyValueFactory <Client,PaymentMethod>("paymentMethod"));
+		
+		clientTable.getItems().addAll(JPAManager.getAllClients());
+		
+		//Corridor Table
+		
+		
+		
 		
 	}
     
