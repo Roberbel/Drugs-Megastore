@@ -166,7 +166,7 @@ public class Client extends User implements Serializable {
 	@Override
 	public String toString() {
 		return "Client [id=" + super.getId() + ", name=" + name + ", adress=" + address + ", telephone=" + telephone + ", email="
-				+ email + ", paymentMethod=" + paymentMethod + ", deliveries=" + deliveries + "]";
+				+ email + ", paymentMethod=" + paymentMethod + ", deliveries=" + deliveries +", user=" + username +", password=" +password + "]";
 	}
 
 	public Integer getId() {
@@ -205,11 +205,27 @@ public class Client extends User implements Serializable {
 	public String getEmail() {
 		return email;
 	}
-
+	
+	 
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	public String getUser() {
+		return username;
+	}
+	
+	 
+	public void setUser(String username) {
+		this.username = username;
+	}
+	public String getPassword() {
+		return password;
+	}
+	
+	 
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public PaymentMethod getPaymentMethod() {
 		return paymentMethod;
 	}

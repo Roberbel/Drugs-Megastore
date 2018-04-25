@@ -562,7 +562,7 @@ public class SQLManager implements Manager {
 		ResultSet rs=prep.executeQuery();
 		List<Drug> drugs= new ArrayList<Drug>();
 		while(rs.next()) {
-			Corridor corridorWanted = extractCorridorById(rs.getInt("id"));
+			Corridor corridorWanted = extractCorridorById(rs.getInt("corridor_id"));
 			Drug drug=new Drug(rs.getInt("id"), rs.getString("name"), rs.getInt("stock"), rs.getInt("sellingPrice"),
 					rs.getString("activePrinciple"), corridorWanted, rs.getBytes("photo"));
 			drugs.add(drug);
