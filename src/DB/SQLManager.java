@@ -197,7 +197,7 @@ public class SQLManager implements Manager {
 		String sql1 = "INSERT INTO client(name, adress ,telephone, email, payment_method)" + "VALUES(?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, client.getName());
-		prep.setString(2, client.getAdress());
+		prep.setString(2, client.getAddress());
 		prep.setInt(3, client.getTelephone());
 		prep.setString(4, client.getEmail());
 		prep.setString(5, client.getPaymentMethod().toString());

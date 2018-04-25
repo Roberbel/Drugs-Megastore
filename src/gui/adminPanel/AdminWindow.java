@@ -27,8 +27,6 @@ import javafx.scene.input.MouseEvent;
 
 public class AdminWindow implements Initializable {
 	
-	JPAManager manager;
-	
     @FXML
     private TabPane pojosTabPane;
 
@@ -258,7 +256,7 @@ public class AdminWindow implements Initializable {
 	    	newClient.setUsername("Morgoth");
 	    	newClient.setPassword("Sauron");
 	    	clientTable.getItems().add(newClient);
-	    	
+
 	    	JPAManager.insertClient(newClient);
     	}catch(NumberFormatException | NullPointerException ex) {
     		Alert alert=new Alert(AlertType.ERROR);
