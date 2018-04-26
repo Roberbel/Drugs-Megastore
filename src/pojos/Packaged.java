@@ -33,14 +33,14 @@ public class Packaged implements Serializable{
 	@PrimaryKeyJoinColumn(name = "transaction_id", referencedColumnName = "transaction_id")
 	private Delivery delivery;
 	
-	private Integer ammount;
+	private Integer amount;
 
 
 	public Packaged() {
 		super();
 	}
 	
-	public Packaged(Drug drug, Delivery delivery, Integer ammount) {
+	public Packaged(Drug drug, Delivery delivery, Integer amount) {
 		
 		super();
 		this.deliveryId = delivery.getTransactionId();
@@ -48,7 +48,7 @@ public class Packaged implements Serializable{
 		drug.addPackaged(this);
 		this.drug = drug;
 		this.delivery = delivery;
-		this.ammount = ammount;
+		this.amount = amount;
 	
 	}
 
@@ -99,15 +99,15 @@ public class Packaged implements Serializable{
 	
 	}
 
-	public Integer getAmmount() {
+	public Integer getAmount() {
 		
-		return ammount;
+		return amount;
 	
 	}
 
-	public void setAmmount(Integer ammount) {
+	public void setAmount(Integer ammount) {
 	
-		this.ammount = ammount;
+		this.amount = ammount;
 	
 	}
 
@@ -115,7 +115,7 @@ public class Packaged implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((ammount == null) ? 0 : ammount.hashCode());
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
 		result = prime * result + ((deliveryId == null) ? 0 : deliveryId.hashCode());
 		result = prime * result + ((drugId == null) ? 0 : drugId.hashCode());
 		return result;
@@ -130,10 +130,10 @@ public class Packaged implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Packaged other = (Packaged) obj;
-		if (ammount == null) {
-			if (other.ammount != null)
+		if (amount == null) {
+			if (other.amount != null)
 				return false;
-		} else if (!ammount.equals(other.ammount))
+		} else if (!amount.equals(other.amount))
 			return false;
 		if (deliveryId == null) {
 			if (other.deliveryId != null)
@@ -150,7 +150,7 @@ public class Packaged implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Packaged [drug=" + drug + ", delivery=" + delivery + ", ammount=" + ammount + "]";
+		return "Packaged [drug=" + drug + ", delivery=" + delivery + ", ammount=" + amount + "]";
 	}
 			
 }

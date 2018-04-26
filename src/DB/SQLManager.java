@@ -205,10 +205,25 @@ public class SQLManager implements Manager {
 		prep.setInt(1, delivery.getSellingPrice());
 		prep.setInt(2, delivery.getTransactionId());
 		prep.setInt(3, delivery.getClient().getId());
+		List <Packaged> packList=delivery.getPackages();
 		prep.executeUpdate();
 		prep.close();
-
+		for(Packaged p: packList) {
+			insertPackaged(p);
+		}
 	}
+	
+	public static void insertPackaged(Packaged pack) throws SQLException{
+		String sql1= "INSERT INTO packaged (drug_id,transaction_id,amount) VALUES(?,?,?)";
+		PreparedStatement prep=c.prepareStatement(sql1);
+		prep.setInt(1,pack.getDrugId());
+		prep.setInt(2,pack.getDeliveryId());
+		prep.setInt(3,pack.getAmount());
+		prep.executeUpdate();
+		prep.close();
+	}
+	
+	
 
 	public static void insertClientEntrance(Client client) throws SQLException {
 
@@ -266,19 +281,19 @@ public class SQLManager implements Manager {
 
 	
 	//NOW WE HAVE A POJO for Arrives, so this should be redone, but should be easy
-	public static void insertArrivesEntrance(Arrival arrival) throws SQLException {
-
-		String sql1 = "INSERT INTO arrives(drug_id,transaction_id,amount)" + "VALUES(?,?,?);";
-		PreparedStatement prep = c.prepareStatement(sql1);
-		for (int i = 0; arrival.getAmount().size() > i; i++) {
-			prep.setInt(1, arrival.getDrugs().get(i).getId());
-			prep.setInt(2, arrival.getArrivalId());
-			prep.setInt(3, arrival.getAmount().get(i));
-			prep.executeUpdate();
-		}
-		prep.close();
-
-	}
+//	public static void insertArrivesEntrance(Arrival arrival) throws SQLException {
+//
+//		String sql1 = "INSERT INTO arrives(drug_id,transaction_id,amount)" + "VALUES(?,?,?);";
+//		PreparedStatement prep = c.prepareStatement(sql1);
+//		for (int i = 0; arrival.getAmount().size() > i; i++) {
+//			prep.setInt(1, arrival.getDrugs().get(i).getId());
+//			prep.setInt(2, arrival.getArrivalId());
+//			prep.setInt(3, arrival.getAmount().get(i));
+//			prep.executeUpdate();
+//		}
+//		prep.close();
+//
+//	}
 
 	public static void insertDrugEntrance(Drug drug) throws SQLException {
 
@@ -391,48 +406,48 @@ public class SQLManager implements Manager {
 	}
 	
 	
-	//We have to talk how to do this 
-	public static Arrival extractArrivalById(Integer id)throws SQLException{
-		
-		String sql = "SELECT * FROM arrivals WHERE id = ? ";
-		PreparedStatement prep= c.prepareStatement(sql);
-		prep.setInt(1, id);
-		ResultSet rs = prep.executeQuery();
-		
-		Provider providerWanted=extractProviderById(rs.getInt("id"));
-		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"), rs.getDate("date"),providerWanted);
-		
-		String sql2 = "SELECT * FROM arrives WHERE transaction_id = ?";
-		PreparedStatement prep2= c.prepareStatement(sql2);
-		prep2.setInt(1, arrival.getArrivalId());
-		
-		List<Drug> drugs = new ArrayList<Drug>();
-		List<Integer> amounts = new ArrayList<Integer>();
-		
-		ResultSet rs2 = prep.executeQuery();
-		while(rs2.next()) {
-			Drug drug = extractDrugById(rs.getInt("drug_id"));
-			Integer amount = rs.getInt("amount");
-			
-			drugs.add(drug);
-			amounts.add(amount);
-		}
-		
-		arrival.setDrugs(drugs);
-		arrival.setAmount(amounts);
-		
-		
-		if(id==arrival.getArrivalId()) {
-			prep.close();
-			rs.close();
-			return arrival;
-		}else {
-			prep.close();
-			rs.close();
-			return null;
-		}
-		
-	}
+//	//We have to talk how to do this 
+//	public static Arrival extractArrivalById(Integer id)throws SQLException{
+//		
+//		String sql = "SELECT * FROM arrivals WHERE id = ? ";
+//		PreparedStatement prep= c.prepareStatement(sql);
+//		prep.setInt(1, id);
+//		ResultSet rs = prep.executeQuery();
+//		
+//		Provider providerWanted=extractProviderById(rs.getInt("id"));
+//		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"), rs.getDate("date"),providerWanted);
+//		
+//		String sql2 = "SELECT * FROM arrives WHERE transaction_id = ?";
+//		PreparedStatement prep2= c.prepareStatement(sql2);
+//		prep2.setInt(1, arrival.getArrivalId());
+//		
+//		List<Drug> drugs = new ArrayList<Drug>();
+//		List<Integer> amounts = new ArrayList<Integer>();
+//		
+//		ResultSet rs2 = prep.executeQuery();
+//		while(rs2.next()) {
+//			Drug drug = extractDrugById(rs.getInt("drug_id"));
+//			Integer amount = rs.getInt("amount");
+//			
+//			drugs.add(drug);
+//			amounts.add(amount);
+//		}
+//		
+//		arrival.setDrugs(drugs);
+//		arrival.setAmount(amounts);
+//		
+//		
+//		if(id==arrival.getArrivalId()) {
+//			prep.close();
+//			rs.close();
+//			return arrival;
+//		}else {
+//			prep.close();
+//			rs.close();
+//			return null;
+//		}
+//		
+//	}
 	
 	public static Corridor extractCorridorById(Integer id) throws SQLException {
 	
