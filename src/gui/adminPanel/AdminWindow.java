@@ -341,6 +341,12 @@ public class AdminWindow implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		//Starts Connection with Database
 		JPAManager.connect();
+		try {
+			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		//Clients Table
 		ObservableList methods=FXCollections.observableArrayList();
 		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");

@@ -198,7 +198,7 @@ public class SQLManager implements Manager {
 	// ==========================INSERT ENTRANCE
 	// METHODS==========================================================
 
-	public static void insertDeliveriesEntrance(Delivery delivery) throws SQLException {
+	public static void insertDeliveries(Delivery delivery) throws SQLException {
 
 		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id)" + "VALUES(?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -223,9 +223,7 @@ public class SQLManager implements Manager {
 		prep.close();
 	}
 	
-	
-
-	public static void insertClientEntrance(Client client) throws SQLException {
+	public static void insertClient(Client client) throws SQLException {
 
 		String sql1 = "INSERT INTO client(name, adress ,telephone, email, payment_method)" + "VALUES(?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -237,24 +235,9 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();
 
-	}
+	}	
 
-	/*public static void insertDeliveryEntrance(Delivery delivery) throws SQLException {
-
-		String sql1 = "INSERT INTO packaged (drug_id, transaction_id, amount)" + "VALUES( ?,?,?);";
-		PreparedStatement prep = c.prepareStatement(sql1);
-		for (int i = 0; delivery.getDrug().getId().size() > i; i++) {
-			prep.setInt(1, delivery.getDrugId().get(i).getId());
-			prep.setInt(2, delivery.getTransactionId());
-			//prep.setInt(3, delivery.getAmmount().get(i)); // CHECK-> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN
-															// A POJO AS A LIST
-			prep.executeUpdate();
-		}
-		prep.close();
-	
-	}*/
-
-	public static void insertProviderEntrance(Provider provider) throws SQLException {
+	public static void insertProvider(Provider provider) throws SQLException {
 
 		String sql1 = "INSERT INTO provider(name, adress, telephone, email)" + "VALUES(?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -267,7 +250,7 @@ public class SQLManager implements Manager {
 
 	}
 
-	public static void insertArrivalsEntrance(Arrival arrival) throws SQLException {
+	public static void insertArrivals(Arrival arrival) throws SQLException {
 
 		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, provider_id)" + "VALUES( ?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -276,26 +259,26 @@ public class SQLManager implements Manager {
 		prep.setInt(3, arrival.getProvider().getProviderId());
 		prep.executeUpdate();
 		prep.close();
+		List <Arrives> arrivesList=arrival.getArrives();
+		for(Arrives a: arrivesList) {
+			insertArrives(a);			
+		}
 	
 	}
-
 	
-	//NOW WE HAVE A POJO for Arrives, so this should be redone, but should be easy
-//	public static void insertArrivesEntrance(Arrival arrival) throws SQLException {
-//
-//		String sql1 = "INSERT INTO arrives(drug_id,transaction_id,amount)" + "VALUES(?,?,?);";
-//		PreparedStatement prep = c.prepareStatement(sql1);
-//		for (int i = 0; arrival.getAmount().size() > i; i++) {
-//			prep.setInt(1, arrival.getDrugs().get(i).getId());
-//			prep.setInt(2, arrival.getArrivalId());
-//			prep.setInt(3, arrival.getAmount().get(i));
-//			prep.executeUpdate();
-//		}
-//		prep.close();
-//
-//	}
-
-	public static void insertDrugEntrance(Drug drug) throws SQLException {
+	public static void insertArrives(Arrives arrive) throws SQLException {
+		
+		String sql1="INSERT INTO arrives(drug_id,transaction_id,amount) VALUE(?,?,?)";
+		PreparedStatement prep=c.prepareStatement(sql1);
+		prep.setInt(1,arrive.getDrugId());
+		prep.setInt(2, arrive.getArrivalId());
+		prep.setInt(3,arrive.getAmount());
+		prep.executeUpdate();
+		prep.close();
+		
+	}
+		
+	public static void insertDrug(Drug drug) throws SQLException {
 
 		String sql1 = "INSERT INTO drug(name, photo, stock, active_principle,corridor_id )" + "VALUES(?,?.?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -304,16 +287,13 @@ public class SQLManager implements Manager {
 		prep.setInt(3, drug.getStock());
 		prep.setString(4, drug.getActivePrinciple());
 		prep.setInt(5, drug.getCorridor().getId());
-
 		prep.executeUpdate();
 		prep.close();
 	
 	}
 
-	public static void insertCorridorEntrance(Corridor corridor) throws SQLException {
-
+	public static void insertCorridor(Corridor corridor) throws SQLException {
 		String sql1 = "INSERT INTO corridor(temperature, warehouse_id)" + "VALUES(?,?);";
-
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setFloat(1, corridor.getTemperature());
 		prep.setInt(2, corridor.getWarehouse().getId());
@@ -322,7 +302,10 @@ public class SQLManager implements Manager {
 
 	}
 
-	public static void insertWarehouseEntrance(Warehouse warehouse) throws SQLException {
+	
+	
+
+	public static void insertWarehouse(Warehouse warehouse) throws SQLException {
 
 		String sql1 = "INSERT INTO warehouse (phone,city,country, address, pc)" + "VALUES(?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -336,7 +319,7 @@ public class SQLManager implements Manager {
 	
 	}
 
-	public static void insertEmployeesEntrance(Employee employees) throws SQLException {
+	public static void insertEmployee(Employee employees) throws SQLException {
 
 		String sql1 = "INSERT INTO employee(name,salary, phone,position,warehouse_id,username,password,type)" + "VALUES(?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
