@@ -2,6 +2,7 @@ package pojos;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,7 +19,9 @@ public abstract class User implements Serializable {
 	 */
 	private static final long serialVersionUID = -2459371836299683662L;
 
+	@Column(name = "username")
 	protected String username;
+	@Column(name = "password")
 	protected String password;
 
 	@Id
