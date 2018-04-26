@@ -8,6 +8,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import sample.db.xml.utils.SQLDateAdapter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +27,8 @@ import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name = "deliveries")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = { "sellingPrice", "transactionDate", "client", "packages" })
 public class Delivery implements Serializable {
 
 	/**
@@ -28,16 +40,25 @@ public class Delivery implements Serializable {
 	@GeneratedValue(generator = "deliveries")
 	@TableGenerator(name="deliveries", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="deliveries")
+	
+	@XmlAttribute
 	private Integer id;
+	
+	@XmlAttribute
 	@Column (name = "selling_price")
 	private Integer sellingPrice;
 	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
+	@XmlElement
 	private Client client;
+	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	@Column (name = "transaction_date")
 	private Date transactionDate;
 
+	@XmlElement(name = "package")
+	@XmlElementWrapper(name = "packages")
 	@OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
 	private List<Packaged> packages;
 	

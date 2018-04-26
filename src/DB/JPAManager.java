@@ -1,15 +1,9 @@
 package DB;
 
 import java.sql.Date;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.EntityManager;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -57,6 +51,7 @@ public class JPAManager implements Manager{
 		}
 		
 		public static void disconnect()  {
+			
 			em.close();
 			System.out.println("Database connection closed.");
 		}
