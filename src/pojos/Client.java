@@ -47,8 +47,8 @@ public class Client extends User implements Serializable {
 		name = "Khorne";
 		address = "c/Viena 17 cabanillas del campo";
 		paymentMethod = PaymentMethod.ORGANS;
-		super.setUsername(name+(int)(Math.random()*10));
-		super.setPassword("Cualquier_cosa");
+		username = (name+(int)(Math.random()*10));
+		password = ("Cualquier_cosa");
 	}
 	
 	

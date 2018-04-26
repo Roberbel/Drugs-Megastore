@@ -30,13 +30,19 @@ public class JPAManager implements Manager{
 
 		public static void main(String[] args) {
 			
+			
 			JPAManager.connect();
-			JPAManager.insertEmployee(new Employee());
+			JPAManager.insertEmployee(new Employee());;
+			System.out.println("inserted");
 			List<Employee> employees = JPAManager.getAllEmployees();
+			System.out.println("Read");
 			for(Employee e: employees) {
 				System.out.println(e);
 			}
-			JPAManager.updateEmployeeUsername(employees.get(0), "LordOfChange");
+			//em.clear();
+			JPAManager.updateEmployeeName(employees.get(0), "LordOfChange");
+			System.out.println("Update");
+			System.out.println(employees.get(0));
 			JPAManager.disconnect();
 		}
 		
@@ -321,6 +327,20 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		
+		/*
+		 * Client updates
+		 */
+		public static void updateClientUsername(Client client , String username){
+			
+			em.getTransaction().begin();
+			client.setUsername(username);
+			em.getTransaction().commit();
+			
+		}
+		
+		
+		
 		/*
 		 * Drug updates
 		 */
@@ -378,8 +398,10 @@ public class JPAManager implements Manager{
 		
 		public static void updateEmployeeName(Employee employee, String name) {
 			
-			em.getTransaction().begin();
+			em.refresh(employee);
 			employee.setName(name);
+			em.getTransaction().begin();
+			em.flush();
 			em.getTransaction().commit();
 			
 		}
@@ -411,9 +433,10 @@ public class JPAManager implements Manager{
 		
 		public static void updateEmployeeUsername(Employee employee, String username) {
 			
+			employee.setUsername(username);
 			em.getTransaction().begin();
 			em.flush();
-			employee.setUsername(username);
+			
 			//em.flush();
 			em.getTransaction().commit();
 			
@@ -426,8 +449,6 @@ public class JPAManager implements Manager{
 			em.getTransaction().commit();
 			
 		}
-		
-		
 		
 		
 		/*
