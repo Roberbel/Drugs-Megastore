@@ -224,11 +224,11 @@ public class SQLManager implements Manager {
 
 	}
 
-	public static void insertPackagedEntrance(Delivery delivery) throws SQLException {
+	/*public static void insertDeliveryEntrance(Delivery delivery) throws SQLException {
 
 		String sql1 = "INSERT INTO packaged (drug_id, transaction_id, amount)" + "VALUES( ?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
-		for (int i = 0; delivery.getDrugId().size() > i; i++) {
+		for (int i = 0; delivery.getDrug().getId().size() > i; i++) {
 			prep.setInt(1, delivery.getDrugId().get(i).getId());
 			prep.setInt(2, delivery.getTransactionId());
 			//prep.setInt(3, delivery.getAmmount().get(i)); // CHECK-> HOW TO INTRODUCE AMOUNTS ON A TABLE IF IS STORED IN
@@ -237,7 +237,7 @@ public class SQLManager implements Manager {
 		}
 		prep.close();
 	
-	}
+	}*/
 
 	public static void insertProviderEntrance(Provider provider) throws SQLException {
 
@@ -329,8 +329,8 @@ public class SQLManager implements Manager {
 		prep.setFloat(2, employees.getSalary());
 		prep.setInt(3, employees.getPhone());
 		prep.setString(4, employees.getPosition());
-		prep.setInt(5, employees.getWarehouseId().getId());
-		prep.setString(6, employees.getUserName());
+		prep.setInt(5, employees.getWarehouse().getId());
+		prep.setString(6, employees.getUsername());
 		prep.setString(7, employees.getPassword());
 		prep.setBoolean(8, employees.getIsAdmin());
 		prep.executeUpdate();
@@ -529,7 +529,7 @@ public class SQLManager implements Manager {
 				rs.getString("position"), rs.getBytes("photo"), rs.getString("username"), rs.getString("password"),
 				rs.getBoolean("isAdmin"));
 	
-		if(username.equals(employee.getUserName())) {
+		if(username.equals(employee.getUsername())) {
 			prep.close();
 			rs.close();
 			return employee;
@@ -560,7 +560,7 @@ public class SQLManager implements Manager {
 			String password = rs.getString("password");
 			Client client=new Client(id_client,name,adress, telephone, email, payMethod,username1,password);
 		
-		if	(username == client.getUserName()) {
+		if	(username == client.getUsername()) {
 			prep.close();
 			rs.close();
 			return client;
