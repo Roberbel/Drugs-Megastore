@@ -13,11 +13,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 
 import java.sql.Date;
 
 @Entity
 @Table(name = "arrivals")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = { "buyingPrice", "date", "provider", "arrives" })
 public class Arrival implements Serializable{
 
 	/**
@@ -29,17 +37,25 @@ public class Arrival implements Serializable{
 	@GeneratedValue(generator = "arrivals")
 	@TableGenerator(name="arrivals", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="arrivals")
+	@XmlAttribute
 	private Integer arrivalId;
+	
 	@Column(name = "buying_price")
+	@XmlAttribute
 	private Integer buyingPrice;
+	
 	@Column(name = "transaction_date") 
+	@XmlAttribute
 	private Date date;
 	
 	@ManyToOne
 	@JoinColumn(name = "provider_id")
+	@XmlElement(name = "Provider")
 	private Provider provider;
 	
 	@OneToMany(mappedBy = "arrival", fetch = FetchType.LAZY)
+	@XmlElement(name = "Arrive")
+	@XmlElementWrapper(name = "Arrives")
 	private List<Arrives> arrives;
 
 	public Arrival() {

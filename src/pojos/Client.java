@@ -13,9 +13,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "client")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"name", "address", "telephone", "email", "paymentMethod", "Deliveries"})
 public class Client extends User implements Serializable {
 
 	/**
@@ -27,13 +35,27 @@ public class Client extends User implements Serializable {
 	@GeneratedValue(generator = "client")
 	@TableGenerator(name="client", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="client")
+	@XmlAttribute
 	private Integer id;
+	
+	@XmlAttribute
 	private String name;
+	
+	@XmlAttribute
 	private String address;
+	
+	@XmlAttribute
 	private Integer telephone;
+	
+	@XmlAttribute
 	private String email;
+	
+	@XmlAttribute
 	@Column(name = "payment_method")
 	private PaymentMethod paymentMethod;
+	
+	@XmlElement(name = "Delivery")
+	@XmlElementWrapper(name = "Deliveries")
 	@OneToMany(fetch = FetchType.LAZY)
 	private List<Delivery> deliveries;
 	

@@ -16,12 +16,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlType;
 
 
 
 
 @Entity
 @Table(name = "corridor")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = { "temperature", "warehouse", "drugs" })
 public class Corridor implements Serializable {
 
 	
@@ -30,12 +38,19 @@ public class Corridor implements Serializable {
 	@GeneratedValue(generator = "corridor")
 	@TableGenerator(name="corridor", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="corridor")
+	@XmlAttribute
 	private Integer id;
+	
+	@XmlAttribute
 	private float temperature;
+	
+	@XmlElement(name = "warehouse")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="warehouse_id")
 	private Warehouse warehouse;
 	
+	@XmlElement(name = "Drug")
+	@XmlElementWrapper(name = "Drugs")
 	@OneToMany(mappedBy="corridor",fetch = FetchType.LAZY)
 	private List<Drug> drugs;
 	

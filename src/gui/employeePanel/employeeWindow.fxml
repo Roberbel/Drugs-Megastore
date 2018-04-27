@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="400.0" prefWidth="122.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Name:" />
+            <Label text="Position:" />
+            <Label text="Warehouse:" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <TabPane prefHeight="400.0" prefWidth="462.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="arrivals">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <ListView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <right>
+                        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" text="Button" />
+                              <Button mnemonicParsing="false" text="Button" />
+                           </children>
+                        </VBox>
+                     </right>
+                  </BorderPane>
+               </content>
+          </Tab>
+          <Tab text="deliveries">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <ListView prefHeight="367.0" prefWidth="405.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <right>
+                        <VBox prefHeight="367.0" prefWidth="68.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Pane prefHeight="108.0" prefWidth="68.0">
+                                 <children>
+                                    <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" text="Button" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="109.0" prefWidth="68.0">
+                                 <children>
+                                    <Button alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="27.0" prefWidth="68.0" text="Button" />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </right>
+                  </BorderPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

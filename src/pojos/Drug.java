@@ -15,9 +15,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "drug")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = { "name", "activePrinciple", "stock", "sellingPrice", "corridor", "packaged", "arrives" })
 public class Drug implements Serializable {
 
 	/**
@@ -29,27 +38,38 @@ public class Drug implements Serializable {
 	@GeneratedValue(generator = "drug")
 	@TableGenerator(name="drug", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="drug")
+	@XmlAttribute
 	private Integer id;
+	
+	@XmlAttribute
 	private String name;
+	@XmlAttribute
 	private Integer stock;
 	@Column (name = "selling_price")
+	@XmlAttribute
 	private Integer sellingPrice;
 	
+	@XmlAttribute
 	@Column(name = "active_principle")
 	private String activePrinciple;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="corridor_id")
+	@XmlElement
 	private Corridor corridor;
 	
-	
+	@XmlElement(name = "package")
+	@XmlElementWrapper(name = "packaged")
 	@OneToMany(mappedBy = "drug", fetch = FetchType.LAZY)
 	private List<Packaged> packaged;
 	
+	@XmlElement(name = "arrive")
+	@XmlElementWrapper(name = "arrives")
 	@OneToMany(mappedBy = "drug", fetch = FetchType.LAZY)
 	private List<Arrives> arrives;
 	
 	@Lob
+	@XmlTransient
 	private byte[] photo;
 
 	public Drug() {
