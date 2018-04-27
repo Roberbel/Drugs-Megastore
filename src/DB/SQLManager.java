@@ -86,8 +86,9 @@ public class SQLManager implements Manager {
 		c.close();
 			
 	}
-	// ===================================CREATE TABLE
-	// METHODS.===============================================
+//================================================================================================
+//									CREATE TABLE
+//================================================================================================
 
 	public static void createClientTable() throws SQLException {
 		
@@ -194,65 +195,10 @@ public class SQLManager implements Manager {
 	
 	}
 
-	// ===========================================================================================================
-
-	// ==========================INSERT ENTRANCE
-	// METHODS==========================================================
-
-	public static void insertDeliveries(Delivery delivery) throws SQLException {
-
-		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id)" + "VALUES(?,?,?);";
-		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setInt(1, delivery.getSellingPrice());
-		prep.setInt(2, delivery.getTransactionId());
-		prep.setInt(3, delivery.getClient().getId());
-		List <Packaged> packList=delivery.getPackages();
-		prep.executeUpdate();
-		prep.close();
-		for(Packaged p: packList) {
-			insertPackaged(p);
-		}
-	}
+//===========================================================================================================
+//									INSERT ENTRANCE
+//===========================================================================================================
 	
-	public static void insertPackaged(Packaged pack) throws SQLException{
-		String sql1= "INSERT INTO packaged (drug_id,transaction_id,amount) VALUES(?,?,?)";
-		PreparedStatement prep=c.prepareStatement(sql1);
-		prep.setInt(1,pack.getDrugId());
-		prep.setInt(2,pack.getDeliveryId());
-		prep.setInt(3,pack.getAmount());
-		prep.executeUpdate();
-		prep.close();
-	}
-	
-	public static void insertClient(Client client) throws SQLException {
-
-		String sql1 = "INSERT INTO client(name, address ,telephone, email, payment_method,username,password)" + "VALUES(?,?,?,?,?,?,?);";
-		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setString(1, client.getName());
-		prep.setString(2, client.getAddress());
-		prep.setInt(3, client.getTelephone());
-		prep.setString(4, client.getEmail());
-		prep.setString(5, client.getPaymentMethod().toString());
-		prep.setString(6,client.getUsername());
-		prep.setString(7, client.getPassword());
-		prep.executeUpdate();
-		prep.close();
-
-	}	
-
-	public static void insertProvider(Provider provider) throws SQLException {
-
-		String sql1 = "INSERT INTO provider(name, adress, telephone, email)" + "VALUES(?,?,?,?);";
-		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setString(1, provider.getName());
-		prep.setString(2, provider.getAdress());
-		prep.setInt(3, provider.getTelephone());
-		prep.setString(4, provider.getEmail());
-		prep.executeUpdate();
-		prep.close();
-
-	}
-
 	public static void insertArrivals(Arrival arrival) throws SQLException {
 
 		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, provider_id)" + "VALUES( ?,?,?);";
@@ -280,6 +226,47 @@ public class SQLManager implements Manager {
 		prep.close();
 		
 	}
+	
+	public static void insertClient(Client client) throws SQLException {
+
+		String sql1 = "INSERT INTO client(name, address ,telephone, email, payment_method,username,password)" + "VALUES(?,?,?,?,?,?,?);";
+		PreparedStatement prep = c.prepareStatement(sql1);
+		prep.setString(1, client.getName());
+		prep.setString(2, client.getAddress());
+		prep.setInt(3, client.getTelephone());
+		prep.setString(4, client.getEmail());
+		prep.setString(5, client.getPaymentMethod().toString());
+		prep.setString(6,client.getUsername());
+		prep.setString(7, client.getPassword());
+		prep.executeUpdate();
+		prep.close();
+
+	}
+	
+	public static void insertCorridor(Corridor corridor) throws SQLException {
+		String sql1 = "INSERT INTO corridor(temperature, warehouse_id)" + "VALUES(?,?);";
+		PreparedStatement prep = c.prepareStatement(sql1);
+		prep.setFloat(1, corridor.getTemperature());
+		prep.setInt(2, corridor.getWarehouse().getId());
+		prep.executeUpdate();
+		prep.close();
+
+	}
+		
+	public static void insertDeliveries(Delivery delivery) throws SQLException {
+
+		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id)" + "VALUES(?,?,?);";
+		PreparedStatement prep = c.prepareStatement(sql1);
+		prep.setInt(1, delivery.getSellingPrice());
+		prep.setInt(2, delivery.getTransactionId());
+		prep.setInt(3, delivery.getClient().getId());
+		List <Packaged> packList=delivery.getPackages();
+		prep.executeUpdate();
+		prep.close();
+		for(Packaged p: packList) {
+			insertPackaged(p);
+		}
+	}
 		
 	public static void insertDrug(Drug drug) throws SQLException {
 
@@ -290,33 +277,6 @@ public class SQLManager implements Manager {
 		prep.setInt(3, drug.getStock());
 		prep.setString(4, drug.getActivePrinciple());
 		prep.setInt(5, drug.getCorridor().getId());
-		prep.executeUpdate();
-		prep.close();
-	
-	}
-
-	public static void insertCorridor(Corridor corridor) throws SQLException {
-		String sql1 = "INSERT INTO corridor(temperature, warehouse_id)" + "VALUES(?,?);";
-		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setFloat(1, corridor.getTemperature());
-		prep.setInt(2, corridor.getWarehouse().getId());
-		prep.executeUpdate();
-		prep.close();
-
-	}
-
-	
-	
-
-	public static void insertWarehouse(Warehouse warehouse) throws SQLException {
-
-		String sql1 = "INSERT INTO warehouse (phone,city,country, address, pc)" + "VALUES(?,?,?,?,?);";
-		PreparedStatement prep = c.prepareStatement(sql1);
-		prep.setInt(1, warehouse.getPhone());
-		prep.setString(2, warehouse.getCity());
-		prep.setString(3, warehouse.getCity());
-		prep.setString(4, warehouse.getAdress());
-		prep.setInt(5, warehouse.getPc());
 		prep.executeUpdate();
 		prep.close();
 	
@@ -339,8 +299,47 @@ public class SQLManager implements Manager {
 		prep.close();
 	
 	}
+	
+	public static void insertPackaged(Packaged pack) throws SQLException{
+		String sql1= "INSERT INTO packaged (drug_id,transaction_id,amount) VALUES(?,?,?)";
+		PreparedStatement prep=c.prepareStatement(sql1);
+		prep.setInt(1,pack.getDrugId());
+		prep.setInt(2,pack.getDeliveryId());
+		prep.setInt(3,pack.getAmount());
+		prep.executeUpdate();
+		prep.close();
+	}
 
-	// ===========================================================================================================
+	public static void insertProvider(Provider provider) throws SQLException {
+
+		String sql1 = "INSERT INTO provider(name, adress, telephone, email)" + "VALUES(?,?,?,?);";
+		PreparedStatement prep = c.prepareStatement(sql1);
+		prep.setString(1, provider.getName());
+		prep.setString(2, provider.getAdress());
+		prep.setInt(3, provider.getTelephone());
+		prep.setString(4, provider.getEmail());
+		prep.executeUpdate();
+		prep.close();
+
+	}
+
+	public static void insertWarehouse(Warehouse warehouse) throws SQLException {
+
+		String sql1 = "INSERT INTO warehouse (phone,city,country, address, pc)" + "VALUES(?,?,?,?,?);";
+		PreparedStatement prep = c.prepareStatement(sql1);
+		prep.setInt(1, warehouse.getPhone());
+		prep.setString(2, warehouse.getCity());
+		prep.setString(3, warehouse.getCity());
+		prep.setString(4, warehouse.getAdress());
+		prep.setInt(5, warehouse.getPc());
+		prep.executeUpdate();
+		prep.close();
+	
+	}
+
+//===========================================================================================================
+//									Reads
+//===========================================================================================================
 	public static Employee extractEmployeeById(Integer id) throws SQLException {
 	
 		String sql = "SELECT * FROM employee WHERE id = ? ";
@@ -594,126 +593,139 @@ public class SQLManager implements Manager {
 		return drugs;
 	}
 	
-	/*
-	 * =====================================================================================================
-	 * 								Updates
-	 * =====================================================================================================
-	 */	
+    
+//=====================================================================================================
+// 								Updates
+//=====================================================================================================
 	
 	//CLIENT
-		public static void updateClientAdress(int id, String newAdress) throws SQLException {
-		String sql="UPDATE client SET adress = ? WHERE id = ? ";
-		PreparedStatement prep=c.prepareStatement(sql);
+	public static void updateClientAdress(int id, String newAdress) throws SQLException {
+		
+		String sql = "UPDATE client SET adress = ? WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, newAdress);
 		prep.setInt(2, id);
 		prep.executeUpdate();
 		prep.close();
-		
 	}
-		public static void updateClientPhone(int id, int phone)throws SQLException{
-			String sql="UPDATE client SET telephone = ? WHERE id=?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1,phone);
-			prep.setInt(2, id);
-			prep.executeUpdate();
-			prep.close();
-		}
-		
-		public static void updateClientEmail(int id, String email)throws SQLException{
-			String sql="UPDATE client SET email = ? WHERE id = ? ";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setString(1, email);
-			prep.setInt(2, id);
-			prep.executeUpdate();
-			prep.close();
-		}
-		public static void updateClientPaymethod(int id, String paymethod)throws SQLException{
-			String sql="UPDATE client SET payMethod = ? WHERE id = ? ";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setString(1, paymethod);
-			prep.setInt(2, id);
-			prep.executeUpdate();
-			prep.close();
-		}
-		public static void updateClientPassword(int id, String password)throws SQLException{
-			String sql="UPDATE client SET password = ? WHERE id = ? ";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setString(1, password);
-			prep.setInt(2, id);
-			prep.executeUpdate();
-			prep.close();
-		}
 
+	public static void updateClientPhone(int id, int phone) throws SQLException {
+		
+		String sql = "UPDATE client SET telephone = ? WHERE id=?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, phone);
+		prep.setInt(2, id);
+		prep.executeUpdate();
+		prep.close();
+	}
+
+	public static void updateClientEmail(int id, String email) throws SQLException {
+		
+		String sql = "UPDATE client SET email = ? WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, email);
+		prep.setInt(2, id);
+		prep.executeUpdate();
+		prep.close();
+	}
+
+	public static void updateClientPaymethod(int id, String paymethod) throws SQLException {
+		
+		String sql = "UPDATE client SET payMethod = ? WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, paymethod);
+		prep.setInt(2, id);
+		prep.executeUpdate();
+		prep.close();
+	}
+
+	public static void updateClientPassword(int id, String password) throws SQLException {
+		
+		String sql = "UPDATE client SET password = ? WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, password);
+		prep.setInt(2, id);
+		prep.executeUpdate();
+		prep.close();
+	}
 		
 	//Employee
 		
 		
-		public static void updateEmployeePhoto(Employee employee, byte[] photo)throws SQLException{
-			String sql="UPDATE employee SET photo =? WHERE id =?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setBytes(1, photo);
-			prep.setInt(2, employee.getId());
-			prep.executeUpdate();
-			prep.close();
-		}
+	public static void updateEmployeePhoto(Employee employee, byte[] photo) throws SQLException {
 		
-		public static void updateEmployeePhone(Employee employee, int phone)throws SQLException{
-			String sql="UPDATE employee SET phone =? WHERE id =?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1, phone);
-			prep.setInt(2, employee.getId());
-			prep.executeUpdate();
-			prep.close();
-		}
+		String sql = "UPDATE employee SET photo =? WHERE id =?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setBytes(1, photo);
+		prep.setInt(2, employee.getId());
+		prep.executeUpdate();
+		prep.close();
+	}
+
+	public static void updateEmployeePhone(Employee employee, int phone) throws SQLException {
 		
-		public static void updateEmployeeSalary(Employee employee, int salary)throws SQLException{
-			String sql="UPDATE employee SET salary =? WHERE id =?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1, salary);
-			prep.setInt(2, employee.getId());
-			prep.executeUpdate();
-			prep.close();
-		}
-		public static void updateEmployeePosition(Employee employee, String position)throws SQLException{
-			String sql="UPDATE employee SET position =? WHERE id =?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setString(1, position);
-			prep.setInt(2, employee.getId());
-			prep.executeUpdate();
-			prep.close();
-		}
+		String sql = "UPDATE employee SET phone =? WHERE id =?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, phone);
+		prep.setInt(2, employee.getId());
+		prep.executeUpdate();
+		prep.close();
+	}
+
+	public static void updateEmployeeSalary(Employee employee, int salary) throws SQLException {
 		
-		public static void updateEmployeeWarehouse(Employee employee, Warehouse warehouse)throws SQLException{
-			String sql="UPDATE employee SET warehouse =? WHERE id =?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1, warehouse.getId());
-			prep.setInt(2, employee.getId());
-			prep.executeUpdate();
-			prep.close();
-		}
+		String sql = "UPDATE employee SET salary =? WHERE id =?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, salary);
+		prep.setInt(2, employee.getId());
+		prep.executeUpdate();
+		prep.close();
+	}
+
+	public static void updateEmployeePosition(Employee employee, String position) throws SQLException {
 		
-		public static void updateEmployeePassword(Employee employee, int password)throws SQLException{
-			String sql="UPDATE employee SET password =? WHERE id =?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1, password);
-			prep.setInt(2, employee.getId());
-			prep.executeUpdate();
-			prep.close();
-		}
+		String sql = "UPDATE employee SET position =? WHERE id =?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, position);
+		prep.setInt(2, employee.getId());
+		prep.executeUpdate();
+		prep.close();
+	}
+
+	public static void updateEmployeeWarehouse(Employee employee, Warehouse warehouse) throws SQLException {
 		
-	public static void updateAdmin(int id, boolean admin) throws SQLException{
-	
-		String sql="UPDATE employee SET type= ? WHERE id = ?";
-		PreparedStatement prep=c.prepareStatement(sql);
+		String sql = "UPDATE employee SET warehouse =? WHERE id =?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, warehouse.getId());
+		prep.setInt(2, employee.getId());
+		prep.executeUpdate();
+		prep.close();
+	}
+
+	public static void updateEmployeePassword(Employee employee, int password) throws SQLException {
+		
+		String sql = "UPDATE employee SET password =? WHERE id =?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, password);
+		prep.setInt(2, employee.getId());
+		prep.executeUpdate();
+		prep.close();
+	}
+
+	public static void updateAdmin(int id, boolean admin) throws SQLException {
+
+		String sql = "UPDATE employee SET type= ? WHERE id = ?";
+		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setBoolean(1, admin);
 		prep.setInt(2, id);
 		prep.executeUpdate();
 		prep.close();
-		
 	}
-		//Arrives 
+	
+	//Arrives 
 		
 	public static void updateArrivesAmmount(Arrives arrives, int ammount)throws SQLException{
+		
 		String sql="UPDATE arrives SET ammount= ? WHERE transaction_id = ?";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1,ammount);
@@ -721,38 +733,42 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();
 	}
+	
 	//Packaged
 	
-		public static void updatePackagedAmmount(Packaged packaged, int ammount)throws SQLException{
-			String sql="UPDATE packaged SET ammount= ? WHERE id = ?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1,ammount);
-			prep.setInt(2, packaged.getDeliveryId());
-			prep.executeUpdate();
-			prep.close();
-		}
+	public static void updatePackagedAmmount(Packaged packaged, int ammount)throws SQLException{
 		
-		
-		
-	//Deliveries
-		public static void updateDeliverySellingPrice(Delivery delivery, int sellingPrice)throws SQLException{
-			String sql="UPDATE deliveries SET sellingPrice=? WHERE id=?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1,sellingPrice);
-			prep.setInt(2,delivery.getTransactionId());
-			prep.executeUpdate();
-			prep.close();
-		}
-		public static void updateDeliveryDate(Delivery delivery, Date date)throws SQLException{
-			String sql="UPDATE deliveries SET transaction_date=? WHERE id=?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setDate(1,date);
-			prep.setInt(2, delivery.getTransactionId());
-			prep.executeUpdate();
-			prep.close();
-		}
+		String sql="UPDATE packaged SET ammount= ? WHERE id = ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setInt(1,ammount);
+		prep.setInt(2, packaged.getDeliveryId());
+		prep.executeUpdate();
+		prep.close();
+	}
 			
-	// ===========================================================================================================
+	//Deliveries
+	
+	public static void updateDeliverySellingPrice(Delivery delivery, int sellingPrice)throws SQLException{
+		
+		String sql="UPDATE deliveries SET sellingPrice=? WHERE id=?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setInt(1,sellingPrice);
+		prep.setInt(2,delivery.getTransactionId());
+		prep.executeUpdate();
+		prep.close();
+	}
+	
+	public static void updateDeliveryDate(Delivery delivery, Date date)throws SQLException{
+		
+		String sql="UPDATE deliveries SET transaction_date=? WHERE id=?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setDate(1,date);
+		prep.setInt(2, delivery.getTransactionId());
+		prep.executeUpdate();
+		prep.close();
+	}
+			
+// ===========================================================================================================
 
 
 	public static void createTable(String statement) throws SQLException {
@@ -776,10 +792,7 @@ public class SQLManager implements Manager {
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
-		prep.close();
-		
-    	
-		
+		prep.close();		
 	}
 	
     public static void deleteArrival(Arrival arrival)  throws SQLException{
@@ -938,6 +951,7 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();
        	
+
     }
     
     //Getting the pojos, more methods needed
@@ -970,6 +984,8 @@ public class SQLManager implements Manager {
     		loadedClient.setPassword(rs.getString("password"));
     		clientList.add(loadedClient);
     	}
+    	rs.close();
+    	prep.close();
     	return clientList;
     }
     
@@ -1030,10 +1046,6 @@ public class SQLManager implements Manager {
     	return drugList;
     }
     
-    
-    
-    
-    
-    
+
     
 }
