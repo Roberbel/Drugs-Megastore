@@ -24,8 +24,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 
 public class AdminWindow implements Initializable {
+	
+	@FXML
+	private BorderPane window;
 	
     @FXML
     private TabPane pojosTabPane;
@@ -50,9 +54,6 @@ public class AdminWindow implements Initializable {
 
     @FXML
     private TableColumn<Client,PaymentMethod> clientPayment;
-
-    @FXML
-    private TableColumn<Client, ?> clientDeliveries;
 
     @FXML
     private TextField clientNameField;
@@ -92,6 +93,9 @@ public class AdminWindow implements Initializable {
 
     @FXML
     private TableColumn<Drug, Integer> drugStock;
+    
+    @FXML
+    private TableColumn<Drug,Corridor> drugCorridor;
 
     @FXML
     private TextField drugNameField;
@@ -104,6 +108,9 @@ public class AdminWindow implements Initializable {
 
     @FXML
     private TextField drugStockField;
+    
+    @FXML
+    private ComboBox <Corridor> comboCorridor;
 
     @FXML
     private JFXButton addDrugButton;
@@ -253,7 +260,7 @@ public class AdminWindow implements Initializable {
 	    	}else {
 	    		newClient.setPaymentMethod(PaymentMethod.ORGANS);
 	    	}
-	    	newClient.setUsername("Morgoth");
+	    	newClient.setUsername(newClient.getEmail());
 	    	newClient.setPassword("Sauron");
 	    	clientTable.getItems().add(newClient);
 	    	SQLManager.insertClient(newClient);	    	    	
@@ -277,6 +284,7 @@ public class AdminWindow implements Initializable {
     	}catch(NumberFormatException | NullPointerException | SQLException ex) {
     		Alert alert=new Alert(AlertType.ERROR);
     		alert.show();	
+    		ex.printStackTrace();
     	}   	
     	
     }
@@ -318,7 +326,17 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void deleteCorridorClicked(ActionEvent event) {
-
+    	ObservableList <Corridor> items,sel;
+    	items=corridorsTable.getItems();
+    	sel=corridorsTable.getSelectionModel().getSelectedItems();
+    	for(Corridor c:sel) {
+    		items.remove(c);
+    		try {
+    			SQLManager.deleteCorridor(c);
+    		}catch(SQLException ex) {
+    			ex.printStackTrace();
+    		}
+    	}
     }
 
     @FXML
@@ -340,6 +358,7 @@ public class AdminWindow implements Initializable {
     void loadEmployeeImage(MouseEvent event) {
 
     }
+    
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -366,15 +385,28 @@ public class AdminWindow implements Initializable {
 			e.printStackTrace();
 		}
 		//Corridors Table
+		corridorId.setCellValueFactory(new PropertyValueFactory <Corridor,Integer>("id"));
+		corridorWarehouse.setCellValueFactory(new PropertyValueFactory <Corridor,Warehouse>("warehouse"));
+		corridorTemperature.setCellValueFactory(new PropertyValueFactory <Corridor,Float>("temperature"));
 		try {
 			comboWare.getItems().addAll(SQLManager.getAllWarehouse());
+			corridorsTable.getItems().addAll(SQLManager.getAllCorridors());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		//clientTable.getItems().addAll(JPAManager.getAllClients());
-		
-		//Corridor Table
+		//Drug Table		
+		drugName.setCellValueFactory(new PropertyValueFactory <Drug,String>("name"));
+		drugPrinciple.setCellValueFactory(new PropertyValueFactory <Drug,String>("activePrinciple"));
+		drugPrice.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("selling price"));
+		drugStock.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("stock"));	
+		drugCorridor.setCellValueFactory(new PropertyValueFactory <Drug,Corridor>("corridor"));
+		try {
+			comboCorridor.getItems().addAll(SQLManager.getAllCorridors());
+			drugTable.getItems().addAll(SQLManager.getAllDrugs());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		

@@ -116,10 +116,14 @@ public class Warehouse implements Serializable {
 		return true;
 	}
 
-	@Override
+//	@Override
+//	public String toString() {
+//		return "Warehouse [id=" + id + ", pc=" + pc + ", country=" + country + ", adress=" + address + ", phone=" + phone
+//				+ "]";
+//	}
+	
 	public String toString() {
-		return "Warehouse [id=" + id + ", pc=" + pc + ", country=" + country + ", adress=" + address + ", phone=" + phone
-				+ "]";
+		return "Warehouse " + this.id;
 	}
 
 	public Integer getId() {

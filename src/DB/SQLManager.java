@@ -377,7 +377,7 @@ public class SQLManager implements Manager {
 		ResultSet rs = prep.executeQuery();
 		
 		Warehouse warehouse =  new Warehouse(rs.getInt("id"), rs.getInt("pc"), rs.getString("country"),
-				rs.getString("city"), rs.getString("adress"),rs.getInt("phone"));
+				rs.getString("city"), rs.getString("address"),rs.getInt("phone"));
 	
 		if(id == warehouse.getId()) {
 			prep.close();
@@ -444,8 +444,12 @@ public class SQLManager implements Manager {
 		
 		ResultSet rs = prep.executeQuery();
 		
-		Corridor corridor = new Corridor (rs.getInt("id"), rs.getFloat("temperature"), extractWarehouseById(rs.getInt("warehouse_id")));
-	
+		//Corridor corridor = new Corridor (rs.getInt("id"), rs.getFloat("temperature"), extractWarehouseById(rs.getInt("warehouse_id")));
+		Corridor corridor=new Corridor();
+		rs.next();
+		corridor.setId(rs.getInt("id"));
+		corridor.setTemperature(rs.getFloat("temperature"));
+		corridor.setWarehouse(extractWarehouseById(rs.getInt("warehouse_id")));
 		if(id == corridor.getId()) {
 			prep.close();
 			rs.close();
@@ -984,7 +988,46 @@ public class SQLManager implements Manager {
     		loadedWarehouse.setPc(rs.getInt("pc"));
     		wareList.add(loadedWarehouse);   		
     	}
+    	rs.close();
+    	prep.close();
     	return wareList;
+    }
+    
+    public static List <Corridor> getAllCorridors() throws SQLException {
+    	String query="SELECT * FROM corridor";
+    	PreparedStatement prep=c.prepareStatement(query);
+    	ResultSet rs=prep.executeQuery();
+    	List <Corridor> corridorList=new ArrayList <Corridor>();
+    	while(rs.next()) {
+    		Corridor loadedCorridor=new Corridor();
+    		loadedCorridor.setId(rs.getInt("id"));
+    		loadedCorridor.setWarehouse(extractWarehouseById(rs.getInt("warehouse_id")));
+    		loadedCorridor.setTemperature(rs.getFloat("temperature"));
+    		corridorList.add(loadedCorridor);
+    	}
+    	rs.close();
+    	prep.close();
+    	return corridorList;
+    }
+    
+    public static List <Drug> getAllDrugs() throws SQLException{
+    	String query="SELECT * FROM drug";
+    	PreparedStatement prep=c.prepareStatement(query);
+    	ResultSet rs=prep.executeQuery();
+    	List <Drug> drugList=new ArrayList <Drug>();
+    	while(rs.next()) {
+    		Drug loadedDrug=new Drug();
+    		loadedDrug.setId(rs.getInt("id"));
+    		loadedDrug.setName(rs.getString("name"));
+    		loadedDrug.setActivePrinciple(rs.getString("active_principle"));
+    		loadedDrug.setSellingPrice(rs.getInt("selling_price"));
+    		loadedDrug.setStock(rs.getInt("stock"));
+    		loadedDrug.setPhoto(rs.getBytes("photo"));
+    		loadedDrug.setCorridor(extractCorridorById(rs.getInt("corridor_id")));
+    	}
+    	rs.close();
+    	prep.close();
+    	return drugList;
     }
     
     
