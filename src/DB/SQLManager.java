@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pojos.*;
+import pojos.Client.PaymentMethod;
 
 
 public class SQLManager implements Manager {
@@ -225,13 +226,15 @@ public class SQLManager implements Manager {
 	
 	public static void insertClient(Client client) throws SQLException {
 
-		String sql1 = "INSERT INTO client(name, adress ,telephone, email, payment_method)" + "VALUES(?,?,?,?,?);";
+		String sql1 = "INSERT INTO client(name, address ,telephone, email, payment_method,username,password)" + "VALUES(?,?,?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, client.getName());
 		prep.setString(2, client.getAddress());
 		prep.setInt(3, client.getTelephone());
 		prep.setString(4, client.getEmail());
 		prep.setString(5, client.getPaymentMethod().toString());
+		prep.setString(6,client.getUsername());
+		prep.setString(7, client.getPassword());
 		prep.executeUpdate();
 		prep.close();
 
@@ -921,9 +924,7 @@ public class SQLManager implements Manager {
 		prep.setInt(1,id);
 		prep.executeUpdate();
 		prep.close();
-		
-    	
-    	
+	
     }
     
     public static void deleteWarehouse(Warehouse warehouse) throws SQLException {
@@ -932,9 +933,59 @@ public class SQLManager implements Manager {
 		prep.setInt(1,warehouse.getId());
 		prep.executeUpdate();
 		prep.close();
-    	
-    	
+       	
     }
+    
+    //Getting the pojos
+    
+    public static List <Client> getAllClient() throws SQLException {
+    	String sql="SELECT * FROM client";
+    	PreparedStatement prep=c.prepareStatement(sql);
+    	ResultSet rs=prep.executeQuery();
+    	List <Client> clientList=new ArrayList <Client> ();
+    	while(rs.next()) {
+    		Client loadedClient=new Client();
+    		loadedClient.setId(rs.getInt("id"));
+    		loadedClient.setName(rs.getString("name"));
+    		loadedClient.setAddress(rs.getString("address"));
+    		loadedClient.setTelephone(rs.getInt("telephone"));
+    		loadedClient.setEmail(rs.getString("email"));    		
+    		if(rs.getString("payment_method").equals("MASTERCARD")) {
+    			loadedClient.setPaymentMethod(PaymentMethod.MASTERCARD);
+    		}else if(rs.getString("payment_method").equals("VISA")) {
+    			loadedClient.setPaymentMethod(PaymentMethod.VISA);
+    		}else if(rs.getString("payment_method").equals("PAYPAL")) {
+    			loadedClient.setPaymentMethod(PaymentMethod.PAYPAL);
+    		}else if(rs.getString("payment_method").equals("AMERICAN_EXPRESS")) {
+    			loadedClient.setPaymentMethod(PaymentMethod.AMERICAN_EXPRESS);
+    		}else {
+    			loadedClient.setPaymentMethod(PaymentMethod.ORGANS);
+    		}    		
+    		loadedClient.setUsername(rs.getString("username"));
+    		loadedClient.setPassword(rs.getString("password"));
+    		clientList.add(loadedClient);
+    	}
+    	return clientList;
+    }
+    
+    public static List <Warehouse> getAllWarehouse() throws SQLException {
+    	String query="SELECT * FROM warehouse";
+    	PreparedStatement prep=c.prepareStatement(query);
+    	ResultSet rs=prep.executeQuery();
+    	List <Warehouse> wareList=new ArrayList <Warehouse>();
+    	while(rs.next()) {
+    		Warehouse loadedWarehouse= new Warehouse();
+    		loadedWarehouse.setId(rs.getInt("id"));
+    		loadedWarehouse.setPhone(rs.getInt("phone"));
+    		loadedWarehouse.setCity(rs.getString("city"));
+    		loadedWarehouse.setCountry(rs.getString("country"));
+    		loadedWarehouse.setAdress(rs.getString("address"));
+    		loadedWarehouse.setPc(rs.getInt("pc"));
+    		wareList.add(loadedWarehouse);   		
+    	}
+    	return wareList;
+    }
+    
     
     
     

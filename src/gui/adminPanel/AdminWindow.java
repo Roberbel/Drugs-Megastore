@@ -256,11 +256,11 @@ public class AdminWindow implements Initializable {
 	    	newClient.setUsername("Morgoth");
 	    	newClient.setPassword("Sauron");
 	    	clientTable.getItems().add(newClient);
-
-	    	JPAManager.insertClient(newClient);
-    	}catch(NumberFormatException | NullPointerException ex) {
+	    	SQLManager.insertClient(newClient);	    	    	
+    	}catch(NumberFormatException | NullPointerException | SQLException ex) {
     		Alert alert=new Alert(AlertType.ERROR);
     		alert.show();		
+    		ex.printStackTrace();
     	}
   	
     }
@@ -273,8 +273,8 @@ public class AdminWindow implements Initializable {
     		newCorridor.setTemperature(Float.parseFloat(corridorTempField.getText()));
     		newCorridor.setWarehouse(comboWare.getSelectionModel().getSelectedItem());
     		corridorsTable.getItems().add(newCorridor);
-    		JPAManager.insertCorridor(newCorridor);
-    	}catch(NumberFormatException | NullPointerException ex) {
+    		SQLManager.insertCorridor(newCorridor);
+    	}catch(NumberFormatException | NullPointerException | SQLException ex) {
     		Alert alert=new Alert(AlertType.ERROR);
     		alert.show();	
     	}   	
@@ -308,8 +308,12 @@ public class AdminWindow implements Initializable {
     	sel=clientTable.getSelectionModel().getSelectedItems();
     	for(Client c:sel) {
     		items.remove(c);
-    	}
-    	
+    		try {
+				SQLManager.deleteClient(c);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+    	}    	
     }
 
     @FXML
@@ -340,7 +344,7 @@ public class AdminWindow implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Starts Connection with Database
-		JPAManager.connect();
+		//JPAManager.connect();
 		try {
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 		} catch (ClassNotFoundException | SQLException e) {
@@ -356,8 +360,19 @@ public class AdminWindow implements Initializable {
 		clientPhone.setCellValueFactory(new PropertyValueFactory <Client,Integer>("telephone"));
 		clientMail.setCellValueFactory(new PropertyValueFactory <Client,String>("email"));
 		clientPayment.setCellValueFactory(new PropertyValueFactory <Client,PaymentMethod>("paymentMethod"));
+		try {
+			clientTable.getItems().addAll(SQLManager.getAllClient());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//Corridors Table
+		try {
+			comboWare.getItems().addAll(SQLManager.getAllWarehouse());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
-		clientTable.getItems().addAll(JPAManager.getAllClients());
+		//clientTable.getItems().addAll(JPAManager.getAllClients());
 		
 		//Corridor Table
 		
