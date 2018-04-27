@@ -936,7 +936,8 @@ public class SQLManager implements Manager {
        	
     }
     
-    //Getting the pojos
+    //Getting the pojos, more methods needed
+    
     
     public static List <Client> getAllClient() throws SQLException {
     	String sql="SELECT * FROM client";
