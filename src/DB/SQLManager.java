@@ -1206,7 +1206,7 @@ public class SQLManager implements Manager {
     	
     	Delivery delivery = new Delivery();
     	delivery.setClient(searchClientById(rs.getInt("client_id")));
-    	delivery.setSellingPrice(rs.getInt("sellign_price"));
+    	delivery.setSellingPrice(rs.getInt("selling_price"));
     	delivery.setTransactionDate(rs.getDate("transaction_date"));
     	delivery.setTransactionId(rs.getInt("transaction_id"));
     	delivery.setPackages(searchPackagedByDeliveryId(delivery.getTransactionId()));
