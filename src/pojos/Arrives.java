@@ -42,7 +42,15 @@ public class Arrives implements Serializable{
 	
 	}
 	
-	public Arrives(Drug drug, Arrival arrival, Integer ammount){
+	public Arrives(Integer drugId, Integer arrivalId, Integer amount) {
+		this.drugId = drugId;
+		this.arrivalId = arrivalId;
+		this.amount = amount;
+		drug = null;
+		arrival = null;
+	}
+	
+	public Arrives(Drug drug, Arrival arrival, Integer amount){
 		
 		super();
 		drug.addArrive(this);
@@ -50,7 +58,7 @@ public class Arrives implements Serializable{
 		this.arrival = arrival;
 		this.drugId = drug.getId();
 		this.arrivalId = arrival.getArrivalId();
-		this.amount = ammount;
+		this.amount = amount;
 	
 	}
 
