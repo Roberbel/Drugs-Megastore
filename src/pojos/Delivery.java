@@ -57,7 +57,8 @@ public class Delivery implements Serializable {
 	@Column (name = "transaction_date")
 	private Date transactionDate;
 	
-	private boolean delivered;
+	@XmlAttribute
+	private boolean sent;
 
 
 	@XmlElement(name = "package")
@@ -81,7 +82,7 @@ public class Delivery implements Serializable {
 		this.transactionDate = transactionDate;
 		this.packages = packages;
 		this.client = client;
-		delivered = false;
+		sent = false;
 	}
 
 	
@@ -91,7 +92,7 @@ public class Delivery implements Serializable {
 		this.transactionDate = transactionDate;
 		this.packages = packages;
 		this.client = client;
-		this.delivered = delivered;
+		this.sent = delivered;
 	}
 
 
@@ -190,14 +191,14 @@ public class Delivery implements Serializable {
 		}
 	}
 	
-	public boolean isDelivered() {
-		return delivered;
+	public boolean isSent() {
+		return sent;
 	}
 
 
 
-	public void setDelivered(boolean delivered) {
-		this.delivered = delivered;
+	public void setSent(boolean delivered) {
+		this.sent = delivered;
 	}
 
 
