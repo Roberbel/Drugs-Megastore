@@ -44,6 +44,8 @@ public class Arrival implements Serializable{
 	@XmlAttribute
 	private Integer buyingPrice;
 	
+	private boolean arrived;
+
 	@Column(name = "transaction_date") 
 	@XmlAttribute
 	private Date date;
@@ -73,25 +75,36 @@ public class Arrival implements Serializable{
 		this.date = date;
 		this.provider = provider;
 		this.arrives = arrives;
+		arrived = false;
 	}
 
-
+	
+	public Arrival(Integer buyingPrice, Date date, Provider provider, List<Arrives> arrives, Boolean arrived) {
+		super();
+		this.buyingPrice = buyingPrice;
+		this.date = date;
+		this.provider = provider;
+		this.arrives = arrives;
+		this.arrived = arrived;
+	}
 
 	public Arrival(Integer arrivalId, Integer buyingPrice, Date date, Provider provider,
-			List<Arrives> arrives) {
+			List<Arrives> arrives, Boolean arrived) {
 		super();
 		this.arrivalId = arrivalId;
 		this.buyingPrice = buyingPrice;
 		this.date = date;
 		this.provider = provider;
 		this.arrives = arrives;
+		this.arrived = arrived;
 	}
-	public Arrival(Integer arrivalId, Integer buyingPrice, Date date,  Provider provider) {
+	public Arrival(Integer arrivalId, Integer buyingPrice, Date date,  Provider provider, Boolean arrived) {
 		super();
 		this.arrivalId = arrivalId;
 		this.buyingPrice = buyingPrice;
 		this.date = date;
 		this.provider = provider;
+		this.arrived = arrived; 
 	}
 
 	@Override
@@ -160,6 +173,15 @@ public class Arrival implements Serializable{
 		return arrives;
 	}
 
+	
+	public boolean isArrived() {
+		return arrived;
+	}
+
+	public void setArrived(boolean arrived) {
+		this.arrived = arrived;
+	}
+	
 	public void setArrives(List<Arrives> arrives) {
 		this.arrives = arrives;
 	}

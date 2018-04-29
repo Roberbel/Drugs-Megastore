@@ -56,6 +56,9 @@ public class Delivery implements Serializable {
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	@Column (name = "transaction_date")
 	private Date transactionDate;
+	
+	private boolean delivered;
+
 
 	@XmlElement(name = "package")
 	@XmlElementWrapper(name = "packages")
@@ -78,6 +81,17 @@ public class Delivery implements Serializable {
 		this.transactionDate = transactionDate;
 		this.packages = packages;
 		this.client = client;
+		delivered = false;
+	}
+
+	
+	public Delivery(Integer sellingPrice, Date transactionDate, List<Packaged> packages, Client client, Boolean delivered) {
+		super();
+		this.sellingPrice = sellingPrice;
+		this.transactionDate = transactionDate;
+		this.packages = packages;
+		this.client = client;
+		this.delivered = delivered;
 	}
 
 
@@ -175,5 +189,17 @@ public class Delivery implements Serializable {
 			this.packages.remove(packaged);
 		}
 	}
+	
+	public boolean isDelivered() {
+		return delivered;
+	}
+
+
+
+	public void setDelivered(boolean delivered) {
+		this.delivered = delivered;
+	}
+
+
 
 }

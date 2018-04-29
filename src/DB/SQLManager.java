@@ -95,7 +95,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE arrivals " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " buying_price INT NOT NULL," + " transaction_date DATE NOT NULL,"
-				+ " provider_id REFERENCES provider (id) )";
+				+ "received BOOLEAN NOT NULL DEFAULT FALSE" + ", provider_id REFERENCES provider (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 
@@ -137,7 +137,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE deliveries  " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " selling_price INT NOT NULL," + " transaction_date DATE NOT NULL,"
-				+ " client_id INT REFERENCES client (id) )";
+				+"sent BOOLEAN NOT NULL DEFAULT FALSE, " + "client_id INT REFERENCES client (id) )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -201,11 +201,12 @@ public class SQLManager implements Manager {
 	
 	public static void insertArrivals(Arrival arrival) throws SQLException {
 		//if(searchArrivalById(arrival.getArrivalId()) == null) {
-			String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, provider_id)" + "VALUES( ?,?,?);";
+			String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, provider_id, arrived)" + "VALUES( ?,?,?,?);";
 			PreparedStatement prep = c.prepareStatement(sql1);
 			prep.setInt(1, arrival.getBuyingPrice());
 			prep.setDate(2, arrival.getDate());
 			prep.setInt(3, arrival.getProvider().getProviderId());
+			prep.setBoolean(4, arrival.isArrived());
 			prep.executeUpdate();
 			prep.close();
 			List <Arrives> arrivesList=arrival.getArrives();
@@ -258,17 +259,19 @@ public class SQLManager implements Manager {
 		
 	public static void insertDeliveries(Delivery delivery) throws SQLException {
 
-		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id)" + "VALUES(?,?,?);";
+		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id, delivered)" + "VALUES(?,?,?, ?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setInt(1, delivery.getSellingPrice());
 		prep.setInt(2, delivery.getTransactionId());
 		prep.setInt(3, delivery.getClient().getId());
+		prep.setBoolean(4, delivery.isDelivered());
 		List <Packaged> packList=delivery.getPackages();
 		prep.executeUpdate();
 		prep.close();
 		for(Packaged p: packList) {
 			insertPackaged(p);
 		}
+	
 	}
 		
 	public static void insertDrug(Drug drug) throws SQLException {
@@ -1154,7 +1157,7 @@ public class SQLManager implements Manager {
     	
     	Provider providerWanted= searchProviderById(rs.getInt("id"));
 		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"), rs.getDate("date"),providerWanted);
-		
+		arrival.setArrived(rs.getBoolean("received"));
 		arrival.setArrives(searchArrivesByArrivalId(arrival.getArrivalId()));
 		
 		return arrival;
@@ -1209,6 +1212,7 @@ public class SQLManager implements Manager {
     	delivery.setSellingPrice(rs.getInt("selling_price"));
     	delivery.setTransactionDate(rs.getDate("transaction_date"));
     	delivery.setTransactionId(rs.getInt("transaction_id"));
+    	delivery.setDelivered(rs.getBoolean("delivered"));
     	delivery.setPackages(searchPackagedByDeliveryId(delivery.getTransactionId()));
     	return delivery;
     	
