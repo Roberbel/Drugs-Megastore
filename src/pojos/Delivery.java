@@ -194,9 +194,7 @@ public class Delivery implements Serializable {
 	public boolean isSent() {
 		return sent;
 	}
-
-
-
+	
 	public void setSent(boolean delivered) {
 		this.sent = delivered;
 	}

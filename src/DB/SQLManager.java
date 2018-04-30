@@ -1213,7 +1213,7 @@ public class SQLManager implements Manager {
     }
     
     private static Delivery getDelivery(ResultSet rs) throws SQLException{
-    	
+    	    	
     	Delivery delivery = new Delivery();
     	delivery.setClient(searchClientById(rs.getInt("client_id")));
     	delivery.setSellingPrice(rs.getInt("selling_price"));
