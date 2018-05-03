@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE Client[
+<!ELEMENT Client(name,address,telephone,email,paymentMethod,Deliveries)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT telephone (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT paymentMethod (#PCDATA)>
+ <!ELEMENT Deliveries (Delivery+)>
+<!ELEMENT Delivery (sellingPrice,transactionDate,client,packages)>
+<!ATTLIST Delivery id CDATA #REQUIRED>
+	 <!ELEMENT sellingPrice (#PCDATA)>
+	 <!ELEMENT transactionDate (#PCDATA)>
+	 <!ELEMENT client (#PCDATA)>
+	 <!ELEMENT packages(Packaged+)>
+	 

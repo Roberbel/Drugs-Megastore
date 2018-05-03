@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE Drug [
-  <!ELEMENT Drug(name, stock, sellingPrice, activePrinciple, corridor,photo)>
+  <!ELEMENT Drug(name, activePrinciple, stock, sellingPrice,corridor,packaged,arrives)>
    <!ELEMENT name (#PCDATA)>
-   <!ELEMENT stock(#PCDATA)>
-   <!ELEMENT sellingPrice(#PCDATA)>
    <!ELEMENT activePrinciple(#PCDATA)>  
-   <!ELEMENT corridor(#PCDATA)>
+    <!ELEMENT stock(#PCDATA)>
+    <!ELEMENT sellingPrice(#PCDATA)>
+      <!ELEMENT corridor(#PCDATA)>
+   <!ELEMENT packaged(Packaged+)>
+   <!ELEMENT Packaged()>
+   
+ 
     <!ELEMENT photo(#PCDATA)>    
      ]>
      
