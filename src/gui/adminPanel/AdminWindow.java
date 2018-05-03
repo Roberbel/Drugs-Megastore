@@ -122,22 +122,22 @@ public class AdminWindow implements Initializable {
     private Tab warehouseTab;
 
     @FXML
-    private TableView<?> warehouseTable;
+    private TableView<Warehouse> warehouseTable;
 
     @FXML
-    private TableColumn<?, ?> warePc;
+    private TableColumn<Warehouse,Integer> warePc;
 
     @FXML
-    private TableColumn<?, ?> wareCountry;
+    private TableColumn<Warehouse,String> wareCountry;
 
     @FXML
-    private TableColumn<?, ?> wareCity;
+    private TableColumn<Warehouse,String> wareCity;
 
     @FXML
-    private TableColumn<?, ?> wareAdress;
+    private TableColumn<Warehouse,String> wareAdress;
 
     @FXML
-    private TableColumn<?, ?> warePhone;
+    private TableColumn<Warehouse,Integer> warePhone;
 
     @FXML
     private TextField warePcField;
@@ -170,22 +170,22 @@ public class AdminWindow implements Initializable {
     private Tab employeesTab;
 
     @FXML
-    private TableView<?> employeeTable;
+    private TableView<Employee> employeeTable;
 
     @FXML
-    private TableColumn<?, ?> employeeName;
+    private TableColumn<Employee, String> employeeName;
 
     @FXML
-    private TableColumn<?, ?> employeeSalary;
+    private TableColumn<Employee, Integer> employeeSalary;
 
     @FXML
-    private TableColumn<?, ?> employeePhone;
+    private TableColumn<Employee, Integer> employeePhone;
 
     @FXML
-    private TableColumn<?, ?> employeePosition;
+    private TableColumn<Employee, String> employeePosition;
 
     @FXML
-    private TableColumn<?, ?> employeeWare;
+    private TableColumn<Employee, Warehouse> employeeWare;
 
     @FXML
     private TextField employeeNameField;
@@ -200,7 +200,7 @@ public class AdminWindow implements Initializable {
     private TextField employeePositionField;
 
     @FXML
-    private ComboBox<?> comboWarehouse;
+    private ComboBox<Warehouse> comboWarehouse;
 
     @FXML
     private JFXButton addEmployeeButton;
@@ -301,12 +301,35 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void addEmployeeClicked(ActionEvent event) {
-
+    	Employee newEmployee= new Employee();
+    	newEmployee.setName(employeeNameField.getText());
+    	newEmployee.setSalary(Integer.parseInt(employeeSalaryField.getText()));
+    	newEmployee.setPhone(Integer.parseInt(employeePhoneField.getText()));
+    	newEmployee.setPosition(employeePositionField.getText());
+    	newEmployee.setWarehouse(comboWarehouse.getSelectionModel().getSelectedItem());
+    	newEmployee.setUsername("Thor");
+    	newEmployee.setPassword("god of thunder");
+    	try {
+			SQLManager.insertEmployee(newEmployee);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     @FXML
     void addWareClicked(ActionEvent event) {
-
+    	Warehouse newWarehouse = new Warehouse();
+    	newWarehouse.setAdress(wareAdressField.getText());
+    	newWarehouse.setPc(Integer.parseInt(warePcField.getText()));
+    	newWarehouse.setCity(wareCityField.getText());
+    	newWarehouse.setCountry(wareCountryField.getText());
+    	newWarehouse.setPhone(Integer.parseInt(warePhoneField.getText()));
+    	try {
+    		SQLManager.insertWarehouse(newWarehouse);
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
+    	
     }
 
     @FXML
@@ -341,17 +364,47 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void deleteDrugClicked(ActionEvent event) {
-
+    	ObservableList <Drug> items, sel;
+    	items=drugTable.getItems();
+    	sel=drugTable.getSelectionModel().getSelectedItems();
+    	for(Drug d:sel) {
+    		items.remove(d);
+    		try {
+    			SQLManager.deleteDrug(d);
+    		}catch(SQLException ex) {
+    			ex.printStackTrace();
+    		}
+    	}
     }
 
     @FXML
     void deleteEmployeeClicked(ActionEvent event) {
-
+    	ObservableList <Employee> items,sel;
+    	items=employeeTable.getItems();
+    	sel=employeeTable.getSelectionModel().getSelectedItems();
+    	for(Employee e:sel) {
+    		items.remove(e);
+    		try {
+    			SQLManager.deleteEmployee(e);
+    		}catch(SQLException ex) {
+    			ex.printStackTrace();
+    		}
+    	}
     }
 
     @FXML
     void deleteWareClicked(ActionEvent event) {
-
+    	ObservableList <Warehouse> items,sel;
+    	items=warehouseTable.getItems();
+    	sel=warehouseTable.getSelectionModel().getSelectedItems();
+    	for(Warehouse w:sel) {
+    		items.remove(w);
+    		try {
+    			SQLManager.deleteWarehouse(w);
+    		}catch(SQLException ex) {
+    			ex.printStackTrace();
+    		}
+    	}
     }
 
     @FXML
@@ -380,7 +433,7 @@ public class AdminWindow implements Initializable {
 		clientMail.setCellValueFactory(new PropertyValueFactory <Client,String>("email"));
 		clientPayment.setCellValueFactory(new PropertyValueFactory <Client,PaymentMethod>("paymentMethod"));
 		try {
-			clientTable.getItems().addAll(SQLManager.getAllClient());
+			clientTable.getItems().addAll(SQLManager.getAllClients());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -389,7 +442,7 @@ public class AdminWindow implements Initializable {
 		corridorWarehouse.setCellValueFactory(new PropertyValueFactory <Corridor,Warehouse>("warehouse"));
 		corridorTemperature.setCellValueFactory(new PropertyValueFactory <Corridor,Float>("temperature"));
 		try {
-			comboWare.getItems().addAll(SQLManager.getAllWarehouse());
+			comboWare.getItems().addAll(SQLManager.getAllWarehouses());
 			corridorsTable.getItems().addAll(SQLManager.getAllCorridors());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -404,11 +457,31 @@ public class AdminWindow implements Initializable {
 			comboCorridor.getItems().addAll(SQLManager.getAllCorridors());
 			drugTable.getItems().addAll(SQLManager.getAllDrugs());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+		//Employee Table
+		employeeName.setCellValueFactory(new PropertyValueFactory <Employee,String>("name"));
+		employeeSalary.setCellValueFactory(new PropertyValueFactory <Employee,Integer>("salary"));
+		employeePhone.setCellValueFactory(new PropertyValueFactory <Employee,Integer>("phone"));
+		employeePosition.setCellValueFactory(new PropertyValueFactory <Employee,String>("position"));
+		employeeWare.setCellValueFactory(new PropertyValueFactory <Employee,Warehouse>("warehouse"));
+		try {
+			comboWarehouse.getItems().addAll(SQLManager.getAllWarehouses());
+			employeeTable.getItems().addAll(SQLManager.getAllEmployee());
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		//Warehouse Table
+		warePc.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("pc"));
+		wareCountry.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("country"));
+		wareCity.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("city"));
+		wareAdress.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("addres"));
+		warePhone.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("phone"));
+		try {
+			employeeTable.getItems().addAll(SQLManager.getAllEmployee());
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 		
 		
 	}
