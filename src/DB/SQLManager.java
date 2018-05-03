@@ -511,9 +511,10 @@ public class SQLManager implements Manager {
 	}
 	
 	
+	
 	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple)throws SQLException{ 
 		
-		String sql="SELECT * FROM drug WHERE activePrinciple LIKE ?";
+		String sql="SELECT * FROM drug WHERE active_principle LIKE %?%";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, activePrinciple);
 		ResultSet rs=prep.executeQuery();
@@ -525,6 +526,98 @@ public class SQLManager implements Manager {
 		return drugs;
 	}
 	
+	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple, Integer maxPrice)throws SQLException{ 
+		
+		String sql="SELECT * FROM drug WHERE active_principle LIKE %?% AND selling_price <= ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setString(1, activePrinciple);
+		prep.setInt(2, maxPrice);
+		ResultSet rs=prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
+		while(rs.next()) {
+			Drug drug = getDrug(rs);
+			drugs.add(drug);
+		}
+		return drugs;
+	}
+	
+	
+	public static List<Drug> searchDrugByMaxPrice(Integer maxPrice) throws SQLException{
+		
+		String sql="SELECT * FROM drug WHERE selling_price <= ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setInt(1, maxPrice);
+		ResultSet rs=prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
+		while(rs.next()) {
+			Drug drug = getDrug(rs);
+			drugs.add(drug);
+		}
+		return drugs;
+		
+	}
+	
+	
+	public static List<Drug> searchDrugByName(String name) throws SQLException{
+		
+		String sql="SELECT * FROM drug WHERE name LIKE %?%";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setString(1, name);
+		ResultSet rs=prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
+		while(rs.next()) {
+			Drug drug = getDrug(rs);
+			drugs.add(drug);
+		}
+		return drugs;
+	}
+	
+	
+	public static List<Drug> searchDrugByName(String name, String activePrinciple) throws SQLException{
+		
+		String sql="SELECT * FROM drug WHERE name LIKE %?% AND active_principle LIKE %?%";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setString(1, name);
+		prep.setString(2, activePrinciple);
+		ResultSet rs=prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
+		while(rs.next()) {
+			Drug drug = getDrug(rs);
+			drugs.add(drug);
+		}
+		return drugs;
+	}
+	
+	public static List<Drug> searchDrugByName(String name, Integer maxPrice) throws SQLException{
+		
+		String sql="SELECT * FROM drug WHERE name LIKE %?% AND selling_price <= ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setString(1, name);
+		prep.setInt(2, maxPrice);
+		ResultSet rs=prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
+		while(rs.next()) {
+			Drug drug = getDrug(rs);
+			drugs.add(drug);
+		}
+		return drugs;
+	}
+	
+	public static List<Drug> searchDrugByName(String name, String activePrinciple, Integer maxPrice) throws SQLException{
+		
+		String sql="SELECT * FROM drug WHERE name LIKE %?% AND active_principle LIKE %?% AND selling_price <= ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setString(1, name);
+		prep.setString(2, activePrinciple);
+		prep.setInt(3, maxPrice);
+		ResultSet rs=prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
+		while(rs.next()) {
+			Drug drug = getDrug(rs);
+			drugs.add(drug);
+		}
+		return drugs;
+	}
     
 	
 	public static Employee searchEmployeeById(Integer id) throws SQLException {
@@ -706,6 +799,32 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();
 	}
+	
+	//Drug
+	
+	public static void updateDrugStock(Integer id, Integer stock) throws SQLException {
+		
+		String sql = "UPDATE client SET password = ? WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, stock);
+		prep.setInt(2, id);
+		prep.executeUpdate();
+		prep.close();
+		
+	}
+	
+	public static void updateDrugStock(Drug drug, Integer stock) throws SQLException {
+		
+		String sql = "UPDATE drug SET stock = ? WHERE id = ? ";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, stock);
+		prep.setInt(2, drug.getId());
+		prep.executeUpdate();
+		prep.close();
+		
+	}
+	
+	
 		
 	//Employee
 		

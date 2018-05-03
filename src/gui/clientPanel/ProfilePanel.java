@@ -37,7 +37,7 @@ public class ProfilePanel extends BorderPane {
 		paymentMethodLab = new Label("Payment Method");
 		
 		nameField = new TextField(client.getName());
-		addressField = new TextField(client.getAdress());
+		addressField = new TextField(client.getAddress());
 		telephoneField = new TextField(client.getTelephone().toString());
 		emailField = new TextField(client.getEmail());
 		paymentMethod = new ChoiceBox<PaymentMethod>();
@@ -82,7 +82,7 @@ public class ProfilePanel extends BorderPane {
 	}
 	
 	private void addressChanged(){
-		client.setAdress(addressField.getText());
+		client.setAddress(addressField.getText());
 	}
 	
 	private void telephoneChanged() {

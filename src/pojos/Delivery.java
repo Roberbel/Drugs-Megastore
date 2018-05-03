@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-import sample.db.xml.utils.SQLDateAdapter;
+import xml.utils.SQLDateAdapter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -74,6 +74,11 @@ public class Delivery implements Serializable {
 		transactionDate = new Date(System.currentTimeMillis());
 	}
 
+	public Delivery(Client client){
+		
+		this.client = client;
+		
+	}
 	
 	
 	public Delivery(Integer sellingPrice, Date transactionDate, List<Packaged> packages, Client client) {

@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import gui.adminPanel.AdminWindow;
+import gui.clientPanel.ClientPane;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,9 @@ public class MainWindow {
 					case "EMPLOYEE":
 						break;
 					case "CLIENT":
+						this.stage.setScene(new Scene(new ClientPane(user.getExtractedClient())));
+						this.stage.setResizable(true);
+						this.stage.show();
 						break;
 					
 					}

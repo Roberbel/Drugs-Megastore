@@ -88,10 +88,10 @@ public class LogInManager {
 			
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 			
-			extractedEmployee = SQLManager.extractEmployeeByUsername(username);
+			extractedEmployee = SQLManager.searchEmployeeByUsername(username);
 			
 			if(extractedEmployee == null) {
-				extractedClient = SQLManager.extractClientByUsername(username);
+				extractedClient = SQLManager.searchClientByUsername(username);
 				
 				if(extractedClient == null) {
 					return false;
