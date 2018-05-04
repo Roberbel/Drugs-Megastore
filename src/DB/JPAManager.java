@@ -27,16 +27,6 @@ public class JPAManager implements Manager{
 			
 			JPAManager.connect();
 			JPAManager.insertEmployee(new Employee());;
-			System.out.println("inserted");
-			List<Employee> employees = JPAManager.getAllEmployees();
-			System.out.println("Read");
-			for(Employee e: employees) {
-				System.out.println(e);
-			}
-			//em.clear();
-			JPAManager.updateEmployeeName(employees.get(0), "LordOfChange");
-			System.out.println("Update");
-			System.out.println(employees.get(0));
 			JPAManager.disconnect();
 		}
 		

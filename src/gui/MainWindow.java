@@ -42,7 +42,7 @@ public class MainWindow {
     	user.setPassword(passField.getText());
     	this.stage=new Stage();
     	try {
-			if(user.checkExistance()) {
+			if(user.checkExistance()){
 				if(user.checkPassword()) {
 					switch(user.getType().toString()) {
 					case "ADMIN":
@@ -59,7 +59,8 @@ public class MainWindow {
 					case "EMPLOYEE":
 						break;
 					case "CLIENT":
-						this.stage.setScene(new Scene(new ClientPane(user.getExtractedClient())));
+						ClientPane pane = new ClientPane(user.getExtractedClient());
+						this.stage.setScene(new Scene(pane, 500, 300));
 						this.stage.setResizable(true);
 						this.stage.show();
 						break;
@@ -73,6 +74,7 @@ public class MainWindow {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			Alert alert=new Alert(AlertType.ERROR);
+			e.printStackTrace();
 			alert.showAndWait();
 		}
     	
