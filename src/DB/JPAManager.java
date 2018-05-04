@@ -27,7 +27,11 @@ public class JPAManager implements Manager{
 			
 			JPAManager.connect();
 			
-			JPAManager.insertArrival(new Arrival());
+			for (int i = 0; i < 40; i++) {
+				
+				JPAManager.insertDrug(new Drug());
+				
+			}
 			 
 			JPAManager.disconnect();
 		}

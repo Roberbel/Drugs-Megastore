@@ -47,7 +47,7 @@ public class ClientPane extends BorderPane {
 		delivery = new Delivery(client);
 		
 		//CHANGE THIS ICON!
-		logo = new ImageView(new Image("https://avatars0.githubusercontent.com/u/16308258?s=460&v=4"));
+		logo = new ImageView(new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Deutsche_Apotheke_Logo.svg/827px-Deutsche_Apotheke_Logo.svg.png"));
 		logo.setFitHeight(100);
 		logo.setFitWidth(100);
 		logo.setPreserveRatio(true);
@@ -157,10 +157,10 @@ public class ClientPane extends BorderPane {
 			 * 
 			 */
 			
-			if(name != "") {
+			if(!name.equals("")) {
 				
-				if(activePrinciple != "") {
-					if(stringMaxPrice != "") {
+				if(!activePrinciple.equals("")) {
+					if(!stringMaxPrice.equals("")) {
 					
 						drugs = SQLManager.searchDrugByName(name, activePrinciple, Integer.parseInt(stringMaxPrice));
 					
@@ -169,7 +169,7 @@ public class ClientPane extends BorderPane {
 						drugs = SQLManager.searchDrugByName(name, activePrinciple);
 					
 					}
-				}else if(stringMaxPrice != "") {
+				}else if(!stringMaxPrice.equals("")) {
 					
 					drugs = SQLManager.searchDrugByName(name, Integer.parseInt(stringMaxPrice));
 				
@@ -179,9 +179,9 @@ public class ClientPane extends BorderPane {
 				
 				}
 								
-			}else if (activePrinciple != "") {
+			}else if (!activePrinciple.equals("")) {
 				
-				if(stringMaxPrice != "") {
+				if(!stringMaxPrice.equals("")) {
 					
 					drugs = SQLManager.searchDrugByActivePrinciple(activePrinciple, Integer.parseInt(stringMaxPrice));
 					
@@ -191,7 +191,7 @@ public class ClientPane extends BorderPane {
 				
 				}
 				
-			}else if(stringMaxPrice != "") {
+			}else if(!stringMaxPrice.equals("")) {
 				
 				drugs = SQLManager.searchDrugByMaxPrice(Integer.parseInt(stringMaxPrice));
 				
@@ -203,20 +203,19 @@ public class ClientPane extends BorderPane {
 			
 			drugsPane.setContent(createDrugsPanels(drugs));
 		}catch (SQLException e) {
-			System.out.println("Error retrieving all the Drugs from the database");			
+			System.out.println("Error retrieving all the Drugs from the database");		
+			e.printStackTrace();
 		}
 	}
 	
 	private VBox createDrugsPanels(List<Drug> drugs) {
 		
 		VBox box = new VBox();
-		System.out.println("Drug list size = "+drugs.size());
 		for (int i = 0; i < drugs.size(); i = i+5) {
 
 			HBox hbox = new HBox();
 			for(int j = 0; j < 5 && (j+i)<drugs.size(); j++ ) {
 				hbox.getChildren().add(new DrugPanel(drugs.get(i+j), delivery));
-				System.out.println("creating a new drugpanel for "+drugs.get(i+j));
 			}
 			box.getChildren().add(hbox);
 		

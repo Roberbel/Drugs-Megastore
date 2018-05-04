@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import pojos.Client;
 import pojos.Client.PaymentMethod;
@@ -68,17 +69,19 @@ public class ProfilePanel extends BorderPane {
 		 * Adding components to Panels
 		 */
 		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
 		grid.add(nameLab, 0, 0);
 		grid.add(nameField, 1, 0);
-		grid.add(addressLab, 1, 0);
+		grid.add(addressLab, 0, 1);
 		grid.add(addressField, 1, 1);
-		grid.add(telephoneLab, 2, 0);
-		grid.add(telephoneField, 2, 1);
-		grid.add(emailLab, 3, 0);
-		grid.add(emailField, 3, 1);
-		grid.add(paymentMethodLab, 4, 0);
-		grid.add(paymentMethod, 4, 1);
-		setCenter(grid);
+		grid.add(telephoneLab, 0, 2);
+		grid.add(telephoneField, 1, 2);
+		grid.add(emailLab, 0, 3);
+		grid.add(emailField, 1, 3);
+		grid.add(paymentMethodLab, 0, 4);
+		grid.add(paymentMethod, 1, 4);
+		setCenter(new FlowPane(grid));
 		
 		
 	}

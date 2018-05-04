@@ -633,6 +633,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByName(String name, String activePrinciple) throws SQLException{
 		
+		System.out.println("name = "+name+"\nA.P. = "+activePrinciple);
 		String sql="SELECT * FROM drug WHERE name LIKE %?% AND active_principle LIKE %?%";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, name);
@@ -654,6 +655,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByName(String name, Integer maxPrice) throws SQLException{
 		
+		System.out.println("name = "+name+"\nMaxPrice = "+maxPrice);
 		String sql="SELECT * FROM drug WHERE name LIKE %?% AND selling_price <= ?";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, name);
@@ -675,6 +677,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByName(String name, String activePrinciple, Integer maxPrice) throws SQLException{
 		
+		System.out.println("name = "+name+"\nA.P. = "+activePrinciple+"\nMaxPrice = "+maxPrice);
 		String sql="SELECT * FROM drug WHERE name LIKE %?% AND active_principle LIKE %?% AND selling_price <= ?";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, name);
@@ -1315,7 +1318,6 @@ public class SQLManager implements Manager {
     	List <Drug> drugList=new ArrayList <Drug>();
     	while(rs1.next()) {
     		drugList.add(getDrug(rs1));
-    		System.out.println(drugList.get(drugList.size()-1));
     	}
     	rs1.close();
     	prep.close();

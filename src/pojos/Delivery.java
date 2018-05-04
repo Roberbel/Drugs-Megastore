@@ -77,6 +77,7 @@ public class Delivery implements Serializable {
 	public Delivery(Client client){
 		
 		this.client = client;
+		this.packages = new ArrayList<Packaged>();
 		
 	}
 	
