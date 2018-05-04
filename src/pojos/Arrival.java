@@ -136,7 +136,7 @@ public class Arrival implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Arrivals [arrivalId=" + arrivalId + ", buyingPrice=" + buyingPrice + ", date=" + date + ", provider=" + provider + ", drugs=" + arrives + "]";
+		return "Id :" + arrivalId +  ", provider :" + provider.getName()  + ", date :" + date;
 	}
 
 	public Integer getArrivalId() {
