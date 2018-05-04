@@ -1386,7 +1386,7 @@ public class SQLManager implements Manager {
     
     private static Arrival getArrival() throws SQLException {
     	
-    	Provider providerWanted= searchProviderById(rs.getInt("id"));
+    	Provider providerWanted= searchProviderById(rs.getInt("transaction_id"));
 		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"), rs.getDate("date"), providerWanted, rs.getBoolean("received"));
 		arrival.setArrives(searchArrivesByArrivalId(arrival.getArrivalId()));
 		
