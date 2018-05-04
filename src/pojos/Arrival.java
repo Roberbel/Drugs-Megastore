@@ -38,6 +38,7 @@ public class Arrival implements Serializable{
 	@TableGenerator(name="arrivals", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="arrivals")
 	@XmlAttribute
+	@Column(name = "transaction_id")
 	private Integer arrivalId;
 	
 	@Column(name = "buying_price")
