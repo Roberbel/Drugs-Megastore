@@ -18,6 +18,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import pojos.Arrival;
 
 public class employeeWindow implements Initializable {
 
@@ -25,7 +26,7 @@ public class employeeWindow implements Initializable {
     private Tab arrivals;
 
     @FXML
-    private ListView<?> arrivalList;
+    private ListView<Arrival> arrivalList;
 
     @FXML
     private JFXButton addArrival;
@@ -110,7 +111,25 @@ public class employeeWindow implements Initializable {
 
     @FXML
     void deleteArrival(ActionEvent event) {
-
+    			
+    			Arrival toBeRemoved = arrivalList.getSelectionModel().getSelectedItem();
+    			try {
+					SQLManager.deleteArrival(toBeRemoved);
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+    			
+   
+				
+					arrivalList.getItems().remove(toBeRemoved);
+					
+				
+				
+    			
+    			
+    			
+    			
     }
 
     @FXML
@@ -133,8 +152,8 @@ public class employeeWindow implements Initializable {
 		}
 		
 		try {
-			ObservableList methods = FXCollections.observableArrayList(SQLManager.getAllArrivals());
-			arrivalList.getItems().addAll(methods);
+			
+			arrivalList.getItems().addAll(SQLManager.getAllArrivals());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
