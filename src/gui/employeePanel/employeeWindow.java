@@ -18,129 +18,130 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import pojos.Arrival;
 
 public class employeeWindow implements Initializable {
 
-    @FXML
-    private Tab arrivals;
+	@FXML
+	private Tab arrivals;
 
-    @FXML
-    private ListView<Arrival> arrivalList;
+	@FXML
+	private ListView<Arrival> arrivalList;
 
-    @FXML
-    private JFXButton addArrival;
+	@FXML
+	private JFXButton addArrival;
 
-    @FXML
-    private JFXButton deleteArrival;
+	@FXML
+	private JFXButton deleteArrival;
 
-    @FXML
-    private DatePicker arrivalDate;
+	@FXML
+	private DatePicker arrivalDate;
 
-    @FXML
-    private TextField arrivalProvider;
+	@FXML
+	private TextField arrivalProvider;
 
-    @FXML
-    private TextField arrivalStatus;
+	@FXML
+	private TextField arrivalStatus;
 
-    @FXML
-    private TableView<?> arrivalInventory;
+	@FXML
+	private TableView<?> arrivalInventory;
 
-    @FXML
-    private TableColumn<?, ?> arrivalDrugs;
+	@FXML
+	private TableColumn<?, ?> arrivalDrugs;
 
-    @FXML
-    private TableColumn<?, ?> arrivalStocks;
+	@FXML
+	private TableColumn<?, ?> arrivalStocks;
 
-    @FXML
-    private Tab deliveries;
+	@FXML
+	private Tab deliveries;
 
-    @FXML
-    private ListView<?> deliveryList;
+	@FXML
+	private ListView<?> deliveryList;
 
-    @FXML
-    private JFXButton addDelivery;
+	@FXML
+	private JFXButton addDelivery;
 
-    @FXML
-    private JFXButton deleteDelivery;
+	@FXML
+	private JFXButton deleteDelivery;
 
-    @FXML
-    private DatePicker deliveryDate;
+	@FXML
+	private DatePicker deliveryDate;
 
-    @FXML
-    private TextField deliveryClient;
+	@FXML
+	private TextField deliveryClient;
 
-    @FXML
-    private TextField deliveryStatus;
+	@FXML
+	private TextField deliveryStatus;
 
-    @FXML
-    private TableView<?> deliveryInventory;
+	@FXML
+	private TableView<?> deliveryInventory;
 
-    @FXML
-    private TableColumn<?, ?> deliveryDrugs;
+	@FXML
+	private TableColumn<?, ?> deliveryDrugs;
 
-    @FXML
-    private TableColumn<?, ?> deliveryStocks;
+	@FXML
+	private TableColumn<?, ?> deliveryStocks;
 
-    @FXML
-    private Tab inventory;
+	@FXML
+	private Tab inventory;
 
-    @FXML
-    private ListView<?> inventoryList;
+	@FXML
+	private ListView<?> inventoryList;
 
-    @FXML
-    private JFXButton addInventory;
+	@FXML
+	private JFXButton addInventory;
 
-    @FXML
-    private JFXButton deleteInventory;
+	@FXML
+	private JFXButton deleteInventory;
 
-    @FXML
-    void addArrival(ActionEvent event) {
+	@FXML
+	void addArrival(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void addDelivery(ActionEvent event) {
+	@FXML
+	void addDelivery(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void addDrug(ActionEvent event) {
+	@FXML
+	void addDrug(ActionEvent event) {
 
-    }
+	}
 
-    @FXML
-    void deleteArrival(ActionEvent event) {
-    			
-    			Arrival toBeRemoved = arrivalList.getSelectionModel().getSelectedItem();
-    			try {
-					SQLManager.deleteArrival(toBeRemoved);
-					
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-    			
-   
-				
-					arrivalList.getItems().remove(toBeRemoved);
-					
-				
-				
-    			
-    			
-    			
-    			
-    }
+	@FXML
+	void deleteArrival(ActionEvent event) {
 
-    @FXML
-    void deleteDelivery(ActionEvent event) {
+		Arrival toBeRemoved = arrivalList.getSelectionModel().getSelectedItem();
+		try {
+			SQLManager.deleteArrival(toBeRemoved);
 
-    }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-    @FXML
-    void deleteDrug(ActionEvent event) {
+		arrivalList.getItems().remove(toBeRemoved);
 
-    }
+	}
+
+	@FXML
+	void deleteDelivery(ActionEvent event) {
+
+	}
+
+	@FXML
+	void deleteDrug(ActionEvent event) {
+
+	}
+	
+	@FXML
+	void showArrival(MouseEvent event) {
+		Arrival toBeShown = arrivalList.getSelectionModel().getSelectedItem();
+		arrivalProvider.setText(toBeShown.getProvider().getName());
+		arrivalDate.setPromptText(toBeShown.getDate().toString());
+		arrivalStatus.setText(""+toBeShown.isReceived());
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -150,9 +151,9 @@ public class employeeWindow implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
-			
+
 			arrivalList.getItems().addAll(SQLManager.getAllArrivals());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -161,4 +162,3 @@ public class employeeWindow implements Initializable {
 	}
 
 }
-
