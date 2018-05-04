@@ -34,7 +34,8 @@ public class ClientPane extends BorderPane {
 	private Label cart;
 
 	private ScrollPane drugsPane;
-
+	private VBox left;
+	
 	private TextField searchName;
 	private TextField searchActivePrinciple;
 	private TextField searchMaxPrice;
@@ -50,6 +51,7 @@ public class ClientPane extends BorderPane {
 		logo.setFitHeight(100);
 		logo.setFitWidth(100);
 		logo.setPreserveRatio(true);
+		logo.setOnMouseClicked(e -> goToSearchTab());
 		HBox top = new HBox(20);
 		top.setAlignment(Pos.CENTER_LEFT);
 		profile = new Label(client.getName());
@@ -58,11 +60,13 @@ public class ClientPane extends BorderPane {
 		profile.setOnMouseExited(e->returnProfileToNormal());
 		profile.setOnMouseClicked(e -> showProfile());
 		cart = new Label("Cart");
+		cart.setOnMouseEntered(e->highlightCart());
+		cart.setOnMouseExited(e->returnCartToNormal());
 		cart.setOnMouseClicked(e -> showCart());
 		top.getChildren().addAll(logo, new Region(), profile, cart);
 		this.setTop(top);
 		
-		VBox left = new VBox(40);
+		left = new VBox(40);
 		left.setAlignment(Pos.CENTER);
 		searchName = new TextField();
 		searchName.setPromptText("Search Bar");
@@ -83,11 +87,11 @@ public class ClientPane extends BorderPane {
 		this.setLeft(left);
 		
 		drugsPane = new ScrollPane();
-		//try {
-			drugsPane.setContent(createDrugsPanels(JPAManager.getAllDrugs()));
-		//}catch (SQLException e) {
-			//System.out.println("Error retrieving all the Drugs from the database");			
-		//}
+		try {
+			drugsPane.setContent(createDrugsPanels(SQLManager.getAllDrugs()));
+		}catch (SQLException e) {
+			System.out.println("Error retrieving all the Drugs from the database");			
+		}
 		
 		this.setCenter(drugsPane);
 		
@@ -106,12 +110,35 @@ public class ClientPane extends BorderPane {
 		
 	}
 	
+	private void highlightCart() {
+		
+		cart.setFont(Font.font ("Verdana", 22));
+		cart.setTextFill(Color.DARKBLUE);
+		
+	}
+	
+	private void returnCartToNormal() {
+		
+		cart.setFont(Font.font ("Verdana", 20));
+		cart.setTextFill(Color.BLACK);
+		
+	}
+	
 	private void showCart() {
 		
+		this.setCenter(null);
+		this.setLeft(null);
+		
+		this.setCenter(new CartPanel(delivery));
 		
 	}
 	
 	private void showProfile() {
+		
+		this.setCenter(null);
+		this.setLeft(null);
+		
+		this.setCenter(new ProfilePanel(client));
 		
 	}
 	
@@ -195,6 +222,18 @@ public class ClientPane extends BorderPane {
 		
 		}
 		return box;
+		
+	}
+	
+	private void goToSearchTab() {
+		
+		this.setLeft(left);
+		try {
+			drugsPane.setContent(createDrugsPanels(SQLManager.getAllDrugs()));
+		}catch (SQLException e) {
+			System.out.println("Error retrieving all the Drugs from the database");			
+		}
+		this.setCenter(drugsPane);
 		
 	}
 	
