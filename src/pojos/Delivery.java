@@ -183,11 +183,28 @@ public class Delivery implements Serializable {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public void addPackaged(Drug drug, Integer amount) {
-		Packaged packaged = new Packaged(drug, this, amount);
+	
+	public boolean addPackaged(Packaged packaged) {
 		if (!packages.contains(packaged)) {
 			this.packages.add(packaged);
+			return true;
+		}else {
+			
+			return false;
+			
 		}
+	}
+	
+	public int positionPackaged(Packaged packaged){
+		
+		return packages.indexOf(packaged);
+		
+	}
+	
+	public Packaged getPackage(int pos){
+		
+		return packages.get(pos);
+		
 	}
 
 

@@ -28,6 +28,7 @@ public class ClientPane extends BorderPane {
 
 	private Client client;
 	private Delivery delivery;
+	private int drugAmount;
 	
 	private ImageView logo;
 	private Label profile;
@@ -41,10 +42,14 @@ public class ClientPane extends BorderPane {
 	private TextField searchMaxPrice;
 	private Button searchButton;
 	
+	private List<Drug> drugs;
+	
 	public ClientPane(Client client){
 		
 		this.client = client;
 		delivery = new Delivery(client);
+		
+		drugAmount = 0;
 		
 		//CHANGE THIS ICON!
 		logo = new ImageView(new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Deutsche_Apotheke_Logo.svg/827px-Deutsche_Apotheke_Logo.svg.png"));
@@ -59,7 +64,8 @@ public class ClientPane extends BorderPane {
 		profile.setOnMouseEntered(e->highlightProfile());
 		profile.setOnMouseExited(e->returnProfileToNormal());
 		profile.setOnMouseClicked(e -> showProfile());
-		cart = new Label("Cart");
+		cart = new Label("Cart: "+drugAmount+ " drugs");
+		cart.setFont(Font.font ("Verdana", 20));
 		cart.setOnMouseEntered(e->highlightCart());
 		cart.setOnMouseExited(e->returnCartToNormal());
 		cart.setOnMouseClicked(e -> showCart());
@@ -87,8 +93,10 @@ public class ClientPane extends BorderPane {
 		this.setLeft(left);
 		
 		drugsPane = new ScrollPane();
+		drugsPane.autosize();
 		try {
-			drugsPane.setContent(createDrugsPanels(SQLManager.getAllDrugs()));
+			drugs = SQLManager.getAllDrugs();
+			drugsPane.setContent(createDrugsPanels(drugs));
 		}catch (SQLException e) {
 			System.out.println("Error retrieving all the Drugs from the database");			
 		}
@@ -145,7 +153,7 @@ public class ClientPane extends BorderPane {
 	private void searchDrugs() {
 		
 		try {
-			List<Drug> drugs;
+			
 			String name = searchName.getText();
 			String activePrinciple = searchActivePrinciple.getText();
 			String stringMaxPrice = searchMaxPrice.getText();
@@ -210,12 +218,13 @@ public class ClientPane extends BorderPane {
 	
 	private VBox createDrugsPanels(List<Drug> drugs) {
 		
+		
 		VBox box = new VBox();
 		for (int i = 0; i < drugs.size(); i = i+5) {
 
 			HBox hbox = new HBox();
-			for(int j = 0; j < 5 && (j+i)<drugs.size(); j++ ) {
-				hbox.getChildren().add(new DrugPanel(drugs.get(i+j), delivery));
+			for(int j = 0; j < 3 && (j+i)<drugs.size(); j++ ) {
+				hbox.getChildren().add(new DrugPanel(drugs.get(i+j), delivery, this));
 			}
 			box.getChildren().add(hbox);
 		
@@ -233,6 +242,12 @@ public class ClientPane extends BorderPane {
 			System.out.println("Error retrieving all the Drugs from the database");			
 		}
 		this.setCenter(drugsPane);
+		
+	}
+	
+	protected void updateCart() {
+		
+		cart.setText("Cart: "+ ++drugAmount+ " drugs"); 
 		
 	}
 	

@@ -27,11 +27,12 @@ public class JPAManager implements Manager{
 			
 			JPAManager.connect();
 			
-			for (int i = 0; i < 40; i++) {
+			for (int i = 0; i < 50; i++) {
 				
 				JPAManager.insertDrug(new Drug());
 				
 			}
+			JPAManager.insertClient(new Client());
 			 
 			JPAManager.disconnect();
 		}

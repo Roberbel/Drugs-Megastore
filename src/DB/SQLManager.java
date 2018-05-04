@@ -28,7 +28,7 @@ public class SQLManager implements Manager {
 		try {
 			
 			connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
-			generateDataBase();
+			SQLManager.insertClient(new Client());
 			disconnect();
 			
 		} catch (Exception e) {
