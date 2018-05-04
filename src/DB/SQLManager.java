@@ -806,7 +806,7 @@ public class SQLManager implements Manager {
 			return null;
 		}
 		
-		Provider provider = getProvider();
+		Provider provider = getProvider(rs1);
 		
 		if	(id == provider.getProviderId()) {
 			prep.close();
@@ -1488,11 +1488,11 @@ public class SQLManager implements Manager {
 		
     }
     
-    private static Provider getProvider() throws SQLException {
+    private static Provider getProvider(ResultSet rs1) throws SQLException {
     	
     	//we don't really need to know which arrives has a provider. We don't use it in the GUI
-    	return new Provider (rs.getInt("id"), rs.getString("name"), rs.getString("adress"), rs.getInt("telephone"),
-				rs.getString("email"));
+    	return new Provider (rs1.getInt("id"), rs1.getString("name"), rs1.getString("address"), rs1.getInt("telephone"),
+				rs1.getString("email"));
     	
     }
     
