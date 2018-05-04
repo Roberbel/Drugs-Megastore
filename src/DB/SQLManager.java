@@ -729,8 +729,11 @@ public class SQLManager implements Manager {
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setString(1, username);
-		
 		rs = prep.executeQuery();
+		if(!rs.isBeforeFirst()) {
+			prep.close();
+			return null;
+		}
 		System.out.println("looking into employees");
 		Employee employee = getEmployee();
 			
@@ -1312,6 +1315,7 @@ public class SQLManager implements Manager {
     	List <Drug> drugList=new ArrayList <Drug>();
     	while(rs.next()) {
     		drugList.add(getDrug());
+    		System.out.println(drugList.get(drugList.size()-1));
     	}
     	rs.close();
     	prep.close();

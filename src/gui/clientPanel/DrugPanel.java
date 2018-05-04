@@ -34,16 +34,21 @@ public class DrugPanel extends BorderPane {
 		this.delivery = delivery;
 		
 		BorderPane center = new BorderPane();
-				
-		photo = new ImageView(new Image(new ByteArrayInputStream(drug.getPhoto())));
+		if(drug.getPhoto()!= null) {
+			photo = new ImageView(new Image(new ByteArrayInputStream(drug.getPhoto())));
+		}else {
+			photo = new ImageView(new Image("https://www.ecured.cu/images/thumb/f/f9/Pomo-medicina-icon-azul.png/390px-Pomo-medicina-icon-azul.png"));
+		}
+		photo.setFitHeight(100);
+		photo.setFitWidth(100);
 		center.setCenter(photo);
 		
-		VBox centerLeft = new VBox(10);
+		VBox centerRight = new VBox(10);
 		name = new Label("Name: " + drug.getName());
 		
 		activePrinciple = new Label("Active Principle: "+ drug.getActivePrinciple());
-		centerLeft.getChildren().addAll(name, activePrinciple);
-		center.setLeft(centerLeft);
+		centerRight.getChildren().addAll(name, activePrinciple);
+		center.setRight(centerRight);
 		
 		HBox centerBottom = new HBox(10);
 		price = new Label("Price: "+ drug.getSellingPrice());

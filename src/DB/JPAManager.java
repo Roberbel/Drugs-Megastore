@@ -26,7 +26,11 @@ public class JPAManager implements Manager{
 			
 			
 			JPAManager.connect();
-			JPAManager.insertEmployee(new Employee());;
+			List<Drug> drugs = JPAManager.getAllDrugs();
+			for(Drug d: drugs) {
+				System.out.println(d);				
+			}
+			
 			JPAManager.disconnect();
 		}
 		

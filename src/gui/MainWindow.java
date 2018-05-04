@@ -60,7 +60,7 @@ public class MainWindow {
 						break;
 					case "CLIENT":
 						ClientPane pane = new ClientPane(user.getExtractedClient());
-						this.stage.setScene(new Scene(pane, 500, 300));
+						this.stage.setScene(new Scene(pane, 600, 600));
 						this.stage.setResizable(true);
 						this.stage.show();
 						break;
@@ -73,7 +73,7 @@ public class MainWindow {
 				throw new ClassNotFoundException();
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			Alert alert=new Alert(AlertType.ERROR);
+			Alert alert=new Alert(AlertType.ERROR, "Wrong username or password");
 			e.printStackTrace();
 			alert.showAndWait();
 		}
