@@ -800,8 +800,8 @@ public class SQLManager implements Manager {
 		
 		prep.setInt(1, id);
 		
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
@@ -810,12 +810,12 @@ public class SQLManager implements Manager {
 		
 		if	(id == provider.getProviderId()) {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return provider;
 		}else {
 			
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}	
 	
@@ -1241,10 +1241,10 @@ public class SQLManager implements Manager {
     	
     	String sql="SELECT * FROM arrivals";
     	PreparedStatement prep=c.prepareStatement(sql);
-    	rs=prep.executeQuery();
+    	ResultSet rs1 =prep.executeQuery();
     	List <Arrival> clientList=new ArrayList <Arrival> ();
-    	while(rs.next()) {
-    		clientList.add(getArrival());
+    	while(rs1.next()) {
+    		clientList.add(getArrival(rs1));
     	}
     	rs.close();
     	prep.close();
@@ -1384,10 +1384,10 @@ public class SQLManager implements Manager {
 //					private get methods
 //===========================================================================================
     
-    private static Arrival getArrival() throws SQLException {
+    private static Arrival getArrival(ResultSet rs1) throws SQLException {
     	
-    	Provider providerWanted= searchProviderById(rs.getInt("transaction_id"));
-		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"), rs.getDate("date"), providerWanted, rs.getBoolean("received"));
+    	Provider providerWanted= searchProviderById(rs1.getInt("provider_id"));
+		Arrival arrival =new Arrival(rs1.getInt("transaction_id"), rs1.getInt("buying_price"), rs1.getDate("transaction_date"), providerWanted, rs1.getBoolean("received"));
 		arrival.setArrives(searchArrivesByArrivalId(arrival.getArrivalId()));
 		
 		return arrival;
