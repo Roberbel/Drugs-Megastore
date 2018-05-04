@@ -38,6 +38,7 @@ public class Arrival implements Serializable{
 	@TableGenerator(name="arrivals", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="arrivals")
 	@XmlAttribute
+	@Column(name = "transaction_id")
 	private Integer arrivalId;
 	
 	@Column(name = "buying_price")
@@ -135,7 +136,7 @@ public class Arrival implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Arrivals [arrivalId=" + arrivalId + ", buyingPrice=" + buyingPrice + ", date=" + date + ", provider=" + provider + ", drugs=" + arrives + "]";
+		return "Id :" + arrivalId +  ", provider :" + provider.getName()  + ", date :" + date;
 	}
 
 	public Integer getArrivalId() {
