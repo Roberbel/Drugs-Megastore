@@ -2,11 +2,13 @@ package gui.clientPanel;
 
 import java.io.ByteArrayInputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import DB.JPAManager;
 import DB.SQLManager;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -57,18 +59,21 @@ public class ClientPane extends BorderPane {
 		logo.setFitWidth(100);
 		logo.setPreserveRatio(true);
 		logo.setOnMouseClicked(e -> goToSearchTab());
-		HBox top = new HBox(20);
-		top.setAlignment(Pos.CENTER_LEFT);
+		
 		profile = new Label(client.getName());
 		profile.setFont(Font.font ("Verdana", 20));
 		profile.setOnMouseEntered(e->highlightProfile());
 		profile.setOnMouseExited(e->returnProfileToNormal());
 		profile.setOnMouseClicked(e -> showProfile());
+		
 		cart = new Label("Cart: "+drugAmount+ " drugs");
 		cart.setFont(Font.font ("Verdana", 20));
 		cart.setOnMouseEntered(e->highlightCart());
 		cart.setOnMouseExited(e->returnCartToNormal());
 		cart.setOnMouseClicked(e -> showCart());
+		
+		HBox top = new HBox(20);
+		top.setAlignment(Pos.CENTER_LEFT);
 		top.getChildren().addAll(logo, new Region(), profile, cart);
 		this.setTop(top);
 		
@@ -87,21 +92,20 @@ public class ClientPane extends BorderPane {
 			
 		//we will only search when the name field is changed or the button is pressed.
 		searchButton.setOnMouseClicked(e -> searchDrugs());
-		searchName.setOnKeyTyped(e -> searchDrugs());
+		searchName.setOnKeyReleased(e -> searchDrugs());
 
 		left.getChildren().addAll(searchName, searchActivePrinciple, searchMaxPrice, searchButton);
 		this.setLeft(left);
 		
 		drugsPane = new ScrollPane();
 		drugsPane.autosize();
-		try {
-			drugs = SQLManager.getAllDrugs();
-			drugsPane.setContent(createDrugsPanels(drugs));
-		}catch (SQLException e) {
-			System.out.println("Error retrieving all the Drugs from the database");			
-		}
-		
+		drugsPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+		drugsPane.setPrefSize(this.getWidth()-200, this.getHeight()-100);
 		this.setCenter(drugsPane);
+		this.setCursor(Cursor.WAIT);
+		//searchDrugs();
+		
+		this.setRight(new FlowPane());
 		
 	}
 	
@@ -208,28 +212,39 @@ public class ClientPane extends BorderPane {
 				drugs = SQLManager.getAllDrugs();
 				
 			}
-			
-			drugsPane.setContent(createDrugsPanels(drugs));
+			this.setCursor(Cursor.WAIT);
+			createDrugsPanels();
 		}catch (SQLException e) {
 			System.out.println("Error retrieving all the Drugs from the database");		
 			e.printStackTrace();
 		}
 	}
 	
-	private VBox createDrugsPanels(List<Drug> drugs) {
-		
-		
-		VBox box = new VBox();
-		for (int i = 0; i < drugs.size(); i = i+5) {
-
-			HBox hbox = new HBox();
-			for(int j = 0; j < 3 && (j+i)<drugs.size(); j++ ) {
+	private void createDrugsPanels() {
+		double width = drugsPane.getWidth();
+		double drugPanelWidth = DrugPanel.GetDrugPanelWidth();
+			
+		System.out.println("ScrollPaneWidth = "+width+"\nDrugPanelWidth = "+drugPanelWidth);
+		int n = calculateDrugsPanel(width, drugPanelWidth);
+			
+		double spacing = ((width-n*drugPanelWidth)/(n-1)) ;
+		System.out.println("Spacing = "+spacing+"\nn = "+n);
+		VBox box = new VBox(spacing);
+		box.getChildren().add(new HBox());
+		for (int i = 0; i < drugs.size(); i = i+n) {
+	
+			HBox hbox = new HBox(spacing);
+			//hbox.getChildren().add(new Region());
+			for(int j = 0; j < n && (j+i)<drugs.size(); j++ ) {
 				hbox.getChildren().add(new DrugPanel(drugs.get(i+j), delivery, this));
 			}
+			//hbox.getChildren().add(new Region());
 			box.getChildren().add(hbox);
-		
+			
 		}
-		return box;
+			
+		drugsPane.setContent(box);
+		this.setCursor(Cursor.DEFAULT);		
 		
 	}
 	
@@ -237,7 +252,9 @@ public class ClientPane extends BorderPane {
 		
 		this.setLeft(left);
 		try {
-			drugsPane.setContent(createDrugsPanels(SQLManager.getAllDrugs()));
+			this.setCursor(Cursor.WAIT);
+			drugs = SQLManager.getAllDrugs();
+			createDrugsPanels();
 		}catch (SQLException e) {
 			System.out.println("Error retrieving all the Drugs from the database");			
 		}
@@ -250,5 +267,27 @@ public class ClientPane extends BorderPane {
 		cart.setText("Cart: "+ ++drugAmount+ " drugs"); 
 		
 	}
+	
+	/*
+	 * Algorithym to calculate the number of drugs panel that would fit in the scroll panel 
+	 * and the spacing necesary for it
+	 */
+	private int calculateDrugsPanel(double scrollWidth, double panelWidth) {
+		
+		double a = panelWidth;
+		double b = scrollWidth + panelWidth*2;
+		double c = 2*scrollWidth;
+		
+		double r1 = (b + Math.sqrt( Math.pow(b, 2) - 4*a*c) ) / (2*a);
+		double r2 = (b - Math.sqrt( Math.pow(b, 2) - 4*a*c) ) / (2*a);
+		System.out.println("r1: \n"+r1+"\n"+(int)r1);
+		System.out.println("r2: \n"+r2+"\n"+(int)r2);
+		if(r1>r2) {
+			return Math.abs((int)r1);
+		}else {
+			return Math.abs((int)r2);
+		}
+	}
+	
 	
 }

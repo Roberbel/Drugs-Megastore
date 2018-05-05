@@ -31,6 +31,8 @@ public class DrugPanel extends BorderPane {
 	private ClientPane clientPanel;
 	private Drug drug;
 	
+	private static final float width = 247;
+	
 	private ImageView photo;
 	private Label name;
 	private Label activePrinciple;
@@ -40,7 +42,6 @@ public class DrugPanel extends BorderPane {
 	private Button add;
 	
 	public DrugPanel(Drug drug, Delivery delivery, ClientPane clientPanel) {
-		
 		this.drug = drug;
 		this.delivery = delivery;
 		this.clientPanel = clientPanel;
@@ -120,14 +121,13 @@ public class DrugPanel extends BorderPane {
 			}
 			
 		}
-		
 	}
 	
 	
 	private void checkAmount() {
 		String amountString = amount.getText();
 		//we only check the last char typed, because we had already checked the rest
-		char character = amountString.charAt(amountString.length());
+		char character = amountString.charAt(amountString.length()-1);
 		if(!(character > 47 && character < 58)) {
 			amount.deleteText(amount.getLength()-1, amount.getLength());
 		}
@@ -141,6 +141,12 @@ public class DrugPanel extends BorderPane {
 			}
 			
 		}
+		
+	}
+	
+	protected static float GetDrugPanelWidth() {
+		
+		return width;
 		
 	}
 }
