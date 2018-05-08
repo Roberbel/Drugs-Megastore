@@ -1,9 +1,15 @@
 package gui.clientPanel;
 
+import java.sql.SQLException;
+
+import DB.SQLManager;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import pojos.Client;
 import pojos.Client.PaymentMethod;
@@ -37,6 +43,7 @@ public class ProfilePanel extends BorderPane {
 		paymentMethodLab = new Label("Payment Method");
 		
 		nameField = new TextField(client.getName());
+		nameField.setEditable(false);
 		addressField = new TextField(client.getAddress());
 		telephoneField = new TextField(client.getTelephone().toString());
 		emailField = new TextField(client.getEmail());
@@ -51,9 +58,9 @@ public class ProfilePanel extends BorderPane {
 		/*
 		 * now we set the event managers
 		 */
-		nameField.setOnInputMethodTextChanged(e -> nameChanged());
 		addressField.setOnInputMethodTextChanged(e -> addressChanged());
 		telephoneField.setOnInputMethodTextChanged(e -> telephoneChanged());
+		telephoneField.setOnKeyReleased(e -> checkPhone());
 		emailField.setOnInputMethodTextChanged(e -> emailChanged());
 		paymentMethod.setOnInputMethodTextChanged(e -> paymentMethodChanged());
 		
@@ -62,38 +69,86 @@ public class ProfilePanel extends BorderPane {
 		 * Adding components to Panels
 		 */
 		GridPane grid = new GridPane();
+		grid.setHgap(10);
+		grid.setVgap(10);
 		grid.add(nameLab, 0, 0);
 		grid.add(nameField, 1, 0);
-		grid.add(addressLab, 1, 0);
+		grid.add(addressLab, 0, 1);
 		grid.add(addressField, 1, 1);
-		grid.add(telephoneLab, 2, 0);
-		grid.add(telephoneField, 2, 1);
-		grid.add(emailLab, 3, 0);
-		grid.add(emailField, 3, 1);
-		grid.add(paymentMethodLab, 4, 0);
-		grid.add(paymentMethod, 4, 1);
-		setCenter(grid);
+		grid.add(telephoneLab, 0, 2);
+		grid.add(telephoneField, 1, 2);
+		grid.add(emailLab, 0, 3);
+		grid.add(emailField, 1, 3);
+		grid.add(paymentMethodLab, 0, 4);
+		grid.add(paymentMethod, 1, 4);
+		setCenter(new FlowPane(grid));
 		
 		
 	}
-	
-	private void nameChanged() {
-		client.setName(nameField.getText());
-	}
-	
+		
 	private void addressChanged(){
-		client.setAddress(addressField.getText());
+		try {
+			SQLManager.updateClientAdress(client.getId(),addressField.getText());
+			client.setAddress(addressField.getText());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR, "Couldn't save the changes");
+			alert.showAndWait();
+		}
+		
 	}
 	
 	private void telephoneChanged() {
-		client.setTelephone(Integer.parseInt(telephoneField.getText()));
+		if(!telephoneField.getText().equals("")) {
+			try {
+				SQLManager.updateClientPhone(client.getId(), Integer.parseInt(telephoneField.getText()));
+				client.setTelephone(Integer.parseInt(telephoneField.getText()));
+			} catch (SQLException e) {
+				e.printStackTrace();
+				Alert alert=new Alert(AlertType.ERROR, "Couldn't save the changes");
+				alert.showAndWait();
+			}
+		}
+			
 	}
 	
 	private void emailChanged() {
-		client.setEmail(emailField.getText());
+		try {
+			SQLManager.updateClientEmail(client.getId(), emailField.getText());
+			client.setEmail(emailField.getText());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR, "Couldn't save the changes");
+			alert.showAndWait();
+		}
+		
+		
 	}
 	
 	private void paymentMethodChanged() {
-		client.setPaymentMethod(paymentMethod.getValue());
+		try {
+			SQLManager.updateClientPaymethod(client.getId(), paymentMethod.getValue().toString());
+			client.setPaymentMethod(paymentMethod.getValue());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR, "Couldn't save the changes");
+			alert.showAndWait();
+		}
+		
+		
+	}
+	
+	/*
+	 * This method makes sure only numbers are typed in the phone field
+	 */
+	private void checkPhone() {
+		String phone = telephoneField.getText();
+		//we only check the last char typed, because we had already checked the rest
+		char character = phone.charAt(phone.length());
+		if(!(character > 47 && character < 58)) {
+			telephoneField.deleteText(telephoneField.getLength()-1, telephoneField.getLength());
+		}
+		
+				
 	}
 }

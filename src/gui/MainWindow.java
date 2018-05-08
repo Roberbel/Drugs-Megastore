@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.concurrent.TimeUnit;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -60,7 +61,7 @@ public class MainWindow {
 						break;
 					case "CLIENT":
 						ClientPane pane = new ClientPane(user.getExtractedClient());
-						this.stage.setScene(new Scene(pane, 600, 600));
+						this.stage.setScene(new Scene(pane, 1000, 600));
 						this.stage.setResizable(true);
 						this.stage.show();
 						break;

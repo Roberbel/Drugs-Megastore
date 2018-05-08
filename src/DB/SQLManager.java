@@ -21,14 +21,14 @@ public class SQLManager implements Manager {
 	 * The get[POJO] methods were giving errors if we passed the result set as a parameter,
 	 * so I made the object result set static, and close it once I have finished with a query.
 	 */
-	private static ResultSet rs;
+	//private static ResultSet rs;
 	
 	public static void main(String[] args) {
 
 		try {
 			
 			connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
-			generateDataBase();
+			SQLManager.insertClient(new Client());
 			disconnect();
 			
 		} catch (Exception e) {
@@ -359,21 +359,21 @@ public class SQLManager implements Manager {
 		String sql = "SELECT * FROM arrivals WHERE id = ? ";
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, id);
-		rs = prep.executeQuery();
+		ResultSet rs1 = prep.executeQuery();
 		
-		if(!rs.isBeforeFirst()) {
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
-		Arrival arrival = getArrival();
+		Arrival arrival = getArrival(rs1);
 			
 		if(id==arrival.getArrivalId()) {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return arrival;
 		}else {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}
 	}
@@ -384,16 +384,16 @@ public class SQLManager implements Manager {
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, id);
 		List<Arrives> arrives = new ArrayList<Arrives>();
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
-		while(rs.next()) {
-			arrives.add(getArrive());
+		while(rs1.next()) {
+			arrives.add(getArrive(rs1));
 		}
 		prep.close();
-		rs.close();
+		rs1.close();
 		return arrives;
 				
 	}
@@ -404,16 +404,16 @@ public class SQLManager implements Manager {
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, id);
 		List<Arrives> arrives = new ArrayList<Arrives>();
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
-		while(rs.next()) {
-			arrives.add(getArrive());
+		while(rs1.next()) {
+			arrives.add(getArrive(rs1));
 		}
 		prep.close();
-		rs.close();		
+		rs1.close();		
 		return arrives;
 		
 	}
@@ -425,21 +425,21 @@ public class SQLManager implements Manager {
 		
 		prep.setInt(1, id);
 		
-		rs = prep.executeQuery();
+		ResultSet rs1 = prep.executeQuery();
 		
-		if(!rs.isBeforeFirst()) {
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
-		Corridor corridor = getCorridor();
+		Corridor corridor = getCorridor(rs1);
 			
 		if(id == corridor.getId()) {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return corridor;
 		}else {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}		
 	}
@@ -452,22 +452,22 @@ public class SQLManager implements Manager {
 		
 		prep.setInt(1, id);
 		
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		
-		Client client = getClient();
+		Client client = getClient(rs1);
 		
 		if	(id == client.getId()) {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return client;
 		}else {
 				
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}	
 		
@@ -482,18 +482,18 @@ public class SQLManager implements Manager {
 		prep.setString(1, username);
 		
 		
-		rs = prep.executeQuery();	
+		ResultSet rs1 = prep.executeQuery();	
 		System.out.println("searching in Client");
-		Client client = getClient();
+		Client client = getClient(rs1);
 				
 		if	(username.equals(client.getUsername())) {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return client;
 		}else {
 			System.out.println("Wrong username\nUsername: "+username+"\nclient: "+client.getUsername());
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}
 
@@ -506,21 +506,21 @@ public class SQLManager implements Manager {
 		
 		prep.setInt(1, id);
 		
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			return null;
 		}
 		
-		Delivery delivery = getDelivery();
+		Delivery delivery = getDelivery(rs1);
 		
 		if	(id == delivery.getTransactionId()) {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return delivery;
 		}else {
 			
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}	
 		
@@ -532,18 +532,18 @@ public class SQLManager implements Manager {
 		String sql="SELECT * FROM deliveries WHERE client_id = ?";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1, id);
-		rs=prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 =prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			return null;
 		}
 		
 		List<Delivery> drugs = new ArrayList<Delivery>();
-		while(rs.next()) {
-			Delivery delivery= getDelivery();
+		while(rs1.next()) {
+			Delivery delivery= getDelivery(rs1);
 			drugs.add(delivery);
 		}
 		prep.close();
-		rs.close();
+		rs1.close();
 		return drugs;
 		
 	}
@@ -555,17 +555,17 @@ public class SQLManager implements Manager {
 		String sql="SELECT * FROM drug WHERE active_principle LIKE %?%";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, activePrinciple);
-		rs=prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			return null;
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
-		while(rs.next()) {
-			Drug drug = getDrug();
+		while(rs1.next()) {
+			Drug drug = getDrug(rs1);
 			drugs.add(drug);
 		}
 		prep.close();
-		rs.close();
+		rs1.close();
 		return drugs;
 	}
 	
@@ -575,17 +575,17 @@ public class SQLManager implements Manager {
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, activePrinciple);
 		prep.setInt(2, maxPrice);
-		rs=prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1=prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			return null;
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
-		while(rs.next()) {
-			Drug drug = getDrug();
+		while(rs1.next()) {
+			Drug drug = getDrug(rs1);
 			drugs.add(drug);
 		}
 		prep.close();
-		rs.close();
+		rs1.close();
 		return drugs;
 	}
 	
@@ -595,17 +595,17 @@ public class SQLManager implements Manager {
 		String sql="SELECT * FROM drug WHERE selling_price <= ?";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1, maxPrice);
-		rs=prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 =prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			return null;
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
-		while(rs.next()) {
-			Drug drug = getDrug();
+		while(rs1.next()) {
+			Drug drug = getDrug(rs1);
 			drugs.add(drug);
 		}
 		prep.close();
-		rs.close();
+		rs1.close();
 		return drugs;
 		
 	}
@@ -616,82 +616,85 @@ public class SQLManager implements Manager {
 		String sql="SELECT * FROM drug WHERE name LIKE %?%";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, name);
-		rs=prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1=prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			return null;
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
-		while(rs.next()) {
-			Drug drug = getDrug();
+		while(rs1.next()) {
+			Drug drug = getDrug(rs1);
 			drugs.add(drug);
 		}
 		prep.close();
-		rs.close();
+		rs1.close();
 		return drugs;
 	}
 	
 	
 	public static List<Drug> searchDrugByName(String name, String activePrinciple) throws SQLException{
 		
+		System.out.println("name = "+name+"\nA.P. = "+activePrinciple);
 		String sql="SELECT * FROM drug WHERE name LIKE %?% AND active_principle LIKE %?%";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, name);
 		prep.setString(2, activePrinciple);
-		rs=prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 =prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
-		while(rs.next()) {
-			Drug drug = getDrug();
+		while(rs1.next()) {
+			Drug drug = getDrug(rs1);
 			drugs.add(drug);
 		}
 		prep.close();
-		rs.close();
+		rs1.close();
 		return drugs;
 	}
 	
 	public static List<Drug> searchDrugByName(String name, Integer maxPrice) throws SQLException{
 		
+		System.out.println("name = "+name+"\nMaxPrice = "+maxPrice);
 		String sql="SELECT * FROM drug WHERE name LIKE %?% AND selling_price <= ?";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, name);
 		prep.setInt(2, maxPrice);
-		rs=prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 =prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
-		while(rs.next()) {
-			Drug drug = getDrug();
+		while(rs1.next()) {
+			Drug drug = getDrug(rs1);
 			drugs.add(drug);
 		}
 		prep.close();
-		rs.close();
+		rs1.close();
 		return drugs;
 	}
 	
 	public static List<Drug> searchDrugByName(String name, String activePrinciple, Integer maxPrice) throws SQLException{
 		
+		System.out.println("name = "+name+"\nA.P. = "+activePrinciple+"\nMaxPrice = "+maxPrice);
 		String sql="SELECT * FROM drug WHERE name LIKE %?% AND active_principle LIKE %?% AND selling_price <= ?";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, name);
 		prep.setString(2, activePrinciple);
 		prep.setInt(3, maxPrice);
-		rs=prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 =prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
-		while(rs.next()) {
-			Drug drug = getDrug();
+		while(rs1.next()) {
+			Drug drug = getDrug(rs1);
 			drugs.add(drug);
 		}
 		prep.close();
-		rs.close();
+		rs1.close();
 		return drugs;
 	}
     
@@ -702,22 +705,22 @@ public class SQLManager implements Manager {
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setInt(1, id);
-		rs = prep.executeQuery();
+		ResultSet rs1 = prep.executeQuery();
 		
-		if(!rs.isBeforeFirst()) {
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		
-		Employee employee = getEmployee();
+		Employee employee = getEmployee(rs1);
 	
 		if(id == employee.getId()) {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return employee;
 		}else {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}
 		
@@ -729,22 +732,22 @@ public class SQLManager implements Manager {
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setString(1, username);
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		System.out.println("looking into employees");
-		Employee employee = getEmployee();
+		Employee employee = getEmployee(rs1);
 			
 		if(username.equals(employee.getUsername())) {
 			System.out.println("Found the employee!");
 			prep.close();
-			rs.close();
+			rs1.close();
 			return employee;
 		}else {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}
 	}
@@ -757,16 +760,16 @@ public class SQLManager implements Manager {
 		
 		List<Packaged> packages = new ArrayList<Packaged>();
 		
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		
-		while(rs.next()) {
-			packages.add(getPackaged());
+		while(rs1.next()) {
+			packages.add(getPackaged(rs1));
 		}
-		rs.close();
+		rs1.close();
 		prep.close();
 		return packages;
 	}
@@ -779,16 +782,16 @@ public class SQLManager implements Manager {
 		
 		List<Packaged> packages = new ArrayList<Packaged>();
 		
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		
-		while(rs.next()) {
-			packages.add(getPackaged());
+		while(rs1.next()) {
+			packages.add(getPackaged(rs1));
 		}
-		rs.close();
+		rs1.close();
 		prep.close();
 		return packages;
 	}
@@ -800,22 +803,22 @@ public class SQLManager implements Manager {
 		
 		prep.setInt(1, id);
 		
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		
-		Provider provider = getProvider();
+		Provider provider = getProvider(rs1);
 		
 		if	(id == provider.getProviderId()) {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return provider;
 		}else {
 			
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}	
 	
@@ -828,21 +831,21 @@ public class SQLManager implements Manager {
 		
 		prep.setInt(1, id);
 		
-		rs = prep.executeQuery();
-		if(!rs.isBeforeFirst()) {
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
 			prep.close();
 			return null;
 		}
 		
-		Warehouse warehouse =  getWarehouse();
+		Warehouse warehouse =  getWarehouse(rs1);
 	
 		if(id == warehouse.getId()) {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return warehouse;
 		}else {
 			prep.close();
-			rs.close();
+			rs1.close();
 			return null;
 		}
 		
@@ -1241,12 +1244,12 @@ public class SQLManager implements Manager {
     	
     	String sql="SELECT * FROM arrivals";
     	PreparedStatement prep=c.prepareStatement(sql);
-    	rs=prep.executeQuery();
+    	ResultSet rs1 =prep.executeQuery();
     	List <Arrival> clientList=new ArrayList <Arrival> ();
-    	while(rs.next()) {
-    		clientList.add(getArrival());
+    	while(rs1.next()) {
+    		clientList.add(getArrival(rs1));
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return clientList;
     	
@@ -1256,12 +1259,12 @@ public class SQLManager implements Manager {
     	
     	String sql="SELECT * FROM arrives";
     	PreparedStatement prep=c.prepareStatement(sql);
-    	rs=prep.executeQuery();
+    	ResultSet rs1=prep.executeQuery();
     	List <Arrives> clientList=new ArrayList <Arrives> ();
-    	while(rs.next()) {
-    		clientList.add(getArrive());
+    	while(rs1.next()) {
+    		clientList.add(getArrive(rs1));
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return clientList;
     	
@@ -1270,12 +1273,12 @@ public class SQLManager implements Manager {
     public static List<Client> getAllClients() throws SQLException {
     	String sql="SELECT * FROM client";
     	PreparedStatement prep=c.prepareStatement(sql);
-    	rs=prep.executeQuery();
+    	ResultSet rs1=prep.executeQuery();
     	List <Client> clientList=new ArrayList <Client> ();
-    	while(rs.next()) {
-    		clientList.add(getClient());
+    	while(rs1.next()) {
+    		clientList.add(getClient(rs1));
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return clientList;
     }
@@ -1283,12 +1286,12 @@ public class SQLManager implements Manager {
     public static List<Corridor> getAllCorridors() throws SQLException {
     	String query="SELECT * FROM corridor";
     	PreparedStatement prep=c.prepareStatement(query);
-    	rs=prep.executeQuery();
+    	ResultSet rs1=prep.executeQuery();
     	List <Corridor> corridorList=new ArrayList <Corridor>();
-    	while(rs.next()) {
-    		corridorList.add(getCorridor());
+    	while(rs1.next()) {
+    		corridorList.add(getCorridor(rs1));
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return corridorList;
     }
@@ -1297,12 +1300,12 @@ public class SQLManager implements Manager {
 		
 		String sql="SELECT * FROM deliveries";
     	PreparedStatement prep=c.prepareStatement(sql);
-    	rs=prep.executeQuery();
+    	ResultSet rs1=prep.executeQuery();
     	List <Delivery> clientList=new ArrayList <Delivery> ();
-    	while(rs.next()) {
-    		clientList.add(getDelivery());
+    	while(rs1.next()) {
+    		clientList.add(getDelivery(rs1));
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return clientList;
 		
@@ -1311,13 +1314,12 @@ public class SQLManager implements Manager {
     public static List<Drug> getAllDrugs() throws SQLException{
     	String query="SELECT * FROM drug";
     	PreparedStatement prep=c.prepareStatement(query);
-    	rs=prep.executeQuery();
+    	ResultSet rs1=prep.executeQuery();
     	List <Drug> drugList=new ArrayList <Drug>();
-    	while(rs.next()) {
-    		drugList.add(getDrug());
-    		System.out.println(drugList.get(drugList.size()-1));
+    	while(rs1.next()) {
+    		drugList.add(getDrug(rs1));
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return drugList;
     }
@@ -1326,12 +1328,12 @@ public class SQLManager implements Manager {
     	
     	String sql="SELECT * FROM employee";
     	PreparedStatement prep=c.prepareStatement(sql);
-    	rs=prep.executeQuery();
+    	ResultSet rs1=prep.executeQuery();
     	List <Employee> clientList=new ArrayList <Employee> ();
-    	while(rs.next()) {
-    		clientList.add(getEmployee());
+    	while(rs1.next()) {
+    		clientList.add(getEmployee(rs1));
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return clientList;
     	
@@ -1341,12 +1343,12 @@ public class SQLManager implements Manager {
     	
     	String sql="SELECT * FROM packaged";
     	PreparedStatement prep=c.prepareStatement(sql);
-    	rs=prep.executeQuery();
+    	ResultSet rs1=prep.executeQuery();
     	List <Packaged> clientList=new ArrayList <Packaged> ();
-    	while(rs.next()) {
-    		clientList.add(getPackaged());
+    	while(rs1.next()) {
+    		clientList.add(getPackaged(rs1));
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return clientList;
     	
@@ -1356,12 +1358,12 @@ public class SQLManager implements Manager {
     	
     	String sql="SELECT * FROM provider";
     	PreparedStatement prep=c.prepareStatement(sql);
-    	rs=prep.executeQuery();
+    	ResultSet rs1=prep.executeQuery();
     	List <Provider> clientList=new ArrayList <Provider> ();
-    	while(rs.next()) {
-    		clientList.add(getProvider());
+    	while(rs1.next()) {
+    		clientList.add(getProvider(rs1));
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return clientList;
     	
@@ -1370,12 +1372,12 @@ public class SQLManager implements Manager {
     public static List <Warehouse> getAllWarehouses() throws SQLException {
     	String query="SELECT * FROM warehouse";
     	PreparedStatement prep=c.prepareStatement(query);
-    	rs=prep.executeQuery();
+    	ResultSet rs1=prep.executeQuery();
     	List <Warehouse> wareList=new ArrayList <Warehouse>();
-    	while(rs.next()) {
-    		wareList.add(getWarehouse());   		
+    	while(rs1.next()) {
+    		wareList.add(getWarehouse(rs1));   		
     	}
-    	rs.close();
+    	rs1.close();
     	prep.close();
     	return wareList;
     }
@@ -1384,124 +1386,124 @@ public class SQLManager implements Manager {
 //					private get methods
 //===========================================================================================
     
-    private static Arrival getArrival() throws SQLException {
+    private static Arrival getArrival(ResultSet rs1) throws SQLException {
     	
-    	Provider providerWanted= searchProviderById(rs.getInt("id"));
-		Arrival arrival =new Arrival(rs.getInt("arrivalId"), rs.getInt("buyingPrice"), rs.getDate("date"), providerWanted, rs.getBoolean("received"));
+    	Provider providerWanted= searchProviderById(rs1.getInt("provider_id"));
+		Arrival arrival =new Arrival(rs1.getInt("transaction_id"), rs1.getInt("buying_price"), rs1.getDate("transaction_date"), providerWanted, rs1.getBoolean("received"));
 		arrival.setArrives(searchArrivesByArrivalId(arrival.getArrivalId()));
 		
 		return arrival;
     	
     }
     
-    private static Arrives getArrive() throws SQLException {
+    private static Arrives getArrive(ResultSet rs1) throws SQLException {
 
-    	return new Arrives(rs.getInt("drug_id") , rs.getInt("transaction_id"), rs.getInt("amount"));
+    	return new Arrives(rs1.getInt("drug_id") , rs1.getInt("transaction_id"), rs1.getInt("amount"));
 		
     }
     
-    private static Client getClient () throws SQLException {
+    private static Client getClient (ResultSet rs1) throws SQLException {
     	
     	Client client = new Client();
-		client.setId(rs.getInt("id"));
-		client.setName(rs.getString("name"));
-		client.setAddress(rs.getString("address"));
-		client.setTelephone(rs.getInt("telephone"));
-		client.setEmail(rs.getString("email"));    		
-		if(rs.getString("payment_method").equals("MASTERCARD")) {
+		client.setId(rs1.getInt("id"));
+		client.setName(rs1.getString("name"));
+		client.setAddress(rs1.getString("address"));
+		client.setTelephone(rs1.getInt("telephone"));
+		client.setEmail(rs1.getString("email"));    		
+		if(rs1.getString("payment_method").equals("MASTERCARD")) {
 			client.setPaymentMethod(PaymentMethod.MASTERCARD);
-		}else if(rs.getString("payment_method").equals("VISA")) {
+		}else if(rs1.getString("payment_method").equals("VISA")) {
 			client.setPaymentMethod(PaymentMethod.VISA);
-		}else if(rs.getString("payment_method").equals("PAYPAL")) {
+		}else if(rs1.getString("payment_method").equals("PAYPAL")) {
 			client.setPaymentMethod(PaymentMethod.PAYPAL);
-		}else if(rs.getString("payment_method").equals("AMERICAN_EXPRESS")) {
+		}else if(rs1.getString("payment_method").equals("AMERICAN_EXPRESS")) {
 			client.setPaymentMethod(PaymentMethod.AMERICAN_EXPRESS);
 		}else {
 			client.setPaymentMethod(PaymentMethod.ORGANS);
 		}    		
-		client.setUsername(rs.getString("username"));
-		client.setPassword(rs.getString("password"));
+		client.setUsername(rs1.getString("username"));
+		client.setPassword(rs1.getString("password"));
 		client.setDeliveries(searchDeliveryByClientId(client.getId()));
 		return client;
     	
     }
     
-    private static Corridor getCorridor() throws SQLException{
+    private static Corridor getCorridor(ResultSet rs1) throws SQLException{
     	
     	Corridor corridor=new Corridor();
-		corridor.setId(rs.getInt("id"));
-		corridor.setTemperature(rs.getFloat("temperature"));
-		corridor.setWarehouse(searchWarehouseById(rs.getInt("warehouse_id")));
+		corridor.setId(rs1.getInt("id"));
+		corridor.setTemperature(rs1.getFloat("temperature"));
+		corridor.setWarehouse(searchWarehouseById(rs1.getInt("warehouse_id")));
     	return corridor;
     
     }
     
-    private static Delivery getDelivery() throws SQLException{
+    private static Delivery getDelivery(ResultSet rs1) throws SQLException{
     	    	
     	Delivery delivery = new Delivery();
-    	delivery.setClient(searchClientById(rs.getInt("client_id")));
-    	delivery.setSellingPrice(rs.getInt("selling_price"));
-    	delivery.setTransactionDate(rs.getDate("transaction_date"));
-    	delivery.setTransactionId(rs.getInt("transaction_id"));
-    	delivery.setSent(rs.getBoolean("sent"));
+    	delivery.setClient(searchClientById(rs1.getInt("client_id")));
+    	delivery.setSellingPrice(rs1.getInt("selling_price"));
+    	delivery.setTransactionDate(rs1.getDate("transaction_date"));
+    	delivery.setTransactionId(rs1.getInt("transaction_id"));
+    	delivery.setSent(rs1.getBoolean("sent"));
     	delivery.setPackages(searchPackagedByDeliveryId(delivery.getTransactionId()));
     	return delivery;
     	
     }
     
-    private static Drug getDrug() throws SQLException {
+    private static Drug getDrug(ResultSet rs1) throws SQLException {
     	
     	Drug drug = new Drug();
-		drug.setId(rs.getInt("id"));
-		drug.setName(rs.getString("name"));
-		drug.setActivePrinciple(rs.getString("active_principle"));
-		drug.setSellingPrice(rs.getInt("selling_price"));
-		drug.setStock(rs.getInt("stock"));
-		drug.setPhoto(rs.getBytes("photo"));
-		drug.setCorridor(searchCorridorById(rs.getInt("corridor_id")));
+		drug.setId(rs1.getInt("id"));
+		drug.setName(rs1.getString("name"));
+		drug.setActivePrinciple(rs1.getString("active_principle"));
+		drug.setSellingPrice(rs1.getInt("selling_price"));
+		drug.setStock(rs1.getInt("stock"));
+		drug.setPhoto(rs1.getBytes("photo"));
+		drug.setCorridor(searchCorridorById(rs1.getInt("corridor_id")));
 		return drug;
     	
     }
     
-    private static Employee getEmployee() throws SQLException {
+    private static Employee getEmployee(ResultSet rs1) throws SQLException {
     	
     	Employee employee = new Employee();
-    	employee.setId(rs.getInt("id"));
-    	employee.setName(rs.getString("name"));
-    	employee.setSalary(rs.getFloat("salary"));
-    	employee.setPhone(rs.getInt("phone"));
-    	employee.setPosition(rs.getString("position"));
-    	employee.setPhoto(rs.getBytes("photo"));
-    	employee.setUsername(rs.getString("username"));
-    	employee.setPassword(rs.getString("password"));
-    	employee.setIsAdmin(rs.getBoolean("isAdmin"));
-    	int id = rs.getInt("warehouse_id");
+    	employee.setId(rs1.getInt("id"));
+    	employee.setName(rs1.getString("name"));
+    	employee.setSalary(rs1.getFloat("salary"));
+    	employee.setPhone(rs1.getInt("phone"));
+    	employee.setPosition(rs1.getString("position"));
+    	employee.setPhoto(rs1.getBytes("photo"));
+    	employee.setUsername(rs1.getString("username"));
+    	employee.setPassword(rs1.getString("password"));
+    	employee.setIsAdmin(rs1.getBoolean("isAdmin"));
+    	int id = rs1.getInt("warehouse_id");
     	Warehouse warehouseWanted = searchWarehouseById(id);
     	employee.setWarehouse(warehouseWanted);
 		return employee;
     	
     }
     
-    private static Packaged getPackaged() throws SQLException {
+    private static Packaged getPackaged(ResultSet rs1) throws SQLException {
 
-    	return new Packaged(rs.getInt("drug_id") , rs.getInt("transaction_id"), rs.getInt("amount"));
+    	return new Packaged(rs1.getInt("drug_id") , rs1.getInt("transaction_id"), rs1.getInt("amount"));
 		
     }
     
-    private static Provider getProvider() throws SQLException {
+    private static Provider getProvider(ResultSet rs1) throws SQLException {
     	
     	//we don't really need to know which arrives has a provider. We don't use it in the GUI
-    	return new Provider (rs.getInt("id"), rs.getString("name"), rs.getString("adress"), rs.getInt("telephone"),
-				rs.getString("email"));
+    	return new Provider (rs1.getInt("id"), rs1.getString("name"), rs1.getString("address"), rs1.getInt("telephone"),
+				rs1.getString("email"));
     	
     }
     
-    private static Warehouse getWarehouse() throws SQLException {
+    private static Warehouse getWarehouse(ResultSet rs1) throws SQLException {
     	
     	//we don't really need to know which corridors or employees a warehouse has. We don't use it in the GUI
-    	// but we could use it
-    	return new Warehouse(rs.getInt("id"), rs.getInt("pc"), rs.getString("country"),
-				rs.getString("city"), rs.getString("address"),rs.getInt("phone"));
+    	return new Warehouse(rs1.getInt("id"), rs1.getInt("pc"), rs1.getString("country"),
+				rs1.getString("city"), rs1.getString("address"),rs1.getInt("phone"));
+
     	
     }
 

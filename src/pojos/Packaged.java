@@ -139,11 +139,6 @@ public class Packaged implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Packaged other = (Packaged) obj;
-		if (amount == null) {
-			if (other.amount != null)
-				return false;
-		} else if (!amount.equals(other.amount))
-			return false;
 		if (deliveryId == null) {
 			if (other.deliveryId != null)
 				return false;

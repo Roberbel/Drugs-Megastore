@@ -70,7 +70,7 @@ public class Client extends User implements Serializable {
 		address = "c/Viena 17 cabanillas del campo";
 		paymentMethod = PaymentMethod.ORGANS;
 		username = (name+(int)(Math.random()*10));
-		password = ("Cualquier_cosa");
+		password = ("Craneos");
 	}
 	
 	
