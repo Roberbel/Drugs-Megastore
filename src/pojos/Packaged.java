@@ -9,30 +9,45 @@ import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "packaged")
 @IdClass(DeliveryAssociationId.class)
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Packaged")
+@XmlType(propOrder = {"Delivery"})
 public class Packaged implements Serializable{
 
 	private static final long serialVersionUID = 3515016001673617510L;
 
 	@Id
 	@Column(name="transaction_id")
+	@XmlAttribute
 	private Integer deliveryId;
 	
 	@Id
 	@Column(name="drug_id")
+	@XmlAttribute
 	private Integer drugId;
 	
 	@ManyToOne
 	@PrimaryKeyJoinColumn(name = "drug_id", referencedColumnName = "id")
+	@XmlTransient
 	private Drug drug;
 	
 	@ManyToOne
 	@PrimaryKeyJoinColumn(name = "transaction_id", referencedColumnName = "transaction_id")
+	@XmlElement
 	private Delivery delivery;
 	
+	@XmlAttribute
 	private Integer amount;
 
 

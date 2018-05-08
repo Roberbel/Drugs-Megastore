@@ -21,6 +21,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -29,7 +31,8 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "corridor")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "temperature", "warehouse", "drugs" })
+@XmlRootElement(name = "Corridor")
+@XmlType(propOrder = {"Warehouse" })
 public class Corridor implements Serializable {
 
 	
@@ -44,13 +47,12 @@ public class Corridor implements Serializable {
 	@XmlAttribute
 	private float temperature;
 	
-	@XmlElement(name = "warehouse")
+	@XmlElement(name = "Warehouse")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="warehouse_id")
 	private Warehouse warehouse;
 	
-	@XmlElement(name = "Drug")
-	@XmlElementWrapper(name = "Drugs")
+	@XmlTransient
 	@OneToMany(mappedBy="corridor",fetch = FetchType.LAZY)
 	private List<Drug> drugs;
 	

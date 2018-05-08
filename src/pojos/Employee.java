@@ -12,9 +12,19 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "employee")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Employee")
+@XmlType
 public class Employee extends User implements Serializable {
 
 	/**
@@ -26,17 +36,32 @@ public class Employee extends User implements Serializable {
 	@GeneratedValue(generator = "employee")
 	@TableGenerator(name="employee", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="employee")
+	@XmlAttribute
 	private Integer id;
+	
+	@XmlAttribute
 	private String name;
+	
+	@XmlAttribute
 	private float salary;
+	
+	@XmlAttribute
 	private Integer phone;
+	
+	@XmlAttribute
 	private String position;
+	
+	@XmlAttribute
 	private boolean isAdmin;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn (name = "warehouse_id")
+	@XmlTransient
 	private Warehouse warehouse;
+	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
+	@XmlTransient
 	private byte[] photo;
 
 	public Employee() {

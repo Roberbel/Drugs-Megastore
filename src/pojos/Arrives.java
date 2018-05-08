@@ -11,28 +11,44 @@ import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "arrives")
 @IdClass(ArrivalAssociationId.class)
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Arrive")
+@XmlType(propOrder = {"Arrival" })
 public class Arrives implements Serializable{
 	
 	private static final long serialVersionUID = -7414814044025259619L;
 	@Id
 	@Column(name = "drug_id")
+	@XmlAttribute
 	private Integer drugId;
 	@Id
 	@Column(name = "transaction_id")
+	@XmlAttribute
 	private Integer arrivalId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn(name = "drug_id", referencedColumnName = "id")	
+	@XmlTransient
 	private Drug drug;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn(name = "transaction_id", referencedColumnName = "transaction_id")
+	@XmlElement(name = "Arrival")
 	private Arrival arrival;
 	
+	@XmlAttribute
 	private Integer amount;
 
 	public Arrives(){

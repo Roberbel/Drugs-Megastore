@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -28,7 +30,8 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "deliveries")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "sellingPrice", "transactionDate", "client", "packages" })
+@XmlRootElement(name = "Delivery")
+@XmlType(propOrder = {"client"})
 public class Delivery implements Serializable {
 
 	/**
@@ -61,8 +64,7 @@ public class Delivery implements Serializable {
 	private boolean sent;
 
 
-	@XmlElement(name = "package")
-	@XmlElementWrapper(name = "packages")
+	@XmlTransient
 	@OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
 	private List<Packaged> packages;
 	
