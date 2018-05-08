@@ -1499,6 +1499,7 @@ public class SQLManager implements Manager {
     private static Warehouse getWarehouse() throws SQLException {
     	
     	//we don't really need to know which corridors or employees a warehouse has. We don't use it in the GUI
+    	// but we could use it
     	return new Warehouse(rs.getInt("id"), rs.getInt("pc"), rs.getString("country"),
 				rs.getString("city"), rs.getString("address"),rs.getInt("phone"));
     	
