@@ -134,7 +134,7 @@ public class AdminWindow implements Initializable {
     private TableColumn<Warehouse,String> wareCity;
 
     @FXML
-    private TableColumn<Warehouse,String> wareAdress;
+    private TableColumn<Warehouse,String> wareAddress;
 
     @FXML
     private TableColumn<Warehouse,Integer> warePhone;
@@ -274,13 +274,13 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void addCorridorClicked(ActionEvent event) {
-    	
-    	try {
-    		Corridor newCorridor=new Corridor();
-    		newCorridor.setTemperature(Float.parseFloat(corridorTempField.getText()));
-    		newCorridor.setWarehouse(comboWare.getSelectionModel().getSelectedItem());
-    		corridorsTable.getItems().add(newCorridor);
+    	Corridor newCorridor=new Corridor();
+    	newCorridor.setTemperature(Float.parseFloat(corridorTempField.getText()));
+    	newCorridor.setWarehouse(comboWare.getSelectionModel().getSelectedItem());
+    	try {    	
     		SQLManager.insertCorridor(newCorridor);
+    		corridorsTable.getItems().add(newCorridor);
+    		refreshComboBoxes();
     	}catch(NumberFormatException | NullPointerException | SQLException ex) {
     		Alert alert=new Alert(AlertType.ERROR);
     		alert.show();	
@@ -296,6 +296,13 @@ public class AdminWindow implements Initializable {
     	newDrug.setActivePrinciple(drugPrincipleField.getText());
     	newDrug.setSellingPrice(Integer.parseInt(drugPriceField.getText()));
     	newDrug.setStock(Integer.parseInt(drugStockField.getText()));
+    	newDrug.setCorridor(comboCorridor.getSelectionModel().getSelectedItem());
+    	try {
+    		SQLManager.insertDrug(newDrug);
+    		drugTable.getItems().add(newDrug);
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
     	
     }
 
@@ -311,6 +318,7 @@ public class AdminWindow implements Initializable {
     	newEmployee.setPassword("god of thunder");
     	try {
 			SQLManager.insertEmployee(newEmployee);
+			employeeTable.getItems().add(newEmployee);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -326,6 +334,8 @@ public class AdminWindow implements Initializable {
     	newWarehouse.setPhone(Integer.parseInt(warePhoneField.getText()));
     	try {
     		SQLManager.insertWarehouse(newWarehouse);
+    		warehouseTable.getItems().add(newWarehouse);
+    		refreshComboBoxes();
     	}catch(SQLException ex) {
     		ex.printStackTrace();
     	}
@@ -356,6 +366,7 @@ public class AdminWindow implements Initializable {
     		items.remove(c);
     		try {
     			SQLManager.deleteCorridor(c);
+    			refreshComboBoxes();
     		}catch(SQLException ex) {
     			ex.printStackTrace();
     		}
@@ -401,15 +412,30 @@ public class AdminWindow implements Initializable {
     		items.remove(w);
     		try {
     			SQLManager.deleteWarehouse(w);
+    			refreshComboBoxes();
     		}catch(SQLException ex) {
     			ex.printStackTrace();
     		}
     	}
     }
+    //ComboWare and ComboWarehouse are the same fucking thing so I will change it later
+    void refreshComboBoxes() {
+    	comboWare.getItems().removeAll();
+    	comboCorridor.getItems().removeAll();
+    	comboWarehouse.getItems().removeAll();
+    	try {
+			comboWare.getItems().addAll(SQLManager.getAllWarehouses());
+			comboCorridor.getItems().addAll(SQLManager.getAllCorridors());
+	    	comboWarehouse.getItems().addAll(SQLManager.getAllWarehouses());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 
     @FXML
     void loadEmployeeImage(MouseEvent event) {
-
+    	
     }
     
     
@@ -442,7 +468,7 @@ public class AdminWindow implements Initializable {
 		corridorWarehouse.setCellValueFactory(new PropertyValueFactory <Corridor,Warehouse>("warehouse"));
 		corridorTemperature.setCellValueFactory(new PropertyValueFactory <Corridor,Float>("temperature"));
 		try {
-			comboWare.getItems().addAll(SQLManager.getAllWarehouses());
+			//comboWare.getItems().addAll(SQLManager.getAllWarehouses());
 			corridorsTable.getItems().addAll(SQLManager.getAllCorridors());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -450,11 +476,11 @@ public class AdminWindow implements Initializable {
 		//Drug Table		
 		drugName.setCellValueFactory(new PropertyValueFactory <Drug,String>("name"));
 		drugPrinciple.setCellValueFactory(new PropertyValueFactory <Drug,String>("activePrinciple"));
-		drugPrice.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("selling price"));
+		drugPrice.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("sellingPrice"));
 		drugStock.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("stock"));	
 		drugCorridor.setCellValueFactory(new PropertyValueFactory <Drug,Corridor>("corridor"));
 		try {
-			comboCorridor.getItems().addAll(SQLManager.getAllCorridors());
+			//comboCorridor.getItems().addAll(SQLManager.getAllCorridors());
 			drugTable.getItems().addAll(SQLManager.getAllDrugs());
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -466,7 +492,7 @@ public class AdminWindow implements Initializable {
 		employeePosition.setCellValueFactory(new PropertyValueFactory <Employee,String>("position"));
 		employeeWare.setCellValueFactory(new PropertyValueFactory <Employee,Warehouse>("warehouse"));
 		try {
-			comboWarehouse.getItems().addAll(SQLManager.getAllWarehouses());
+			//comboWarehouse.getItems().addAll(SQLManager.getAllWarehouses());
 			employeeTable.getItems().addAll(SQLManager.getAllEmployee());
 		}catch(SQLException ex) {
 			ex.printStackTrace();
@@ -475,16 +501,20 @@ public class AdminWindow implements Initializable {
 		warePc.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("pc"));
 		wareCountry.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("country"));
 		wareCity.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("city"));
-		wareAdress.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("addres"));
+		wareAddress.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("address"));
 		warePhone.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("phone"));
 		try {
-			employeeTable.getItems().addAll(SQLManager.getAllEmployee());
+			warehouseTable.getItems().addAll(SQLManager.getAllWarehouses());
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}
 		
+		refreshComboBoxes();
+		
 		
 	}
+	
+	
     
     
 
