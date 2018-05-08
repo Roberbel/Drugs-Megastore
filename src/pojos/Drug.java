@@ -170,8 +170,9 @@ public class Drug implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Drugs [id=" + id + ", name=" + name + ", stock=" + stock + ", sellingPrice=" + sellingPrice
-				+ ", activePrinciple=" + activePrinciple + ", corridor=" + corridor + "]";
+		/*return "Drugs [id=" + id + ", name=" + name + ", stock=" + stock + ", sellingPrice=" + sellingPrice
+				+ ", activePrinciple=" + activePrinciple + ", corridor=" + corridor + "]";*/
+		return this.name;
 	}
 
 	public Integer getId() {

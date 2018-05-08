@@ -18,8 +18,11 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import pojos.Arrival;
+import pojos.Arrives;
+import pojos.Drug;
 
 public class employeeWindow implements Initializable {
 
@@ -45,13 +48,13 @@ public class employeeWindow implements Initializable {
 	private TextField arrivalStatus;
 
 	@FXML
-	private TableView<?> arrivalInventory;
+	private TableView<Arrives> arrivalInventory;
 
 	@FXML
-	private TableColumn<?, ?> arrivalDrugs;
+	private TableColumn<Arrives, String> arrivalDrugs;
 
 	@FXML
-	private TableColumn<?, ?> arrivalStocks;
+	private TableColumn<Arrives, Integer> arrivalStocks;
 
 	@FXML
 	private Tab deliveries;
@@ -141,10 +144,13 @@ public class employeeWindow implements Initializable {
 		arrivalProvider.setText(toBeShown.getProvider().getName());
 		arrivalDate.setPromptText(toBeShown.getDate().toString());
 		arrivalStatus.setText(""+toBeShown.isReceived());
+		arrivalInventory.getItems().clear();
+		arrivalInventory.getItems().addAll(toBeShown.getArrives());
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		try {
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 		} catch (ClassNotFoundException | SQLException e) {
@@ -159,6 +165,9 @@ public class employeeWindow implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		arrivalDrugs.setCellValueFactory(new PropertyValueFactory <Arrives,String>("drug"));
+		arrivalStocks.setCellValueFactory(new PropertyValueFactory <Arrives, Integer>("amount"));
 	}
 
 }
