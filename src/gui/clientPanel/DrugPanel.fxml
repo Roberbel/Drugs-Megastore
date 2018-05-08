@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.9999000000025" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="DrugPanelSB">
+  <children>
+    <BorderPane prefHeight="399.9999000000025" prefWidth="400.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="35.0">
+      <bottom>
+        <GridPane prefHeight="105.0" prefWidth="350.0">
+          <children>
+            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <Label fx:id="priceLabel" prefWidth="109.0" text="Price:" />
+              </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <children>
+                <Label fx:id="stockLabel" prefWidth="188.0" text="Stock:" />
+              </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" minWidth="175.0" prefHeight="52.0" prefWidth="175.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+              <children>
+                <TextField fx:id="amountTextField" onKeyReleased="#checkAmount" prefWidth="150.0" promptText="Amount" />
+              </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <children>
+                <Button fx:id="addToCart" mnemonicParsing="false" onMousePressed="#addToCart" text="Add to Cart" />
+              </children>
+            </FlowPane>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </bottom>
+      <center>
+        <FlowPane alignment="CENTER" prefHeight="250.0" prefWidth="209.0">
+          <children>
+            <ImageView fx:id="drugPhoto" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="file:/D:/Pictures/G%20%20%20O%20%20%20N%20%20%20Z%20%20%20A%20%20%20L%20%20%20O/descarga.png" />
+              </image>
+            </ImageView>
+          </children>
+        </FlowPane>
+      </center>
+      <right>
+        <GridPane prefHeight="250.0" prefWidth="148.0">
+          <children>
+            <FlowPane alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <Label fx:id="nameLabel" prefWidth="145.0001220703125" text="Name:" wrapText="true">
+                  <font>
+                    <Font size="20.0" fx:id="x1" />
+                  </font>
+                </Label>
+              </children>
+            </FlowPane>
+            <FlowPane alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+              <children>
+                <Label id="price" fx:id="activePrincipleLabel" font="$x1" prefHeight="72.0" prefWidth="150.0" text="Active Principle:" wrapText="true" />
+              </children>
+            </FlowPane>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </right>
+    </BorderPane>
+  </children>
+</AnchorPane>
