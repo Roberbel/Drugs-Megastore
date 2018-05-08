@@ -1,16 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE Drug [
-  <!ELEMENT Drug(name, activePrinciple, stock, sellingPrice,corridor,packaged,arrives)>
-   <!ELEMENT name (#PCDATA)>
-   <!ELEMENT activePrinciple(#PCDATA)>  
+  <!ELEMENT Drug(name, activePrinciple, stock, sellingPrice,Corridor,packaged,Arrives)>
+    <!ELEMENT name (#PCDATA)>
+    <!ELEMENT activePrinciple(#PCDATA)>  
     <!ELEMENT stock(#PCDATA)>
     <!ELEMENT sellingPrice(#PCDATA)>
-      <!ELEMENT corridor(#PCDATA)>
-   <!ELEMENT packaged(Packaged+)>
-   <!ELEMENT Packaged()>
-   
- 
-    <!ELEMENT photo(#PCDATA)>    
+    <!ELEMENT Corridor(temperature, Warehouse)>
+     <!ATTLIST Corridor id CDATA #REQUIRED
+    <!ELEMENT packaged(Packaged+)>
+    <!ELEMENT arrives(Arrives+)>  
+    
+    <!ELEMENT temperature(#PCDATA)>
+        <!ELEMENT Warehouse(id, pc, country, city, address, phone,  employees)>
+    
+    <!ELEMENT Packaged( Delivery)>
+    	<!ATTLIST Packaged drugId CDATA #REQUIRED
+    					deliveryId CDATA #REQUIRED>
+    					
+    <!ELEMENT Arrives(ammount, arrival)>
+    	<!ATTLIST Arrives drugId CDATA #REQUIRED
+    					arrivalId CDATA #REQUIRED>
+    <!ELEMENT id(#PCDATA)>
+    <!ELEMENT pc(#PCDATA)>
+    <!ELEMENT country(#PCDATA)>
+    <!ELEMENT city(#PCDATA)>
+    <!ELEMENT address(#PCDATA)>
+    <!ELEMENT phone(#PCDATA)>
+    <!ELEMENT employees(Employee+)>
+  	  <!ELEMENT Employees(phone, salary, position)>  
+    	<!ATTLIST Employees name CDATA #REQUIRED
+    						id CDATA #REQUIRED>
+     <!ELEMENT phone(#PCDATA)>
+     <!ELEMENT salary(#PCDATA)>
+     <!ELEMENT position(#PCDATA)>
+     <!ELEMENT Delivery(sellingPrice, client, transactionDate)>
+     	<!ATTLIST Delivery id CDATA #REQUIRED>
+     <!ELEMENT sellingPrice(#PCDATA)>
+     <!ELEMENT transactionDate(#PCDATA)>
+     <!ELEMENT client( address,telephone,email,paymentMethod)>
+      <!ATTLIST client name(#PCDATA)>
+      <!ELEMENT ammount(#PCDATA)>
+      <!ELEMENT arrival(buyingPrice,date,provider)>
+       <!ATTLIST arrival arrivalId CDATA #REQUIRED>
+        <!ELEMENT buyingPrice(#PCDATA)>
+        <!ELEMENT date(#PCDATA)>
+      <!ELEMENT provider(address, telephone, email) 
+      <!ATTLIST provider name CDATA #REQUIRED
+    						id CDATA #REQUIRED> 
+      <!ELEMENT address(#PCDATA)>
+      <!ELEMENT telephone(#PCDATA)>
+      <!ELEMENT email(#PCDATA)>
      ]>
      
