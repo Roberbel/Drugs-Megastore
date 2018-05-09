@@ -70,8 +70,6 @@ public class Delivery implements Serializable {
 	public Delivery() {
 		super();
 		packages = new ArrayList<Packaged>();
-		sellingPrice = 1000000;
-		transactionDate = new Date(System.currentTimeMillis());
 	}
 
 	public Delivery(Client client){

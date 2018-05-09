@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -17,7 +15,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
 <BorderPane fx:id="window" prefHeight="649.0" prefWidth="953.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.adminPanel.AdminWindow">
    <center>
@@ -98,7 +95,7 @@
                               <TableColumn fx:id="warePc" prefWidth="94.3999969959259" text="Zip Code" />
                               <TableColumn fx:id="wareCountry" prefWidth="149.59994506835938" text="Country" />
                               <TableColumn fx:id="wareCity" prefWidth="158.3999481201172" text="City" />
-                              <TableColumn fx:id="wareAddress" prefWidth="179.5999755859375" text="Address" />
+                              <TableColumn fx:id="wareAdress" prefWidth="179.5999755859375" text="Adress" />
                               <TableColumn fx:id="warePhone" prefWidth="160.4000244140625" text="Phone Number" />
                            </columns>
                            <columnResizePolicy>
@@ -123,46 +120,9 @@
                </content>
             </Tab>
             <Tab fx:id="arrivalsTab" text="Arrivals">
-               <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <left>
-                        <JFXListView fx:id="arrivalList" prefHeight="620.0" prefWidth="142.0" BorderPane.alignment="CENTER" />
-                     </left>
-                     <center>
-                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                           <bottom>
-                              <TableView fx:id="arrivalTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                <columns>
-                                  <TableColumn fx:id="arrivalDrugName" editable="false" prefWidth="267.59999084472656" text="Drug Name" />
-                                  <TableColumn fx:id="arrivalDrugAmount" editable="false" prefWidth="292.79998779296875" text="Amount" />
-                                </columns>
-                              </TableView>
-                           </bottom>
-                           <center>
-                              <GridPane BorderPane.alignment="CENTER">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <VBox prefHeight="200.0" prefWidth="100.0">
-                                       <children>
-                                          <Label text="Label" />
-                                          <Label text="Label" />
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </GridPane>
-                           </center>
-                        </BorderPane>
-                     </center>
-                  </BorderPane>
-               </content>
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
             </Tab>
             <Tab fx:id="deliveriesTab" text="Deliveries">
               <content>

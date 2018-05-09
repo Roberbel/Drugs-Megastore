@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="872.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.clientPanel.ClientPanelSB">
+  <children>
+    <BorderPane fx:id="mainPanel" blendMode="SRC_OVER" prefHeight="683.0" prefWidth="872.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0">
+      <center>
+        <ScrollPane fx:id="drugsScrollPanel" content="$null" hbarPolicy="NEVER" prefHeight="549.0" prefWidth="568.0" />
+      </center>
+      <left>
+        <GridPane fx:id="leftPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="254.0">
+          <children>
+            <FlowPane alignment="BOTTOM_CENTER" prefHeight="241.5" prefWidth="244.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <TextField fx:id="nameTextField" onKeyReleased="#searchDrugs" prefWidth="200.0" promptText="Name" />
+              </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+              <children>
+                <TextField fx:id="activePrincipleTextField" prefWidth="200.0" promptText="Active principle" />
+              </children>
+            </FlowPane>
+            <FlowPane alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+              <children>
+                <TextField fx:id="maxPriceTextField" prefWidth="200.0" promptText="maximun price" />
+              </children>
+            </FlowPane>
+            <FlowPane alignment="TOP_CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+              <children>
+                <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#searchDrugs" text="Search" underline="false" />
+              </children>
+            </FlowPane>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="252.0" minHeight="10.0" prefHeight="212.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="182.0" minHeight="10.0" prefHeight="112.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="258.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="258.0" minHeight="10.0" prefHeight="167.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </left>
+      <top>
+        <GridPane fx:id="topPanel" prefHeight="100.0" prefWidth="872.0">
+          <children>
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+              <children>
+                <Label fx:id="cart" onMouseClicked="#showCartPanel" onMouseEntered="#highlightCart" onMouseExited="#returnCartToNormal" text="Cart: 0 items" textAlignment="JUSTIFY" wrapText="true">
+                  <font>
+                    <Font name="System Bold" size="15.0" fx:id="x1" />
+                  </font>
+                </Label>
+              </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER_RIGHT" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+              <children>
+                <Label fx:id="profile" font="$x1" onMouseClicked="#showProfilePanel" onMouseEntered="#highlightProfile" onMouseExited="#returnProfileToNormal" prefWidth="142.0" text="Profile" wrapText="true" />
+              </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <ImageView fx:id="logo" fitHeight="83.49992370605469" fitWidth="83.49992370605469" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                    <Image url="file:/D:/Pictures/G%20%20%20O%20%20%20N%20%20%20Z%20%20%20A%20%20%20L%20%20%20O/ceu.jpeg" />
+                  </image>
+                </ImageView>
+              </children>
+            </FlowPane>
+            <FlowPane alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <children>
+                <Label fx:id="companyName" text="Apotheke">
+                  <font>
+                    <Font size="45.0" />
+                  </font>
+                </Label>
+              </children>
+            </FlowPane>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="291.0" minWidth="10.0" prefWidth="142.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="296.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.0" minWidth="10.0" prefWidth="222.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.0" minWidth="10.0" prefWidth="212.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </top>
+    </BorderPane>
+  </children>
+</AnchorPane>

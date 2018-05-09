@@ -1503,7 +1503,6 @@ public class SQLManager implements Manager {
     	//we don't really need to know which corridors or employees a warehouse has. We don't use it in the GUI
     	return new Warehouse(rs1.getInt("id"), rs1.getInt("pc"), rs1.getString("country"),
 				rs1.getString("city"), rs1.getString("address"),rs1.getInt("phone"));
-
     	
     }
 

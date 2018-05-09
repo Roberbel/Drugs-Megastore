@@ -73,7 +73,7 @@
                               <Label text="Arrived" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <DatePicker fx:id="arrivalDate" editable="false" prefHeight="23.0" prefWidth="613.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                               <TextField fx:id="arrivalProvider" editable="false" GridPane.columnIndex="2" />
-                              <TextField fx:id="arrivalStatus" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <TextField fx:id="arrivalStatus" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                               <TableView fx:id="arrivalInventory" prefHeight="248.0" prefWidth="204.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                 <columns>
                                   <TableColumn fx:id="arrivalDrugs" prefWidth="121.0" text="Drug" />
