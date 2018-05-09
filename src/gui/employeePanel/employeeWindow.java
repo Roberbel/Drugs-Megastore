@@ -92,13 +92,25 @@ public class employeeWindow implements Initializable {
 	private Tab inventory;
 
 	@FXML
-	private ListView<?> inventoryList;
+	private ListView<Drug> inventoryList;
 
 	@FXML
 	private JFXButton addInventory;
 
 	@FXML
 	private JFXButton deleteInventory;
+	
+	@FXML
+	private TextField drugProvider;
+	
+	@FXML
+	private TextField drugActivePrinciple;
+	
+	@FXML
+	private TextField drugCorridor;
+	
+	@FXML
+	private TextField drugStock;
 
 	@FXML
 	void addArrival(ActionEvent event) {
@@ -145,7 +157,15 @@ public class employeeWindow implements Initializable {
 
 	@FXML
 	void deleteDrug(ActionEvent event) {
+		Drug toBeRemoved = inventoryList.getSelectionModel().getSelectedItem();
+		try {
+			SQLManager.deleteDrug(toBeRemoved);
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		inventoryList.getItems().remove(toBeRemoved);
 	}
 	
 	@FXML
@@ -153,7 +173,11 @@ public class employeeWindow implements Initializable {
 		Arrival toBeShown = arrivalList.getSelectionModel().getSelectedItem();
 		arrivalProvider.setText(toBeShown.getProvider().getName());
 		arrivalDate.setPromptText(toBeShown.getDate().toString());
-		arrivalStatus.setText(""+toBeShown.isReceived());
+		if(toBeShown.isReceived()) {		
+			arrivalStatus.setText("Yes");
+		}else{
+			arrivalStatus.setText("No");
+		}
 		arrivalInventory.getItems().clear();
 		arrivalInventory.getItems().addAll(toBeShown.getArrives());
 	}
@@ -163,11 +187,23 @@ public class employeeWindow implements Initializable {
 		Delivery toBeShown = deliveryList.getSelectionModel().getSelectedItem();
 		deliveryClient.setText(toBeShown.getClient().getName());
 		deliveryDate.setPromptText(toBeShown.getTransactionDate().toString());
-		deliveryStatus.setText(""+toBeShown.isSent());
+		if(toBeShown.isSent()) {		
+			deliveryStatus.setText("Yes");
+		}else{
+			deliveryStatus.setText("No");
+		}
 		deliveryInventory.getItems().clear();
 		deliveryInventory.getItems().addAll(toBeShown.getPackages());
 		
 		
+	}
+	
+	@FXML
+	void showInventory(MouseEvent event) {
+		Drug toBeShown = inventoryList.getSelectionModel().getSelectedItem();
+		drugActivePrinciple.setText(toBeShown.getActivePrinciple());
+		drugCorridor.setText(toBeShown.getCorridor().getId().toString());
+		drugStock.setText(toBeShown.getStock().toString());
 	}
 
 	@Override
@@ -190,6 +226,14 @@ public class employeeWindow implements Initializable {
 		try {
 			deliveryList.getItems().addAll(SQLManager.getAllDeliveries());
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			inventoryList.getItems().addAll(SQLManager.getAllDrugs());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
