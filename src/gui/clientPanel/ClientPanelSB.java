@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 
 import DB.SQLManager;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -182,6 +181,7 @@ public class ClientPanelSB {
 			e.printStackTrace();
 		}
     	
+    	drugsFlowPanel.autosize();
         assert activePrincipleTextField != null : "fx:id=\"ActivePrincipleTextField\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert cart != null : "fx:id=\"cart\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert companyName != null : "fx:id=\"companyName\" was not injected: check your FXML file 'ClientPanel.fxml'.";

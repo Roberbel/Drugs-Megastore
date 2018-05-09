@@ -236,7 +236,7 @@ public class ClientPane extends BorderPane {
 			HBox hbox = new HBox(spacing);
 			//hbox.getChildren().add(new Region());
 			for(int j = 0; j < n && (j+i)<drugs.size(); j++ ) {
-				hbox.getChildren().add(new DrugPanel(drugs.get(i+j), delivery, this));
+				//hbox.getChildren().add(new DrugPanel(drugs.get(i+j), delivery, this));
 			}
 			//hbox.getChildren().add(new Region());
 			box.getChildren().add(hbox);

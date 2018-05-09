@@ -20,13 +20,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "drug")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "name", "activePrinciple", "stock", "sellingPrice", "corridor", "packaged", "arrives" })
+@XmlRootElement(name = "Drug")
+@XmlType(propOrder = { "Corridor", "Packaged", "Arrives" })
 public class Drug implements Serializable {
 
 	/**
@@ -58,13 +60,13 @@ public class Drug implements Serializable {
 	@XmlElement
 	private Corridor corridor;
 	
-	@XmlElement(name = "package")
-	@XmlElementWrapper(name = "packaged")
+	@XmlElement(name = "Package")
+	@XmlElementWrapper(name = "Packaged")
 	@OneToMany(mappedBy = "drug", fetch = FetchType.LAZY)
 	private List<Packaged> packaged;
 	
-	@XmlElement(name = "arrive")
-	@XmlElementWrapper(name = "arrives")
+	@XmlElement(name = "Arrive")
+	@XmlElementWrapper(name = "Arrives")
 	@OneToMany(mappedBy = "drug", fetch = FetchType.LAZY)
 	private List<Arrives> arrives;
 	

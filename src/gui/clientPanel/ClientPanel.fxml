@@ -15,7 +15,7 @@
       <center>
         <ScrollPane fx:id="drugsScrollPanel" hbarPolicy="NEVER" prefHeight="549.0" prefWidth="568.0">
           <content>
-            <FlowPane fx:id="drugsFlowPanel" prefHeight="508.0" prefWidth="517.0">
+            <FlowPane fx:id="drugsFlowPanel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="508.0" prefWidth="517.0">
               <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
               </padding>
