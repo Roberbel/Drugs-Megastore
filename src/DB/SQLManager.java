@@ -1398,7 +1398,7 @@ public class SQLManager implements Manager {
     
     private static Arrives getArrive(ResultSet rs1) throws SQLException {
 
-    	return new Arrives(rs1.getInt("drug_id") , rs1.getInt("transaction_id"), rs1.getInt("amount"));
+    	return new Arrives(rs1.getInt("drug_id") , rs1.getInt("transaction_id"), rs1.getInt("amount"),getDrugNameById(rs1.getInt("drug_id")));
 		
     }
     

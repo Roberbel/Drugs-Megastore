@@ -50,6 +50,16 @@ public class Arrives implements Serializable{
 		arrival = null;
 	}
 	
+	
+	
+	public Arrives(Integer drugId, Integer arrivalId, Integer amount, Drug drug) {
+		super();
+		this.drugId = drugId;
+		this.arrivalId = arrivalId;
+		this.drug = drug;
+		this.amount = amount;
+	}
+
 	public Arrives(Drug drug, Arrival arrival, Integer amount){
 		
 		super();
