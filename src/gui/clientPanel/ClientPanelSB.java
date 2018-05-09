@@ -2,6 +2,7 @@ package gui.clientPanel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -12,10 +13,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import pojos.Client;
 import pojos.Delivery;
@@ -46,6 +49,9 @@ public class ClientPanelSB {
 
     @FXML
     private ScrollPane drugsScrollPanel;
+    
+    @FXML
+    private FlowPane drugsFlowPanel;
 
     @FXML
     private GridPane leftPanel;
@@ -94,6 +100,7 @@ public class ClientPanelSB {
 			
 			String name = nameTextField.getText();
 			String activePrinciple = activePrincipleTextField.getText();
+			System.out.println(activePrinciple);
 			String stringMaxPrice = maxPriceTextField.getText();
 			/*
 			 * if the name isn't empty we will search mainly by it
@@ -165,6 +172,16 @@ public class ClientPanelSB {
     void initialize() {
     	drugAmount = 0;
     	delivery = new Delivery();
+    	drugs = new ArrayList<Drug>();
+    	delivery = new Delivery();
+    	
+    	try {
+			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
         assert activePrincipleTextField != null : "fx:id=\"ActivePrincipleTextField\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert cart != null : "fx:id=\"cart\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert companyName != null : "fx:id=\"companyName\" was not injected: check your FXML file 'ClientPanel.fxml'.";
@@ -177,20 +194,35 @@ public class ClientPanelSB {
         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert topPanel != null : "fx:id=\"topPanel\" was not injected: check your FXML file 'ClientPanel.fxml'.";
+        logo.setImage(new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Deutsche_Apotheke_Logo.svg/827px-Deutsche_Apotheke_Logo.svg.png"));
+        searchDrugs(null);
 
-
+    }
+    
+    private void createDrugsPanels(){
+    	drugsFlowPanel.getChildren().clear();
+    	for (Drug d: drugs) {
+    		
+    		DrugPanel drugPanel = new DrugPanel(d, delivery,  this);
+    		drugsFlowPanel.getChildren().add(drugPanel);
+    		
+    	}
+    	
     }
 
     
     public void setClient(Client client) {
     	
     	this.client = client;
+    	delivery.setClient(client);
+    	
+    	profile.setText(client.getName());
     	
     }
     
     protected void updateCart() {
 		
-		cart.setText("Cart: "+ ++drugAmount+ " drugs"); 
+		cart.setText("Cart: "+ ++drugAmount+ " items"); 
 		
 	}
 }

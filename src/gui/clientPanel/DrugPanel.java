@@ -28,7 +28,7 @@ import pojos.Packaged;
 public class DrugPanel extends BorderPane {
 
 	private Delivery delivery;
-	private ClientPane clientPanel;
+	private ClientPanelSB clientPanel;
 	private Drug drug;
 	
 	private static final float width = 247;
@@ -41,7 +41,7 @@ public class DrugPanel extends BorderPane {
 	private TextField amount;
 	private Button add;
 	
-	public DrugPanel(Drug drug, Delivery delivery, ClientPane clientPanel) {
+	public DrugPanel(Drug drug, Delivery delivery, ClientPanelSB clientPanel) {
 		this.drug = drug;
 		this.delivery = delivery;
 		this.clientPanel = clientPanel;
@@ -66,7 +66,7 @@ public class DrugPanel extends BorderPane {
 		center.setRight(centerRight);
 		
 		HBox centerBottom = new HBox(10);
-		price = new Label("Price: "+ drug.getSellingPrice());
+		price = new Label("Price: "+ drug.getSellingPrice()+ " €/unit");
 		
 		stock = new Label("Stock: "+ drug.getStock());
 		
@@ -127,19 +127,21 @@ public class DrugPanel extends BorderPane {
 	private void checkAmount() {
 		String amountString = amount.getText();
 		//we only check the last char typed, because we had already checked the rest
-		char character = amountString.charAt(amountString.length()-1);
-		if(!(character > 47 && character < 58)) {
-			amount.deleteText(amount.getLength()-1, amount.getLength());
-		}
-		if(!amount.getText().equals("")) {
-			int quantity = Integer.parseInt(amount.getText());
-			if(quantity > drug.getStock()) {
-				
-				amount.setText("" + drug.getStock());
-				amount.end();
+		if(amountString.length() > 0) {
+			char character = amountString.charAt(amountString.length()-1);
+			if(!(character > 47 && character < 58)) {
+				amount.deleteText(amount.getLength()-1, amount.getLength());
+			}
+			if(!amount.getText().equals("")) {
+				int quantity = Integer.parseInt(amount.getText());
+				if(quantity > drug.getStock()) {
+					
+					amount.setText("" + drug.getStock());
+					amount.end();
+					
+				}
 				
 			}
-			
 		}
 		
 	}

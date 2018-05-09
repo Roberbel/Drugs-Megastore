@@ -48,8 +48,9 @@ public class JPAManager implements Manager{
 		}
 		
 		public static void disconnect()  {
-			
-			em.close();
+			if(em != null) {
+				em.close();
+			}
 			System.out.println("Database connection closed.");
 		}
 		

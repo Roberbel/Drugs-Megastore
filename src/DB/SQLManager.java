@@ -553,9 +553,9 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple)throws SQLException{ 
 		
-		String sql="SELECT * FROM drug WHERE active_principle LIKE %?%";
+		String sql="SELECT * FROM drug WHERE active_principle LIKE ?";
 		PreparedStatement prep=c.prepareStatement(sql);
-		prep.setString(1, activePrinciple);
+		prep.setString(1, "%"+activePrinciple+"%");
 		ResultSet rs1 = prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			return null;
@@ -572,9 +572,9 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple, Integer maxPrice)throws SQLException{ 
 		
-		String sql="SELECT * FROM drug WHERE active_principle LIKE %?% AND selling_price <= ?";
+		String sql="SELECT * FROM drug WHERE active_principle LIKE ? AND selling_price <= ?";
 		PreparedStatement prep=c.prepareStatement(sql);
-		prep.setString(1, activePrinciple);
+		prep.setString(1, "%"+activePrinciple+"%");
 		prep.setInt(2, maxPrice);
 		ResultSet rs1=prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
@@ -614,9 +614,9 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByName(String name) throws SQLException{
 		
-		String sql="SELECT * FROM drug WHERE name LIKE %?%";
+		String sql="SELECT * FROM drug WHERE name LIKE ? ";
 		PreparedStatement prep=c.prepareStatement(sql);
-		prep.setString(1, name);
+		prep.setString(1, "%"+name+"%");
 		ResultSet rs1=prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			return null;
@@ -635,10 +635,10 @@ public class SQLManager implements Manager {
 	public static List<Drug> searchDrugByName(String name, String activePrinciple) throws SQLException{
 		
 		System.out.println("name = "+name+"\nA.P. = "+activePrinciple);
-		String sql="SELECT * FROM drug WHERE name LIKE %?% AND active_principle LIKE %?%";
+		String sql="SELECT * FROM drug WHERE name LIKE ? AND active_principle LIKE ?";
 		PreparedStatement prep=c.prepareStatement(sql);
-		prep.setString(1, name);
-		prep.setString(2, activePrinciple);
+		prep.setString(1, "%"+name+"%");
+		prep.setString(2, "%"+activePrinciple+"%");
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
@@ -657,9 +657,9 @@ public class SQLManager implements Manager {
 	public static List<Drug> searchDrugByName(String name, Integer maxPrice) throws SQLException{
 		
 		System.out.println("name = "+name+"\nMaxPrice = "+maxPrice);
-		String sql="SELECT * FROM drug WHERE name LIKE %?% AND selling_price <= ?";
+		String sql="SELECT * FROM drug WHERE name LIKE ? AND selling_price <= ?";
 		PreparedStatement prep=c.prepareStatement(sql);
-		prep.setString(1, name);
+		prep.setString(1, "%"+name+"%");
 		prep.setInt(2, maxPrice);
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
@@ -679,10 +679,10 @@ public class SQLManager implements Manager {
 	public static List<Drug> searchDrugByName(String name, String activePrinciple, Integer maxPrice) throws SQLException{
 		
 		System.out.println("name = "+name+"\nA.P. = "+activePrinciple+"\nMaxPrice = "+maxPrice);
-		String sql="SELECT * FROM drug WHERE name LIKE %?% AND active_principle LIKE %?% AND selling_price <= ?";
+		String sql="SELECT * FROM drug WHERE name LIKE '%?%' AND active_principle LIKE '%?%' AND selling_price <= ?";
 		PreparedStatement prep=c.prepareStatement(sql);
-		prep.setString(1, name);
-		prep.setString(2, activePrinciple);
+		prep.setString(1, "%"+name+"%");
+		prep.setString(2, "%"+activePrinciple+"%");
 		prep.setInt(3, maxPrice);
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {

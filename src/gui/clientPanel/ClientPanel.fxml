@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -12,7 +13,15 @@
   <children>
     <BorderPane fx:id="mainPanel" blendMode="SRC_OVER" prefHeight="683.0" prefWidth="872.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0">
       <center>
-        <ScrollPane fx:id="drugsScrollPanel" content="$null" hbarPolicy="NEVER" prefHeight="549.0" prefWidth="568.0" />
+        <ScrollPane fx:id="drugsScrollPanel" hbarPolicy="NEVER" prefHeight="549.0" prefWidth="568.0">
+          <content>
+            <FlowPane fx:id="drugsFlowPanel" prefHeight="508.0" prefWidth="517.0">
+              <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+              </padding>
+            </FlowPane>
+          </content>
+        </ScrollPane>
       </center>
       <left>
         <GridPane fx:id="leftPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="254.0">
