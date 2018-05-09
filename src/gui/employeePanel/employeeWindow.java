@@ -22,7 +22,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import pojos.Arrival;
 import pojos.Arrives;
+import pojos.Delivery;
 import pojos.Drug;
+import pojos.Packaged;
 
 public class employeeWindow implements Initializable {
 
@@ -60,7 +62,7 @@ public class employeeWindow implements Initializable {
 	private Tab deliveries;
 
 	@FXML
-	private ListView<?> deliveryList;
+	private ListView<Delivery> deliveryList;
 
 	@FXML
 	private JFXButton addDelivery;
@@ -78,13 +80,13 @@ public class employeeWindow implements Initializable {
 	private TextField deliveryStatus;
 
 	@FXML
-	private TableView<?> deliveryInventory;
+	private TableView<Packaged> deliveryInventory;
 
 	@FXML
-	private TableColumn<?, ?> deliveryDrugs;
+	private TableColumn<Packaged, String> deliveryDrugs;
 
 	@FXML
-	private TableColumn<?, ?> deliveryStocks;
+	private TableColumn<Packaged, Integer> deliveryStocks;
 
 	@FXML
 	private Tab inventory;
@@ -154,20 +156,28 @@ public class employeeWindow implements Initializable {
 		try {
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		try {
 
 			arrivalList.getItems().addAll(SQLManager.getAllArrivals());
+	
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			deliveryList.getItems().addAll(SQLManager.getAllDeliveries());
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
 		arrivalDrugs.setCellValueFactory(new PropertyValueFactory <Arrives,String>("drug"));
 		arrivalStocks.setCellValueFactory(new PropertyValueFactory <Arrives, Integer>("amount"));
+		deliveryDrugs.setCellValueFactory(new PropertyValueFactory <Packaged,String>("drug"));
+		deliveryStocks.setCellValueFactory(new PropertyValueFactory <Packaged, Integer>("amount"));
+		
 	}
 
 }
