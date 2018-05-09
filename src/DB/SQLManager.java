@@ -1475,7 +1475,11 @@ public class SQLManager implements Manager {
 		ResultSet rs1 =prep.executeQuery();
     		
 		Drug drug = new Drug(rs1.getInt("id"),rs1.getString("name"));
-    	
+    		
+		rs1.close();
+		prep.close();
+		
+		
 		return drug;
 	}
 

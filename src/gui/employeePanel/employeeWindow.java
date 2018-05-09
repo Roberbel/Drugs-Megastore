@@ -101,9 +101,6 @@ public class employeeWindow implements Initializable {
 	private JFXButton deleteInventory;
 	
 	@FXML
-	private TextField drugProvider;
-	
-	@FXML
 	private TextField drugActivePrinciple;
 	
 	@FXML
