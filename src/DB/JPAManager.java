@@ -29,7 +29,7 @@ public class JPAManager implements Manager{
 			
 			for (int i = 0; i < 50; i++) {
 				
-				JPAManager.insertArrival(new Arrival());
+				JPAManager.insertDrug(new Drug());
 				
 			}
 			JPAManager.insertClient(new Client());
