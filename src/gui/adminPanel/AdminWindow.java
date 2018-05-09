@@ -327,7 +327,7 @@ public class AdminWindow implements Initializable {
     @FXML
     void addWareClicked(ActionEvent event) {
     	Warehouse newWarehouse = new Warehouse();
-    	newWarehouse.setAdress(wareAdressField.getText());
+    	newWarehouse.setAddress(wareAdressField.getText());
     	newWarehouse.setPc(Integer.parseInt(warePcField.getText()));
     	newWarehouse.setCity(wareCityField.getText());
     	newWarehouse.setCountry(wareCountryField.getText());
@@ -418,11 +418,12 @@ public class AdminWindow implements Initializable {
     		}
     	}
     }
+
     //ComboWare and ComboWarehouse are the same fucking thing so I will change it later
     void refreshComboBoxes() {
-    	comboWare.getItems().removeAll();
-    	comboCorridor.getItems().removeAll();
-    	comboWarehouse.getItems().removeAll();
+    	comboWare.getItems().clear();
+    	comboCorridor.getItems().clear();
+    	comboWarehouse.getItems().clear();
     	try {
 			comboWare.getItems().addAll(SQLManager.getAllWarehouses());
 			comboCorridor.getItems().addAll(SQLManager.getAllCorridors());

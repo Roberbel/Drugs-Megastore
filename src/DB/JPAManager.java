@@ -473,7 +473,7 @@ public class JPAManager implements Manager{
 		public static void updateWarehouseAddress(Warehouse warehouse, String address) {
 			
 			em.getTransaction().begin();
-			warehouse.setAdress(address);
+			warehouse.setAddress(address);
 			em.getTransaction().commit();
 			
 		}

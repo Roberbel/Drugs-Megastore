@@ -162,11 +162,11 @@ public class Warehouse implements Serializable {
 		this.country = country;
 	}
 
-	public String getAdress() {
+	public String getAddress() {
 		return address;
 	}
 
-	public void setAdress(String adress) {
+	public void setAddress(String adress) {
 		this.address = adress;
 	}
 

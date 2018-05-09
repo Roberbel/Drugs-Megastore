@@ -1,5 +1,8 @@
 package gui;
 
+import java.sql.SQLException;
+
+import DB.SQLManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -23,8 +26,17 @@ public class Main extends Application{
 			this.window.setScene(new Scene(root));
 			this.window.setResizable(true);
 			this.window.show();
+			this.window.setOnCloseRequest(e->closeConnection());
 		}catch(Exception ex) {
 			ex.printStackTrace();
+		}
+	}
+	
+	private void closeConnection(){
+		try {
+			SQLManager.disconnect();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

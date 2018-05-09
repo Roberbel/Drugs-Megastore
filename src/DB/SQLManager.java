@@ -341,7 +341,7 @@ public class SQLManager implements Manager {
 		prep.setInt(1, warehouse.getPhone());
 		prep.setString(2, warehouse.getCity());
 		prep.setString(3, warehouse.getCity());
-		prep.setString(4, warehouse.getAdress());
+		prep.setString(4, warehouse.getAddress());
 		prep.setInt(5, warehouse.getPc());
 		prep.executeUpdate();
 		prep.close();
