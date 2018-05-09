@@ -1135,7 +1135,7 @@ public class SQLManager implements Manager {
     
     public static void deleteDelivery(Integer id)  throws SQLException {
     	
-    	String sql = "DELETE FROM deliveries WHERE transactionId=?";
+    	String sql = "DELETE FROM deliveries WHERE transaction_id=?";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
@@ -1147,7 +1147,7 @@ public class SQLManager implements Manager {
     
     public static void deleteDelivery(Delivery delivery) throws SQLException {
     	
-    	String sql = "DELETE FROM deliveries WHERE transactionId=?";
+    	String sql = "DELETE FROM deliveries WHERE transaction_id=?";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,delivery.getTransactionId());
 		prep.executeUpdate();
@@ -1501,7 +1501,7 @@ public class SQLManager implements Manager {
     
     private static Packaged getPackaged(ResultSet rs1) throws SQLException {
 
-    	return new Packaged(rs1.getInt("drug_id") , rs1.getInt("transaction_id"), rs1.getInt("amount"));
+    	return new Packaged(rs1.getInt("drug_id") , rs1.getInt("transaction_id"), rs1.getInt("amount"),getDrugNameById(rs1.getInt("drug_id")));
 		
     }
     

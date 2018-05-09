@@ -49,6 +49,16 @@ public class Packaged implements Serializable{
 		
 	}
 	
+	
+	
+	public Packaged(Integer deliveryId, Integer drugId, Integer amount, Drug drug) {
+		super();
+		this.deliveryId = deliveryId;
+		this.drugId = drugId;
+		this.drug = drug;
+		this.amount = amount;
+	}
+
 	public Packaged(Drug drug, Delivery delivery, Integer amount) {
 		
 		super();

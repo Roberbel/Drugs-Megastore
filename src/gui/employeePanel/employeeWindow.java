@@ -132,7 +132,15 @@ public class employeeWindow implements Initializable {
 
 	@FXML
 	void deleteDelivery(ActionEvent event) {
+		Delivery toBeRemoved = deliveryList.getSelectionModel().getSelectedItem();
+		try {
+			SQLManager.deleteDelivery(toBeRemoved);
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		deliveryList.getItems().remove(toBeRemoved);
 	}
 
 	@FXML
@@ -148,6 +156,18 @@ public class employeeWindow implements Initializable {
 		arrivalStatus.setText(""+toBeShown.isReceived());
 		arrivalInventory.getItems().clear();
 		arrivalInventory.getItems().addAll(toBeShown.getArrives());
+	}
+	
+	@FXML
+	void showDelivery(MouseEvent event) {
+		Delivery toBeShown = deliveryList.getSelectionModel().getSelectedItem();
+		deliveryClient.setText(toBeShown.getClient().getName());
+		deliveryDate.setPromptText(toBeShown.getTransactionDate().toString());
+		deliveryStatus.setText(""+toBeShown.isSent());
+		deliveryInventory.getItems().clear();
+		deliveryInventory.getItems().addAll(toBeShown.getPackages());
+		
+		
 	}
 
 	@Override
