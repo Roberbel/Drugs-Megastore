@@ -1402,7 +1402,7 @@ public class SQLManager implements Manager {
 		
     }
     
-    private static Client getClient (ResultSet rs1) throws SQLException {
+	private static Client getClient (ResultSet rs1) throws SQLException {
     	
     	Client client = new Client();
 		client.setId(rs1.getInt("id"));
@@ -1464,6 +1464,20 @@ public class SQLManager implements Manager {
 		return drug;
     	
     }
+    
+    private static Drug getDrugNameById(Integer id) throws SQLException {
+		
+    	
+    	String sql="SELECT * FROM drug WHERE id = ?";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setInt(1, id);
+		ResultSet rs1 =prep.executeQuery();
+    		
+		Drug drug = new Drug(rs1.getInt("id"),rs1.getString("name"));
+    	
+		return drug;
+	}
+
     
     private static Employee getEmployee(ResultSet rs1) throws SQLException {
     	

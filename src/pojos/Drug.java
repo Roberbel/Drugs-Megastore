@@ -142,6 +142,15 @@ public class Drug implements Serializable {
 		this.arrives = arrives;
 		this.photo=photo;
 	}
+	
+	
+
+	public Drug(Integer id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 
 	@Override
 	public int hashCode() {
