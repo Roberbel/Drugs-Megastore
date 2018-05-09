@@ -140,8 +140,7 @@ public class Delivery implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Deliveries [transactionId=" + id + ", sellingPrice=" + sellingPrice + ", ammount="
-				+ ", transactionDate=" + transactionDate + ", drugId=" + packages + ", client=" + client + "]";
+		return "Id :" + id +  ", client :" + client.getName()  + ", date :" + transactionDate;
 	}
 
 	public Integer getTransactionId() {
