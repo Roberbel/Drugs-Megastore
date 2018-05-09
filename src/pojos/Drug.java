@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "drug")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Drug")
-@XmlType(propOrder = { "Corridor", "Packaged", "Arrives" })
+@XmlType(propOrder = { "corridor", "packaged", "arrives" })
 public class Drug implements Serializable {
 
 	/**
@@ -57,7 +57,7 @@ public class Drug implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="corridor_id")
-	@XmlElement
+	@XmlElement(name = "Corridor")
 	private Corridor corridor;
 	
 	@XmlElement(name = "Package")

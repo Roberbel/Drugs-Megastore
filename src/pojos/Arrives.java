@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "arrives")
 @IdClass(ArrivalAssociationId.class)
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"Arrival"})
+@XmlType(propOrder = {"arrival"})
 public class Arrives implements Serializable{
 	
 	private static final long serialVersionUID = -7414814044025259619L;

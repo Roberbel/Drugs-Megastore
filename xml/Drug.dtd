@@ -16,11 +16,13 @@
     
     <!ELEMENT Packaged( Delivery)>
     	<!ATTLIST Packaged drugId CDATA #REQUIRED
-    					deliveryId CDATA #REQUIRED>
+    					deliveryId CDATA #REQUIRED
+    					amount CDATA #REQUIRED>
     					
     <!ELEMENT Arrives(ammount, arrival)>
     	<!ATTLIST Arrives drugId CDATA #REQUIRED
-    					arrivalId CDATA #REQUIRED>
+    					arrivalId CDATA #REQUIRED
+    					amount CDATA #REQUIRED>
     <!ELEMENT id(#PCDATA)>
     <!ELEMENT pc(#PCDATA)>
     <!ELEMENT country(#PCDATA)>

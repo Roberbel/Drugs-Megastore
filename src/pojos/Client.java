@@ -18,12 +18,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "client")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"name", "address", "telephone", "email", "paymentMethod", "Deliveries"})
+@XmlType()
 public class Client extends User implements Serializable {
 
 	/**
@@ -54,8 +55,7 @@ public class Client extends User implements Serializable {
 	@Column(name = "payment_method")
 	private PaymentMethod paymentMethod;
 	
-	@XmlElement(name = "Delivery")
-	@XmlElementWrapper(name = "Deliveries")
+	@XmlTransient
 	@OneToMany(fetch = FetchType.LAZY)
 	private List<Delivery> deliveries;
 	
