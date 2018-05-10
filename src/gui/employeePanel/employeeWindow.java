@@ -1,5 +1,6 @@
 package gui.employeePanel;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -19,6 +20,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import pojos.Arrival;
 import pojos.Arrives;
@@ -108,6 +111,9 @@ public class employeeWindow implements Initializable {
 	
 	@FXML
 	private TextField drugStock;
+	
+	@FXML
+	private ImageView drugPhoto;
 
 	@FXML
 	void addArrival(ActionEvent event) {
@@ -201,6 +207,11 @@ public class employeeWindow implements Initializable {
 		drugActivePrinciple.setText(toBeShown.getActivePrinciple());
 		drugCorridor.setText(toBeShown.getCorridor().getId().toString());
 		drugStock.setText(toBeShown.getStock().toString());
+		if(toBeShown.getPhoto()!= null) {
+			drugPhoto.setImage(new Image(new ByteArrayInputStream(toBeShown.getPhoto())));
+		}else {
+			drugPhoto.setImage(new Image("https://www.ecured.cu/images/thumb/f/f9/Pomo-medicina-icon-azul.png/390px-Pomo-medicina-icon-azul.png"));
+		}
 	}
 
 	@Override
@@ -238,6 +249,7 @@ public class employeeWindow implements Initializable {
 		arrivalStocks.setCellValueFactory(new PropertyValueFactory <Arrives, Integer>("amount"));
 		deliveryDrugs.setCellValueFactory(new PropertyValueFactory <Packaged,String>("drug"));
 		deliveryStocks.setCellValueFactory(new PropertyValueFactory <Packaged, Integer>("amount"));
+		drugPhoto.setImage(new Image("https://www.ecured.cu/images/thumb/f/f9/Pomo-medicina-icon-azul.png/390px-Pomo-medicina-icon-azul.png"));
 		
 	}
 
