@@ -19,12 +19,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import pojos.Client;
 import pojos.Delivery;
 import pojos.Drug;
+import gui.clientPanel.DrugPanelSB;
 
 
 public class ClientPanelSB {
@@ -97,7 +99,7 @@ public class ClientPanelSB {
     }
 
     @FXML
-    void searchDrugs(InputEvent event) {
+    public void searchDrugs(InputEvent event) {
     	try {
 			
 			String name = nameTextField.getText();
@@ -175,16 +177,9 @@ public class ClientPanelSB {
     	drugAmount = 0;
     	delivery = new Delivery();
     	drugs = new ArrayList<Drug>();
-    	delivery = new Delivery();
     	
-    	try {
-			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	drugsFlowPanel.autosize();
+    	drugsFlowPanel.prefHeightProperty().bind(drugsScrollPanel.heightProperty());
+    	drugsFlowPanel.prefWidthProperty().bind(drugsScrollPanel.widthProperty());
         assert activePrincipleTextField != null : "fx:id=\"ActivePrincipleTextField\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert cart != null : "fx:id=\"cart\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert companyName != null : "fx:id=\"companyName\" was not injected: check your FXML file 'ClientPanel.fxml'.";
@@ -198,26 +193,29 @@ public class ClientPanelSB {
         assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert topPanel != null : "fx:id=\"topPanel\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         logo.setImage(new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Deutsche_Apotheke_Logo.svg/827px-Deutsche_Apotheke_Logo.svg.png"));
-        searchDrugs(null);
+        //searchDrugs(null);
 
     }
     
     private void createDrugsPanels(){
     	drugsFlowPanel.getChildren().clear();
     	for (Drug d: drugs) {
-    		/*DrugPanelSB drugPanel;
-			try {
-				drugPanel = FXMLLoader.load(getClass().getResource("/gui/clientPanel/DrugPanelSB"));
+    		
+    		try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/clientPanel/DrugPanel.fxml"));
+				AnchorPane drugPanel = loader.load();
+				DrugPanelSB controller = loader.<DrugPanelSB>getController();
+				controller.setClientPanel(this);
+				controller.setDrug(d);
+				drugsFlowPanel.getChildren().add(drugPanel);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}*/
-    		
-    		
-    		DrugPanel drugPanel = new DrugPanel(d, delivery,  this);
-    		drugsFlowPanel.getChildren().add(drugPanel);
-    		
+				//e.printStackTrace();
+				System.out.println("error");
+			}
     	}
+    	
+    	drugsScrollPanel.setContent(drugsFlowPanel);
     	
     }
 

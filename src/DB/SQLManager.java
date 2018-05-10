@@ -54,9 +54,10 @@ public class SQLManager implements Manager {
 	}
 
 	public static void disconnect() throws SQLException {
-		
-		c.close();
-		System.out.println("Database connection closed.");
+		if(c != null) {
+			c.close();
+			System.out.println("Database connection closed.");
+		}
 		
 	}
 
