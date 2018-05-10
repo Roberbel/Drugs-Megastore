@@ -6,21 +6,16 @@
     <!ELEMENT activePrinciple(#PCDATA)>  
     <!ELEMENT stock(#PCDATA)>
     <!ELEMENT sellingPrice(#PCDATA)>
-<!--Warehouse shouldn't be necessary here I think.-->
-    <!ELEMENT Corridor(temperature, Warehouse)>
+    <!ELEMENT Corridor(temperature)>
      <!ATTLIST Corridor id CDATA #REQUIRED
     <!ELEMENT packaged(Packaged+)>
     <!ELEMENT arrives(Arrives+)>  
     
     <!ELEMENT temperature(#PCDATA)>
-    <!ELEMENT Warehouse(id, pc, country, city, address, phone,  employees)>
-    
-<!--This one is missing amount and  Delivery shouldn't be here.-->
-    <!ELEMENT Packaged(Delivery)>
+    <!ELEMENT Packaged(amount)>
     	<!ATTLIST Packaged drugId CDATA #REQUIRED
-    					deliveryId CDATA #REQUIRED>
-<!-- Arrival shouldn't be necesary. -->    					
-    <!ELEMENT Arrives(ammount, arrival)>
+    					deliveryId CDATA #REQUIRED>   					
+    <!ELEMENT Arrives(amount)>
     	<!ATTLIST Arrives drugId CDATA #REQUIRED
     					arrivalId CDATA #REQUIRED>
     <!ELEMENT id(#PCDATA)>
@@ -36,22 +31,6 @@
      <!ELEMENT phone(#PCDATA)>
      <!ELEMENT salary(#PCDATA)>
      <!ELEMENT position(#PCDATA)>
-     <!ELEMENT Delivery(sellingPrice, client, transactionDate)>
-     	<!ATTLIST Delivery id CDATA #REQUIRED>
-     <!ELEMENT sellingPrice(#PCDATA)>
-     <!ELEMENT transactionDate(#PCDATA)>
-     <!ELEMENT client( address,telephone,email,paymentMethod)>
-      <!ATTLIST client name(#PCDATA)>
-      <!ELEMENT ammount(#PCDATA)>
-      <!ELEMENT arrival(buyingPrice,date,provider)>
-       <!ATTLIST arrival arrivalId CDATA #REQUIRED>
-        <!ELEMENT buyingPrice(#PCDATA)>
-        <!ELEMENT date(#PCDATA)>
-      <!ELEMENT provider(address, telephone, email) 
-      <!ATTLIST provider name CDATA #REQUIRED
-    						id CDATA #REQUIRED> 
-      <!ELEMENT address(#PCDATA)>
-      <!ELEMENT telephone(#PCDATA)>
-      <!ELEMENT email(#PCDATA)>
+    
      ]>
      
