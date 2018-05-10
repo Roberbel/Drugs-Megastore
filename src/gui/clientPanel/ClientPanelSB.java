@@ -132,6 +132,7 @@ public class ClientPanelSB {
 				
 				}else {
 					
+					System.out.println("getting drugs starting with '"+name+"'");
 					drugs = SQLManager.searchDrugByName(name);
 				
 				}
