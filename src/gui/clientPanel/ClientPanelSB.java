@@ -171,6 +171,20 @@ public class ClientPanelSB {
 
     @FXML
     void showProfilePanel(MouseEvent event) {
+    	
+    	mainPanel.setLeft(null);
+    	try {
+	    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/clientPanel/ProfilePanel.fxml"));
+			AnchorPane profilePanel = loader.load();
+			ProfilePanelSB controller = loader.<ProfilePanelSB>getController();
+			
+			
+			mainPanel.setCenter(profilePanel);
+    	}catch(IOException e) {
+    		
+    		
+    	}
+    	
     }
 
     @FXML
