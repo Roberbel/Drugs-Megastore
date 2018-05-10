@@ -6,23 +6,23 @@
     <!ELEMENT activePrinciple(#PCDATA)>  
     <!ELEMENT stock(#PCDATA)>
     <!ELEMENT sellingPrice(#PCDATA)>
+<!--Warehouse shouldn't be necessary here I think.-->
     <!ELEMENT Corridor(temperature, Warehouse)>
      <!ATTLIST Corridor id CDATA #REQUIRED
     <!ELEMENT packaged(Packaged+)>
     <!ELEMENT arrives(Arrives+)>  
     
     <!ELEMENT temperature(#PCDATA)>
-        <!ELEMENT Warehouse(id, pc, country, city, address, phone,  employees)>
+    <!ELEMENT Warehouse(id, pc, country, city, address, phone,  employees)>
     
-    <!ELEMENT Packaged( Delivery)>
+<!--This one is missing amount and  Delivery shouldn't be here.-->
+    <!ELEMENT Packaged(Delivery)>
     	<!ATTLIST Packaged drugId CDATA #REQUIRED
-    					deliveryId CDATA #REQUIRED
-    					amount CDATA #REQUIRED>
-    					
+    					deliveryId CDATA #REQUIRED>
+<!-- Arrival shouldn't be necesary. -->    					
     <!ELEMENT Arrives(ammount, arrival)>
     	<!ATTLIST Arrives drugId CDATA #REQUIRED
-    					arrivalId CDATA #REQUIRED
-    					amount CDATA #REQUIRED>
+    					arrivalId CDATA #REQUIRED>
     <!ELEMENT id(#PCDATA)>
     <!ELEMENT pc(#PCDATA)>
     <!ELEMENT country(#PCDATA)>

@@ -25,7 +25,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "arrivals")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "buyingPrice", "date", "provider", "arrives" })
+@XmlType(propOrder = {"provider", "arrives" })
 public class Arrival implements Serializable{
 
 	/**

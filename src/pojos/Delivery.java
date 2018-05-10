@@ -28,7 +28,7 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "deliveries")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "sellingPrice", "transactionDate", "client", "packages" })
+@XmlType(propOrder = {"client", "packages" })
 public class Delivery implements Serializable {
 
 	/**
