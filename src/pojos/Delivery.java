@@ -28,7 +28,7 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "deliveries")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"client", "packages" })
+@XmlType(propOrder = {"client", "transactionDate" ,"packages" })
 public class Delivery implements Serializable {
 
 	/**
@@ -52,6 +52,7 @@ public class Delivery implements Serializable {
 	@JoinColumn(name = "client_id")
 	@XmlElement
 	private Client client;
+	
 	@XmlElement
 	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	@Column (name = "transaction_date")

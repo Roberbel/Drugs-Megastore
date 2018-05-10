@@ -57,7 +57,7 @@ public class Drug implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="corridor_id")
-	@XmlElement(name = "Corridor")
+	@XmlElement
 	private Corridor corridor;
 	
 	@XmlElement(name = "Package")
@@ -77,6 +77,7 @@ public class Drug implements Serializable {
 	public Drug() {
 		super();
 		packaged = new ArrayList<Packaged>();
+		corridor = new Corridor();
 		arrives = new ArrayList<Arrives>();
 		name = "Droga"+(int)(Math.random()*10000);
 		stock = (int)(Math.random()*100000);

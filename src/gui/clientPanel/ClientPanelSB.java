@@ -1,5 +1,6 @@
 package gui.clientPanel;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import java.util.ResourceBundle;
 
 import DB.SQLManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -202,6 +205,14 @@ public class ClientPanelSB {
     private void createDrugsPanels(){
     	drugsFlowPanel.getChildren().clear();
     	for (Drug d: drugs) {
+    		/*DrugPanelSB drugPanel;
+			try {
+				drugPanel = FXMLLoader.load(getClass().getResource("/gui/clientPanel/DrugPanelSB"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}*/
+    		
     		
     		DrugPanel drugPanel = new DrugPanel(d, delivery,  this);
     		drugsFlowPanel.getChildren().add(drugPanel);
