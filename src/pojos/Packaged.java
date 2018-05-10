@@ -9,6 +9,8 @@ import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,6 +20,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "packaged")
 @IdClass(DeliveryAssociationId.class)
+@XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Packaged")
 @XmlType()
 public class Packaged implements Serializable{
@@ -26,7 +29,6 @@ public class Packaged implements Serializable{
 
 	@Id
 	@Column(name="transaction_id")
-	@XmlAttribute
 	private Integer deliveryId;
 	
 	@Id
@@ -129,7 +131,7 @@ public class Packaged implements Serializable{
 		this.delivery = delivery;
 	
 	}
-
+	
 	public Integer getAmount() {
 		
 		return amount;

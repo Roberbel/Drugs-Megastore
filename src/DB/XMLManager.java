@@ -19,8 +19,8 @@ public class XMLManager {
 	public static void main(String[] args) {
 		
 		try {
-			XMLManager.marshallDrug(new Drug(), "D:\\Documents\\GitHub\\Drugs-Megastore\\xml");
-			System.out.println(XMLManager.unmarshallDrug("D:\\Documents\\GitHub\\Drugs-Megastore\\xml"));
+			XMLManager.marshallDrug(new Drug(), "D:/Documents/1.Gonzalo/Drugtest.txt");
+			System.out.println(XMLManager.unmarshallDrug("D:/Documents/1.Gonzalo/Drugtest.txt"));
 		} catch (JAXBException|IOException e) {
 			
 			e.printStackTrace();
