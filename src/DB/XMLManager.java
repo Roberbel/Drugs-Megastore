@@ -2,6 +2,7 @@ package DB;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -11,23 +12,41 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import pojos.Drug;
 
 public class XMLManager {
 	
+	private static final String xsltPath = "D:/Documents/GitHub/Drugs-Megastore/xml/Report-Style.xslt";
+	
 	public static void main(String[] args) {
-		
+		String dir = "D:/Documents/GitHub/Drugs-Megastore/xml/DrugTest.txt";
 		try {
-			XMLManager.marshallDrug(new Drug(), "D:/Documents/1.Gonzalo/Drugtest.txt");
-			System.out.println(XMLManager.unmarshallDrug("D:/Documents/1.Gonzalo/Drugtest.txt"));
-		} catch (JAXBException|IOException e) {
+			XMLManager.marshallDrug(new Drug(), dir);
+			System.out.println(XMLManager.unmarshallDrug(dir));
+			//next one doesn't work just yet
+			XMLManager.xml2Html(dir , "D:/Documents/GitHub/Drugs-Megastore/xml/drugTestHtml");
+		} catch (JAXBException|IOException|TransformerException  e) {
 			
 			e.printStackTrace();
 		}
 		
 	}
 	
+	
+	public static void xml2Html(String origin, String destiny) throws TransformerException {
+		
+		TransformerFactory tFactory = TransformerFactory.newInstance();
+		Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
+		transformer.transform(new StreamSource(new File(origin)),new StreamResult(new File(destiny)));
+	
+	}
 	
 	public static void marshallDrug(Drug drug, String directory) throws JAXBException, IOException {
 		
