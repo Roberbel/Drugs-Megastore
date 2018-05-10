@@ -4,6 +4,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
+
 import pojos.*;
 import pojos.Client.PaymentMethod;
 import model.*;
@@ -79,6 +81,54 @@ public class AdminWindow implements Initializable {
     @FXML
     private Tab drugTab;
 
+    @FXML
+    private JFXListView<?> arrivalsList;
+
+    @FXML
+    private TableView<?> inventoryTable;
+
+    @FXML
+    private TableColumn<?, ?> inventoryDrug;
+
+    @FXML
+    private TableColumn<?, ?> inventoryAmount;
+    
+    @FXML
+    private TextField arrivalProviderField;
+
+    @FXML
+    private TextField arrivalProviderDate;
+
+    @FXML
+    private TextField arrivedField;
+
+    @FXML
+    private TextField arrivalPriceField;
+
+    @FXML
+    private JFXListView<?> deliveriesList;
+
+    @FXML
+    private TableView<?> itemsBoughtTable;
+
+    @FXML
+    private TableColumn<?, ?> itemsDrug;
+
+    @FXML
+    private TableColumn<?, ?> itemsAmount;
+
+    @FXML
+    private TextField deliveryClientIdField;
+
+    @FXML
+    private TextField deliveryDateField;
+
+    @FXML
+    private TextField deliveredField;
+
+    @FXML
+    private TextField deliveryPriceField;
+    
     @FXML
     private TableView<Drug> drugTable;
 
@@ -237,6 +287,39 @@ public class AdminWindow implements Initializable {
 
     @FXML
     private JFXButton deleteCorridorButton;
+    
+    @FXML
+    private TableView<?> providerTable;
+
+    @FXML
+    private TableColumn<?, ?> providerName;
+
+    @FXML
+    private TableColumn<?, ?> providerAddress;
+
+    @FXML
+    private TableColumn<?, ?> providerPhone;
+
+    @FXML
+    private TableColumn<?, ?> providerMail;
+
+    @FXML
+    private TextField providerNameField;
+
+    @FXML
+    private TextField providerAddressField;
+
+    @FXML
+    private TextField providerPhoneField;
+
+    @FXML
+    private TextField providerMailField;
+
+    @FXML
+    private JFXButton addProviderButton;
+
+    @FXML
+    private JFXButton deleteProviderButton;
 
     @FXML
     private ImageView imageView;
@@ -332,7 +415,7 @@ public class AdminWindow implements Initializable {
     	
     }
 
-    @FXML
+    /*@FXML
     void deleteClientClicked(ActionEvent event) {
     	ObservableList <Client> items,sel;
     	items=clientTable.getItems();
@@ -345,7 +428,7 @@ public class AdminWindow implements Initializable {
 				e.printStackTrace();
 			}
     	}    	
-    }
+    }*/
 
     @FXML
     void deleteCorridorClicked(ActionEvent event) {
@@ -466,7 +549,7 @@ public class AdminWindow implements Initializable {
 		//Drug Table		
 		drugName.setCellValueFactory(new PropertyValueFactory <Drug,String>("name"));
 		drugPrinciple.setCellValueFactory(new PropertyValueFactory <Drug,String>("activePrinciple"));
-		drugPrice.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("selling price"));
+		drugPrice.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("sellingPrice"));
 		drugStock.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("stock"));	
 		drugCorridor.setCellValueFactory(new PropertyValueFactory <Drug,Corridor>("corridor"));
 		try {
@@ -494,11 +577,11 @@ public class AdminWindow implements Initializable {
 		wareAdress.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("addres"));
 		warePhone.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("phone"));
 		try {
-			employeeTable.getItems().addAll(SQLManager.getAllEmployee());
+			warehouseTable.getItems().addAll(SQLManager.getAllWarehouses());
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}
-		
+		//Providers Table
 		
 	}
     
