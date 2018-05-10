@@ -101,7 +101,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE arrivals " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " buying_price INT NOT NULL," + " transaction_date DATE NOT NULL,"
-				+ "received BOOLEAN NOT NULL DEFAULT FALSE" + ", provider_id REFERENCES provider (id) )";
+				+ "received BOOLEAN NOT NULL DEFAULT FALSE" + ", provider_id REFERENCES provider (id) ON UPDATE CASCADE ON DELETE CASCADE )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 
@@ -132,7 +132,7 @@ public class SQLManager implements Manager {
 		
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE corridor" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "temperature FLOAT NOT NULL,"
-				+ "warehouse_id REFERENCES warehouse (id))";
+				+ "warehouse_id REFERENCES warehouse (id) ON UPDATE CASCADE ON DELETE CASCADE)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -143,7 +143,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE deliveries  " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " selling_price INT NOT NULL," + " transaction_date DATE NOT NULL,"
-				+"sent BOOLEAN NOT NULL DEFAULT FALSE, " + "client_id INT REFERENCES client (id) )";
+				+"sent BOOLEAN NOT NULL DEFAULT FALSE, " + "client_id INT REFERENCES client (id) ON UPDATE CASCADE ON DELETE CASCADE )";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -154,7 +154,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE drug " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL UNIQUE,"
 				+ " photo BLOB," + " stock INT NOT NULL," + " active_principle TEXT," + " selling_price INTEGER NOT NULL,"
-				+ " corridor_id INT REFERENCES corridor (id) )";
+				+ " corridor_id INT REFERENCES corridor (id)  ON UPDATE CASCADE ON DELETE CASCADE)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -165,7 +165,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE employee" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 				+ "photo BLOB," + "salary FLOAT NOT NULL," + "phone INT NOT NULL," + "position TEXT NOT NULL,"
-				+ "warehouse_id REFERENCES warehouse (id), username STRING NOT NULL UNIQUE,password STRING NOT NULL,isAdmin BOOLEAN)";
+				+ "warehouse_id REFERENCES warehouse (id) ON UPDATE CASCADE ON DELETE CASCADE, username STRING NOT NULL UNIQUE,password STRING NOT NULL,isAdmin BOOLEAN)";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -1472,15 +1472,20 @@ public class SQLManager implements Manager {
     	String sql="SELECT * FROM drug WHERE id = ?";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1, id);
-		ResultSet rs1 =prep.executeQuery();
-    		
-		Drug drug = new Drug(rs1.getInt("id"),rs1.getString("name"));
-    		
-		rs1.close();
+		ResultSet rs2 =prep.executeQuery();
+		rs2.next();
+
+		if(rs2.isClosed()) {
+		
+			return null;
+		
+		}else {
+		Drug drug = new Drug(rs2.getInt("id"),rs2.getString("name"));
+		rs2.close();
 		prep.close();
 		
-		
 		return drug;
+		}
 	}
 
     
