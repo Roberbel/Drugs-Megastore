@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -28,7 +29,7 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "deliveries")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"client", "transactionDate" ,"packages" })
+@XmlType(propOrder = {"client", "transactionDate" })
 public class Delivery implements Serializable {
 
 	/**
@@ -40,7 +41,7 @@ public class Delivery implements Serializable {
 	@GeneratedValue(generator = "deliveries")
 	@TableGenerator(name="deliveries", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="deliveries")
-	
+	@Column(name = "transaction_id")
 	@XmlAttribute
 	private Integer id;
 	
@@ -62,8 +63,7 @@ public class Delivery implements Serializable {
 	private boolean sent;
 
 
-	@XmlElement(name = "package")
-	@XmlElementWrapper(name = "packages")
+	@XmlTransient
 	@OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
 	private List<Packaged> packages;
 	

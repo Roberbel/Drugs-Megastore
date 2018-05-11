@@ -28,10 +28,12 @@ public class XMLManager {
 	public static void main(String[] args) {
 		String dir = "D:/Documents/GitHub/Drugs-Megastore/xml/DrugTest.txt";
 		try {
-			XMLManager.marshallDrug(new Drug(), dir);
+			JPAManager.connect();
+			XMLManager.marshallDrug(JPAManager.searchDrugById(8), dir);
 			System.out.println(XMLManager.unmarshallDrug(dir));
 			//next one doesn't work just yet
 			XMLManager.xml2Html(dir , "D:/Documents/GitHub/Drugs-Megastore/xml/drugTestHtml");
+			System.out.println("finished");
 		} catch (JAXBException|IOException|TransformerException  e) {
 			
 			e.printStackTrace();

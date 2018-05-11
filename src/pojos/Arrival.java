@@ -21,6 +21,9 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import xml.utils.SQLDateAdapter;
 
 import java.sql.Date;
 
@@ -28,7 +31,7 @@ import java.sql.Date;
 @Table(name = "arrivals")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Arrivals")
-@XmlType(propOrder = {"provider" })
+@XmlType(propOrder = {"date", "provider"})
 public class Arrival implements Serializable{
 
 	/**
@@ -52,12 +55,13 @@ public class Arrival implements Serializable{
 	private boolean received;
 
 	@Column(name = "transaction_date") 
-	@XmlAttribute
+	@XmlElement
+	@XmlJavaTypeAdapter(SQLDateAdapter.class)
 	private Date date;
 	
 	@ManyToOne
 	@JoinColumn(name = "provider_id")
-	@XmlElement(name = "Provider")
+	@XmlElement
 	private Provider provider;
 	
 	@OneToMany(mappedBy = "arrival", fetch = FetchType.LAZY)
