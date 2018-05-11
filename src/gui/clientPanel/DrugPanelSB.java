@@ -1,5 +1,6 @@
 package gui.clientPanel;
 
+import java.io.ByteArrayInputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -121,6 +123,15 @@ public class DrugPanelSB {
 
 	public void setDrug(Drug drug) {
 		this.drug = drug;
+		nameLabel.setText("Name: " + drug.getName());
+		activePrincipleLabel.setText("Active Principle: " + drug.getActivePrinciple());
+		priceLabel.setText("Price: " + drug.getSellingPrice());
+		stockLabel.setText("Stock: " + drug.getStock());
+		if(drug.getPhoto()!= null) {
+			drugPhoto.setImage(new Image(new ByteArrayInputStream(drug.getPhoto())));
+		}else {
+			drugPhoto.setImage(new Image("https://www.ecured.cu/images/thumb/f/f9/Pomo-medicina-icon-azul.png/390px-Pomo-medicina-icon-azul.png"));
+		}
 	}
 
 	public void setClientPanel(ClientPanelSB clientPanel) {
