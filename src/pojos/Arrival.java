@@ -18,6 +18,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import java.sql.Date;
@@ -25,7 +27,8 @@ import java.sql.Date;
 @Entity
 @Table(name = "arrivals")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"provider", "arrives" })
+@XmlRootElement(name = "Arrivals")
+@XmlType(propOrder = {"provider" })
 public class Arrival implements Serializable{
 
 	/**
@@ -58,8 +61,7 @@ public class Arrival implements Serializable{
 	private Provider provider;
 	
 	@OneToMany(mappedBy = "arrival", fetch = FetchType.LAZY)
-	@XmlElement(name = "Arrive")
-	@XmlElementWrapper(name = "Arrives")
+	@XmlTransient
 	private List<Arrives> arrives;
 
 	public Arrival() {
