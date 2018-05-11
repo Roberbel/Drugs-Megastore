@@ -75,7 +75,7 @@ public class MainWindow {
 				            this.stage.setScene(new Scene(panel));
 							this.stage.setResizable(true);
 							this.stage.show();
-							controller.searchDrugs(null);
+							controller.showShopPanel(null);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

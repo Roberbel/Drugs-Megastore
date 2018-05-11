@@ -22,7 +22,7 @@ import pojos.Packaged;
 public class DrugPanelSB {
 	
 	private Drug drug;
-	private ClientPanelSB clientPanel;
+	private ShopPanelSB shopPanel;
 	private Delivery delivery;
 
     @FXML
@@ -64,7 +64,7 @@ public class DrugPanelSB {
 				SQLManager.updateDrugStock(drug, (Integer)(drug.getStock()-sellingAmount));
 				drug.setStock(drug.getStock()-sellingAmount);
 				stockLabel.setText("Stock: "+ drug.getStock());
-				clientPanel.updateCart();
+				shopPanel.updateCart();
 			}catch(SQLException e) {
 				System.out.println("There was an error updating the drug: "+ drug.getName());
 				e.printStackTrace();			
@@ -134,8 +134,8 @@ public class DrugPanelSB {
 		}
 	}
 
-	public void setClientPanel(ClientPanelSB clientPanel) {
-		this.clientPanel = clientPanel;
+	public void setShoppingPanel(ShopPanelSB clientPanel) {
+		this.shopPanel = clientPanel;
 	}
 
 
