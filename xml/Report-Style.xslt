@@ -4,8 +4,11 @@
 <xsl:template match="/">
    <html>
    <p><b><xsl:value-of select="//name" /></b></p>
-   <p><b>Contents: </b><xsl:value-of select="//content" /></p>
-   <p><b>Paid authors:</b></p>
+   <p><b>Price: </b><xsl:value-of select="//sellingPrice" /></p>
+   <p><b>Stock : </b><xsl:value-of select="//stock" /></p>
+   <p><b>Active Principle: </b><xsl:value-of select="//activePrinciple" /></p>
+   
+   <p><b>Corridor:</b></p>
    <table border="1">
       <th>Author</th>
       <th>Date of Birth</th>
