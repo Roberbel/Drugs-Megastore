@@ -54,9 +54,10 @@ public class SQLManager implements Manager {
 	}
 
 	public static void disconnect() throws SQLException {
-		
-		c.close();
-		System.out.println("Database connection closed.");
+		if(c != null) {
+			c.close();
+			System.out.println("Database connection closed.");
+		}
 		
 	}
 
@@ -535,6 +536,7 @@ public class SQLManager implements Manager {
 		prep.setInt(1, id);
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
+			prep.close();
 			return null;
 		}
 		
@@ -558,7 +560,8 @@ public class SQLManager implements Manager {
 		prep.setString(1, "%"+activePrinciple+"%");
 		ResultSet rs1 = prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
-			return null;
+			prep.close();
+			return new ArrayList<Drug>();
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
@@ -578,7 +581,8 @@ public class SQLManager implements Manager {
 		prep.setInt(2, maxPrice);
 		ResultSet rs1=prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
-			return null;
+			prep.close();
+			return new ArrayList<Drug>();
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
@@ -598,7 +602,8 @@ public class SQLManager implements Manager {
 		prep.setInt(1, maxPrice);
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
-			return null;
+			prep.close();
+			return new ArrayList<Drug>();
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
@@ -619,7 +624,8 @@ public class SQLManager implements Manager {
 		prep.setString(1, "%"+name+"%");
 		ResultSet rs1=prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
-			return null;
+			prep.close();
+			return new ArrayList<Drug>();
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
@@ -642,7 +648,7 @@ public class SQLManager implements Manager {
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return new ArrayList<Drug>();
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
@@ -664,7 +670,7 @@ public class SQLManager implements Manager {
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return new ArrayList<Drug>();
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
@@ -687,7 +693,7 @@ public class SQLManager implements Manager {
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return new ArrayList<Drug>();
 		}
 		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {

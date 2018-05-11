@@ -15,6 +15,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.SplitPaneBuilder;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,6 +25,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import pojos.Arrival;
 import pojos.Arrives;
 import pojos.Delivery;
@@ -114,6 +118,21 @@ public class employeeWindow implements Initializable {
 	
 	@FXML
 	private ImageView drugPhoto;
+	
+	@FXML
+	private SplitPane roberbelPanel;
+	
+	@FXML
+	private BorderPane rigthArrivalPane;
+	
+	@FXML
+	private GridPane showArrivalPane;
+	
+	@FXML
+	private BorderPane rigthDeliveryPane;
+	
+	@FXML
+	private GridPane showDeliveryPane;
 
 	@FXML
 	void addArrival(ActionEvent event) {
@@ -144,6 +163,8 @@ public class employeeWindow implements Initializable {
 		arrivalList.getItems().remove(toBeRemoved);
 
 	}
+	
+	
 
 	@FXML
 	void deleteDelivery(ActionEvent event) {

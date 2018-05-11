@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import gui.adminPanel.AdminWindow;
 import gui.clientPanel.ClientPane;
+import gui.clientPanel.ClientPanelSB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -60,10 +62,24 @@ public class MainWindow {
 					case "EMPLOYEE":
 						break;
 					case "CLIENT":
-						ClientPane pane = new ClientPane(user.getExtractedClient());
+						/*ClientPane pane = new ClientPane(user.getExtractedClient());
 						this.stage.setScene(new Scene(pane, 1000, 600));
 						this.stage.setResizable(true);
-						this.stage.show();
+						this.stage.show();*/
+						
+						FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/clientPanel/ClientPanel.fxml"));	
+						try {
+							AnchorPane panel = loader.load();
+							ClientPanelSB controller = loader.<ClientPanelSB>getController();
+							controller.setClient(user.getExtractedClient());
+				            this.stage.setScene(new Scene(panel));
+							this.stage.setResizable(true);
+							this.stage.show();
+							controller.searchDrugs(null);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						break;
 					
 					}
