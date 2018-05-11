@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "client")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType()
+@XmlType(propOrder= {"name","address","telephone","email","paymentMethod"})
 public class Client extends User implements Serializable {
 
 	/**
