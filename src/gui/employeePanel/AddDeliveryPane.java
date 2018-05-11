@@ -1,26 +1,31 @@
 package gui.employeePanel;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import pojos.Client;
 
-public class AddDeliveryPane {
+public class AddDeliveryPane implements Initializable {
 
     @FXML
-    private ComboBox<?> ClientComboBox;
+    private ComboBox<Client> ClientComboBox;
 
     @FXML
     private DatePicker dateNewDelivery;
 
     @FXML
-    private JFXCheckBox YesCheckBox;
+    private JFXCheckBox yesCheckBox;
 
     @FXML
-    private JFXCheckBox NoCheckBox;
+    private JFXCheckBox noCheckBox;
 
     @FXML
     private TableView<?> newInventoryTable;
@@ -42,18 +47,24 @@ public class AddDeliveryPane {
     
     @FXML  
     private void handleYesCheckBox() {
-    		if(YesCheckBox.isSelected()) {
-    			NoCheckBox.setSelected(false);
+    		if(yesCheckBox.isSelected()) {
+    			noCheckBox.setSelected(false);
     		}   	
     }
     
     @FXML  
     private void handleNoCheckBox() {
-    		if(NoCheckBox.isSelected()) {
-    			YesCheckBox.setSelected(false);
+    		if(noCheckBox.isSelected()) {
+    			yesCheckBox.setSelected(false);
     		}   	
     }
     
-    
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+    		
+  
+    		
+    	
+    }
 
 }

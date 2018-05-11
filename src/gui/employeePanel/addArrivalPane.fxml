@@ -31,7 +31,7 @@
             <RowConstraints maxHeight="317.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ComboBox fx:id="providerComboBox" prefWidth="150.0" GridPane.columnIndex="2">
+            <ComboBox fx:id="providerComboBox" prefWidth="150.0" promptText="Providers" GridPane.columnIndex="2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -51,12 +51,12 @@
             <Label text="Has Arrived?" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <HBox alignment="CENTER_LEFT" spacing="30.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <JFXCheckBox fx:id="YesCheckBox" onAction="#handleYesCheckBox" text="Yes">
+                  <JFXCheckBox fx:id="yesCheckBox" onAction="#handleYesCheckBox" text="Yes">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </JFXCheckBox>
-                  <JFXCheckBox fx:id="NoCheckBox" onAction="#handleNoCheckBox" text="No" />
+                  <JFXCheckBox fx:id="noCheckBox" onAction="#handleNoCheckBox" text="No" />
                </children>
             </HBox>
             <Label text="Inventory:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
@@ -72,13 +72,13 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="244.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
                <children>
-                  <ComboBox fx:id="drugPicker" prefHeight="23.0" prefWidth="105.0" />
-                  <ComboBox fx:id="stockPicker" prefHeight="23.0" prefWidth="105.0" />
+                  <ComboBox fx:id="drugPicker" prefHeight="24.0" prefWidth="131.0" promptText="Drugs" />
+                  <ComboBox fx:id="stockPicker" prefHeight="23.0" prefWidth="105.0" promptText="Amount" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">

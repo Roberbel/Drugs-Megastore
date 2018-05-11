@@ -110,8 +110,7 @@ public class Provider implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Provider [providerId=" + id + ", name=" + name + ", adress=" + address + ", telephone="
-				+ telephone + ", email=" + email + ", arrivals=" + arrivals + "]";
+		return name ;
 	}
 
 	public Integer getProviderId() {
