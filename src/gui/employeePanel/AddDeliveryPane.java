@@ -8,7 +8,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class addDeliveryPane {
+public class AddDeliveryPane {
 
     @FXML
     private ComboBox<?> ClientComboBox;
@@ -39,5 +39,21 @@ public class addDeliveryPane {
 
     @FXML
     private JFXButton addPackagesButton;
+    
+    @FXML  
+    private void handleYesCheckBox() {
+    		if(YesCheckBox.isSelected()) {
+    			NoCheckBox.setSelected(false);
+    		}   	
+    }
+    
+    @FXML  
+    private void handleNoCheckBox() {
+    		if(NoCheckBox.isSelected()) {
+    			YesCheckBox.setSelected(false);
+    		}   	
+    }
+    
+    
 
 }

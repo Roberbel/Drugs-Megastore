@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.employeePanel.addArrivalPane">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.employeePanel.AddArrivalPane">
    <center>
       <GridPane prefHeight="434.0" prefWidth="377.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -52,12 +51,12 @@
             <Label text="Has Arrived?" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <HBox alignment="CENTER_LEFT" spacing="30.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <JFXCheckBox fx:id="YesCheckBox" text="Yes">
+                  <JFXCheckBox fx:id="YesCheckBox" onAction="#handleYesCheckBox" text="Yes">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </JFXCheckBox>
-                  <JFXCheckBox fx:id="NoCheckBox" text="No" />
+                  <JFXCheckBox fx:id="NoCheckBox" onAction="#handleNoCheckBox" text="No" />
                </children>
             </HBox>
             <Label text="Inventory:" GridPane.columnIndex="1" GridPane.rowIndex="3" />

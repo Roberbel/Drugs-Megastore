@@ -1,6 +1,7 @@
 package gui.employeePanel;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -12,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
@@ -33,7 +35,7 @@ import pojos.Delivery;
 import pojos.Drug;
 import pojos.Packaged;
 
-public class employeeWindow implements Initializable {
+public class EmployeeWindow implements Initializable {
 
 	@FXML
 	private Tab arrivals;
@@ -135,13 +137,23 @@ public class employeeWindow implements Initializable {
 	private GridPane showDeliveryPane;
 
 	@FXML
-	void addArrival(ActionEvent event) {
-
+	void addArrival(ActionEvent event) throws IOException {
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/gui/employeePanel/AddArrivalPane.fxml"));
+        BorderPane panelMostrar=null;
+        panelMostrar=loader.load();
+        panelMostrar.prefHeightProperty().bind(rigthArrivalPane.heightProperty());
+        panelMostrar.prefWidthProperty().bind(rigthArrivalPane.widthProperty());
+        rigthArrivalPane.setCenter(panelMostrar);
 	}
 
 	@FXML
-	void addDelivery(ActionEvent event) {
-
+	void addDelivery(ActionEvent event) throws IOException {
+		FXMLLoader loader=new FXMLLoader(getClass().getResource("/gui/employeePanel/AddDeliveryPane.fxml"));
+        BorderPane panelMostrar=null;
+        panelMostrar=loader.load();
+        panelMostrar.prefHeightProperty().bind(rigthArrivalPane.heightProperty());
+        panelMostrar.prefWidthProperty().bind(rigthArrivalPane.widthProperty());
+        rigthDeliveryPane.setCenter(panelMostrar);
 	}
 
 	@FXML

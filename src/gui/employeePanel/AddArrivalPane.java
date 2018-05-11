@@ -8,7 +8,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-public class addArrivalPane {
+public class AddArrivalPane {
 
     @FXML
     private ComboBox<?> providerComboBox;
@@ -39,5 +39,19 @@ public class addArrivalPane {
 
     @FXML
     private JFXButton addArrivesButton;
+    
+    @FXML  
+    private void handleYesCheckBox() {
+    		if(YesCheckBox.isSelected()) {
+    			NoCheckBox.setSelected(false);
+    		}   	
+    }
+    
+    @FXML  
+    private void handleNoCheckBox() {
+    		if(NoCheckBox.isSelected()) {
+    			YesCheckBox.setSelected(false);
+    		}   	
+    }
 
 }
