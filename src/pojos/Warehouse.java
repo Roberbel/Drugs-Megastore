@@ -12,9 +12,20 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @Table(name = "warehouse")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Warehouse")
+@XmlType(propOrder = { "employees" })
 public class Warehouse implements Serializable {
 
 	/**
@@ -25,16 +36,30 @@ public class Warehouse implements Serializable {
 	@GeneratedValue(generator = "warehouse")
 	@TableGenerator(name="warehouse", table="sqlite_sequence",
     pkColumnName="name", valueColumnName="seq", pkColumnValue="warehouse")
+	@XmlAttribute
 	private Integer id;
+	
+	@XmlAttribute
 	private Integer pc;
+	
+	@XmlAttribute
 	private String country;
+	
+	@XmlAttribute
 	private String city;
+	
+	@XmlAttribute
 	private String address;
+	
+	@XmlAttribute
 	private Integer phone;
 	
+	@XmlElement(name = "Employee")
+	@XmlElementWrapper(name = "Employees")
 	@OneToMany(mappedBy="warehouse", fetch = FetchType.LAZY)
 	private List<Employee> employees;
 	
+	@XmlTransient
 	@OneToMany(mappedBy="warehouse", fetch = FetchType.LAZY)
 	private List<Corridor> corridor;
 

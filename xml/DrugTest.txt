@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Drug id="8" name="Droga6743" stock="23871" sellingPrice="65" activePrinciple="VIBRANUM">
-    <corridor id="2" temperature="45.0"/>
+    <corridor id="2" temperature="45.0">
+        <warehouse id="2" pc="28049" country="Spain" city="Madrid" address="montecarmelo" phone="564332898">
+            <Employees/>
+        </warehouse>
+    </corridor>
     <Packaged>
         <Package deliveryId="2" drugId="8" amount="455">
             <delivery id="2" sellingPrice="476" sent="true">
@@ -16,13 +20,7 @@
         <Arrive drugId="8" arrivalId="6" amount="87">
             <arrival arrivalId="6" buyingPrice="100" received="false">
                 <date>2018-05-10</date>
-                <provider>
-                    <adress>montecarmelo</adress>
-                    <email>jimmyvinigra</email>
-                    <name>Jaime</name>
-                    <providerId>2</providerId>
-                    <telephone>456</telephone>
-                </provider>
+                <provider id="2" name="Jaime" address="montecarmelo" telephone="456" email="jimmyvinigra"/>
             </arrival>
         </Arrive>
     </Arrives>
