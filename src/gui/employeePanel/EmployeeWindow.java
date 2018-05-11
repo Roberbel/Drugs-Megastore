@@ -206,6 +206,12 @@ public class EmployeeWindow implements Initializable {
 	
 	@FXML
 	void showArrival(MouseEvent event) {
+		
+        GridPane panelMostrar=showArrivalPane;
+        panelMostrar.prefHeightProperty().bind(rigthArrivalPane.heightProperty());
+        panelMostrar.prefWidthProperty().bind(rigthArrivalPane.widthProperty());
+        rigthArrivalPane.setCenter(panelMostrar);			
+		
 		Arrival toBeShown = arrivalList.getSelectionModel().getSelectedItem();
 		arrivalProvider.setText(toBeShown.getProvider().getName());
 		arrivalDate.setPromptText(toBeShown.getDate().toString());

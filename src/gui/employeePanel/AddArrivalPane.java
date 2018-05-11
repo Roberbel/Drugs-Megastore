@@ -14,12 +14,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import pojos.Arrives;
 import pojos.Drug;
 import pojos.Provider;
 
 public class AddArrivalPane implements Initializable {
 
+	
 	@FXML
 	private ComboBox<Provider> providerComboBox;
 
@@ -45,10 +49,13 @@ public class AddArrivalPane implements Initializable {
 	private ComboBox<Drug> drugPicker;
 
 	@FXML
-	private ComboBox<Integer> stockPicker;
+	private TextField stockPicker;
 
 	@FXML
-	private JFXButton addArrivesButton;
+	private JFXButton addArrivalButton;
+	
+	@FXML
+	private JFXButton newGroupButton;
 
 	@FXML
 	private void handleYesCheckBox() {
@@ -63,15 +70,30 @@ public class AddArrivalPane implements Initializable {
 			yesCheckBox.setSelected(false);
 		}
 	}
+	
+	@FXML
+	void createArrives(MouseEvent event) {
+		
+		Arrives createdArrives = new Arrives();
+		
+		createdArrives.setDrug(drugPicker.getSelectionModel().getSelectedItem());
+		createdArrives.setAmount(Integer.parseInt(stockPicker.getText()));
+		newInventoryTable.getItems().add(createdArrives);
+		
+		drugPicker.getSelectionModel().clearSelection();
+		stockPicker.clear();
+	}
+	
+	@FXML
+	void newArrival (MouseEvent event) {
+		
+		
+		
+		
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-
 		try {
 			providerComboBox.getItems().addAll(SQLManager.getAllProvider());
 			drugPicker.getItems().addAll(SQLManager.getAllDrugs());
@@ -79,6 +101,9 @@ public class AddArrivalPane implements Initializable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		newDrugs.setCellValueFactory(new PropertyValueFactory <Arrives,Drug>("drug"));
+		newStocks.setCellValueFactory(new PropertyValueFactory <Arrives,Integer>("amount"));
 	}
 
 }
