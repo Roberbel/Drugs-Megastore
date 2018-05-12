@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Drug id="8" name="Droga6743" stock="23871" sellingPrice="65" activePrinciple="VIBRANUM">
+    <corridor id="2" temperature="45.0">
+        <warehouse id="2" pc="28049" country="Spain" city="Madrid" address="montecarmelo" phone="564332898">
+            <Employees/>
+        </warehouse>
+    </corridor>
+    <Packaged>
+        <Package deliveryId="2" drugId="8" amount="455">
+            <delivery id="2" sellingPrice="476" sent="true">
+                <client name="Khorne" address="c/Viena 17 cabanillas del campo" telephone="65" email="CELIACO" paymentMethod="ORGANS" id="2">
+                    <password>Craneos</password>
+                    <username>Khorne0</username>
+                </client>
+                <transactionDate>2018-05-10</transactionDate>
+            </delivery>
+        </Package>
+    </Packaged>
+    <Arrives>
+        <Arrive drugId="8" arrivalId="6" amount="87">
+            <arrival arrivalId="6" buyingPrice="100" received="false">
+                <date>2018-05-10</date>
+                <provider id="2" name="Jaime" address="montecarmelo" telephone="456" email="jimmyvinigra"/>
+            </arrival>
+        </Arrive>
+    </Arrives>
+</Drug>
