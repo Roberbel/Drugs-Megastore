@@ -8,7 +8,7 @@
     <Packaged>
         <Package deliveryId="2" drugId="8" amount="455">
             <delivery id="2" sellingPrice="476" sent="true">
-                <client id="2" name="Khorne" address="c/Viena 17 cabanillas del campo" telephone="65" email="CELIACO" paymentMethod="ORGANS">
+                <client name="Khorne" address="c/Viena 17 cabanillas del campo" telephone="65" email="CELIACO" paymentMethod="ORGANS" id="2">
                     <password>Craneos</password>
                     <username>Khorne0</username>
                 </client>
