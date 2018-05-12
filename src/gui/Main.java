@@ -22,7 +22,7 @@ public class Main extends Application{
 		try {
 			this.window=stage;
 			//Remember remember the fifth of November and to change the resource to MainWindow
-			Parent root=FXMLLoader.load(getClass().getResource("/gui/employeePanel/employeeWindow.fxml"));
+			Parent root=FXMLLoader.load(getClass().getResource("/gui/MainWindow.fxml"));
 			this.window.setScene(new Scene(root));
 			this.window.setResizable(true);
 			this.window.show();
@@ -34,6 +34,7 @@ public class Main extends Application{
 	
 	private void closeConnection(){
 		try {
+			System.exit(0);
 			SQLManager.disconnect();
 		} catch (SQLException e) {
 			e.printStackTrace();
