@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="831.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="ProfilePanelSB">
+<AnchorPane id="AnchorPane" fx:id="mainPanel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="831.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.clientPanel.ProfilePanelSB">
   <children>
     <GridPane prefHeight="512.0" prefWidth="831.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
@@ -99,16 +99,12 @@
         </GridPane>
         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
           <children>
-            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-              <children>
-                <Label text="Latest Orders" />
-              </children>
-            </FlowPane>
             <ListView fx:id="deliveriesList" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
               <GridPane.margin>
                 <Insets bottom="40.0" left="20.0" right="20.0" />
               </GridPane.margin>
             </ListView>
+            <Label contentDisplay="CENTER" text="Latest Orders" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -120,29 +116,21 @@
         </GridPane>
         <GridPane GridPane.columnIndex="2" GridPane.rowIndex="0">
           <children>
-            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
-              <children>
-                <Label text="Selected order" />
-              </children>
-            </FlowPane>
-            <FlowPane alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
-              <children>
-                <Label text="You payed:" />
-              </children>
-            </FlowPane>
             <ListView fx:id="deliveryDrugs" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
               <GridPane.margin>
                 <Insets bottom="40.0" right="20.0" />
               </GridPane.margin>
             </ListView>
+            <Label text="Selected order" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+            <Label fx:id="paymentAmount" text="You payed:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints maxHeight="255.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="255.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="469.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="469.0" minHeight="10.0" prefHeight="398.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="469.0" minHeight="10.0" prefHeight="432.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
       </children>

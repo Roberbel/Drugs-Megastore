@@ -3,6 +3,8 @@ package gui.clientPanel;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import DB.JPAManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -75,6 +77,8 @@ public class ClientPanelSB {
         	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/clientPanel/ShopPanel.fxml"));
 			AnchorPane shopPanel = loader.load();
 			ShopPanelSB controller = (ShopPanelSB)loader.getController();
+			shopPanel.prefWidthProperty().bind(this.mainPanel.widthProperty());
+			shopPanel.prefHeightProperty().bind(this.mainPanel.heightProperty());
 			controller.setClientPanel(this);
 			controller.setDelivery(delivery);
 			controller.searchDrugs(null);
@@ -94,7 +98,10 @@ public class ClientPanelSB {
 	    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/clientPanel/ProfilePanel.fxml"));
 			AnchorPane profilePanel = loader.load();
 			ProfilePanelSB controller = loader.<ProfilePanelSB>getController();
-			
+			profilePanel.prefWidthProperty().bind(this.mainPanel.widthProperty());
+			profilePanel.prefHeightProperty().bind(this.mainPanel.heightProperty());
+			controller.setClient(client);
+			controller.setClientPanel(this);
 			mainPanel.setCenter(profilePanel);
     	}catch(IOException e) {
     		e.printStackTrace();
@@ -106,6 +113,7 @@ public class ClientPanelSB {
 
     @FXML
     void initialize() {
+    	
     	
     	drugAmount = 0;
     	delivery = new Delivery();
@@ -122,8 +130,8 @@ public class ClientPanelSB {
     public void setClient(Client client) {
     	
     	this.client = client;
+
     	delivery.setClient(client);
-    	
     	profile.setText(client.getName());
     	
     }
