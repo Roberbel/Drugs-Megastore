@@ -16,6 +16,7 @@ import gui.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -25,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import pojos.Arrival;
 import pojos.Arrives;
 import pojos.Drug;
@@ -123,10 +125,20 @@ public class AddArrivalPane implements Initializable {
 			}
 	    }
 	    
-	   Main main = new Main();
-	   
-	   
-	   main.start(args);
+	    
+	    try {
+	    		FXMLLoader loader=new FXMLLoader(getClass().getResource("/gui/employeePanel/employeeWindow.fxml"));
+			BorderPane root = loader.load();
+			EmployeeWindow controller = loader.<EmployeeWindow>getController();
+			Scene scene = addArrivalButton.getScene();
+			Stage stage = (Stage) scene.getWindow();
+			stage.setScene(new Scene(root));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
 	    
 	   
 }

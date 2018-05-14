@@ -1,5 +1,6 @@
 package gui.employeePanel;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -11,7 +12,9 @@ import DB.JPAManager;
 import DB.SQLManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -19,6 +22,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import pojos.Arrival;
 import pojos.Arrives;
 import pojos.Client;
@@ -117,6 +122,20 @@ public class AddDeliveryPane implements Initializable {
 				e.printStackTrace();
 			}
 	    }
+	    
+	    try {
+    		FXMLLoader loader=new FXMLLoader(getClass().getResource("/gui/employeePanel/employeeWindow.fxml"));
+		BorderPane root = loader.load();
+		EmployeeWindow controller = loader.<EmployeeWindow>getController();
+		Scene scene = addDeliveryButton.getScene();
+		Stage stage = (Stage) scene.getWindow();
+		stage.setScene(new Scene(root));
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    
     }
     
     @Override
