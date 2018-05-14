@@ -187,8 +187,7 @@ public class Client extends User implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Client [id=" + super.getId() + ", name=" + name + ", adress=" + address + ", telephone=" + telephone + ", email="
-				+ email + ", paymentMethod=" + paymentMethod + ", deliveries=" + deliveries +", user=" + username +", password=" +password + "]";
+		return name;
 	}
 
 	public Integer getId() {

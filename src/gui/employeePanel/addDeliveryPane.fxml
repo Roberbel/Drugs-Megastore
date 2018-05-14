@@ -8,30 +8,31 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="461.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.employeePanel.AddDeliveryPane">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="377.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.employeePanel.AddDeliveryPane">
    <center>
-      <GridPane prefHeight="434.0" prefWidth="377.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="482.0" prefWidth="377.0" BorderPane.alignment="CENTER">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="20.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="93.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="264.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="283.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="370.0" minHeight="10.0" prefHeight="277.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="317.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="317.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="128.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="370.0" minHeight="10.0" prefHeight="273.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="317.0" minHeight="0.0" prefHeight="38.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="317.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ComboBox fx:id="ClientComboBox" prefWidth="150.0" promptText="Clients" GridPane.columnIndex="2">
+            <ComboBox fx:id="clientComboBox" prefWidth="150.0" promptText="Clients" GridPane.columnIndex="2">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -42,13 +43,13 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </ComboBox>
-            <Label text="Fecha:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <DatePicker fx:id="dateNewDelivery" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label text="Date:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dateNewArrival" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </DatePicker>
-            <Label text="Delivered?" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Has left?" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <HBox alignment="CENTER_LEFT" spacing="30.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
                   <JFXCheckBox fx:id="yesCheckBox" onAction="#handleYesCheckBox" text="Yes">
@@ -72,21 +73,22 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <HBox alignment="CENTER" prefHeight="30.0" prefWidth="244.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
                <children>
-                  <ComboBox fx:id="drugPicker" prefHeight="23.0" prefWidth="105.0" promptText="Drugs" />
-                  <ComboBox fx:id="stockPicker" prefHeight="23.0" prefWidth="105.0" promptText="Amounts" />
+                  <ComboBox fx:id="drugPicker" prefHeight="24.0" prefWidth="131.0" promptText="Drugs" />
+                  <JFXButton fx:id="newGroupButtom" buttonType="RAISED" onMouseClicked="#createsPackaged" prefHeight="24.0" prefWidth="114.0" text="New Group" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <children>
-                  <JFXButton fx:id="addPackagesButton" prefHeight="24.0" prefWidth="192.0" text="Add" />
+                  <JFXButton fx:id="addDeliveryButton" buttonType="RAISED" onMouseClicked="#newDelivery" prefHeight="24.0" prefWidth="192.0" text="Add delivery" />
                </children>
             </HBox>
             <Label text="Client" GridPane.columnIndex="1" />
+            <TextField fx:id="stockPicker" prefHeight="25.0" prefWidth="129.0" text="Amount" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </center>

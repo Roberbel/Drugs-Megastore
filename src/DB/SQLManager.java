@@ -228,7 +228,7 @@ public class SQLManager implements Manager {
 	
 	public static void insertArrives(Arrives arrive) throws SQLException {
 		
-		String sql1="INSERT INTO arrives(drug_id,transaction_id,amount) VALUE(?,?,?)";
+		String sql1="INSERT INTO arrives(drug_id, transaction_id ,amount)" + "VALUES(?,?,?);";
 		PreparedStatement prep=c.prepareStatement(sql1);
 		prep.setInt(1,arrive.getDrugId());
 		prep.setInt(2, arrive.getArrivalId());

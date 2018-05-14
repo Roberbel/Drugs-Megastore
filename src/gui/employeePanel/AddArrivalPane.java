@@ -1,14 +1,20 @@
 package gui.employeePanel;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 
+import DB.JPAManager;
 import DB.SQLManager;
+import gui.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -17,6 +23,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import pojos.Arrival;
 import pojos.Arrives;
 import pojos.Drug;
 import pojos.Provider;
@@ -86,11 +95,44 @@ public class AddArrivalPane implements Initializable {
 	
 	@FXML
 	void newArrival (MouseEvent event) {
+	    Arrival toBeAdded = new Arrival();
+	    
+	    toBeAdded.setProvider(providerComboBox.getSelectionModel().getSelectedItem());
+	    toBeAdded.setDate(java.sql.Date.valueOf(dateNewArrival.getValue()));
+	    if(yesCheckBox.isSelected()) {
+	    		toBeAdded.setReceived(true);
+	    }else {
+	    		toBeAdded.setReceived(false);
+	    }
 		
+	    JPAManager.connect();
+	    JPAManager.insertArrival(toBeAdded);
+	    JPAManager.disconnect();
+	    
+	   
+	    
+	    for (Arrives item : newInventoryTable.getItems()) {
+	        Drug droga = newDrugs.getCellObservableValue(item).getValue();
+	        Integer stock = newStocks.getCellObservableValue(item).getValue();
+	        Arrives arrive = new Arrives(droga.getId(),toBeAdded.getArrivalId(),stock);
+	        
+	        try {
+				SQLManager.insertArrives(arrive);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+	    }
+	    
+	   Main main = new Main();
+	   
+	   
+	   main.start(args);
+	    
+	   
+}
+	    
 		
-		
-		
-	}
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
