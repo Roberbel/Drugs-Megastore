@@ -9,6 +9,7 @@ public class CartPanel extends BorderPane {
 	
 	public CartPanel(Delivery delivery) {
 		
+		
 		this.delivery = delivery;
 		
 		

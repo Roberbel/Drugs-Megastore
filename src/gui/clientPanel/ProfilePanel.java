@@ -30,6 +30,7 @@ public class ProfilePanel extends BorderPane {
 	TextField emailField;
 	ChoiceBox<PaymentMethod> paymentMethod;
 	
+	
 	ProfilePanel(Client client){
 		this.client = client;
 		

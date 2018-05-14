@@ -36,6 +36,7 @@ public class ClientPane extends BorderPane {
 	private Label profile;
 	private Label cart;
 
+	
 	private ScrollPane drugsPane;
 	private VBox left;
 	

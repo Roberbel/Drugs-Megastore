@@ -33,6 +33,7 @@ public class DrugPanel extends BorderPane {
 	
 	private static final float width = 247;
 	
+	
 	private ImageView photo;
 	private Label name;
 	private Label activePrinciple;
@@ -66,7 +67,7 @@ public class DrugPanel extends BorderPane {
 		center.setRight(centerRight);
 		
 		HBox centerBottom = new HBox(10);
-		price = new Label("Price: "+ drug.getSellingPrice()+ " €/unit");
+		price = new Label("Price: "+ drug.getSellingPrice()+ " ï¿½/unit");
 		
 		stock = new Label("Stock: "+ drug.getStock());
 		

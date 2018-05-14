@@ -27,7 +27,8 @@ public class DrugPanelSB {
 
     @FXML
     private ResourceBundle resources;
-
+    
+    
     @FXML
     private URL location;
 
@@ -74,8 +75,12 @@ public class DrugPanelSB {
 				SQLManager.updateDrugStock(drug, (Integer)(drug.getStock()-sellingAmount));
 				drug.setStock(drug.getStock()-sellingAmount);
 				stockLabel.setText("Stock: "+ drug.getStock());
+				int pos = delivery.positionPackaged(packaged);
 				//we put the new amount of that drug in the text field so the buyer knows how many they already have ordered.
-				packaged = delivery.getPackage(delivery.positionPackaged(packaged));
+				System.out.println(packaged);
+				packaged = delivery.getPackage(pos);
+				
+				System.out.println(packaged +"\nPosition: "+ pos);
 				amountTextField.setText(""+(packaged.getAmount()+sellingAmount));
 				packaged.setAmount(packaged.getAmount()+sellingAmount);
 				//we won't update the cart here, as there hasn't been added a new drug
@@ -121,7 +126,7 @@ public class DrugPanelSB {
     }
     
 
-	public void setDrug(Drug drug) {
+	protected void setDrug(Drug drug) {
 		this.drug = drug;
 		nameLabel.setText("Name: " + drug.getName());
 		activePrincipleLabel.setText("Active Principle: " + drug.getActivePrinciple());
@@ -134,8 +139,14 @@ public class DrugPanelSB {
 		}
 	}
 
-	public void setShoppingPanel(ShopPanelSB clientPanel) {
+	protected void setShoppingPanel(ShopPanelSB clientPanel) {
 		this.shopPanel = clientPanel;
+	}
+	
+	protected void setDelivery (Delivery delivery) {
+		
+		this.delivery = delivery;
+		
 	}
 
 

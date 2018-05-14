@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import DB.JPAManager;
 import DB.SQLManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import pojos.Delivery;
 import pojos.Drug;
 
@@ -28,14 +30,23 @@ public class ShopPanelSB {
 
     @FXML
     private URL location;
-    
+     
     @FXML
     private FlowPane drugsFlowPanel;
 
     @FXML
     private ScrollPane drugsScrollPanel;
 
+    @FXML
+    private AnchorPane anchorPanelScroll;
 
+
+    @FXML
+    private FlowPane mainFlowPanel;
+
+    @FXML
+    private GridPane mainGridPanel;
+    
     @FXML
     private TextField activePrincipleTextField;
 
@@ -124,6 +135,7 @@ try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/clientPanel/DrugPanel.fxml"));
 				AnchorPane drugPanel = loader.load();
 				DrugPanelSB controller = (DrugPanelSB) loader.getController();
+				controller.setDelivery(delivery);
 				controller.setShoppingPanel(this);
 				controller.setDrug(d);
 				drugsFlowPanel.getChildren().add(drugPanel);
@@ -146,6 +158,17 @@ try {
         assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'ShopPanel.fxml'.";
         drugsFlowPanel.prefHeightProperty().bind(drugsScrollPanel.heightProperty());
         drugsFlowPanel.prefWidthProperty().bind(drugsScrollPanel.widthProperty());
+        
+        mainGridPanel.prefHeightProperty().bind(mainFlowPanel.heightProperty());
+        mainGridPanel.prefWidthProperty().bind(mainFlowPanel.widthProperty());
+        
+        anchorPanelScroll.prefHeightProperty().bind(mainGridPanel.heightProperty());
+        anchorPanelScroll.prefWidthProperty().bind(mainGridPanel.widthProperty());
+        
+        drugsScrollPanel.prefHeightProperty().bind(anchorPanelScroll.heightProperty());
+        drugsScrollPanel.prefWidthProperty().bind(anchorPanelScroll.widthProperty());
+        
+        
         
     }
     
