@@ -275,6 +275,9 @@ public class SQLManager implements Manager {
 		List <Packaged> packList=delivery.getPackages();
 		prep.executeUpdate();
 		prep.close();
+		
+		//SELECT IDENT_CURRENT('deliveries');
+		//that line should return the latest ID used in that table.
 		for(Packaged p: packList) {
 			insertPackaged(p);
 		}

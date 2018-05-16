@@ -13,8 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import pojos.Client;
 import pojos.Client.PaymentMethod;
 import pojos.Delivery;
@@ -34,6 +36,9 @@ public class ProfilePanelSB {
 
     @FXML
     private URL location;
+    
+    @FXML
+    private AnchorPane mainPanel;
 
     @FXML
     private TextField addressTextField;
@@ -63,7 +68,9 @@ public class ProfilePanelSB {
     @FXML
     void showDelivery(MouseEvent event) {
     	Delivery toShow = deliveriesList.getSelectionModel().getSelectedItem();
-    	deliveryDrugs = new ListView<Packaged>(FXCollections.<Packaged>observableArrayList(toShow.getPackages()));
+    	System.out.println("Selected: " + toShow);
+    	//deliveryDrugs = new ListView<Packaged>(FXCollections.<Packaged>observableArrayList(toShow.getPackages()));
+    	deliveryDrugs.getItems().setAll(toShow.getPackages());
     	paymentAmount.setText("You payed: "+toShow.getSellingPrice());
     }
 
@@ -80,15 +87,19 @@ public class ProfilePanelSB {
     @FXML
     void initialize() {
         
-        assert addressTextField != null : "fx:id=\"addressTextField\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
+    	assert addressTextField != null : "fx:id=\"addressTextField\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
         assert deliveriesList != null : "fx:id=\"deliveriesList\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
         assert deliveryDrugs != null : "fx:id=\"deliveryDrugs\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
         assert emailTextField != null : "fx:id=\"emailTextField\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
+        assert mainPanel != null : "fx:id=\"mainPanel\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
         assert nameTextField != null : "fx:id=\"nameTextField\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
+        assert paymentAmount != null : "fx:id=\"paymentAmount\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
         assert paymentMethodChoiceBox != null : "fx:id=\"paymentMethodChoiceBox\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
         assert telephoneTextField != null : "fx:id=\"telephoneTextField\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
         assert updateButton != null : "fx:id=\"updateButton\" was not injected: check your FXML file 'ProfilePanel.fxml'.";
 
+
+        deliveriesList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
     }
      
     protected void setClient(Client client){
@@ -105,7 +116,7 @@ public class ProfilePanelSB {
 				PaymentMethod.ORGANS);
     	paymentMethodChoiceBox.getSelectionModel().select(client.getPaymentMethod());
     	telephoneTextField.setText(""+client.getTelephone());
-    	if(client.getDeliveries() == null) {
+    	if(client.getDeliveries().isEmpty()) {
 	    	try {
 				client.setDeliveries(SQLManager.searchDeliveryByClientId(client.getId()));
 			} catch (SQLException e1) {
@@ -113,7 +124,7 @@ public class ProfilePanelSB {
 				e1.printStackTrace();
 			}
     	}
-    	deliveriesList = new ListView<Delivery>(FXCollections.<Delivery>observableArrayList(client.getDeliveries()));
+		deliveriesList.getItems().setAll(client.getDeliveries());
 		
     }
     

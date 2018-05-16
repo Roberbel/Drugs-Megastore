@@ -178,7 +178,7 @@ public class Packaged implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Packaged [drug=" + drug + ", delivery=" + delivery + ", ammount=" + amount + "]";
+		return "Drug: "+drug+" ,Amount: "+amount+" ,price per unit: " +drug.getSellingPrice();
 	}
 			
 }
