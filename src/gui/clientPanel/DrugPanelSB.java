@@ -56,11 +56,13 @@ public class DrugPanelSB {
 
     @FXML
     void addToCart(MouseEvent event) {
+    	
     	int sellingAmount =  Integer.parseInt(amountTextField.getText());
 		Packaged packaged = new Packaged(drug, delivery ,sellingAmount);
 		//it the package already exist in the delivery, we will update it's amount.
 		if(delivery.addPackaged(packaged)) {
 			//we won't update the delivery in the Database until the client has confirmed the shopping
+			//THIS IS WRONG - it should only update the label, not the amount inside the drug;
 			try {
 				SQLManager.updateDrugStock(drug, (Integer)(drug.getStock()-sellingAmount));
 				drug.setStock(drug.getStock()-sellingAmount);

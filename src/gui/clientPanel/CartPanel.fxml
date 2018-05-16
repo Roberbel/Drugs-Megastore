@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="gui.clientPanel.CartPanelSB">
+  <children>
+    <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <bottom>
+        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+          <children>
+            <Button mnemonicParsing="false" onMouseClicked="#confirmDelivery" prefHeight="35.0" prefWidth="136.0" text="Confirm" />
+          </children>
+          <BorderPane.margin>
+            <Insets right="20.0" />
+          </BorderPane.margin>
+        </HBox>
+      </bottom>
+      <center>
+        <ScrollPane fx:id="packagedScrollPanel" fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="419.0" vbarPolicy="AS_NEEDED">
+          <content>
+            <VBox fx:id="vbox" prefHeight="200.0" prefWidth="100.0" />
+          </content>
+          <BorderPane.margin>
+            <Insets left="20.0" top="20.0" />
+          </BorderPane.margin>
+        </ScrollPane>
+      </center>
+      <right>
+        <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" spacing="25.0" BorderPane.alignment="CENTER">
+          <children>
+            <Label fx:id="priceLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="131.0" text="Price:" wrapText="true">
+              <font>
+                <Font size="20.0" fx:id="x1" />
+              </font>
+            </Label>
+            <Label fx:id="addressLabel" font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="131.0" text="Address:" wrapText="true" />
+            <Label id="paymentMethodAddress" fx:id="paymentMethodLabel" font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="136.0" text="Payment method:" wrapText="true" />
+            <Label fx:id="phoneLabel" font="$x1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="136.0" text="Phone:" wrapText="true" />
+          </children>
+          <BorderPane.margin>
+            <Insets left="10.0" />
+          </BorderPane.margin>
+        </VBox>
+      </right>
+    </BorderPane>
+  </children>
+</AnchorPane>

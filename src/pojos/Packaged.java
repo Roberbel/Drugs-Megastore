@@ -149,7 +149,6 @@ public class Packaged implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
 		result = prime * result + ((deliveryId == null) ? 0 : deliveryId.hashCode());
 		result = prime * result + ((drugId == null) ? 0 : drugId.hashCode());
 		return result;

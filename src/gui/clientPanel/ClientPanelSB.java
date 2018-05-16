@@ -16,7 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import pojos.Client;
 import pojos.Delivery;
-import gui.clientPanel.ShopPanelSB;
+import gui.clientPanel.CartPanelSB;
 
 
 public class ClientPanelSB {
@@ -69,6 +69,22 @@ public class ClientPanelSB {
 
     @FXML
     void showCartPanel(MouseEvent event) {
+    	try {
+	    	
+        	FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/clientPanel/CartPanel.fxml"));
+			AnchorPane cartPanel = loader.load();
+			CartPanelSB controller = (CartPanelSB)loader.getController();
+			cartPanel.prefWidthProperty().bind(this.mainPanel.widthProperty());
+			cartPanel.prefHeightProperty().bind(this.mainPanel.heightProperty());
+			controller.setDelivery(delivery);
+			controller.setParent(this);
+			mainPanel.setCenter(cartPanel);
+			    	
+        }catch(IOException e) {
+    		e.printStackTrace();
+    		System.out.println("Error loading  cart panel");
+    		
+    	}
     }
 
     @FXML
@@ -125,7 +141,6 @@ public class ClientPanelSB {
         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert topPanel != null : "fx:id=\"topPanel\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         logo.setImage(new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Deutsche_Apotheke_Logo.svg/827px-Deutsche_Apotheke_Logo.svg.png"));
-        //showShopPanel(null);
     }
     
     public void setClient(Client client) {
@@ -137,11 +152,22 @@ public class ClientPanelSB {
     	
     }
     
-    protected void updateCart() {
+    protected void increaseCart() {
 		
-		cart.setText("Cart: "+ ++drugAmount+ " items"); 
+		cart.setText("Cart: "+ ++drugAmount + " items"); 
 		
 	}
+    
+    protected void decreaseCart() {
+    	
+    	cart.setText("Cart: "+ --drugAmount + " items"); 
+    }
+    
+    protected void clearDelivery() {
+    	
+    	delivery = new Delivery(client);
+    	
+    }
 
 }
 

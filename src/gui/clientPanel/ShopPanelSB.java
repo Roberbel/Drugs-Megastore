@@ -184,7 +184,7 @@ try {
     
     protected void updateCart() {
     	
-    	clientPanel.updateCart();
+    	clientPanel.increaseCart();
     	
     }
 

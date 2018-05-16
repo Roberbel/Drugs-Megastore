@@ -208,9 +208,14 @@ public class Delivery implements Serializable {
 	}
 
 
-	public void removePackaged(Packaged packaged) {
+	public boolean removePackaged(Packaged packaged) {
 		if (packages.contains(packaged)) {
 			this.packages.remove(packaged);
+			return true;
+		}else {
+			
+			return false;
+			
 		}
 	}
 	

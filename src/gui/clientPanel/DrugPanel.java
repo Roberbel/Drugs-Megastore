@@ -101,7 +101,7 @@ public class DrugPanel extends BorderPane {
 				SQLManager.updateDrugStock(drug, (Integer)(drug.getStock()-sellingAmount));
 				drug.setStock(drug.getStock()-sellingAmount);
 				stock.setText("Stock: "+ drug.getStock());
-				clientPanel.updateCart();
+				clientPanel.increaseCart();
 			}catch(SQLException e) {
 				System.out.println("There was an error updating the drug: "+ drug.getName());
 				e.printStackTrace();			

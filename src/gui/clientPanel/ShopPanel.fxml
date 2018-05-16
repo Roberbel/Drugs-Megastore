@@ -48,7 +48,7 @@
             </GridPane>
             <AnchorPane fx:id="anchorPanelScroll" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
               <children>
-                <ScrollPane fx:id="drugsScrollPanel" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="380.0" prefWidth="365.0" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <ScrollPane fx:id="drugsScrollPanel" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" prefHeight="380.0" prefWidth="365.0" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                   <content>
                     <FlowPane id="drug" fx:id="drugsFlowPanel" prefHeight="399.0" prefWidth="385.0" />
                   </content>
