@@ -24,7 +24,8 @@ public class DrugPanelSB {
 	private Drug drug;
 	private ShopPanelSB shopPanel;
 	private Delivery delivery;
-
+	private int stock;
+	
     @FXML
     private ResourceBundle resources;
     
@@ -59,38 +60,17 @@ public class DrugPanelSB {
     	
     	int sellingAmount =  Integer.parseInt(amountTextField.getText());
 		Packaged packaged = new Packaged(drug, delivery ,sellingAmount);
-		//it the package already exist in the delivery, we will update it's amount.
-		if(delivery.addPackaged(packaged)) {
-			//we won't update the delivery in the Database until the client has confirmed the shopping
-			//THIS IS WRONG - it should only update the label, not the amount inside the drug;
-			try {
-				SQLManager.updateDrugStock(drug, (Integer)(drug.getStock()-sellingAmount));
-				drug.setStock(drug.getStock()-sellingAmount);
-				stockLabel.setText("Stock: "+ drug.getStock());
-				shopPanel.updateCart();
-			}catch(SQLException e) {
-				System.out.println("There was an error updating the drug: "+ drug.getName());
-				e.printStackTrace();			
-			}
-		}else {
-			try {
-				SQLManager.updateDrugStock(drug, (Integer)(drug.getStock()-sellingAmount));
-				drug.setStock(drug.getStock()-sellingAmount);
-				stockLabel.setText("Stock: "+ drug.getStock());
-				int pos = delivery.positionPackaged(packaged);
-				//we put the new amount of that drug in the text field so the buyer knows how many they already have ordered.
-				System.out.println(packaged);
-				packaged = delivery.getPackage(pos);
-				
-				System.out.println(packaged +"\nPosition: "+ pos);
-				amountTextField.setText(""+(packaged.getAmount()+sellingAmount));
-				packaged.setAmount(packaged.getAmount()+sellingAmount);
-				//we won't update the cart here, as there hasn't been added a new drug
-			}catch(SQLException e) {
-				System.out.println("There was an error updating the drug: "+ drug.getName());
-				e.printStackTrace();			
-			}
+		stock = stock - sellingAmount;
+		stockLabel.setText("Stock: "+ stock);
+		//if the package already exist in the delivery, we will update it's amount instead.
+		if(!delivery.addPackaged(packaged)) {
 			
+			int pos = delivery.positionPackaged(packaged);
+			packaged = delivery.getPackage(pos);
+			packaged.setAmount(packaged.getAmount() + sellingAmount);
+			amountTextField.setText("" + packaged.getAmount());
+			shopPanel.updateCart();
+		
 		}
     }
 
@@ -104,9 +84,10 @@ public class DrugPanelSB {
 		}
 		if(!amountTextField.getText().equals("")) {
 			int quantity = Integer.parseInt(amountTextField.getText());
-			if(quantity > drug.getStock()) {
+			int stock = Integer.parseInt(stockLabel.getText());
+			if(quantity > stock) {
 				
-				amountTextField.setText("" + drug.getStock());
+				amountTextField.setText("" + stock);
 				amountTextField.end();
 				
 			}
@@ -133,7 +114,8 @@ public class DrugPanelSB {
 		nameLabel.setText("Name: " + drug.getName());
 		activePrincipleLabel.setText("Active Principle: " + drug.getActivePrinciple());
 		priceLabel.setText("Price: " + drug.getSellingPrice());
-		stockLabel.setText("Stock: " + drug.getStock());
+		stock = drug.getStock();
+		stockLabel.setText("Stock: " + stock);
 		if(drug.getPhoto()!= null) {
 			drugPhoto.setImage(new Image(new ByteArrayInputStream(drug.getPhoto())));
 		}else {

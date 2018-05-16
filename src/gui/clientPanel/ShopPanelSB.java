@@ -25,30 +25,20 @@ public class ShopPanelSB {
 	private List<Drug> drugs;
 	private ClientPanelSB clientPanel;
 
-    @FXML
+	@FXML
     private ResourceBundle resources;
 
     @FXML
     private URL location;
-     
+
+    @FXML
+    private TextField activePrincipleTextField;
+
     @FXML
     private FlowPane drugsFlowPanel;
 
     @FXML
     private ScrollPane drugsScrollPanel;
-
-    @FXML
-    private AnchorPane anchorPanelScroll;
-
-
-    @FXML
-    private FlowPane mainFlowPanel;
-
-    @FXML
-    private GridPane mainGridPanel;
-    
-    @FXML
-    private TextField activePrincipleTextField;
 
     @FXML
     private TextField maxPriceTextField;
@@ -59,10 +49,9 @@ public class ShopPanelSB {
     @FXML
     private Button searchButton;
 
-
     @FXML
     void searchDrugs(InputEvent event) {
-try {
+    	try {
 			
 			String name = nameTextField.getText();
 			String activePrinciple = activePrincipleTextField.getText();
@@ -152,21 +141,18 @@ try {
 
     @FXML
     void initialize() {
-        assert activePrincipleTextField != null : "fx:id=\"activePrincipleTextField\" was not injected: check your FXML file 'ShopPanel.fxml'.";
+    	assert activePrincipleTextField != null : "fx:id=\"activePrincipleTextField\" was not injected: check your FXML file 'ShopPanel.fxml'.";
+        assert drugsFlowPanel != null : "fx:id=\"drugsFlowPanel\" was not injected: check your FXML file 'ShopPanel.fxml'.";
+        assert drugsScrollPanel != null : "fx:id=\"drugsScrollPanel\" was not injected: check your FXML file 'ShopPanel.fxml'.";
         assert maxPriceTextField != null : "fx:id=\"maxPriceTextField\" was not injected: check your FXML file 'ShopPanel.fxml'.";
         assert nameTextField != null : "fx:id=\"nameTextField\" was not injected: check your FXML file 'ShopPanel.fxml'.";
         assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'ShopPanel.fxml'.";
+        
         drugsFlowPanel.prefHeightProperty().bind(drugsScrollPanel.heightProperty());
         drugsFlowPanel.prefWidthProperty().bind(drugsScrollPanel.widthProperty());
-        
-        mainGridPanel.prefHeightProperty().bind(mainFlowPanel.heightProperty());
-        mainGridPanel.prefWidthProperty().bind(mainFlowPanel.widthProperty());
-        
-        anchorPanelScroll.prefHeightProperty().bind(mainGridPanel.heightProperty());
-        anchorPanelScroll.prefWidthProperty().bind(mainGridPanel.widthProperty());
-        
-        drugsScrollPanel.prefHeightProperty().bind(anchorPanelScroll.heightProperty());
-        drugsScrollPanel.prefWidthProperty().bind(anchorPanelScroll.widthProperty());
+
+        //drugsScrollPanel.prefHeightProperty().bind(anchorPanelScroll.heightProperty());
+        //drugsScrollPanel.prefWidthProperty().bind(anchorPanelScroll.widthProperty());
         
         
         
