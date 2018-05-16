@@ -8,7 +8,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import gui.adminPanel.AdminWindow;
-import gui.clientPanel.ClientPane;
 import gui.clientPanel.ClientPanelSB;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
