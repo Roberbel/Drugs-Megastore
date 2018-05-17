@@ -364,7 +364,6 @@ public class SQLManager implements Manager {
 //===========================================================================================================
 
 	
-	//We have to talk how to do this 
 	public static Arrival searchArrivalById(Integer id)throws SQLException{
 		
 		String sql = "SELECT * FROM arrivals WHERE id = ? ";
@@ -456,7 +455,7 @@ public class SQLManager implements Manager {
 	}
 		
 	
-	public static Client searchClientById(Integer id)throws SQLException{
+	public static Client searchClientById(Integer id) throws SQLException{
 	
 		String sql="SELECT * FROM client WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
@@ -562,7 +561,7 @@ public class SQLManager implements Manager {
 	
 	
 	
-	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple)throws SQLException{ 
+	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple) throws SQLException{ 
 		
 		String sql="SELECT * FROM drug WHERE active_principle LIKE ?";
 		PreparedStatement prep=c.prepareStatement(sql);
@@ -582,7 +581,7 @@ public class SQLManager implements Manager {
 		return drugs;
 	}
 	
-	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple, Integer maxPrice)throws SQLException{ 
+	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple, Integer maxPrice) throws SQLException{ 
 		
 		String sql="SELECT * FROM drug WHERE active_principle LIKE ? AND selling_price <= ?";
 		PreparedStatement prep=c.prepareStatement(sql);
@@ -812,7 +811,7 @@ public class SQLManager implements Manager {
 		return packages;
 	}
 	
-	public static Provider searchProviderById(Integer id)throws SQLException{
+	public static Provider searchProviderById(Integer id) throws SQLException{
 	
 		String sql="SELECT * FROM provider WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
@@ -1276,7 +1275,7 @@ public class SQLManager implements Manager {
     	return drugList;
     }
         
-    public static List<Employee> getAllEmployee() throws SQLException{
+    public static List<Employee> getAllEmployees() throws SQLException{
     	
     	String sql="SELECT * FROM employee";
     	PreparedStatement prep=c.prepareStatement(sql);
@@ -1306,7 +1305,7 @@ public class SQLManager implements Manager {
     	
     }
     
-    public static List<Provider> getAllProvider() throws SQLException{
+    public static List<Provider> getAllProviders() throws SQLException{
     	
     	String sql="SELECT * FROM provider";
     	PreparedStatement prep=c.prepareStatement(sql);
