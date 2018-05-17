@@ -15,7 +15,7 @@
       <top>
         <GridPane fx:id="topPanel" prefHeight="100.0" prefWidth="872.0">
           <children>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+            <FlowPane alignment="CENTER_LEFT" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
               <children>
                 <Label fx:id="cart" onMouseClicked="#showCartPanel" onMouseEntered="#highlightCart" onMouseExited="#returnCartToNormal" text="Cart: 0 items" textAlignment="JUSTIFY" wrapText="true">
                   <font>
@@ -24,9 +24,9 @@
                 </Label>
               </children>
             </FlowPane>
-            <FlowPane alignment="CENTER_RIGHT" columnHalignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
+            <FlowPane alignment="CENTER" columnHalignment="CENTER" prefHeight="100.0" prefWidth="162.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
               <children>
-                <Label fx:id="profile" font="$x1" onMouseClicked="#showProfilePanel" onMouseEntered="#highlightProfile" onMouseExited="#returnProfileToNormal" prefWidth="142.0" text="Profile" wrapText="true" />
+                <Label fx:id="profile" font="$x1" onMouseClicked="#showProfilePanel" onMouseEntered="#highlightProfile" onMouseExited="#returnProfileToNormal" prefWidth="84.0" text="Profile" wrapText="true" />
               </children>
             </FlowPane>
             <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -47,11 +47,17 @@
                 </Label>
               </children>
             </FlowPane>
+            <FlowPane alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="0">
+              <children>
+                <Button fx:id="logOutButton" mnemonicParsing="false" onMouseClicked="#logOut" text="Log out" />
+              </children>
+            </FlowPane>
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="291.0" minWidth="10.0" prefWidth="142.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="296.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.0" minWidth="10.0" prefWidth="222.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.0" minWidth="10.0" prefWidth="212.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.0" minWidth="10.0" prefWidth="212.0" />
           </columnConstraints>
           <rowConstraints>

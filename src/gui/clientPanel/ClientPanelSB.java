@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import DB.JPAManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,8 @@ public class ClientPanelSB {
     @FXML
     private ResourceBundle resources;
 
+    @FXML
+    private Button logOutButton;
     
     @FXML
     private URL location;
@@ -49,7 +52,10 @@ public class ClientPanelSB {
 
     @FXML
     private GridPane topPanel;
-
+    
+    @FXML
+    void logOut(MouseEvent event) {
+    }
 
     @FXML
     void highlightCart(MouseEvent event) {
@@ -61,6 +67,9 @@ public class ClientPanelSB {
 
     @FXML
     void returnCartToNormal(MouseEvent event) {
+    	
+    	//cart.setFont(new Font());
+    	
     }
 
     @FXML
@@ -133,12 +142,14 @@ public class ClientPanelSB {
     	
     	
     	drugAmount = 0;
-        assert cart != null : "fx:id=\"cart\" was not injected: check your FXML file 'ClientPanel.fxml'.";
-        assert companyName != null : "fx:id=\"companyName\" was not injected: check your FXML file 'ClientPanel.fxml'.";
-        assert logo != null : "fx:id=\"logo\" was not injected: check your FXML file 'ClientPanel.fxml'.";
-        assert mainPanel != null : "fx:id=\"mainPanel\" was not injected: check your FXML file 'ClientPanel.fxml'.";
-        assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'ClientPanel.fxml'.";
-        assert topPanel != null : "fx:id=\"topPanel\" was not injected: check your FXML file 'ClientPanel.fxml'.";
+    	 assert cart != null : "fx:id=\"cart\" was not injected: check your FXML file 'ClientPanel.fxml'.";
+         assert companyName != null : "fx:id=\"companyName\" was not injected: check your FXML file 'ClientPanel.fxml'.";
+         assert logOutButton != null : "fx:id=\"logOutButton\" was not injected: check your FXML file 'ClientPanel.fxml'.";
+         assert logo != null : "fx:id=\"logo\" was not injected: check your FXML file 'ClientPanel.fxml'.";
+         assert mainPanel != null : "fx:id=\"mainPanel\" was not injected: check your FXML file 'ClientPanel.fxml'.";
+         assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'ClientPanel.fxml'.";
+         assert topPanel != null : "fx:id=\"topPanel\" was not injected: check your FXML file 'ClientPanel.fxml'.";
+         
         logo.setImage(new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Deutsche_Apotheke_Logo.svg/827px-Deutsche_Apotheke_Logo.svg.png"));
     }
     

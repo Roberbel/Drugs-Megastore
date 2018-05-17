@@ -59,11 +59,7 @@ public class MainWindow {
 					case "EMPLOYEE":
 						break;
 					case "CLIENT":
-						/*ClientPane pane = new ClientPane(user.getExtractedClient());
-						this.stage.setScene(new Scene(pane, 1000, 600));
-						this.stage.setResizable(true);
-						this.stage.show();*/
-						
+
 						FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/clientPanel/ClientPanel.fxml"));	
 						try {
 							AnchorPane panel = loader.load();
