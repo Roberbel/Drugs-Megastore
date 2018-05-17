@@ -28,10 +28,11 @@ public class SQLManager implements Manager {
 		try {
 			
 			connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
-			//SQLManager.insertClient(new Client());
+			/*//SQLManager.insertClient(new Client());
 			generateDataBase();
 			disconnect();
-			
+			*/
+			SQLManager.insertDeliveries(new Delivery());
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -266,19 +267,27 @@ public class SQLManager implements Manager {
 		
 	public static void insertDeliveries(Delivery delivery) throws SQLException {
 
-		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id, delivered)" + "VALUES(?,?,?, ?);";
+		
+		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id, sent)" + "VALUES(?,?,?, ?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setInt(1, delivery.getSellingPrice());
-		prep.setInt(2, delivery.getTransactionId());
-		prep.setInt(3, delivery.getClient().getId());
+		prep.setDate(2, delivery.getTransactionDate());
+		//prep.setInt(3, delivery.getClient().getId());
 		prep.setBoolean(4, delivery.isSent());
 		List <Packaged> packList=delivery.getPackages();
 		prep.executeUpdate();
 		prep.close();
 		
-		//SELECT IDENT_CURRENT('deliveries');
-		//that line should return the latest ID used in that table.
+		String query = "SELECT last_insert_rowid() AS lastId";
+		PreparedStatement ps = c.prepareStatement(query);
+		ResultSet rs = ps.executeQuery();
+		Integer id = rs.getInt("lastId");
+
+		
+		
+		
 		for(Packaged p: packList) {
+			p.setDeliveryId(id);
 			insertPackaged(p);
 		}
 	
@@ -867,9 +876,21 @@ public class SQLManager implements Manager {
 //=====================================================================================================
 	
 	//CLIENT
+	public static void updateClient(Integer id, String address, String email, Integer telephone, String paymentMethod) throws SQLException {
+		
+		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ? WHERE id = ?";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setString(1, address);
+		prep.setString(2, email);
+		prep.setInt(3, telephone);
+		prep.setString(4, paymentMethod);
+		prep.setInt(5, id);
+		
+	}
+	
 	public static void updateClientAdress(int id, String newAdress) throws SQLException {
 		
-		String sql = "UPDATE client SET adress = ? WHERE id = ? ";
+		String sql = "UPDATE client SET address = ? WHERE id = ? ";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, newAdress);
 		prep.setInt(2, id);
@@ -879,7 +900,7 @@ public class SQLManager implements Manager {
 
 	public static void updateClientPhone(int id, int phone) throws SQLException {
 		
-		String sql = "UPDATE client SET telephone = ? WHERE id=?";
+		String sql = "UPDATE client SET telephone = ? WHERE id = ?";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1, phone);
 		prep.setInt(2, id);

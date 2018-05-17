@@ -79,9 +79,15 @@ public class ProfilePanelSB {
     	String address = addressTextField.getText();
     	String email = emailTextField.getText();
     	String name = nameTextField.getText();
-    	PaymentMethod paymentMethod = paymentMethodChoiceBox.getSelectionModel().getSelectedItem();
+    	String paymentMethod = paymentMethodChoiceBox.getSelectionModel().getSelectedItem().toString();
     	Integer phone = Integer.parseInt((telephoneTextField.getText()));
-    	//SQLManager.updateClient(client, name, address, email, phone, paymentMethod);
+    	try {
+			SQLManager.updateClient(client.getId(), address, email, phone, paymentMethod);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("There was an error updating the client info");
+		}
     }
 
     @FXML

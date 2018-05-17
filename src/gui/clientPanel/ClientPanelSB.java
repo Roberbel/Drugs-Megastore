@@ -133,7 +133,6 @@ public class ClientPanelSB {
     	
     	
     	drugAmount = 0;
-    	delivery = new Delivery();
         assert cart != null : "fx:id=\"cart\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert companyName != null : "fx:id=\"companyName\" was not injected: check your FXML file 'ClientPanel.fxml'.";
         assert logo != null : "fx:id=\"logo\" was not injected: check your FXML file 'ClientPanel.fxml'.";
@@ -147,7 +146,7 @@ public class ClientPanelSB {
     	
     	this.client = client;
 
-    	delivery.setClient(client);
+    	delivery = new Delivery(client);
     	profile.setText(client.getName());
     	
     }
