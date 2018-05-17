@@ -57,12 +57,6 @@ public class CartPanelSB {
     	try {
     		
     		SQLManager.insertDeliveries(delivery);
-    		for(Packaged p : delivery.getPackages()) {
-    			
-    			Drug d = p.getDrug();
-    			SQLManager.updateDrugStock(d.getId(), d.getStock()-p.getAmount());
-    			
-    		}
     		//we clear the delivery.
     		parentPanel.clearDelivery();
     		parentPanel.showShopPanel(null);
