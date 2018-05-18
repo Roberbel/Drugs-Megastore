@@ -1,16 +1,9 @@
 package gui.clientPanel;
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import DB.SQLManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

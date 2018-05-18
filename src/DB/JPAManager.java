@@ -148,49 +148,158 @@ public class JPAManager implements Manager{
 		
 		public static Arrival searchArrivalById(Integer id) {
 			
-			Query q1 = em.createNativeQuery("SELECT * FROM arrivals WHERE transaction_id = ?", Arrival.class);
+			Query q1 = em.createNativeQuery("SELECT * FROM arrivals WHERE transaction_id = ?;", Arrival.class);
 			q1.setParameter(1, id);
 			return (Arrival) q1.getSingleResult();
 			
 		}
 		
-		public static Client searchClientById(Integer id) {
-			
-			Query q1 = em.createNativeQuery("SELECT * FROM client WHERE id = ?", Client.class);
+		public static List<Arrives> searchArrivesByArrivalId(Integer id){
+		
+			Query q1 = em.createNativeQuery("SELECT * FROM arrives WHERE drug_id = ?;", Arrives.class);
 			q1.setParameter(1, id);
-			return (Client) q1.getSingleResult();
+			return (List<Arrives>) q1.getResultList();
+		
+		}
+
+		public static List<Arrives> searchArrivesByDrugId(Integer id){
 			
+			Query q1 = em.createNativeQuery("SELECT * FROM arrives WHERE transaction_id = ?;", Arrives.class);
+			q1.setParameter(1, id);
+			return (List<Arrives>) q1.getResultList();
+	
 		}
 		
 		public static Corridor searchCorridorById(Integer id) {
 			
-			Query q1 = em.createNativeQuery("SELECT * FROM corridor WHERE id = ?", Corridor.class);
+			Query q1 = em.createNativeQuery("SELECT * FROM corridor WHERE id = ?;", Corridor.class);
 			q1.setParameter(1, id);
 			return (Corridor) q1.getSingleResult();
 			
 		}
 		
+		public static Client searchClientById(Integer id) {
+			
+			Query q1 = em.createNativeQuery("SELECT * FROM client WHERE id = ?;", Client.class);
+			q1.setParameter(1, id);
+			return (Client) q1.getSingleResult();
+			
+		}
+		
+		public static Client searchClientByUsername(String username) {
+			
+			Query q1 = em.createNativeQuery("SELECT * FROM client WHERE username = ?;", Client.class);
+			q1.setParameter(1, username);
+			return (Client) q1.getSingleResult();
+		
+		}
+		
 		public static Delivery searchDeliveryById(Integer id) {
 			
-			Query q1 = em.createNativeQuery("SELECT * FROM deliveries WHERE transaction_id = ?", Delivery.class);
+			Query q1 = em.createNativeQuery("SELECT * FROM deliveries WHERE transaction_id = ?;", Delivery.class);
 			q1.setParameter(1, id);
 			return (Delivery) q1.getSingleResult();
 			
 		}
 		
-		public static Drug searchDrugById(Integer id) {
-			
-			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE id = ?", Drug.class);
+		public static List<Delivery> searchDeliveryByClientId(Integer id) {
+		
+			Query q1 = em.createNativeQuery("SELECT * FROM deliveries WHERE client_id = ?;", Delivery.class);
 			q1.setParameter(1, id);
-			return (Drug) q1.getSingleResult();
+			return (List<Delivery>) q1.getResultList();
+		
+		}
+		
+		public static List<Drug> searchDrugByActivePrinciple(String activePrinciple) {
+		
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE active_principle LIKE ?;");
+			q1.setParameter(1, "%"+activePrinciple+"%");
+			return (List<Drug>) q1.getResultList();
+		
+		}
+		
+		public static List<Drug> searchDrugByActivePrinciple(String activePrinciple, Integer maxPrice) {
+		
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE active_principle LIKE ? AND selling_price <= ?;");
+			q1.setParameter(1, "%"+activePrinciple+"%");
+			q1.setParameter(2, maxPrice);
+			return (List<Drug>) q1.getResultList();
+		
+		}
+		
+		public static List<Drug> searchDrugByMaxPrice(Integer maxPrice) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE selling_price <= ?;");
+			q1.setParameter(1, maxPrice);
+			return (List<Drug>) q1.getResultList();
 			
+		}
+		
+		public static List<Drug> searchDrugByName(String name) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ?;");
+			q1.setParameter(1, "%"+name+"%");
+			return (List<Drug>) q1.getResultList();
+			
+		}
+		
+		public static List<Drug> searchDrugByName(String name, String activePrinciple) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND active_principle LIKE ?;");
+			q1.setParameter(1, "%"+name+"%");
+			q1.setParameter(2, "%"+activePrinciple+"%");
+			return (List<Drug>) q1.getResultList();
+			
+		}
+		
+		public static List<Drug> searchDrugByName(String name, Integer maxPrice) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND selling_price <= ?;");
+			q1.setParameter(1, "%"+name+"%");
+			q1.setParameter(2, maxPrice);
+			return (List<Drug>) q1.getResultList();
+			
+		}
+		
+		public static List<Drug> searchDrugByName(String name, String activePrinciple, Integer maxPrice) {
+			
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND active_principle LIKE ? AND selling_price <= ?;");
+			q1.setParameter(1, "%"+name+"%");
+			q1.setParameter(2, "%"+activePrinciple+"%");
+			q1.setParameter(3, maxPrice);
+			return (List<Drug>) q1.getResultList();
+		
 		}
 		
 		public static Employee searchEmployeeById(Integer id) {
 			
-			Query q1 = em.createNativeQuery("SELECT * FROM employee WHERE id = ?", Employee.class);
+			Query q1 = em.createNativeQuery("SELECT * FROM employee WHERE id = ?;", Employee.class);
 			q1.setParameter(1, id);
 			return (Employee) q1.getSingleResult();
+			
+		}
+		
+		public static Employee searchEmployeeByUsername(String username) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM employee WHERE username LIKE ?;", Employee.class);
+			q1.setParameter(1, username);
+			return (Employee) q1.getSingleResult();
+			
+		}
+		
+		public static List<Packaged> searchPackagedByDeliveryId(Integer id) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM packaged WHERE drug_id = ?;", Packaged.class);
+			q1.setParameter(1, id);
+			return (List<Packaged>) q1.getResultList();
+			
+		}
+		
+		public static List<Packaged> searchPackagedByDrugId(Integer id) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM packaged WHERE transaction_id = ?;", Packaged.class);
+			q1.setParameter(1, id);
+			return (List<Packaged>) q1.getResultList();
 			
 		}
 		
@@ -210,6 +319,17 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+				
+		public static Drug searchDrugById(Integer id) {
+			
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE id = ?", Drug.class);
+			q1.setParameter(1, id);
+			return (Drug) q1.getSingleResult();
+			
+		}
+			
 		
 		/*
 		 *  SELECT EVERYTHING FROM EACH TABLE
@@ -285,6 +405,8 @@ public class JPAManager implements Manager{
 			return (List<Warehouse>) q1.getResultList();
 			
 		}
+		
+		
 		
 
 /*

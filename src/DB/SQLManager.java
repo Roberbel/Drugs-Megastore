@@ -68,21 +68,21 @@ public class SQLManager implements Manager {
 		createArrivalsTable();
 		createProvidersTable();
 		Statement statement  = c.createStatement();
-		String query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('client', 1)";
+		String query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('client', 1);";
 		statement.executeUpdate(query);
-		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('employee', 1)";
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('employee', 1);";
 		statement.executeUpdate(query);
-		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('corridor', 1)";
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('corridor', 1);";
 		statement.executeUpdate(query);
-		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('warehouse', 1)";
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('warehouse', 1);";
 		statement.executeUpdate(query);
-		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('deliveries', 1)";
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('deliveries', 1);";
 		statement.executeUpdate(query);
-		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('drug', 1)";
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('drug', 1);";
 		statement.executeUpdate(query);
-		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('arrivals', 1)";
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('arrivals', 1);";
 		statement.executeUpdate(query);
-		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('provider', 1)";
+		query = "INSERT INTO sqlite_sequence (name, seq) VALUES ('provider', 1);";
 		statement.executeUpdate(query);
 		c.close();
 			
@@ -96,7 +96,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE arrivals " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " buying_price INT NOT NULL," + " transaction_date DATE NOT NULL,"
-				+ "received BOOLEAN NOT NULL DEFAULT FALSE" + ", provider_id REFERENCES provider (id) ON UPDATE CASCADE ON DELETE CASCADE )";
+				+ "received BOOLEAN NOT NULL DEFAULT FALSE" + ", provider_id REFERENCES provider (id) ON UPDATE CASCADE ON DELETE CASCADE );";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 
@@ -106,7 +106,7 @@ public class SQLManager implements Manager {
 		
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE arrives " + "(drug_id INT," + " transaction_id INT," + " amount INT NOT NULL,"
-				+ " PRIMARY KEY (drug_id, transaction_id) )";
+				+ " PRIMARY KEY (drug_id, transaction_id) );";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -117,7 +117,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE client" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 				+ "address TEXT NOT NULL," + "telephone INT," + "email TEXT, payment_method TEXT NOT NULL, username STRING NOT NULL UNIQUE,"
-				+"password STRING NOT NULL)";
+				+"password STRING NOT NULL);";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 		
@@ -127,7 +127,7 @@ public class SQLManager implements Manager {
 		
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE corridor" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "temperature FLOAT NOT NULL,"
-				+ "warehouse_id REFERENCES warehouse (id) ON UPDATE CASCADE ON DELETE CASCADE)";
+				+ "warehouse_id REFERENCES warehouse (id) ON UPDATE CASCADE ON DELETE CASCADE);";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -138,7 +138,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE deliveries  " + "(transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,"
 				+ " selling_price INT NOT NULL," + " transaction_date DATE NOT NULL,"
-				+"sent BOOLEAN NOT NULL DEFAULT FALSE, " + "client_id INT REFERENCES client (id) ON UPDATE CASCADE ON DELETE CASCADE )";
+				+"sent BOOLEAN NOT NULL DEFAULT FALSE, " + "client_id INT REFERENCES client (id) ON UPDATE CASCADE ON DELETE CASCADE );";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -149,7 +149,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE drug " + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + " name TEXT NOT NULL UNIQUE,"
 				+ " photo BLOB," + " stock INT NOT NULL," + " active_principle TEXT," + " selling_price INTEGER NOT NULL,"
-				+ " corridor_id INT REFERENCES corridor (id)  ON UPDATE CASCADE ON DELETE CASCADE)";
+				+ " corridor_id INT REFERENCES corridor (id)  ON UPDATE CASCADE ON DELETE CASCADE);";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -160,7 +160,7 @@ public class SQLManager implements Manager {
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE employee" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
 				+ "photo BLOB," + "salary FLOAT NOT NULL," + "phone INT NOT NULL," + "position TEXT NOT NULL,"
-				+ "warehouse_id REFERENCES warehouse (id) ON UPDATE CASCADE ON DELETE CASCADE, username STRING NOT NULL UNIQUE,password STRING NOT NULL,isAdmin BOOLEAN)";
+				+ "warehouse_id REFERENCES warehouse (id) ON UPDATE CASCADE ON DELETE CASCADE, username STRING NOT NULL UNIQUE,password STRING NOT NULL,isAdmin BOOLEAN);";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -170,7 +170,7 @@ public class SQLManager implements Manager {
 	
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE packaged " + "(drug_id INT," + " transaction_id INT," + " amount INT NOT NULL,"
-				+ " PRIMARY KEY (drug_id," + " transaction_id) )";
+				+ " PRIMARY KEY (drug_id," + " transaction_id) );";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -180,7 +180,7 @@ public class SQLManager implements Manager {
 
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE provider" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "name TEXT NOT NULL,"
-				+ "address TEXT NOT NULL," + "telephone INTEGER," + "email TEXT)";
+				+ "address TEXT NOT NULL," + "telephone INTEGER," + "email TEXT);";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -190,7 +190,7 @@ public class SQLManager implements Manager {
 	
 		Statement stmt1 = c.createStatement();
 		String sql1 = "CREATE TABLE warehouse" + "(id INTEGER PRIMARY KEY AUTOINCREMENT," + "phone INT NOT NULL,"
-				+ "city TEXT NOT NULL," + "country TEXT NOT NULL," + "address TEXT NOT NULL," + "pc INT NOT NULL)";
+				+ "city TEXT NOT NULL," + "country TEXT NOT NULL," + "address TEXT NOT NULL," + "pc INT NOT NULL);";
 		stmt1.executeUpdate(sql1);
 		stmt1.close();
 	
@@ -202,7 +202,7 @@ public class SQLManager implements Manager {
 	
 	public static void insertArrivals(Arrival arrival) throws SQLException {
 
-		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, provider_id, arrived)" + "VALUES( ?,?,?,?);";
+		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, provider_id, arrived) VALUES( ?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setInt(1, arrival.getBuyingPrice());
 		prep.setDate(2, arrival.getDate());
@@ -212,7 +212,7 @@ public class SQLManager implements Manager {
 		prep.close();
 		List <Arrives> arrivesList=arrival.getArrives();
 		
-		String query = "SELECT last_insert_rowid() AS lastId";
+		String query = "SELECT last_insert_rowid() AS lastId;";
 		PreparedStatement ps = c.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		Integer id = rs.getInt("lastId");	
@@ -227,7 +227,7 @@ public class SQLManager implements Manager {
 	
 	public static void insertArrives(Arrives arrive) throws SQLException {
 		
-		String sql1="INSERT INTO arrives(drug_id, transaction_id ,amount)" + "VALUES(?,?,?);";
+		String sql1="INSERT INTO arrives(drug_id, transaction_id ,amount) VALUES(?,?,?);";
 		PreparedStatement prep=c.prepareStatement(sql1);
 		prep.setInt(1,arrive.getDrugId());
 		prep.setInt(2, arrive.getArrivalId());
@@ -239,7 +239,7 @@ public class SQLManager implements Manager {
 	
 	public static void insertClient(Client client) throws SQLException {
 
-		String sql1 = "INSERT INTO client(name, address ,telephone, email, payment_method,username,password)" + "VALUES(?,?,?,?,?,?,?);";
+		String sql1 = "INSERT INTO client(name, address ,telephone, email, payment_method,username,password) VALUES(?,?,?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, client.getName());
 		prep.setString(2, client.getAddress());
@@ -254,7 +254,7 @@ public class SQLManager implements Manager {
 	}
 	
 	public static void insertCorridor(Corridor corridor) throws SQLException {
-		String sql1 = "INSERT INTO corridor(temperature, warehouse_id)" + "VALUES(?,?);";
+		String sql1 = "INSERT INTO corridor(temperature, warehouse_id) VALUES(?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setFloat(1, corridor.getTemperature());
 		prep.setInt(2, corridor.getWarehouse().getId());
@@ -266,7 +266,7 @@ public class SQLManager implements Manager {
 	public static void insertDeliveries(Delivery delivery) throws SQLException {
 
 		
-		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id, sent)" + "VALUES(?,?,?, ?);";
+		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id, sent) VALUES(?,?,?, ?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setInt(1, delivery.getSellingPrice());
 		prep.setDate(2, delivery.getTransactionDate());
@@ -276,7 +276,7 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();
 		
-		String query = "SELECT last_insert_rowid() AS lastId";
+		String query = "SELECT last_insert_rowid() AS lastId;";
 		PreparedStatement ps = c.prepareStatement(query);
 		ResultSet rs = ps.executeQuery();
 		Integer id = rs.getInt("lastId");		
@@ -292,7 +292,7 @@ public class SQLManager implements Manager {
 		
 	public static void insertDrug(Drug drug) throws SQLException {
 
-		String sql1 = "INSERT INTO drug(name, photo, stock, active_principle,corridor_id )" + "VALUES(?,?.?,?,?);";
+		String sql1 = "INSERT INTO drug(name, photo, stock, active_principle,corridor_id ) VALUES(?,?.?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, drug.getName());
 		prep.setBytes(2, drug.getPhoto());
@@ -306,7 +306,7 @@ public class SQLManager implements Manager {
 
 	public static void insertEmployee(Employee employees) throws SQLException {
 
-		String sql1 = "INSERT INTO employee(name,salary, phone,position,warehouse_id,username,password,type)" + "VALUES(?,?,?,?,?);";
+		String sql1 = "INSERT INTO employee(name,salary, phone,position,warehouse_id,username,password,type) VALUES(?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, employees.getName());
 		prep.setFloat(2, employees.getSalary());
@@ -323,7 +323,7 @@ public class SQLManager implements Manager {
 	}
 	
 	public static void insertPackaged(Packaged pack) throws SQLException{
-		String sql1= "INSERT INTO packaged (drug_id,transaction_id,amount) VALUES(?,?,?)";
+		String sql1= "INSERT INTO packaged (drug_id,transaction_id,amount) VALUES(?,?,?);";
 		PreparedStatement prep=c.prepareStatement(sql1);
 		prep.setInt(1,pack.getDrugId());
 		prep.setInt(2,pack.getDeliveryId());
@@ -334,7 +334,7 @@ public class SQLManager implements Manager {
 
 	public static void insertProvider(Provider provider) throws SQLException {
 
-		String sql1 = "INSERT INTO provider(name, adress, telephone, email)" + "VALUES(?,?,?,?);";
+		String sql1 = "INSERT INTO provider(name, adress, telephone, email) VALUES(?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, provider.getName());
 		prep.setString(2, provider.getAddress());
@@ -347,7 +347,7 @@ public class SQLManager implements Manager {
 
 	public static void insertWarehouse(Warehouse warehouse) throws SQLException {
 
-		String sql1 = "INSERT INTO warehouse (phone,city,country, address, pc)" + "VALUES(?,?,?,?,?);";
+		String sql1 = "INSERT INTO warehouse (phone,city,country, address, pc) VALUES(?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setInt(1, warehouse.getPhone());
 		prep.setString(2, warehouse.getCity());
@@ -366,7 +366,7 @@ public class SQLManager implements Manager {
 	
 	public static Arrival searchArrivalById(Integer id)throws SQLException{
 		
-		String sql = "SELECT * FROM arrivals WHERE id = ? ";
+		String sql = "SELECT * FROM arrivals WHERE id = ? ;";
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, id);
 		ResultSet rs1 = prep.executeQuery();
@@ -390,7 +390,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Arrives> searchArrivesByArrivalId(Integer id) throws SQLException{
 
-		String sql = "SELECT * FROM arrives WHERE transaction_id = ?";
+		String sql = "SELECT * FROM arrives WHERE transaction_id = ? ;";
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, id);
 		List<Arrives> arrives = new ArrayList<Arrives>();
@@ -410,7 +410,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Arrives> searchArrivesByDrugId(Integer id) throws SQLException{
 
-		String sql = "SELECT * FROM arrives WHERE drug_id = ?";
+		String sql = "SELECT * FROM arrives WHERE drug_id = ? ;";
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, id);
 		List<Arrives> arrives = new ArrayList<Arrives>();
@@ -430,7 +430,7 @@ public class SQLManager implements Manager {
 	
 	public static Corridor searchCorridorById(Integer id) throws SQLException {
 	
-		String sql = "SELECT * FROM corridor WHERE id = ? ";
+		String sql = "SELECT * FROM corridor WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setInt(1, id);
@@ -457,7 +457,7 @@ public class SQLManager implements Manager {
 	
 	public static Client searchClientById(Integer id) throws SQLException{
 	
-		String sql="SELECT * FROM client WHERE id = ? ";
+		String sql="SELECT * FROM client WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setInt(1, id);
@@ -486,14 +486,13 @@ public class SQLManager implements Manager {
 
 	public static Client searchClientByUsername(String username) throws SQLException {
 		
-		String sql="SELECT * FROM client WHERE username = ? ";
+		String sql="SELECT * FROM client WHERE username = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setString(1, username);
 		
 		
 		ResultSet rs1 = prep.executeQuery();	
-		System.out.println("searching in Client");
 		Client client = getClient(rs1);
 				
 		if	(username.equals(client.getUsername())) {
@@ -511,7 +510,7 @@ public class SQLManager implements Manager {
 	
 	public static Delivery searchDeliveryById(Integer id) throws SQLException {
 		
-		String sql = "SELECT * FROM deliveries WHERE id = ? ";
+		String sql = "SELECT * FROM deliveries WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setInt(1, id);
@@ -539,7 +538,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Delivery> searchDeliveryByClientId(Integer id) throws SQLException{
 		
-		String sql="SELECT * FROM deliveries WHERE client_id = ?";
+		String sql="SELECT * FROM deliveries WHERE client_id = ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1, id);
 		ResultSet rs1 =prep.executeQuery();
@@ -563,7 +562,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple) throws SQLException{ 
 		
-		String sql="SELECT * FROM drug WHERE active_principle LIKE ?";
+		String sql="SELECT * FROM drug WHERE active_principle LIKE ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+activePrinciple+"%");
 		ResultSet rs1 = prep.executeQuery();
@@ -583,7 +582,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByActivePrinciple(String activePrinciple, Integer maxPrice) throws SQLException{ 
 		
-		String sql="SELECT * FROM drug WHERE active_principle LIKE ? AND selling_price <= ?";
+		String sql="SELECT * FROM drug WHERE active_principle LIKE ? AND selling_price <= ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+activePrinciple+"%");
 		prep.setInt(2, maxPrice);
@@ -605,7 +604,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByMaxPrice(Integer maxPrice) throws SQLException{
 		
-		String sql="SELECT * FROM drug WHERE selling_price <= ?";
+		String sql="SELECT * FROM drug WHERE selling_price <= ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1, maxPrice);
 		ResultSet rs1 =prep.executeQuery();
@@ -627,7 +626,7 @@ public class SQLManager implements Manager {
 	
 	public static List<Drug> searchDrugByName(String name) throws SQLException{
 		
-		String sql="SELECT * FROM drug WHERE name LIKE ? ";
+		String sql="SELECT * FROM drug WHERE name LIKE ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+name+"%");
 		ResultSet rs1=prep.executeQuery();
@@ -649,7 +648,7 @@ public class SQLManager implements Manager {
 	public static List<Drug> searchDrugByName(String name, String activePrinciple) throws SQLException{
 		
 		System.out.println("name = "+name+"\nA.P. = "+activePrinciple);
-		String sql="SELECT * FROM drug WHERE name LIKE ? AND active_principle LIKE ?";
+		String sql="SELECT * FROM drug WHERE name LIKE ? AND active_principle LIKE ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+name+"%");
 		prep.setString(2, "%"+activePrinciple+"%");
@@ -671,7 +670,7 @@ public class SQLManager implements Manager {
 	public static List<Drug> searchDrugByName(String name, Integer maxPrice) throws SQLException{
 		
 		System.out.println("name = "+name+"\nMaxPrice = "+maxPrice);
-		String sql="SELECT * FROM drug WHERE name LIKE ? AND selling_price <= ?";
+		String sql="SELECT * FROM drug WHERE name LIKE ? AND selling_price <= ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+name+"%");
 		prep.setInt(2, maxPrice);
@@ -693,7 +692,7 @@ public class SQLManager implements Manager {
 	public static List<Drug> searchDrugByName(String name, String activePrinciple, Integer maxPrice) throws SQLException{
 		
 		System.out.println("name = "+name+"\nA.P. = "+activePrinciple+"\nMaxPrice = "+maxPrice);
-		String sql="SELECT * FROM drug WHERE name LIKE '%?%' AND active_principle LIKE '%?%' AND selling_price <= ?";
+		String sql="SELECT * FROM drug WHERE name LIKE '%?%' AND active_principle LIKE '%?%' AND selling_price <= ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+name+"%");
 		prep.setString(2, "%"+activePrinciple+"%");
@@ -716,7 +715,7 @@ public class SQLManager implements Manager {
 	
 	public static Employee searchEmployeeById(Integer id) throws SQLException {
 	
-		String sql = "SELECT * FROM employee WHERE id = ? ";
+		String sql = "SELECT * FROM employee WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setInt(1, id);
@@ -743,7 +742,7 @@ public class SQLManager implements Manager {
 	
 	public static Employee searchEmployeeByUsername(String username) throws SQLException {
 	
-		String sql = "SELECT * FROM employee WHERE username = ? ";
+		String sql = "SELECT * FROM employee WHERE username = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setString(1, username);
@@ -752,11 +751,9 @@ public class SQLManager implements Manager {
 			prep.close();
 			return null;
 		}
-		System.out.println("looking into employees");
 		Employee employee = getEmployee(rs1);
 			
 		if(username.equals(employee.getUsername())) {
-			System.out.println("Found the employee!");
 			prep.close();
 			rs1.close();
 			return employee;
@@ -769,7 +766,7 @@ public class SQLManager implements Manager {
 
 	public static List<Packaged> searchPackagedByDeliveryId(Integer id) throws SQLException{
 
-    	String sql = "SELECT * FROM packaged WHERE transaction_id = ?";
+    	String sql = "SELECT * FROM packaged WHERE transaction_id = ? ;";
     	PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, id);
 		
@@ -791,7 +788,7 @@ public class SQLManager implements Manager {
 
 	public static List<Packaged> searchPackagedByDrugId(Integer id) throws SQLException{
 
-    	String sql = "SELECT * FROM packaged WHERE drug_id = ?";
+    	String sql = "SELECT * FROM packaged WHERE drug_id = ? ;";
     	PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, id);
 		
@@ -813,7 +810,7 @@ public class SQLManager implements Manager {
 	
 	public static Provider searchProviderById(Integer id) throws SQLException{
 	
-		String sql="SELECT * FROM provider WHERE id = ? ";
+		String sql="SELECT * FROM provider WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setInt(1, id);
@@ -841,7 +838,7 @@ public class SQLManager implements Manager {
 	
 	public static Warehouse searchWarehouseById(Integer id) throws SQLException {
 		
-		String sql = "SELECT * FROM warehouse WHERE id = ? ";
+		String sql = "SELECT * FROM warehouse WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		
 		prep.setInt(1, id);
@@ -874,7 +871,7 @@ public class SQLManager implements Manager {
 	//CLIENT
 	public static void updateClient(Integer id, String address, String email, Integer telephone, String paymentMethod) throws SQLException {
 		
-		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ? WHERE id = ?";
+		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, address);
 		prep.setString(2, email);
@@ -886,7 +883,7 @@ public class SQLManager implements Manager {
 	
 	public static void updateClient(Integer id, String address, String email, Integer telephone, String paymentMethod, String username, String password) throws SQLException {
 		
-		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ?, username = ?, password = ? WHERE id = ?";
+		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ?, username = ?, password = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, address);
 		prep.setString(2, email);
@@ -905,7 +902,7 @@ public class SQLManager implements Manager {
 	
 	public static void updateDrug(Integer id, Integer stock, Integer sellingPrice, String name, String activePrinciple, Corridor corridor, byte[] photo) throws SQLException {
 		
-		String sql = "UPDATE drug SET stock = ?, selling_price = ?, name = ?, active_principle = ?, corridor_id = ?, photo = ? WHERE id = ? ";
+		String sql = "UPDATE drug SET stock = ?, selling_price = ?, name = ?, active_principle = ?, corridor_id = ?, photo = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1, stock);
 		prep.setInt(2, sellingPrice);
@@ -921,7 +918,7 @@ public class SQLManager implements Manager {
 	
 	public static void updateDrugStock(Integer id, Integer stock) throws SQLException {
 		
-		String sql = "UPDATE drug SET stock = ? WHERE id = ? ";
+		String sql = "UPDATE drug SET stock = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1, stock);
 		prep.setInt(2, id);
@@ -932,7 +929,7 @@ public class SQLManager implements Manager {
 	
 	public static void updateDrugPhoto(Integer id, byte[] photo) throws SQLException {
 		
-		String sql = "UPDATE drug SET photo= ? WHERE id = ? ";
+		String sql = "UPDATE drug SET photo= ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setBytes(1, photo);
 		prep.setInt(2, id);
@@ -944,7 +941,7 @@ public class SQLManager implements Manager {
 	//Employee
 	public static void updateEmployee(Integer id, String name, float salary, Integer phone, String position, Boolean isAdmin, Warehouse warehouse, byte[] photo ) throws SQLException {
 		
-		String sql = "UPDATE employee SET name = ?, salary = ?, phone = ?, position = ?, isAdmin = ?, warehouse_id = ?, photo = ? WHERE id = ? ";
+		String sql = "UPDATE employee SET name = ?, salary = ?, phone = ?, position = ?, isAdmin = ?, warehouse_id = ?, photo = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, name);
 		prep.setFloat(2, salary);
@@ -961,7 +958,7 @@ public class SQLManager implements Manager {
 		
 	public static void updateEmployeePhoto(Employee employee, byte[] photo) throws SQLException {
 		
-		String sql = "UPDATE employee SET photo =? WHERE id =?";
+		String sql = "UPDATE employee SET photo = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setBytes(1, photo);
 		prep.setInt(2, employee.getId());
@@ -1004,7 +1001,7 @@ public class SQLManager implements Manager {
 	//Deliveries
 	public static void updateDeliverySent(Integer id, Boolean sent) throws SQLException {
 		
-		String sql = "UPDATE deliveries SET sent = ? WHERE id = ?";
+		String sql = "UPDATE deliveries SET sent = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setBoolean(1, sent);
 		prep.setInt(2, id);
@@ -1023,39 +1020,37 @@ public class SQLManager implements Manager {
 	
 	public static void deleteArrival(Integer id)  throws SQLException {
     	
-    	String sql = "DELETE FROM arrivals WHERE transaction_id=?";
+    	String sql = "DELETE FROM arrivals WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
 		prep.close();		
+	
 	}
 	
     public static void deleteArrival(Arrival arrival)  throws SQLException{
 		
-    	String sql = "DELETE FROM arrivals WHERE transaction_id=?";
+    	String sql = "DELETE FROM arrivals WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,arrival.getArrivalId());
 		prep.executeUpdate();
-		prep.close();
-		
+		prep.close();	
 		
 	}
     
     public static void deleteClient(Integer id) throws SQLException {
     	
-    	String sql = "DELETE FROM client WHERE id=?";
+    	String sql = "DELETE FROM client WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
-		prep.close();
-		
-    	
+		prep.close();	
     	
     }
 
     public static void deleteClient(Client client) throws SQLException {
     	
-    	String sql = "DELETE FROM client WHERE id=?";
+    	String sql = "DELETE FROM client WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,client.getId());
 		prep.executeUpdate();
@@ -1065,17 +1060,17 @@ public class SQLManager implements Manager {
     
     public static void deleteCorridor(Integer id)  throws SQLException {
     	
-    	String sql = "DELETE FROM corridor WHERE id=?";
+    	String sql = "DELETE FROM corridor WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
 		prep.close();
-		   	
-    	
+		   		
     }
     
     public static void deleteCorridor(Corridor corridor)  throws SQLException {
-    	String sql = "DELETE FROM corridor WHERE id=?";
+    	
+    	String sql = "DELETE FROM corridor WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,corridor.getId());
 		prep.executeUpdate();
@@ -1085,19 +1080,17 @@ public class SQLManager implements Manager {
     
     public static void deleteDelivery(Integer id)  throws SQLException {
     	
-    	String sql = "DELETE FROM deliveries WHERE transaction_id=?";
+    	String sql = "DELETE FROM deliveries WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
 		prep.close();
-		
-    	
     	
     }
     
     public static void deleteDelivery(Delivery delivery) throws SQLException {
     	
-    	String sql = "DELETE FROM deliveries WHERE transaction_id=?";
+    	String sql = "DELETE FROM deliveries WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,delivery.getTransactionId());
 		prep.executeUpdate();
@@ -1107,39 +1100,37 @@ public class SQLManager implements Manager {
     
     public static void deleteDrug(Integer id) throws SQLException {
     	
-    	String sql = "DELETE FROM drug WHERE id=?";
+    	String sql = "DELETE FROM drug WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
 		prep.close();
-		
     	
     }
     
     public static void deleteDrug(Drug drug) throws SQLException {
-    	String sql = "DELETE FROM drug WHERE id=?";
+    	
+    	String sql = "DELETE FROM drug WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,drug.getId());
 		prep.executeUpdate();
 		prep.close();
     	
-    	
     }
     
     public static void deleteEmployee(Integer id) throws SQLException {
-    	String sql = "DELETE FROM employee WHERE id=?";
+    	
+    	String sql = "DELETE FROM employee WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
 		prep.close();
-		
-    	
     	
     }
     
     public static void deleteEmployee(Employee employee)  throws SQLException{
     		
-    	String sql = "DELETE FROM employee WHERE id=?";
+    	String sql = "DELETE FROM employee WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1, employee.getId());
 		prep.executeUpdate();
@@ -1149,19 +1140,18 @@ public class SQLManager implements Manager {
     }
     
     public static void deleteProvider(Integer id) throws SQLException{
-    	String sql = "DELETE FROM provider WHERE id=?";
+    	
+    	String sql = "DELETE FROM provider WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
 		prep.close();
-		
-    	
-    		
+			
     }
     
     public static void deleteProvider(Provider provider)  throws SQLException{
     	
-    	String sql = "DELETE FROM provider WHERE id=?";
+    	String sql = "DELETE FROM provider WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,provider.getProviderId());
 		prep.executeUpdate();
@@ -1171,7 +1161,8 @@ public class SQLManager implements Manager {
     }
     
     public static void deleteWarehouse(Integer id) throws SQLException {
-    	String sql = "DELETE FROM warehouse WHERE id=?";
+    	
+    	String sql = "DELETE FROM warehouse WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,id);
 		prep.executeUpdate();
@@ -1180,20 +1171,19 @@ public class SQLManager implements Manager {
     }
     
     public static void deleteWarehouse(Warehouse warehouse) throws SQLException {
-    	String sql = "DELETE FROM warehouse WHERE id=?";
+    	
+    	String sql = "DELETE FROM warehouse WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,warehouse.getId());
 		prep.executeUpdate();
 		prep.close();
        	
-
     }
     
-    //Getting the pojos, more methods needed
     
     public static List<Arrival> getAllArrivals() throws SQLException{
     	
-    	String sql="SELECT * FROM arrivals";
+    	String sql="SELECT * FROM arrivals ;";
     	PreparedStatement prep=c.prepareStatement(sql);
     	ResultSet rs1 =prep.executeQuery();
     	List <Arrival> clientList=new ArrayList <Arrival> ();
@@ -1208,7 +1198,7 @@ public class SQLManager implements Manager {
     
     public static List<Arrives> getAllArrives() throws SQLException{
     	
-    	String sql="SELECT * FROM arrives";
+    	String sql="SELECT * FROM arrives ;";
     	PreparedStatement prep=c.prepareStatement(sql);
     	ResultSet rs1=prep.executeQuery();
     	List <Arrives> clientList=new ArrayList <Arrives> ();
@@ -1222,7 +1212,8 @@ public class SQLManager implements Manager {
     }
     
     public static List<Client> getAllClients() throws SQLException {
-    	String sql="SELECT * FROM client";
+    	
+    	String sql="SELECT * FROM client ;";
     	PreparedStatement prep=c.prepareStatement(sql);
     	ResultSet rs1=prep.executeQuery();
     	List <Client> clientList=new ArrayList <Client> ();
@@ -1235,7 +1226,8 @@ public class SQLManager implements Manager {
     }
 
     public static List<Corridor> getAllCorridors() throws SQLException {
-    	String query="SELECT * FROM corridor";
+    	
+    	String query="SELECT * FROM corridor ;";
     	PreparedStatement prep=c.prepareStatement(query);
     	ResultSet rs1=prep.executeQuery();
     	List <Corridor> corridorList=new ArrayList <Corridor>();
@@ -1249,7 +1241,7 @@ public class SQLManager implements Manager {
     
 	public static List<Delivery> getAllDeliveries() throws SQLException{
 		
-		String sql="SELECT * FROM deliveries";
+		String sql="SELECT * FROM deliveries ;";
     	PreparedStatement prep=c.prepareStatement(sql);
     	ResultSet rs1=prep.executeQuery();
     	List <Delivery> clientList=new ArrayList <Delivery> ();
@@ -1263,7 +1255,8 @@ public class SQLManager implements Manager {
 	}
     
     public static List<Drug> getAllDrugs() throws SQLException{
-    	String query="SELECT * FROM drug";
+    	
+    	String query="SELECT * FROM drug ;";
     	PreparedStatement prep=c.prepareStatement(query);
     	ResultSet rs1=prep.executeQuery();
     	List <Drug> drugList=new ArrayList <Drug>();
@@ -1277,7 +1270,7 @@ public class SQLManager implements Manager {
         
     public static List<Employee> getAllEmployees() throws SQLException{
     	
-    	String sql="SELECT * FROM employee";
+    	String sql="SELECT * FROM employee ;";
     	PreparedStatement prep=c.prepareStatement(sql);
     	ResultSet rs1=prep.executeQuery();
     	List <Employee> clientList=new ArrayList <Employee> ();
@@ -1292,7 +1285,7 @@ public class SQLManager implements Manager {
     
     public static List<Packaged> getAllPackaged() throws SQLException{
     	
-    	String sql="SELECT * FROM packaged";
+    	String sql="SELECT * FROM packaged ;";
     	PreparedStatement prep=c.prepareStatement(sql);
     	ResultSet rs1=prep.executeQuery();
     	List <Packaged> clientList=new ArrayList <Packaged> ();
@@ -1307,7 +1300,7 @@ public class SQLManager implements Manager {
     
     public static List<Provider> getAllProviders() throws SQLException{
     	
-    	String sql="SELECT * FROM provider";
+    	String sql="SELECT * FROM provider ;";
     	PreparedStatement prep=c.prepareStatement(sql);
     	ResultSet rs1=prep.executeQuery();
     	List <Provider> clientList=new ArrayList <Provider> ();
@@ -1321,7 +1314,8 @@ public class SQLManager implements Manager {
     }
     
     public static List <Warehouse> getAllWarehouses() throws SQLException {
-    	String query="SELECT * FROM warehouse";
+    	
+    	String query="SELECT * FROM warehouse ;";
     	PreparedStatement prep=c.prepareStatement(query);
     	ResultSet rs1=prep.executeQuery();
     	List <Warehouse> wareList=new ArrayList <Warehouse>();
@@ -1331,6 +1325,7 @@ public class SQLManager implements Manager {
     	rs1.close();
     	prep.close();
     	return wareList;
+    
     }
     
 //===========================================================================================
@@ -1374,7 +1369,7 @@ public class SQLManager implements Manager {
 		}    		
 		client.setUsername(rs1.getString("username"));
 		client.setPassword(rs1.getString("password"));
-		//client.setDeliveries(searchDeliveryByClientId(client.getId()));
+		client.setDeliveries(searchDeliveryByClientId(client.getId()));
 		return client;
     	
     }
@@ -1419,7 +1414,7 @@ public class SQLManager implements Manager {
     private static Drug getDrugNameById(Integer id) throws SQLException {
 		
     	
-    	String sql="SELECT * FROM drug WHERE id = ?";
+    	String sql="SELECT * FROM drug WHERE id = ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1, id);
 		ResultSet rs2 =prep.executeQuery();

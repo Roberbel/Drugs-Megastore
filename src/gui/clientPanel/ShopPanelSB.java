@@ -149,12 +149,7 @@ public class ShopPanelSB {
         assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'ShopPanel.fxml'.";
         
         drugsFlowPanel.prefHeightProperty().bind(drugsScrollPanel.heightProperty());
-        drugsFlowPanel.prefWidthProperty().bind(drugsScrollPanel.widthProperty());
-
-        //drugsScrollPanel.prefHeightProperty().bind(anchorPanelScroll.heightProperty());
-        //drugsScrollPanel.prefWidthProperty().bind(anchorPanelScroll.widthProperty());
-        
-        
+        drugsFlowPanel.prefWidthProperty().bind(drugsScrollPanel.widthProperty());       
         
     }
     
