@@ -1,6 +1,8 @@
 package DB;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,6 +12,7 @@ import javax.persistence.Query;
 import pojos.Arrival;
 import pojos.Arrives;
 import pojos.Client;
+import pojos.Client.PaymentMethod;
 import pojos.Corridor;
 import pojos.Delivery;
 import pojos.Drug;
@@ -426,191 +429,134 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public static void updateArrivalDate(Arrival arrival, Date date) {
+		//CLIENT
+		public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod) throws SQLException {
 			
+			Client client = JPAManager.searchClientById(id);
 			em.getTransaction().begin();
-			arrival.setDate(date);
+			client.setAddress(address);
+			client.setEmail(email);
+			client.setTelephone(telephone);
+			client.setPaymentMethod(paymentMethod);
 			em.getTransaction().commit();
 			
 		}
 		
-		public static void updateArrivalProvider(Arrival arrival, Provider provider) {
+		public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod, String username, String password) throws SQLException {
 			
+			Client client = JPAManager.searchClientById(id);
 			em.getTransaction().begin();
-			arrival.setProvider(provider);
-			em.getTransaction().commit();
-			
-		}
-		
-		
-		/*
-		 * Client updates
-		 */
-		public static void updateClientUsername(Client client , String username){
-			
-			em.getTransaction().begin();
+			client.setAddress(address);
+			client.setEmail(email);
+			client.setTelephone(telephone);
+			client.setPaymentMethod(paymentMethod);
 			client.setUsername(username);
+			client.setPassword(password);
 			em.getTransaction().commit();
-			
 		}
+
 		
+		//Drug
 		
-		
-		/*
-		 * Drug updates
-		 */
-		public static void updateDrugActivePrinciple(Drug drug, String activePrinciple) {
+		public static void updateDrug(Integer id, Integer stock, Integer sellingPrice, String name, String activePrinciple, Corridor corridor, byte[] photo) throws SQLException {
 			
+			Drug drug = JPAManager.searchDrugById(id);
 			em.getTransaction().begin();
-			drug.setActivePrinciple(activePrinciple);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateDrugCorridor(Drug drug, Corridor corridor) {
-			
-			em.getTransaction().begin();
-			drug.setCorridor(corridor);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateDrugName(Drug drug, String name) {
-			
-			em.getTransaction().begin();
-			drug.setName(name);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateDrugSellingPrice(Drug drug, Integer sellingPrice) {
-			
-			em.getTransaction().begin();
+			drug.setStock(stock);
 			drug.setSellingPrice(sellingPrice);
+			drug.setName(name);
+			drug.setActivePrinciple(activePrinciple);
+			drug.setCorridor(corridor);
+			drug.setPhoto(photo);
 			em.getTransaction().commit();
 			
 		}
 		
-		public static void updateDrugStock(Drug drug, Integer stock) {
+		public static void updateDrugStock(Integer id, Integer stock) throws SQLException {
 			
+			Drug drug = JPAManager.searchDrugById(id);
 			em.getTransaction().begin();
 			drug.setStock(stock);
 			em.getTransaction().commit();
 			
 		}
 		
-		
-		/*
-		 * Employee updates
-		 */
-		public static void updateEmployeeAdminRights(Employee employee, Boolean isAdmin) {
+		public static void updateDrugPhoto(Integer id, byte[] photo) throws SQLException {
 			
+			Drug drug = JPAManager.searchDrugById(id);
 			em.getTransaction().begin();
-			employee.setIsAdmin(isAdmin);
+			drug.setPhoto(photo);
 			em.getTransaction().commit();
-			
+					
 		}
-		
-		public static void updateEmployeeName(Employee employee, String name) {
 			
-			em.refresh(employee);
+		//Employee
+		public static void updateEmployee(Integer id, String name, float salary, Integer phone, String position, Boolean isAdmin, Warehouse warehouse, byte[] photo ) throws SQLException {
+			
+			Employee employee = JPAManager.searchEmployeeById(id);
+			em.getTransaction().begin();
 			employee.setName(name);
-			em.getTransaction().begin();
-			em.flush();
+			employee.setSalary(salary);
+			employee.setPhone(phone);
+			employee.setPosition(position);
+			employee.setIsAdmin(isAdmin);
+			employee.setWarehouse(warehouse);
+			employee.setPhoto(photo);
 			em.getTransaction().commit();
 			
 		}
-		
-		public static void updateEmployeePassword(Employee employee, String password) {
 			
-			em.getTransaction().begin();
-			employee.setPassword(password);
-			em.getTransaction().commit();
+		public static void updateEmployeePhoto(Integer id, byte[] photo) throws SQLException {
 			
-		}
-		
-		public static void updateEmployeePhoto(Employee employee, byte[] photo) {
-			
+			Employee employee = JPAManager.searchEmployeeById(id);
 			em.getTransaction().begin();
 			employee.setPhoto(photo);
 			em.getTransaction().commit();
 			
 		}
-		
-		public static void updateEmployeePosition(Employee employee, String position) {
-			//lets hope he got promoted
-			
-			em.getTransaction().begin();
-			employee.setPosition(position);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateEmployeeUsername(Employee employee, String username) {
-			
-			employee.setUsername(username);
-			em.getTransaction().begin();
-			em.flush();
-			
-			//em.flush();
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateEmployeeWarehouse(Employee employee, Warehouse warehouse) {
-			
-			em.getTransaction().begin();
-			employee.setWarehouse(warehouse);
-			em.getTransaction().commit();
-			
-		}
+
 		
 		
+		//Arrives 
+		//The next two shouldn't be necesary at all!
 		/*
-		 * Warehouse updates
-		 */
-		public static void updateWarehousePc(Warehouse warehouse, Integer pc) {
 			
-			em.getTransaction().begin();
-			warehouse.setPc(pc);
-			em.getTransaction().commit();
+		public static void updateArrivesAmmount(Arrives arrives, int ammount)throws SQLException{
 			
-		}
-		
-		public static void updateWarehouseCountry(Warehouse warehouse, String  country) {
-			
-			em.getTransaction().begin();
-			warehouse.setCountry(country);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateWarehouseCity(Warehouse warehouse, String city) {
-			
-			em.getTransaction().begin();
-			warehouse.setCity(city);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateWarehouseAddress(Warehouse warehouse, String address) {
-			
-			em.getTransaction().begin();
-			warehouse.setAddress(address);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateWarehousePhone(Warehouse warehouse, Integer phone) {
-			
-			em.getTransaction().begin();
-			warehouse.setPhone(phone);
-			em.getTransaction().commit();
-			
+			String sql="UPDATE arrives SET ammount = ? WHERE transaction_id = ? AND drug_id = ?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1,ammount);
+			prep.setInt(2, arrives.getArrivalId());
+			prep.setInt(3, arrives.getDrugId());
+			prep.executeUpdate();
+			prep.close();
 		}
 		
 		
-		
+
+		//Packaged
+		public static void updatePackagedAmmount(Packaged packaged, int ammount)throws SQLException{
+			
+			String sql="UPDATE packaged SET ammount= ? WHERE transaction_id = ? AND drug_id = ?";
+			PreparedStatement prep=c.prepareStatement(sql);
+			prep.setInt(1,ammount);
+			prep.setInt(2, packaged.getDeliveryId());
+			prep.setInt(3, packaged.getDrugId());
+			prep.executeUpdate();
+			prep.close();
+		}
+		*/
+				
+		//Deliveries
+		public static void updateDeliverySent(Integer id, Boolean sent) throws SQLException {
+			
+			Delivery delivery = JPAManager.searchDeliveryById(id);
+			em.getTransaction().begin();
+			delivery.isSent();
+			em.getTransaction().commit();
+			
+			
+		}	
 		
 /*
  * =====================================================================================================

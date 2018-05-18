@@ -869,26 +869,26 @@ public class SQLManager implements Manager {
 //=====================================================================================================
 	
 	//CLIENT
-	public static void updateClient(Integer id, String address, String email, Integer telephone, String paymentMethod) throws SQLException {
+	public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod) throws SQLException {
 		
 		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, address);
 		prep.setString(2, email);
 		prep.setInt(3, telephone);
-		prep.setString(4, paymentMethod);
+		prep.setString(4, paymentMethod.toString());
 		prep.setInt(5, id);
 		
 	}
 	
-	public static void updateClient(Integer id, String address, String email, Integer telephone, String paymentMethod, String username, String password) throws SQLException {
+	public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod, String username, String password) throws SQLException {
 		
 		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ?, username = ?, password = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, address);
 		prep.setString(2, email);
 		prep.setInt(3, telephone);
-		prep.setString(4, paymentMethod);
+		prep.setString(4, paymentMethod.toString());
 		prep.setString(5, username);
 		prep.setString(6, password);
 		prep.setInt(7, id);
@@ -956,12 +956,12 @@ public class SQLManager implements Manager {
 		
 	}
 		
-	public static void updateEmployeePhoto(Employee employee, byte[] photo) throws SQLException {
+	public static void updateEmployeePhoto(Integer id, byte[] photo) throws SQLException {
 		
 		String sql = "UPDATE employee SET photo = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setBytes(1, photo);
-		prep.setInt(2, employee.getId());
+		prep.setInt(2, id);
 		prep.executeUpdate();
 		prep.close();
 	}

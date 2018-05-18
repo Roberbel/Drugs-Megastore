@@ -1,6 +1,8 @@
 package DB;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import pojos.Arrival;
@@ -186,37 +188,26 @@ public interface Manager {
  * 					Updates
  * =====================================================================================================
  */    
-     public static void updateArrivalBuyingPrice(Arrival arrival, Integer buyingPrice) {}
-     
-     public static void updateArrivalDate(Arrival arrival, Date date) {}
-     
-     public static void updateArrivalProvider(Arrival arrival, Provider provider) {}
-     
-     
-     public static void updateDrugActivePrinciple(Drug drug, String activePrinciple) {}
-     
-     public static void updateDrugCorridor(Drug drug, Corridor corridor) {}
-     
-     public static void updateDrugName(Drug drug, String name) {}
-     
-     public static void updateDrugSellingPrice(Drug drug, Integer sellingPrice) {}
-     
-     public static void updateDrugStock(Drug drug, Integer stock) {}
-     
-     
-     public static void updateEmployeeAdminRights(Employee employee, Boolean isAdmin) {}
+	//CLIENT
+	public static void updateClient(Integer id, String address, String email, Integer telephone, 
+												String paymentMethod) {}
+	
+	public static void updateClient(Integer id, String address, String email, Integer telephone, 
+												String paymentMethod, String username, String password) {}
+
+	public static void updateDrug(Integer id, Integer stock, Integer sellingPrice, String name, 
+											String activePrinciple, Corridor corridor, byte[] photo) {}
+	
+	public static void updateDrugStock(Integer id, Integer stock) {}
+	
+	public static void updateDrugPhoto(Integer id, byte[] photo) {}
 		
-	 public static void updateEmployeeName(Employee employee, String name) {}
-	 
-	 public static void updateEmployeePassword(Employee employee, String password) {}
+	public static void updateEmployee(Integer id, String name, float salary, Integer phone, String position, 
+													Boolean isAdmin, Warehouse warehouse, byte[] photo ) {}
 		
-	 public static void updateEmployeePhoto(Employee employee, byte[] photo) {}
-		
-	 public static void updateEmployeePosition(Employee employee, String position) {}
-	 
-	 public static void updateEmployeeUsername(Employee employee, String username) {}
-				
-	 public static void updateEmployeeWarehouse(Employee employee, Warehouse warehouse) {}
+	public static void updateEmployeePhoto(Integer id, byte[] photo) {}
+
+	public static void updateDeliverySent(Integer id, Boolean sent){}	
 	 
 	 
 /*

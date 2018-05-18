@@ -79,7 +79,7 @@ public class ProfilePanelSB {
     	String address = addressTextField.getText();
     	String email = emailTextField.getText();
     	String name = nameTextField.getText();
-    	String paymentMethod = paymentMethodChoiceBox.getSelectionModel().getSelectedItem().toString();
+    	PaymentMethod paymentMethod = paymentMethodChoiceBox.getSelectionModel().getSelectedItem();
     	Integer phone = Integer.parseInt((telephoneTextField.getText()));
     	try {
 			SQLManager.updateClient(client.getId(), address, email, phone, paymentMethod);
