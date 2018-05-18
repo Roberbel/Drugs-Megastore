@@ -1,5 +1,7 @@
 package gui.adminPanel;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,6 +10,9 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
+import javax.imageio.ImageIO;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 
@@ -17,6 +22,7 @@ import model.*;
 import DB.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +35,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -606,7 +613,14 @@ public class AdminWindow implements Initializable {
     
     @FXML
     void showDrugImage(MouseEvent event) {
-    	
+    	try {
+    		Drug drugtoShow=drugTable.getSelectionModel().getSelectedItem();
+			BufferedImage img=ImageIO.read(new ByteArrayInputStream(drugtoShow.getPhoto()));
+			Image picture=SwingFXUtils.toFXImage(img, null);
+			imageView.setImage(picture);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     
