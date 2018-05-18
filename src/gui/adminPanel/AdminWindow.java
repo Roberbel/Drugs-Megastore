@@ -1,5 +1,9 @@
 package gui.adminPanel;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -27,8 +31,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class AdminWindow implements Initializable {
+	
+	Stage stage;
 	
 	@FXML
 	private BorderPane window;
@@ -166,6 +174,9 @@ public class AdminWindow implements Initializable {
     private JFXButton addDrugButton;
 
     @FXML
+    private JFXButton browseButton;
+    
+    @FXML
     private JFXButton deleteDrugButton;
 
     @FXML
@@ -289,19 +300,19 @@ public class AdminWindow implements Initializable {
     private JFXButton deleteCorridorButton;
     
     @FXML
-    private TableView<?> providerTable;
+    private TableView<Provider> providerTable;
 
     @FXML
-    private TableColumn<?, ?> providerName;
+    private TableColumn<Provider,String> providerName;
 
     @FXML
-    private TableColumn<?, ?> providerAddress;
+    private TableColumn<Provider,String> providerAddress;
 
     @FXML
-    private TableColumn<?, ?> providerPhone;
+    private TableColumn<Provider,Integer> providerPhone;
 
     @FXML
-    private TableColumn<?, ?> providerMail;
+    private TableColumn<Provider,String> providerMail;
 
     @FXML
     private TextField providerNameField;
@@ -379,6 +390,8 @@ public class AdminWindow implements Initializable {
     	newDrug.setActivePrinciple(drugPrincipleField.getText());
     	newDrug.setSellingPrice(Integer.parseInt(drugPriceField.getText()));
     	newDrug.setStock(Integer.parseInt(drugStockField.getText()));
+    	newDrug.setCorridor(comboCorridor.getSelectionModel().getSelectedItem());
+    	
     	
     }
 
@@ -414,8 +427,23 @@ public class AdminWindow implements Initializable {
     	}
     	
     }
+    
+    @FXML
+    void addProviderClicked(ActionEvent event) {
+    	Provider newProvider=new Provider();
+    	newProvider.setAddress(providerAddressField.getText());
+    	newProvider.setName(providerNameField.getText());
+    	newProvider.setTelephone(Integer.parseInt(providerPhoneField.getText()));
+    	newProvider.setEmail(providerMailField.getText());
+    	try {
+    		SQLManager.insertProvider(newProvider);
+    		providerTable.getItems().add(newProvider);
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
+    }
 
-    /*@FXML
+    @FXML
     void deleteClientClicked(ActionEvent event) {
     	ObservableList <Client> items,sel;
     	items=clientTable.getItems();
@@ -428,7 +456,7 @@ public class AdminWindow implements Initializable {
 				e.printStackTrace();
 			}
     	}    	
-    }*/
+    }
 
     @FXML
     void deleteCorridorClicked(ActionEvent event) {
@@ -459,7 +487,7 @@ public class AdminWindow implements Initializable {
     		}
     	}
     }
-
+    
     @FXML
     void deleteEmployeeClicked(ActionEvent event) {
     	ObservableList <Employee> items,sel;
@@ -489,6 +517,21 @@ public class AdminWindow implements Initializable {
     		}
     	}
     }
+    
+    @FXML
+    void deleteProviderClicked(ActionEvent event) {
+    	ObservableList <Provider> items,sel;
+    	items=providerTable.getItems();
+    	sel=providerTable.getSelectionModel().getSelectedItems();
+    	for(Provider p:sel) {
+    		items.remove(p);
+    		try {
+    			SQLManager.deleteProvider(p);
+    		}catch(SQLException ex) {
+    			ex.printStackTrace();
+    		}
+    	}
+    }
 
     //ComboWare and ComboWarehouse are the same fucking thing so I will change it later
     void refreshComboBoxes() {
@@ -503,6 +546,32 @@ public class AdminWindow implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    }
+    
+    @FXML
+    void browseButtonClicked(ActionEvent event) {
+    	FileChooser filechooser=new FileChooser(); 
+    	FileChooser.ExtensionFilter extFilter=new FileChooser.ExtensionFilter("JPG Files", "*.jpg");
+    	filechooser.getExtensionFilters().add(extFilter);
+    	File url=filechooser.showSaveDialog(stage);
+    	try {
+			InputStream blob=new FileInputStream(url);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+    	
+    	
+    }
+    
+
+    @FXML
+    void deliveryListClicked(MouseEvent event) {
+
+    }
+    
+    @FXML
+    void arrivalsListClicked(MouseEvent event) {
+    	
     }
 
 
@@ -582,7 +651,15 @@ public class AdminWindow implements Initializable {
 			ex.printStackTrace();
 		}
 		//Providers Table
-		
+		providerName.setCellValueFactory(new PropertyValueFactory<Provider,String>("name"));
+		providerPhone.setCellValueFactory(new PropertyValueFactory <Provider,Integer>("telephone"));
+		providerAddress.setCellValueFactory(new PropertyValueFactory<Provider,String>("address"));
+		providerMail.setCellValueFactory(new PropertyValueFactory <Provider,String>("email"));
+		try {
+			providerTable.getItems().addAll(SQLManager.getAllProvider());
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
     
     
