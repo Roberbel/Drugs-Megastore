@@ -2,6 +2,7 @@ package gui.clientPanel;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -56,6 +57,7 @@ public class CartPanelSB {
     	
     	try {
     		
+    		delivery.setTransactionDate(new Date(System.currentTimeMillis()));
     		SQLManager.insertDeliveries(delivery);
     		//we clear the delivery.
     		parentPanel.clearDelivery();
