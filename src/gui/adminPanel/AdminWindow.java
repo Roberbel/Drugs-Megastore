@@ -3,6 +3,7 @@ package gui.adminPanel;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
@@ -37,6 +38,7 @@ import javafx.stage.Stage;
 public class AdminWindow implements Initializable {
 	
 	Stage stage;
+	byte [] imageLoaded;
 	
 	@FXML
 	private BorderPane window;
@@ -391,6 +393,25 @@ public class AdminWindow implements Initializable {
     	newDrug.setSellingPrice(Integer.parseInt(drugPriceField.getText()));
     	newDrug.setStock(Integer.parseInt(drugStockField.getText()));
     	newDrug.setCorridor(comboCorridor.getSelectionModel().getSelectedItem());
+    	if(this.imageLoaded!=null) {
+    		newDrug.setPhoto(imageLoaded);
+    		this.imageLoaded=null;
+    	}else {
+    		File photo = new File("utils/no_photo_1x.jpg");
+			InputStream streamBlob;
+			try {
+				streamBlob = new FileInputStream(photo);
+				byte[] bytesBlob = new byte[streamBlob.available()];
+				newDrug.setPhoto(bytesBlob);
+			} catch ( IOException e) {
+				e.printStackTrace();
+			}
+    	}
+    	try {
+    		SQLManager.insertDrug(newDrug);
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
     	
     	
     }
@@ -556,11 +577,14 @@ public class AdminWindow implements Initializable {
     	File url=filechooser.showSaveDialog(stage);
     	try {
 			InputStream blob=new FileInputStream(url);
-		} catch (FileNotFoundException e) {
+			byte [] byteBlob=new byte[blob.available()];
+			blob.read(byteBlob);
+			blob.close();
+			this.imageLoaded=byteBlob;
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-    	
-    	
+   	
     }
     
 
@@ -578,6 +602,11 @@ public class AdminWindow implements Initializable {
     @FXML
     void loadEmployeeImage(MouseEvent event) {
 
+    }
+    
+    @FXML
+    void showDrugImage(MouseEvent event) {
+    	
     }
     
     
@@ -635,7 +664,7 @@ public class AdminWindow implements Initializable {
 		employeeWare.setCellValueFactory(new PropertyValueFactory <Employee,Warehouse>("warehouse"));
 		try {
 			comboWarehouse.getItems().addAll(SQLManager.getAllWarehouses());
-			employeeTable.getItems().addAll(SQLManager.getAllEmployee());
+			employeeTable.getItems().addAll(SQLManager.getAllEmployees());
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}
@@ -656,7 +685,7 @@ public class AdminWindow implements Initializable {
 		providerAddress.setCellValueFactory(new PropertyValueFactory<Provider,String>("address"));
 		providerMail.setCellValueFactory(new PropertyValueFactory <Provider,String>("email"));
 		try {
-			providerTable.getItems().addAll(SQLManager.getAllProvider());
+			providerTable.getItems().addAll(SQLManager.getAllProviders());
 		}catch(SQLException ex) {
 			ex.printStackTrace();
 		}

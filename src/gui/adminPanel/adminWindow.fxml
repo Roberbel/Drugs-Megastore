@@ -58,7 +58,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="drugTable" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="drugTable" onMouseClicked="#showDrugImage" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="drugName" prefWidth="292.7999756336212" text="Name" />
                               <TableColumn fx:id="drugPrinciple" prefWidth="237.20004272460938" text="Active Principle" />

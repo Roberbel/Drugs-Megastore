@@ -337,7 +337,7 @@ public class SQLManager implements Manager {
 		String sql1 = "INSERT INTO provider(name, adress, telephone, email)" + "VALUES(?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, provider.getName());
-		prep.setString(2, provider.getAdress());
+		prep.setString(2, provider.getAddress());
 		prep.setInt(3, provider.getTelephone());
 		prep.setString(4, provider.getEmail());
 		prep.executeUpdate();
