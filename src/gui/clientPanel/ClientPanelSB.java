@@ -150,7 +150,7 @@ public class ClientPanelSB {
          assert profile != null : "fx:id=\"profile\" was not injected: check your FXML file 'ClientPanel.fxml'.";
          assert topPanel != null : "fx:id=\"topPanel\" was not injected: check your FXML file 'ClientPanel.fxml'.";
          
-        logo.setImage(new Image("https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Deutsche_Apotheke_Logo.svg/827px-Deutsche_Apotheke_Logo.svg.png"));
+        
     }
     
     public void setClient(Client client) {
@@ -176,6 +176,8 @@ public class ClientPanelSB {
     protected void clearDelivery() {
     	
     	delivery = new Delivery(client);
+    	drugAmount = 0;
+    	cart.setText("Cart: "+ drugAmount + " items"); 
     	
     }
 

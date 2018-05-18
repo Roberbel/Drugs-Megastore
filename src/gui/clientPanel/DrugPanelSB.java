@@ -1,6 +1,11 @@
 package gui.clientPanel;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -22,6 +27,7 @@ import pojos.Packaged;
 public class DrugPanelSB {
 	
 	private Drug drug;
+	private Packaged packaged;
 	private ShopPanelSB shopPanel;
 	private Delivery delivery;
 	private int stock;
@@ -59,40 +65,44 @@ public class DrugPanelSB {
     void addToCart(MouseEvent event) {
     	
     	int sellingAmount =  Integer.parseInt(amountTextField.getText());
-		Packaged packaged = new Packaged(drug, delivery ,sellingAmount);
 		stock = stock - sellingAmount;
 		stockLabel.setText("Stock: "+ stock);
 		//if the package already exist in the delivery, we will update it's amount instead.
-		if(!delivery.addPackaged(packaged)) {
-			
-			int pos = delivery.positionPackaged(packaged);
-			packaged = delivery.getPackage(pos);
+		if(packaged != null) {
+
 			packaged.setAmount(packaged.getAmount() + sellingAmount);
 			amountTextField.setText("" + packaged.getAmount());
-			shopPanel.updateCart();
 		
+		}else {
+			
+			packaged = new Packaged(drug, delivery ,sellingAmount);
+			delivery.addPackaged(packaged);
+			shopPanel.updateCart();
 		}
     }
 
     @FXML
     void checkAmount(KeyEvent event) {
+    	
     	String amountString = amountTextField.getText();
 		//we only check the last char typed, because we had already checked the rest
-		char character = amountString.charAt(amountString.length()-1);
-		if(!(character > 47 && character < 58)) {
-			amountTextField.deleteText(amountTextField.getLength()-1, amountTextField.getLength());
-		}
-		if(!amountTextField.getText().equals("")) {
-			int quantity = Integer.parseInt(amountTextField.getText());
-			int stock = Integer.parseInt(stockLabel.getText());
-			if(quantity > stock) {
-				
-				amountTextField.setText("" + stock);
-				amountTextField.end();
-				
+	    if( amountTextField.getLength() > 0) {
+			char character = amountString.charAt(amountString.length()-1);
+			if(!(character > 47 && character < 58)) {
+				amountTextField.deleteText(amountTextField.getLength()-1, amountTextField.getLength());
 			}
 			
-		}
+			if(!amountTextField.getText().equals("")) {
+				int quantity = Integer.parseInt(amountTextField.getText());
+				if(quantity > stock) {
+					
+					amountTextField.setText("" + stock);
+					amountTextField.end();
+					
+				}
+				
+			}
+	    }
     }
 
     @FXML
@@ -118,8 +128,6 @@ public class DrugPanelSB {
 		stockLabel.setText("Stock: " + stock);
 		if(drug.getPhoto()!= null) {
 			drugPhoto.setImage(new Image(new ByteArrayInputStream(drug.getPhoto())));
-		}else {
-			drugPhoto.setImage(new Image("https://www.ecured.cu/images/thumb/f/f9/Pomo-medicina-icon-azul.png/390px-Pomo-medicina-icon-azul.png"));
 		}
 	}
 

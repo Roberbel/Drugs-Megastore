@@ -109,8 +109,6 @@ public class PackagedPanelSB {
     	activePrincipleLabel.setText("Active Peinciple: " + drug.getActivePrinciple());
     	if(drug.getPhoto()!= null) {
 			drugPhoto.setImage(new Image(new ByteArrayInputStream(drug.getPhoto())));
-		}else {
-			drugPhoto.setImage(new Image("https://www.ecured.cu/images/thumb/f/f9/Pomo-medicina-icon-azul.png/390px-Pomo-medicina-icon-azul.png"));
 		}
     	priceLabel.setText("Price per unit: " + drug.getSellingPrice());
     	amountTextField.setText("" + packaged.getAmount());

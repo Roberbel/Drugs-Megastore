@@ -18,7 +18,7 @@
               <children>
                 <ImageView fx:id="drugPhoto" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                   <image>
-                    <Image url="file:/D:/Pictures/G%20%20%20O%20%20%20N%20%20%20Z%20%20%20A%20%20%20L%20%20%20O/ceu.jpeg" />
+                    <Image url="@defaultDrug.png" />
                   </image>
                 </ImageView>
               </children>
