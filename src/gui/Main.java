@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import DB.SQLManager;
@@ -19,17 +20,8 @@ public class Main extends Application{
 	
 	@Override
 	public void start(Stage stage) {
-		try {
-			this.window=stage;
-			//Remember remember the fifth of November and to change the resource to MainWindow
-			Parent root=FXMLLoader.load(getClass().getResource("/gui/MainWindow.fxml"));
-			this.window.setScene(new Scene(root));
-			this.window.setResizable(true);
-			this.window.show();
-			this.window.setOnCloseRequest(e->closeConnection());
-		}catch(Exception ex) {
-			ex.printStackTrace();
-		}
+		this.window=stage;
+		loadLogin();
 	}
 	
 	private void closeConnection(){
@@ -39,6 +31,33 @@ public class Main extends Application{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void updateScene(Scene scene) {
+		
+		window.setScene(scene);
+		
+	}
+	
+	public void loadLogin() {
+		
+		Parent root;
+		try {
+			//Remember remember the fifth of November and to change the resource to MainWindow
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainWindow.fxml"));	
+			root = loader.load();
+			MainWindow controller = loader.getController();
+			controller.setMain(this);
+			this.window.setScene(new Scene(root));
+			this.window.setResizable(true);
+			this.window.show();
+			this.window.setOnCloseRequest(e->closeConnection());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 	}
 
 }

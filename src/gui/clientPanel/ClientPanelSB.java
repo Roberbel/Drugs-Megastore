@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import pojos.Client;
 import pojos.Delivery;
+import gui.MainWindow;
 import gui.clientPanel.CartPanelSB;
 
 
@@ -25,6 +26,7 @@ public class ClientPanelSB {
 	private Client client;
 	private int drugAmount;
 	private Delivery delivery;
+	private MainWindow mainWindow;
 
     @FXML
     private ResourceBundle resources;
@@ -55,6 +57,9 @@ public class ClientPanelSB {
     
     @FXML
     void logOut(MouseEvent event) {
+    	
+    	mainWindow.logout();
+    	
     }
 
     @FXML
@@ -178,6 +183,12 @@ public class ClientPanelSB {
     	delivery = new Delivery(client);
     	drugAmount = 0;
     	cart.setText("Cart: "+ drugAmount + " items"); 
+    	
+    }
+    
+    public void setMainWindow(MainWindow mainWindow) {
+    	
+    	this.mainWindow = mainWindow;
     	
     }
 

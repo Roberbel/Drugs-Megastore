@@ -23,6 +23,7 @@ import pojos.*;
 
 public class MainWindow {
 
+	private Main main;
 	private LogInManager user;
 	private Stage stage;
 	
@@ -73,9 +74,11 @@ public class MainWindow {
 							AnchorPane panel = loader.load();
 							ClientPanelSB controller = loader.<ClientPanelSB>getController();
 							controller.setClient(user.getExtractedClient());
-				            this.stage.setScene(new Scene(panel));
+							main.updateScene(new Scene(panel));
+				           /*this.stage.setScene(new Scene(panel));
 							this.stage.setResizable(true);
-							this.stage.show();
+							this.stage.show();*/
+							controller.setMainWindow(this);
 							controller.showShopPanel(null);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
@@ -112,6 +115,18 @@ public class MainWindow {
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
+	}
+	
+	public void setMain(Main main) {
+		
+		this.main = main;
+		
+	}
+	
+	public void logout() {
+		
+		main.loadLogin();
+		
 	}
     
     
