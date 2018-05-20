@@ -7,18 +7,18 @@
     <!ELEMENT stock(#PCDATA)>
     <!ELEMENT sellingPrice(#PCDATA)>
     <!ELEMENT Corridor(temperature,Warehouse)>
-     <!ATTLIST Corridor id CDATA #REQUIRED
+     <!ATTLIST Corridor id ID #REQUIRED
     <!ELEMENT packaged(Packaged+)>
     <!ELEMENT arrives(Arrives+)>  
     
     <!ELEMENT temperature(#PCDATA)>
     <!ELEMENT Warehouse(id, pc, country, city, address, phone,  employees)> 
     <!ELEMENT Packaged(amount,Delivery)>
-    	<!ATTLIST Packaged drugId CDATA #REQUIRED
-    					deliveryId CDATA #REQUIRED>   					
+    	<!ATTLIST Packaged drugId IDREF #REQUIRED
+    					deliveryId IDREF #REQUIRED>   					
     <!ELEMENT Arrives(amount, arrival)>
-    	<!ATTLIST Arrives drugId CDATA #REQUIRED
-    					arrivalId CDATA #REQUIRED>
+    	<!ATTLIST Arrives drugId IDREF #REQUIRED
+    					arrivalId IDREF #REQUIRED>
     <!ELEMENT id(#PCDATA)>
     <!ELEMENT pc(#PCDATA)>
     <!ELEMENT country(#PCDATA)>
@@ -28,7 +28,7 @@
     <!ELEMENT employees(Employee+)>
   	  <!ELEMENT Employees(phone, salary, position)>  
     	<!ATTLIST Employees name CDATA #REQUIRED
-    						id CDATA #REQUIRED>
+    						id ID #REQUIRED>
      <!ELEMENT phone(#PCDATA)>
      <!ELEMENT salary(#PCDATA)>
      <!ELEMENT position(#PCDATA)>
@@ -40,12 +40,12 @@
       <!ATTLIST client name(#PCDATA)>
      <!ELEMENT ammount(#PCDATA)>
 	 <!ELEMENT arrival(buyingPrice,date,provider)>
-       <!ATTLIST arrival arrivalId CDATA #REQUIRED>
+       <!ATTLIST arrival arrivalId ID #REQUIRED>
      <!ELEMENT buyingPrice(#PCDATA)>
 	 <!ELEMENT date(#PCDATA)>
      <!ELEMENT provider(address, telephone, email) 
       <!ATTLIST provider name CDATA #REQUIRED
-    						id CDATA #REQUIRED> 
+    						id ID #REQUIRED> 
       <!ELEMENT address(#PCDATA)>
       <!ELEMENT telephone(#PCDATA)>
       <!ELEMENT email(#PCDATA)>

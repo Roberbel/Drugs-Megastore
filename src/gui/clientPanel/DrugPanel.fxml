@@ -50,7 +50,7 @@
           <children>
             <ImageView fx:id="drugPhoto" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@defaultDrug.png" />
+                <Image url="@../../../Photos/defaultDrug.png" />
               </image>
             </ImageView>
           </children>

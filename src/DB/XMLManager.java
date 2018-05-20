@@ -19,11 +19,11 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import pojos.Database;
 import pojos.Drug;
 
 public class XMLManager {
 	
-	private static final String xsltPath = "D:/Documents/GitHub/Drugs-Megastore/xml/Report-Style.xslt";
 	
 	public static void main(String[] args) {
 		String dir = "D:/Documents/GitHub/Drugs-Megastore/xml/DrugTest.txt";
@@ -31,8 +31,7 @@ public class XMLManager {
 			JPAManager.connect();
 			XMLManager.marshallDrug(JPAManager.searchDrugById(8), dir);
 			System.out.println(XMLManager.unmarshallDrug(dir));
-			//next one doesn't work just yet
-			XMLManager.xml2Html(dir , "D:/Documents/GitHub/Drugs-Megastore/xml/drugTestHtml");
+			XMLManager.drugxml2Html(dir , "D:/Documents/GitHub/Drugs-Megastore/xml/drugTestHtml");
 			System.out.println("finished");
 		} catch (JAXBException|IOException|TransformerException  e) {
 			
@@ -42,8 +41,9 @@ public class XMLManager {
 	}
 	
 	
-	public static void xml2Html(String origin, String destiny) throws TransformerException {
+	public static void drugxml2Html(String origin, String destiny) throws TransformerException {
 		
+		String xsltPath = "D:/Documents/GitHub/Drugs-Megastore/xml/Report-Style.xslt";
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
 		transformer.transform(new StreamSource(new File(origin)),new StreamResult(new File(destiny)));
@@ -66,6 +66,16 @@ public class XMLManager {
 		Unmarshaller jaxbU = (Unmarshaller) jaxbC.createUnmarshaller();
 		Drug drug = (Drug) jaxbU.unmarshal(new BufferedReader(new FileReader(directory)));
 		return drug;
+		
+	}
+	
+	public static void marshallDatabase(Database database, String directory) {
+		
+		
+	}
+	
+	public static Database unmarshallDatabase(String directory) {
+		return null;
 		
 	}
 

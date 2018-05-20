@@ -1369,7 +1369,6 @@ public class SQLManager implements Manager {
 		}    		
 		client.setUsername(rs1.getString("username"));
 		client.setPassword(rs1.getString("password"));
-		client.setDeliveries(searchDeliveryByClientId(client.getId()));
 		return client;
     	
     }
