@@ -165,7 +165,7 @@ public class EmployeeWindow implements Initializable {
 	void deleteArrival(ActionEvent event) {
 
 		Arrival toBeRemoved = arrivalList.getSelectionModel().getSelectedItem();
-		toBeRemoved.getArrives()
+		toBeRemoved.getArrives();
 		try {
 			SQLManager.deleteArrival(toBeRemoved);
 
