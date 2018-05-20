@@ -57,6 +57,14 @@ public class MainWindow {
 						
 						break;
 					case "EMPLOYEE":
+						try {
+							Parent root =FXMLLoader.load(getClass().getResource("/gui/employeePanel/employeeWindow.fxml"));
+							this.stage.setScene(new Scene(root));
+							this.stage.setResizable(true);
+							this.stage.show();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 						break;
 					case "CLIENT":
 
