@@ -49,9 +49,7 @@ public class MainWindow {
 					case "ADMIN":
 						try {
 							Parent root =FXMLLoader.load(getClass().getResource("/gui/adminPanel/adminWindow.fxml"));
-							this.stage.setScene(new Scene(root));
-							this.stage.setResizable(true);
-							this.stage.show();
+							main.updateScene(new Scene(root));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -60,9 +58,7 @@ public class MainWindow {
 					case "EMPLOYEE":
 						try {
 							Parent root =FXMLLoader.load(getClass().getResource("/gui/employeePanel/employeeWindow.fxml"));
-							this.stage.setScene(new Scene(root));
-							this.stage.setResizable(true);
-							this.stage.show();
+							main.updateScene(new Scene(root));
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -75,9 +71,6 @@ public class MainWindow {
 							ClientPanelSB controller = loader.<ClientPanelSB>getController();
 							controller.setClient(user.getExtractedClient());
 							main.updateScene(new Scene(panel));
-				           /*this.stage.setScene(new Scene(panel));
-							this.stage.setResizable(true);
-							this.stage.show();*/
 							controller.setMainWindow(this);
 							controller.showShopPanel(null);
 						} catch (IOException e) {
