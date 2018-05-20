@@ -284,7 +284,6 @@ public class SQLManager implements Manager {
 		for(Packaged p: packList) {
 			
 			p.setDeliveryId(id);
-			SQLManager.updateDrugStock(p.getDrugId(), p.getDrug().getStock() - p.getAmount());
 			insertPackaged(p);
 		}
 	
@@ -330,6 +329,8 @@ public class SQLManager implements Manager {
 		prep.setInt(3,pack.getAmount());
 		prep.executeUpdate();
 		prep.close();
+
+		SQLManager.updateDrugStock(pack.getDrugId(), pack.getDrug().getStock() - pack.getAmount());
 	}
 
 	public static void insertProvider(Provider provider) throws SQLException {
