@@ -1018,19 +1018,15 @@ public class SQLManager implements Manager {
  * =====================================================================================================
  * 
  */
-	
-	public static void deleteArrival(Integer id)  throws SQLException {
-    	
-    	String sql = "DELETE FROM arrivals WHERE transaction_id = ? ;";
-		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setInt(1,id);
-		prep.executeUpdate();
-		prep.close();		
-	
-	}
-	
+		
     public static void deleteArrival(Arrival arrival)  throws SQLException{
 		
+    	for( Arrives a : arrival.getArrives()) {
+    		
+    		SQLManager.deleteArrive(a);
+    		
+    	}
+    	
     	String sql = "DELETE FROM arrivals WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,arrival.getArrivalId());
@@ -1038,6 +1034,20 @@ public class SQLManager implements Manager {
 		prep.close();	
 		
 	}
+    
+    public static void deleteArrive(Arrives a) throws SQLException {
+    	
+    	String sql = "DELETE FROM arrivaes WHERE transaction_id = ? AND drug_id = ? ;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1,a.getArrivalId());
+		prep.setInt(2, a.getDrugId());
+		prep.executeUpdate();
+		prep.close();	
+		
+		SQLManager.updateDrugStock(a.getDrugId(), a.getDrug().getStock() - a.getAmount());
+    	
+    }
+    
     
     public static void deleteClient(Integer id) throws SQLException {
     	
@@ -1091,6 +1101,13 @@ public class SQLManager implements Manager {
     
     public static void deleteDelivery(Delivery delivery) throws SQLException {
     	
+    	List<Packaged> packs = delivery.getPackages();
+    	for (Packaged p : packs) {
+    		
+    		SQLManager.deletePackaged(p);
+    		
+    	}
+    	
     	String sql = "DELETE FROM deliveries WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,delivery.getTransactionId());
@@ -1137,6 +1154,19 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();
 		
+    	
+    }
+    
+    public static void deletePackaged(Packaged p) throws SQLException {
+    	
+    	String sql = "DELETE FROM packaged WHERE drug_id = ? AND transaction_id = ? ;";
+    	PreparedStatement prep = c.prepareStatement(sql);
+		prep.setInt(1, p.getDrugId());
+		prep.setInt(2, p.getDeliveryId());
+		prep.executeUpdate();
+		prep.close();
+		
+		SQLManager.updateDrugStock(p.getDrugId(), p.getDrug().getStock() + p.getAmount());
     	
     }
     
