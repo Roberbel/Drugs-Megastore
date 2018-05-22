@@ -57,11 +57,13 @@ public class CartPanelSB {
     	
     	try {
     		
+    		System.out.println(delivery.getClient().getId());
     		delivery.setTransactionDate(new Date(System.currentTimeMillis()));
     		SQLManager.insertDeliveries(delivery);
     		//we clear the delivery.
     		parentPanel.clearDelivery();
     		parentPanel.showShopPanel(null);
+    		
     		
     	}catch(SQLException e) {
     		

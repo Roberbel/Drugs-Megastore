@@ -270,7 +270,7 @@ public class SQLManager implements Manager {
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setInt(1, delivery.getSellingPrice());
 		prep.setDate(2, delivery.getTransactionDate());
-		//prep.setInt(3, delivery.getClient().getId());
+		prep.setInt(3, delivery.getClient().getId());
 		prep.setBoolean(4, delivery.isSent());
 		List <Packaged> packList=delivery.getPackages();
 		prep.executeUpdate();
