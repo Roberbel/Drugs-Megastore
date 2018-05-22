@@ -967,38 +967,6 @@ public class SQLManager implements Manager {
 		prep.close();
 	}
 
-	
-	
-	//Arrives 
-	//The next two shouldn't be necesary at all!
-	/*
-		
-	public static void updateArrivesAmmount(Arrives arrives, int ammount)throws SQLException{
-		
-		String sql="UPDATE arrives SET ammount = ? WHERE transaction_id = ? AND drug_id = ?";
-		PreparedStatement prep=c.prepareStatement(sql);
-		prep.setInt(1,ammount);
-		prep.setInt(2, arrives.getArrivalId());
-		prep.setInt(3, arrives.getDrugId());
-		prep.executeUpdate();
-		prep.close();
-	}
-	
-	
-
-	//Packaged
-	public static void updatePackagedAmmount(Packaged packaged, int ammount)throws SQLException{
-		
-		String sql="UPDATE packaged SET ammount= ? WHERE transaction_id = ? AND drug_id = ?";
-		PreparedStatement prep=c.prepareStatement(sql);
-		prep.setInt(1,ammount);
-		prep.setInt(2, packaged.getDeliveryId());
-		prep.setInt(3, packaged.getDrugId());
-		prep.executeUpdate();
-		prep.close();
-	}
-	*/
-			
 	//Deliveries
 	public static void updateDeliverySent(Integer id, Boolean sent) throws SQLException {
 		
@@ -1020,13 +988,7 @@ public class SQLManager implements Manager {
  */
 		
     public static void deleteArrival(Arrival arrival)  throws SQLException{
-		
-    	for( Arrives a : arrival.getArrives()) {
-    		
-    		SQLManager.deleteArrive(a);
-    		
-    	}
-    	
+
     	String sql = "DELETE FROM arrivals WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,arrival.getArrivalId());
@@ -1044,8 +1006,6 @@ public class SQLManager implements Manager {
 		prep.executeUpdate();
 		prep.close();	
 		
-		SQLManager.updateDrugStock(a.getDrugId(), a.getDrug().getStock() - a.getAmount());
-    	
     }
     
     
@@ -1089,25 +1049,10 @@ public class SQLManager implements Manager {
     	
     }
     
-    public static void deleteDelivery(Integer id)  throws SQLException {
-    	
-    	String sql = "DELETE FROM deliveries WHERE transaction_id = ? ;";
-		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setInt(1,id);
-		prep.executeUpdate();
-		prep.close();
-    	
-    }
     
     public static void deleteDelivery(Delivery delivery) throws SQLException {
     	
     	List<Packaged> packs = delivery.getPackages();
-    	for (Packaged p : packs) {
-    		
-    		SQLManager.deletePackaged(p);
-    		
-    	}
-    	
     	String sql = "DELETE FROM deliveries WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,delivery.getTransactionId());
@@ -1165,8 +1110,6 @@ public class SQLManager implements Manager {
 		prep.setInt(2, p.getDeliveryId());
 		prep.executeUpdate();
 		prep.close();
-		
-		SQLManager.updateDrugStock(p.getDrugId(), p.getDrug().getStock() + p.getAmount());
     	
     }
     
