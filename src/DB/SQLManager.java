@@ -201,6 +201,8 @@ public class SQLManager implements Manager {
 //===========================================================================================================
 	
 	public static void insertArrivals(Arrival arrival) throws SQLException {
+		
+		c.setAutoCommit(false);
 
 		String sql1 = "INSERT INTO arrivals(buying_price, transaction_date, provider_id, arrived) VALUES( ?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -219,9 +221,11 @@ public class SQLManager implements Manager {
 		
 		for(Arrives a: arrivesList) {
 			a.setArrivalId(id);
-			SQLManager.updateDrugStock(a.getDrugId(), a.getDrug().getStock() + a.getAmount());
 			insertArrives(a);			
 		}
+		
+		c.commit();
+		c.setAutoCommit(true);
 	
 	}
 	
@@ -234,6 +238,9 @@ public class SQLManager implements Manager {
 		prep.setInt(3,arrive.getAmount());
 		prep.executeUpdate();
 		prep.close();
+		
+
+		SQLManager.updateDrugStock(arrive.getDrugId(), arrive.getDrug().getStock() + arrive.getAmount());
 		
 	}
 	
@@ -265,6 +272,7 @@ public class SQLManager implements Manager {
 		
 	public static void insertDeliveries(Delivery delivery) throws SQLException {
 
+		c.setAutoCommit(false);
 		
 		String sql1 = "INSERT INTO deliveries(selling_price, transaction_date, client_id, sent) VALUES(?,?,?, ?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
@@ -285,7 +293,11 @@ public class SQLManager implements Manager {
 			
 			p.setDeliveryId(id);
 			insertPackaged(p);
+			
 		}
+		
+		c.commit();
+		c.setAutoCommit(true);
 	
 	}
 		
