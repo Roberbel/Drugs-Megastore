@@ -514,39 +514,7 @@ public class JPAManager implements Manager{
 			em.getTransaction().commit();
 			
 		}
-
-		
-		
-		//Arrives 
-		//The next two shouldn't be necesary at all!
-		/*
-			
-		public static void updateArrivesAmmount(Arrives arrives, int ammount)throws SQLException{
-			
-			String sql="UPDATE arrives SET ammount = ? WHERE transaction_id = ? AND drug_id = ?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1,ammount);
-			prep.setInt(2, arrives.getArrivalId());
-			prep.setInt(3, arrives.getDrugId());
-			prep.executeUpdate();
-			prep.close();
-		}
-		
-		
-
-		//Packaged
-		public static void updatePackagedAmmount(Packaged packaged, int ammount)throws SQLException{
-			
-			String sql="UPDATE packaged SET ammount= ? WHERE transaction_id = ? AND drug_id = ?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1,ammount);
-			prep.setInt(2, packaged.getDeliveryId());
-			prep.setInt(3, packaged.getDrugId());
-			prep.executeUpdate();
-			prep.close();
-		}
-		*/
-				
+	
 		//Deliveries
 		public static void updateDeliverySent(Integer id, Boolean sent) throws SQLException {
 			
@@ -561,8 +529,6 @@ public class JPAManager implements Manager{
 /*
  * =====================================================================================================
  * 								DELETE
- * 
- * Might be missing Arrives and Packaged delete, not sure yet how to do it
  * =====================================================================================================
  */
 		
