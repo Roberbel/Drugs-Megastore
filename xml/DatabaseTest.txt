@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Database>
+    <Clients>
+        <Client id="2" name="Khorne" address="c/Viena 17 cabanillas del campo" telephone="65" email="CELIACO" paymentMethod="ORGANS">
+            <password>Craneos</password>
+            <username>Khorne0</username>
+            <Deliveries

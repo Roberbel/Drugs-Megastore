@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "warehouse")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Warehouse")
-@XmlType(propOrder = { "employees" })
+@XmlType(propOrder = { "employees", "corridor" })
 public class Warehouse implements Serializable {
 
 	/**
@@ -59,7 +59,8 @@ public class Warehouse implements Serializable {
 	@OneToMany(mappedBy="warehouse", fetch = FetchType.LAZY)
 	private List<Employee> employees;
 	
-	@XmlTransient
+	@XmlElement(name = "Corridor")
+	@XmlElementWrapper(name = "Corridors")
 	@OneToMany(mappedBy="warehouse", fetch = FetchType.LAZY)
 	private List<Corridor> corridor;
 

@@ -30,7 +30,7 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "deliveries")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"client", "transactionDate" })
+@XmlType(propOrder = {"transactionDate" ,"packages" })
 public class Delivery implements Serializable {
 
 	/**
@@ -52,7 +52,7 @@ public class Delivery implements Serializable {
 	
 	@ManyToOne( cascade=CascadeType.MERGE)
 	@JoinColumn(name = "client_id")
-	@XmlElement
+	@XmlTransient
 	private Client client;
 	
 	@XmlElement
@@ -64,7 +64,8 @@ public class Delivery implements Serializable {
 	private boolean sent;
 
 
-	@XmlTransient
+	@XmlElement(name = "Package")
+	@XmlElementWrapper(name = "Packages")
 	@OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY, cascade=CascadeType.MERGE)
 	private List<Packaged> packages;
 	

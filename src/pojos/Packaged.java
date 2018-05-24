@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlType;
 @IdClass(DeliveryAssociationId.class)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Packaged")
-@XmlType(propOrder = { "delivery" })
+@XmlType
 public class Packaged implements Serializable{
 
 	private static final long serialVersionUID = 3515016001673617510L;
@@ -44,7 +44,7 @@ public class Packaged implements Serializable{
 	
 	@ManyToOne
 	@PrimaryKeyJoinColumn(name = "transaction_id", referencedColumnName = "transaction_id")
-	@XmlElement
+	@XmlTransient
 	private Delivery delivery;
 	
 	@XmlAttribute
