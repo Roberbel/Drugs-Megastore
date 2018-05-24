@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "warehouse")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Warehouse")
-@XmlType(propOrder = { "employees", "corridor" })
+@XmlType(propOrder = { "employees", "corridors" })
 public class Warehouse implements Serializable {
 
 	/**
@@ -62,7 +62,7 @@ public class Warehouse implements Serializable {
 	@XmlElement(name = "Corridor")
 	@XmlElementWrapper(name = "Corridors")
 	@OneToMany(mappedBy="warehouse", fetch = FetchType.LAZY)
-	private List<Corridor> corridor;
+	private List<Corridor> corridors;
 
 	public Warehouse() {
 		super();
@@ -77,7 +77,7 @@ public class Warehouse implements Serializable {
 	
 
 	public Warehouse(Integer pc, String country, String city, String adress, Integer phone, List<Employee> employees,
-			List<Corridor> corridor) {
+			List<Corridor> corridors) {
 		super();
 		this.pc = pc;
 		this.country = country;
@@ -85,13 +85,13 @@ public class Warehouse implements Serializable {
 		this.city = city;
 		this.phone = phone;
 		this.employees = employees;
-		this.corridor = corridor;
+		this.corridors = corridors;
 	}
 
 
 
 	public Warehouse(Integer id, Integer pc, String country,String city, String adress, Integer phone, List<Employee> employees,
-			List<Corridor> corridor) {
+			List<Corridor> corridors) {
 
 		super();
 		this.id = id;
@@ -101,7 +101,7 @@ public class Warehouse implements Serializable {
 		this.address = adress;
 		this.phone = phone;
 		this.employees = employees;
-		this.corridor = corridor;
+		this.corridors = corridors;
 	}
 
 	public Warehouse(Integer id, Integer pc, String country,String city, String adress, Integer phone) {
@@ -114,7 +114,7 @@ public class Warehouse implements Serializable {
 		this.address = adress;
 		this.phone = phone;
 		this.employees = new ArrayList<Employee>();
-		this.corridor = new ArrayList<Corridor>();
+		this.corridors = new ArrayList<Corridor>();
 	}
 
 	@Override
@@ -213,11 +213,11 @@ public class Warehouse implements Serializable {
 	}
 
 	public List<Corridor> getCorridor() {
-		return corridor;
+		return corridors;
 	}
 
-	public void setCorridor(List<Corridor> corridor) {
-		this.corridor = corridor;
+	public void setCorridors(List<Corridor> corridor) {
+		this.corridors = corridor;
 	}
 
 	public void addEmployee(Employee employee) {
@@ -232,15 +232,15 @@ public class Warehouse implements Serializable {
 		}
 	}
 
-	public void addCorridor(Corridor corridors) {
-		if (!corridor.contains(corridors)) {
-			this.corridor.add(corridors);
+	public void addCorridor(Corridor corridor) {
+		if (!corridors.contains(corridor)) {
+			this.corridors.add(corridor);
 		}
 	}
 
-	public void removeCorridor(Corridor corridors) {
-		if (corridor.contains(corridors)) {
-			this.corridor.remove(corridors);
+	public void removeCorridor(Corridor corridor) {
+		if (corridors.contains(corridor)) {
+			this.corridors.remove(corridor);
 		}
 	}
 

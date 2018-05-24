@@ -401,6 +401,26 @@ public class SQLManager implements Manager {
 		}
 	}
 	
+	public static List<Arrival> searchArrivalsByProviderId(Integer providerId) throws SQLException{
+		
+		String sql = "SELECT * FROM arrivals WHERE provider_id = ? ;";
+		PreparedStatement prep= c.prepareStatement(sql);
+		prep.setInt(1, providerId);
+		List<Arrival> arrivals = new ArrayList<Arrival>();
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
+			prep.close();
+			return null;
+		}
+		while(rs1.next()) {
+			arrivals.add(getArrival(rs1));
+		}
+		prep.close();
+		rs1.close();
+		return arrivals;
+		
+	}
+	
 	public static List<Arrives> searchArrivesByArrivalId(Integer id) throws SQLException{
 
 		String sql = "SELECT * FROM arrives WHERE transaction_id = ? ;";
@@ -465,6 +485,27 @@ public class SQLManager implements Manager {
 			rs1.close();
 			return null;
 		}		
+	}
+	
+	public static List<Corridor> searchCorridorByWarehouseId(Integer warehouseId) throws SQLException{
+		
+		System.out.println("QUERY: SELECT * FROM corridor WHERE warehouse_id = " + warehouseId);
+		String sql = "SELECT * FROM corridor WHERE warehouse_id = ? ;";
+		PreparedStatement prep= c.prepareStatement(sql);
+		prep.setInt(1, warehouseId);
+		List<Corridor> corridors = new ArrayList<Corridor>();
+		ResultSet rs1 = prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
+			prep.close();
+			return null;
+		}
+		while(rs1.next()) {
+			corridors.add(getCorridor(rs1));
+		}
+		prep.close();
+		rs1.close();		
+		return corridors;
+		
 	}
 		
 	
@@ -612,6 +653,27 @@ public class SQLManager implements Manager {
 		prep.close();
 		rs1.close();
 		return drugs;
+	}
+	
+	public static List<Drug> searchDrugByCorridorId(Integer corridorId) throws SQLException{
+		
+		String sql="SELECT * FROM drug WHERE corridor_id = ? ;";
+		PreparedStatement prep=c.prepareStatement(sql);
+		prep.setInt(1, corridorId);
+		ResultSet rs1 =prep.executeQuery();
+		if(!rs1.isBeforeFirst()) {
+			prep.close();
+			return new ArrayList<Drug>();
+		}
+		List<Drug> drugs = new ArrayList<Drug>();
+		while(rs1.next()) {
+			Drug drug = getDrug(rs1);
+			drugs.add(drug);
+		}
+		prep.close();
+		rs1.close();
+		return drugs;
+		
 	}
 	
 	
