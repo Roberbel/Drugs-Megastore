@@ -133,6 +133,9 @@ EFE"/>
 EFE"/>
                     </Drugs>
                 </Corridor>
+                <Corridor id="3" temperature="38.0">
+                    <Drugs/>
+                </Corridor>
             </Corridors>
         </Warehouse>
     </Warehouses>
