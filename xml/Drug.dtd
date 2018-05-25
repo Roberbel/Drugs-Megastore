@@ -7,7 +7,7 @@
     <!ELEMENT stock(#PCDATA)>
     <!ELEMENT sellingPrice(#PCDATA)>
     <!ELEMENT Corridor(temperature,Warehouse)>
-     <!ATTLIST Corridor id ID #REQUIRED
+     <!ATTLIST Corridor id ID #REQUIRED>
     <!ELEMENT packaged(Packaged+)>
     <!ELEMENT arrives(Arrives+)>  
     
