@@ -410,7 +410,7 @@ public class SQLManager implements Manager {
 		ResultSet rs1 = prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return arrivals;
 		}
 		while(rs1.next()) {
 			arrivals.add(getArrival(rs1));
@@ -430,7 +430,7 @@ public class SQLManager implements Manager {
 		ResultSet rs1 = prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return arrives;
 		}
 		while(rs1.next()) {
 			arrives.add(getArrive(rs1));
@@ -450,7 +450,7 @@ public class SQLManager implements Manager {
 		ResultSet rs1 = prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return arrives;
 		}
 		while(rs1.next()) {
 			arrives.add(getArrive(rs1));
@@ -497,7 +497,7 @@ public class SQLManager implements Manager {
 		ResultSet rs1 = prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return corridors;
 		}
 		while(rs1.next()) {
 			corridors.add(getCorridor(rs1));
@@ -595,20 +595,20 @@ public class SQLManager implements Manager {
 		String sql="SELECT * FROM deliveries WHERE client_id = ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1, id);
+		
+		List<Delivery> deliveries = new ArrayList<Delivery>();
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return deliveries;
 		}
-		
-		List<Delivery> drugs = new ArrayList<Delivery>();
 		while(rs1.next()) {
 			Delivery delivery= getDelivery(rs1);
-			drugs.add(delivery);
+			deliveries.add(delivery);
 		}
 		prep.close();
 		rs1.close();
-		return drugs;
+		return deliveries;
 		
 	}
 	
@@ -619,12 +619,13 @@ public class SQLManager implements Manager {
 		String sql="SELECT * FROM drug WHERE active_principle LIKE ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+activePrinciple+"%");
+
+		List<Drug> drugs = new ArrayList<Drug>();
 		ResultSet rs1 = prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return new ArrayList<Drug>();
+			return drugs;
 		}
-		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
 			Drug drug = getDrug(rs1);
 			drugs.add(drug);
@@ -641,11 +642,11 @@ public class SQLManager implements Manager {
 		prep.setString(1, "%"+activePrinciple+"%");
 		prep.setInt(2, maxPrice);
 		ResultSet rs1=prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return new ArrayList<Drug>();
+			return drugs;
 		}
-		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
 			Drug drug = getDrug(rs1);
 			drugs.add(drug);
@@ -661,11 +662,11 @@ public class SQLManager implements Manager {
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1, corridorId);
 		ResultSet rs1 =prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return new ArrayList<Drug>();
+			return drugs;
 		}
-		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
 			Drug drug = getDrug(rs1);
 			drugs.add(drug);
@@ -682,12 +683,13 @@ public class SQLManager implements Manager {
 		String sql="SELECT * FROM drug WHERE selling_price <= ? ;";
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setInt(1, maxPrice);
+		
 		ResultSet rs1 =prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return new ArrayList<Drug>();
+			return drugs;
 		}
-		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
 			Drug drug = getDrug(rs1);
 			drugs.add(drug);
@@ -705,11 +707,11 @@ public class SQLManager implements Manager {
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+name+"%");
 		ResultSet rs1=prep.executeQuery();
+		List<Drug> drugs = new ArrayList<Drug>();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return new ArrayList<Drug>();
+			return drugs;
 		}
-		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
 			Drug drug = getDrug(rs1);
 			drugs.add(drug);
@@ -727,12 +729,12 @@ public class SQLManager implements Manager {
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+name+"%");
 		prep.setString(2, "%"+activePrinciple+"%");
+		List<Drug> drugs = new ArrayList<Drug>();
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return new ArrayList<Drug>();
+			return drugs;
 		}
-		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
 			Drug drug = getDrug(rs1);
 			drugs.add(drug);
@@ -749,12 +751,12 @@ public class SQLManager implements Manager {
 		PreparedStatement prep=c.prepareStatement(sql);
 		prep.setString(1, "%"+name+"%");
 		prep.setInt(2, maxPrice);
+		List<Drug> drugs = new ArrayList<Drug>();
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return new ArrayList<Drug>();
+			return drugs;
 		}
-		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
 			Drug drug = getDrug(rs1);
 			drugs.add(drug);
@@ -772,12 +774,12 @@ public class SQLManager implements Manager {
 		prep.setString(1, "%"+name+"%");
 		prep.setString(2, "%"+activePrinciple+"%");
 		prep.setInt(3, maxPrice);
+		List<Drug> drugs = new ArrayList<Drug>();
 		ResultSet rs1 =prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return new ArrayList<Drug>();
+			return drugs;
 		}
-		List<Drug> drugs = new ArrayList<Drug>();
 		while(rs1.next()) {
 			Drug drug = getDrug(rs1);
 			drugs.add(drug);
@@ -850,7 +852,7 @@ public class SQLManager implements Manager {
 		ResultSet rs1 = prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return packages;
 		}
 		
 		while(rs1.next()) {
@@ -872,7 +874,7 @@ public class SQLManager implements Manager {
 		ResultSet rs1 = prep.executeQuery();
 		if(!rs1.isBeforeFirst()) {
 			prep.close();
-			return null;
+			return packages;
 		}
 		
 		while(rs1.next()) {
