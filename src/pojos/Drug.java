@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "drug")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Drug")
-@XmlType(propOrder = { "corridor", "packaged", "arrives" })
+@XmlType(propOrder = { "photo" })
 public class Drug implements Serializable {
 
 	/**
@@ -57,21 +57,19 @@ public class Drug implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="corridor_id")
-	@XmlElement
+	@XmlTransient
 	private Corridor corridor;
 	
-	@XmlElement(name = "Package")
-	@XmlElementWrapper(name = "Packaged")
+	@XmlTransient
 	@OneToMany(mappedBy = "drug", fetch = FetchType.LAZY)
 	private List<Packaged> packaged;
 	
-	@XmlElement(name = "Arrive")
-	@XmlElementWrapper(name = "Arrives")
+	@XmlTransient
 	@OneToMany(mappedBy = "drug", fetch = FetchType.LAZY)
 	private List<Arrives> arrives;
 	
 	@Lob
-	@XmlTransient
+	@XmlElement
 	private byte[] photo;
 
 	public Drug() {

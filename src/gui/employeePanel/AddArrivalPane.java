@@ -149,7 +149,7 @@ public class AddArrivalPane implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try {
-			providerComboBox.getItems().addAll(SQLManager.getAllProvider());
+			providerComboBox.getItems().addAll(SQLManager.getAllProviders());
 			drugPicker.getItems().addAll(SQLManager.getAllDrugs());
 			
 		} catch (SQLException e) {

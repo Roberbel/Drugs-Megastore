@@ -33,7 +33,7 @@
               <children>
                 <ImageView fx:id="logo" fitHeight="83.49992370605469" fitWidth="83.49992370605469" onMouseClicked="#showShopPanel" pickOnBounds="true" preserveRatio="true">
                   <image>
-                    <Image url="@aphotekeLogo.png" />
+                    <Image url="@../../../Photos/aphotekeLogo.png" />
                   </image>
                 </ImageView>
               </children>

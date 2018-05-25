@@ -19,6 +19,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import xml.utils.SQLDateAdapter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,7 +30,7 @@ import javax.persistence.JoinColumn;
 @Entity
 @Table(name = "deliveries")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"client", "transactionDate" })
+@XmlType(propOrder = {"transactionDate" ,"packages" })
 public class Delivery implements Serializable {
 
 	/**
@@ -49,9 +50,9 @@ public class Delivery implements Serializable {
 	@Column (name = "selling_price")
 	private Integer sellingPrice;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "client_id")
-	@XmlElement
+	@XmlTransient
 	private Client client;
 	
 	@XmlElement
@@ -63,8 +64,9 @@ public class Delivery implements Serializable {
 	private boolean sent;
 
 
-	@XmlTransient
-	@OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY)
+	@XmlElement(name = "Package")
+	@XmlElementWrapper(name = "Packages")
+	@OneToMany(mappedBy = "delivery", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private List<Packaged> packages;
 	
 

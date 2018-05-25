@@ -31,7 +31,7 @@ import java.sql.Date;
 @Table(name = "arrivals")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Arrivals")
-@XmlType(propOrder = {"date", "provider"})
+@XmlType(propOrder = {"date", "arrives"})
 public class Arrival implements Serializable{
 
 	/**
@@ -61,11 +61,12 @@ public class Arrival implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "provider_id")
-	@XmlElement
+	@XmlTransient
 	private Provider provider;
 	
 	@OneToMany(mappedBy = "arrival", fetch = FetchType.LAZY)
-	@XmlTransient
+	@XmlElement(name = "Arrive")
+	@XmlElementWrapper(name = "Arrives")
 	private List<Arrives> arrives;
 
 	public Arrival() {

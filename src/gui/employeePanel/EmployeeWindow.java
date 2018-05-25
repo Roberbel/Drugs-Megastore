@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 
 import DB.SQLManager;
 import javafx.collections.FXCollections;
@@ -56,9 +57,6 @@ public class EmployeeWindow implements Initializable {
 	private TextField arrivalProvider;
 
 	@FXML
-	private TextField arrivalStatus;
-
-	@FXML
 	private TableView<Arrives> arrivalInventory;
 
 	@FXML
@@ -86,9 +84,6 @@ public class EmployeeWindow implements Initializable {
 	private TextField deliveryClient;
 
 	@FXML
-	private TextField deliveryStatus;
-
-	@FXML
 	private TableView<Packaged> deliveryInventory;
 
 	@FXML
@@ -106,9 +101,6 @@ public class EmployeeWindow implements Initializable {
 	@FXML
 	private JFXButton addInventory;
 
-	@FXML
-	private JFXButton deleteInventory;
-	
 	@FXML
 	private TextField drugActivePrinciple;
 	
@@ -135,6 +127,48 @@ public class EmployeeWindow implements Initializable {
 	
 	@FXML
 	private GridPane showDeliveryPane;
+	
+	@FXML
+	private JFXCheckBox yesCheckBox;
+
+	@FXML
+	private JFXCheckBox noCheckBox;
+	
+	@FXML
+	private JFXCheckBox yesCheckBox1;
+
+	@FXML
+	private JFXCheckBox noCheckBox1;
+	
+	@FXML
+	private void handleYesCheckBox() {
+		if (yesCheckBox.isSelected()) {
+			noCheckBox.setSelected(false);
+		}
+	}
+
+	@FXML
+	private void handleNoCheckBox() {
+		if (noCheckBox.isSelected()) {
+			yesCheckBox.setSelected(false);
+		}
+	}
+	
+	@FXML
+	private void handleYesCheckBox1() {
+		if (yesCheckBox1.isSelected()) {
+			noCheckBox1.setSelected(false);
+		}
+	}
+
+	@FXML
+	private void handleNoCheckBox1() {
+		if (noCheckBox1.isSelected()) {
+			yesCheckBox1.setSelected(false);
+		}
+	}
+	
+	
 
 	@FXML
 	void addArrival(ActionEvent event) throws IOException {
@@ -156,16 +190,12 @@ public class EmployeeWindow implements Initializable {
         rigthDeliveryPane.setCenter(panelMostrar);
 	}
 
-	@FXML
-	void addDrug(ActionEvent event) {
-
-	}
 
 	@FXML
 	void deleteArrival(ActionEvent event) {
 
 		Arrival toBeRemoved = arrivalList.getSelectionModel().getSelectedItem();
-		toBeRemoved.getArrives()
+		toBeRemoved.getArrives();
 		try {
 			SQLManager.deleteArrival(toBeRemoved);
 
@@ -208,18 +238,22 @@ public class EmployeeWindow implements Initializable {
 	@FXML
 	void showArrival(MouseEvent event) {
 		
+		
         GridPane panelMostrar=showArrivalPane;
         panelMostrar.prefHeightProperty().bind(rigthArrivalPane.heightProperty());
         panelMostrar.prefWidthProperty().bind(rigthArrivalPane.widthProperty());
-        rigthArrivalPane.setCenter(panelMostrar);			
+        rigthArrivalPane.setCenter(panelMostrar);		
+        
+		yesCheckBox.setSelected(false);
+		noCheckBox.setSelected(false);
 		
 		Arrival toBeShown = arrivalList.getSelectionModel().getSelectedItem();
 		arrivalProvider.setText(toBeShown.getProvider().getName());
 		arrivalDate.setPromptText(toBeShown.getDate().toString());
 		if(toBeShown.isReceived()) {		
-			arrivalStatus.setText("Yes");
+			yesCheckBox.setSelected(true);
 		}else{
-			arrivalStatus.setText("No");
+			noCheckBox.setSelected(true);
 		}
 		arrivalInventory.getItems().clear();
 		arrivalInventory.getItems().addAll(toBeShown.getArrives());
@@ -227,13 +261,17 @@ public class EmployeeWindow implements Initializable {
 	
 	@FXML
 	void showDelivery(MouseEvent event) {
+	
+		yesCheckBox1.setSelected(false);
+		noCheckBox1.setSelected(false);
+		
 		Delivery toBeShown = deliveryList.getSelectionModel().getSelectedItem();
 		deliveryClient.setText(toBeShown.getClient().getName());
 		deliveryDate.setPromptText(toBeShown.getTransactionDate().toString());
 		if(toBeShown.isSent()) {		
-			deliveryStatus.setText("Yes");
+			yesCheckBox1.setSelected(true);
 		}else{
-			deliveryStatus.setText("No");
+			noCheckBox1.setSelected(true);
 		}
 		deliveryInventory.getItems().clear();
 		deliveryInventory.getItems().addAll(toBeShown.getPackages());

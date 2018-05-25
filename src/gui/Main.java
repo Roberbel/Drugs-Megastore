@@ -1,7 +1,9 @@
 package gui;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
+import DB.JPAManager;
 import DB.SQLManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,7 +21,9 @@ public class Main extends Application{
 	
 	@Override
 	public void start(Stage stage) {
+		this.window=stage;
 		try {
+
 			this.window=stage;
 			//Remember remember the fifth of November and to change the resource to MainWindow
 			Parent root=FXMLLoader.load(getClass().getResource("/gui/adminPanel/adminWindow.fxml"));
@@ -27,9 +31,12 @@ public class Main extends Application{
 			this.window.setResizable(true);
 			this.window.show();
 			this.window.setOnCloseRequest(e->closeConnection());
-		}catch(Exception ex) {
-			ex.printStackTrace();
+			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
+		}catch(SQLException | ClassNotFoundException | IOException e) {
+			e.printStackTrace();
 		}
+		JPAManager.connect();
+		loadLogin();
 	}
 	
 	private void closeConnection(){
@@ -38,7 +45,38 @@ public class Main extends Application{
 			SQLManager.disconnect();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			
+			JPAManager.disconnect();
+			
 		}
+	}
+	
+	public void updateScene(Scene scene) {
+		
+		window.setScene(scene);
+		
+	}
+	
+	public void loadLogin() {
+		
+		Parent root;
+		try {
+			//Remember remember the fifth of November and to change the resource to MainWindow
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainWindow.fxml"));	
+			root = loader.load();
+			MainWindow controller = loader.getController();
+			controller.setMain(this);
+			this.window.setScene(new Scene(root));
+			this.window.setResizable(true);
+			this.window.show();
+			this.window.setOnCloseRequest(e->closeConnection());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
 	}
 
 }

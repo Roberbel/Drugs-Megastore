@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 @Table(name = "client")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder= {"name","address","telephone","email","paymentMethod"})
+@XmlType(propOrder= {"deliveries"})
 public class Client extends User implements Serializable {
 
 	/**
@@ -55,7 +55,8 @@ public class Client extends User implements Serializable {
 	@Column(name = "payment_method")
 	private PaymentMethod paymentMethod;
 	
-	@XmlTransient
+	@XmlElement(name = "Delivery")
+	@XmlElementWrapper(name = "Deliveries")
 	@OneToMany(fetch = FetchType.LAZY)
 	private List<Delivery> deliveries;
 	

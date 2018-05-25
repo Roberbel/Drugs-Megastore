@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
@@ -45,9 +46,21 @@ public class ShopPanelSB {
 
     @FXML
     private TextField nameTextField;
-
+    
     @FXML
-    private Button searchButton;
+    void checkPrice(KeyEvent event) {
+    
+    	String amountString = maxPriceTextField.getText();
+		//we only check the last char typed, because we had already checked the rest
+	    if( maxPriceTextField.getLength() > 0) {
+			char character = amountString.charAt(amountString.length()-1);
+			if(!(character > 47 && character < 58)) {
+				maxPriceTextField.deleteText(maxPriceTextField.getLength()-1, maxPriceTextField.getLength());
+			}
+	    }
+    	
+    	searchDrugs(null);
+    }
 
     @FXML
     void searchDrugs(InputEvent event) {
@@ -146,15 +159,9 @@ public class ShopPanelSB {
         assert drugsScrollPanel != null : "fx:id=\"drugsScrollPanel\" was not injected: check your FXML file 'ShopPanel.fxml'.";
         assert maxPriceTextField != null : "fx:id=\"maxPriceTextField\" was not injected: check your FXML file 'ShopPanel.fxml'.";
         assert nameTextField != null : "fx:id=\"nameTextField\" was not injected: check your FXML file 'ShopPanel.fxml'.";
-        assert searchButton != null : "fx:id=\"searchButton\" was not injected: check your FXML file 'ShopPanel.fxml'.";
         
         drugsFlowPanel.prefHeightProperty().bind(drugsScrollPanel.heightProperty());
-        drugsFlowPanel.prefWidthProperty().bind(drugsScrollPanel.widthProperty());
-
-        //drugsScrollPanel.prefHeightProperty().bind(anchorPanelScroll.heightProperty());
-        //drugsScrollPanel.prefWidthProperty().bind(anchorPanelScroll.widthProperty());
-        
-        
+        drugsFlowPanel.prefWidthProperty().bind(drugsScrollPanel.widthProperty());       
         
     }
     

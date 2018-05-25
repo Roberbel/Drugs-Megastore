@@ -1,15 +1,19 @@
 package DB;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import pojos.Arrival;
 import pojos.Arrives;
 import pojos.Client;
+import pojos.Client.PaymentMethod;
 import pojos.Corridor;
 import pojos.Delivery;
 import pojos.Drug;
@@ -27,12 +31,7 @@ public class JPAManager implements Manager{
 			
 			JPAManager.connect();
 			
-			for (int i = 0; i < 15; i++) {
-				
-				JPAManager.insertArrive(new Arrives());
-				
-			}
-			JPAManager.insertClient(new Client());
+			
 			 
 			JPAManager.disconnect();
 		}
@@ -64,6 +63,12 @@ public class JPAManager implements Manager{
 			
 			em.getTransaction().begin();
 			em.persist(arrival);
+			for(Arrives a: arrival.getArrives()) {
+				
+				Drug d = JPAManager.searchDrugById(a.getDrugId());
+				d.setStock(d.getStock() + a.getAmount());				
+				
+			}			
 			em.getTransaction().commit();
 			
 		}
@@ -96,6 +101,13 @@ public class JPAManager implements Manager{
 			
 			em.getTransaction().begin();
 			em.persist(delivery);
+			for(Packaged p: delivery.getPackages()) {
+				
+				Drug d = JPAManager.searchDrugById(p.getDrugId());
+				d.setStock(d.getStock() - p.getAmount());				
+				//p.setDeliveryId(delivery.getTransactionId());
+				//em.persist(p);
+			}
 			em.getTransaction().commit();
 			
 		}
@@ -148,49 +160,186 @@ public class JPAManager implements Manager{
 		
 		public static Arrival searchArrivalById(Integer id) {
 			
-			Query q1 = em.createNativeQuery("SELECT * FROM arrivals WHERE transaction_id = ?", Arrival.class);
+			Query q1 = em.createNativeQuery("SELECT * FROM arrivals WHERE transaction_id = ?;", Arrival.class);
 			q1.setParameter(1, id);
-			return (Arrival) q1.getSingleResult();
+			try {
+				return (Arrival) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
+			
+		}
+		
+		public static List<Arrives> searchArrivesByArrivalId(Integer id){
+		
+			Query q1 = em.createNativeQuery("SELECT * FROM arrives WHERE drug_id = ?;", Arrives.class);
+			q1.setParameter(1, id);
+			return (List<Arrives>) q1.getResultList();
+		
+		}
+
+		public static List<Arrives> searchArrivesByDrugId(Integer id){
+			
+			Query q1 = em.createNativeQuery("SELECT * FROM arrives WHERE transaction_id = ?;", Arrives.class);
+			q1.setParameter(1, id);
+			return (List<Arrives>) q1.getResultList();
+	
+		}
+		
+		public static Corridor searchCorridorById(Integer id) {
+			
+			Query q1 = em.createNativeQuery("SELECT * FROM corridor WHERE id = ?;", Corridor.class);
+			q1.setParameter(1, id);
+			try {
+				return (Corridor) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
 		public static Client searchClientById(Integer id) {
 			
-			Query q1 = em.createNativeQuery("SELECT * FROM client WHERE id = ?", Client.class);
+			Query q1 = em.createNativeQuery("SELECT * FROM client WHERE id = ?;", Client.class);
 			q1.setParameter(1, id);
-			return (Client) q1.getSingleResult();
+			try {
+				return (Client) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
-		public static Corridor searchCorridorById(Integer id) {
+		public static Client searchClientByUsername(String username) {
 			
-			Query q1 = em.createNativeQuery("SELECT * FROM corridor WHERE id = ?", Corridor.class);
-			q1.setParameter(1, id);
-			return (Corridor) q1.getSingleResult();
-			
+			Query q1 = em.createNativeQuery("SELECT * FROM client WHERE username = ?;", Client.class);
+			q1.setParameter(1, username);
+			try {
+				return (Client) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
+		
 		}
 		
 		public static Delivery searchDeliveryById(Integer id) {
 			
-			Query q1 = em.createNativeQuery("SELECT * FROM deliveries WHERE transaction_id = ?", Delivery.class);
+			Query q1 = em.createNativeQuery("SELECT * FROM deliveries WHERE transaction_id = ?;", Delivery.class);
 			q1.setParameter(1, id);
-			return (Delivery) q1.getSingleResult();
+			try {
+				return (Delivery) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
-		public static Drug searchDrugById(Integer id) {
-			
-			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE id = ?", Drug.class);
+		public static List<Delivery> searchDeliveryByClientId(Integer id) {
+		
+			Query q1 = em.createNativeQuery("SELECT * FROM deliveries WHERE client_id = ?;", Delivery.class);
 			q1.setParameter(1, id);
-			return (Drug) q1.getSingleResult();
+			return (List<Delivery>) q1.getResultList();
+		
+		}
+		
+		public static List<Drug> searchDrugByActivePrinciple(String activePrinciple) {
+		
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE active_principle LIKE ?;");
+			q1.setParameter(1, "%"+activePrinciple+"%");
+			return (List<Drug>) q1.getResultList();
+		
+		}
+		
+		public static List<Drug> searchDrugByActivePrinciple(String activePrinciple, Integer maxPrice) {
+		
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE active_principle LIKE ? AND selling_price <= ?;");
+			q1.setParameter(1, "%"+activePrinciple+"%");
+			q1.setParameter(2, maxPrice);
+			return (List<Drug>) q1.getResultList();
+		
+		}
+		
+		public static List<Drug> searchDrugByMaxPrice(Integer maxPrice) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE selling_price <= ?;");
+			q1.setParameter(1, maxPrice);
+			return (List<Drug>) q1.getResultList();
 			
+		}
+		
+		public static List<Drug> searchDrugByName(String name) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ?;");
+			q1.setParameter(1, "%"+name+"%");
+			return (List<Drug>) q1.getResultList();
+			
+		}
+		
+		public static List<Drug> searchDrugByName(String name, String activePrinciple) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND active_principle LIKE ?;");
+			q1.setParameter(1, "%"+name+"%");
+			q1.setParameter(2, "%"+activePrinciple+"%");
+			return (List<Drug>) q1.getResultList();
+			
+		}
+		
+		public static List<Drug> searchDrugByName(String name, Integer maxPrice) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND selling_price <= ?;");
+			q1.setParameter(1, "%"+name+"%");
+			q1.setParameter(2, maxPrice);
+			return (List<Drug>) q1.getResultList();
+			
+		}
+		
+		public static List<Drug> searchDrugByName(String name, String activePrinciple, Integer maxPrice) {
+			
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND active_principle LIKE ? AND selling_price <= ?;");
+			q1.setParameter(1, "%"+name+"%");
+			q1.setParameter(2, "%"+activePrinciple+"%");
+			q1.setParameter(3, maxPrice);
+			return (List<Drug>) q1.getResultList();
+		
 		}
 		
 		public static Employee searchEmployeeById(Integer id) {
 			
-			Query q1 = em.createNativeQuery("SELECT * FROM employee WHERE id = ?", Employee.class);
+			Query q1 = em.createNativeQuery("SELECT * FROM employee WHERE id = ?;", Employee.class);
 			q1.setParameter(1, id);
-			return (Employee) q1.getSingleResult();
+			try {
+				return (Employee) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
+			
+		}
+		
+		public static Employee searchEmployeeByUsername(String username) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM employee WHERE username LIKE ?;", Employee.class);
+			q1.setParameter(1, username);
+			try {
+				return (Employee) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
+			
+		}
+		
+		public static List<Packaged> searchPackagedByDeliveryId(Integer id) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM packaged WHERE drug_id = ?;", Packaged.class);
+			q1.setParameter(1, id);
+			return (List<Packaged>) q1.getResultList();
+			
+		}
+		
+		public static List<Packaged> searchPackagedByDrugId(Integer id) {
+
+			Query q1 = em.createNativeQuery("SELECT * FROM packaged WHERE transaction_id = ?;", Packaged.class);
+			q1.setParameter(1, id);
+			return (List<Packaged>) q1.getResultList();
 			
 		}
 		
@@ -198,7 +347,11 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM provider WHERE id = ?", Provider.class);
 			q1.setParameter(1, id);
-			return (Provider) q1.getSingleResult();
+			try {
+				return (Provider) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
@@ -206,10 +359,26 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM warehouse WHERE id = ?", Warehouse.class);
 			q1.setParameter(1, id);
-			return (Warehouse) q1.getSingleResult();
+			try {
+				return (Warehouse) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
-		
+				
+		public static Drug searchDrugById(Integer id) {
+			
+			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE id = ?", Drug.class);
+			q1.setParameter(1, id);
+			try {
+				return (Drug) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
+			
+		}
+			
 		
 		/*
 		 *  SELECT EVERYTHING FROM EACH TABLE
@@ -286,6 +455,8 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		
+		
 
 /*
  * =====================================================================================================
@@ -304,197 +475,106 @@ public class JPAManager implements Manager{
 			
 		}
 		
-		public static void updateArrivalDate(Arrival arrival, Date date) {
+		//CLIENT
+		public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod) throws SQLException {
 			
+			Client client = JPAManager.searchClientById(id);
 			em.getTransaction().begin();
-			arrival.setDate(date);
+			client.setAddress(address);
+			client.setEmail(email);
+			client.setTelephone(telephone);
+			client.setPaymentMethod(paymentMethod);
 			em.getTransaction().commit();
 			
 		}
 		
-		public static void updateArrivalProvider(Arrival arrival, Provider provider) {
+		public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod, String username, String password) throws SQLException {
 			
+			Client client = JPAManager.searchClientById(id);
 			em.getTransaction().begin();
-			arrival.setProvider(provider);
-			em.getTransaction().commit();
-			
-		}
-		
-		
-		/*
-		 * Client updates
-		 */
-		public static void updateClientUsername(Client client , String username){
-			
-			em.getTransaction().begin();
+			client.setAddress(address);
+			client.setEmail(email);
+			client.setTelephone(telephone);
+			client.setPaymentMethod(paymentMethod);
 			client.setUsername(username);
+			client.setPassword(password);
 			em.getTransaction().commit();
-			
 		}
+
 		
+		//Drug
 		
-		
-		/*
-		 * Drug updates
-		 */
-		public static void updateDrugActivePrinciple(Drug drug, String activePrinciple) {
+		public static void updateDrug(Integer id, Integer stock, Integer sellingPrice, String name, String activePrinciple, Corridor corridor, byte[] photo) throws SQLException {
 			
+			Drug drug = JPAManager.searchDrugById(id);
 			em.getTransaction().begin();
-			drug.setActivePrinciple(activePrinciple);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateDrugCorridor(Drug drug, Corridor corridor) {
-			
-			em.getTransaction().begin();
-			drug.setCorridor(corridor);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateDrugName(Drug drug, String name) {
-			
-			em.getTransaction().begin();
-			drug.setName(name);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateDrugSellingPrice(Drug drug, Integer sellingPrice) {
-			
-			em.getTransaction().begin();
+			drug.setStock(stock);
 			drug.setSellingPrice(sellingPrice);
+			drug.setName(name);
+			drug.setActivePrinciple(activePrinciple);
+			drug.setCorridor(corridor);
+			drug.setPhoto(photo);
 			em.getTransaction().commit();
 			
 		}
 		
-		public static void updateDrugStock(Drug drug, Integer stock) {
+		public static void updateDrugStock(Integer id, Integer stock) throws SQLException {
 			
+			Drug drug = JPAManager.searchDrugById(id);
 			em.getTransaction().begin();
 			drug.setStock(stock);
 			em.getTransaction().commit();
 			
 		}
 		
-		
-		/*
-		 * Employee updates
-		 */
-		public static void updateEmployeeAdminRights(Employee employee, Boolean isAdmin) {
+		public static void updateDrugPhoto(Integer id, byte[] photo) throws SQLException {
 			
+			Drug drug = JPAManager.searchDrugById(id);
 			em.getTransaction().begin();
-			employee.setIsAdmin(isAdmin);
+			drug.setPhoto(photo);
 			em.getTransaction().commit();
-			
+					
 		}
-		
-		public static void updateEmployeeName(Employee employee, String name) {
 			
-			em.refresh(employee);
+		//Employee
+		public static void updateEmployee(Integer id, String name, float salary, Integer phone, String position, Boolean isAdmin, Warehouse warehouse, byte[] photo ) throws SQLException {
+			
+			Employee employee = JPAManager.searchEmployeeById(id);
+			em.getTransaction().begin();
 			employee.setName(name);
-			em.getTransaction().begin();
-			em.flush();
+			employee.setSalary(salary);
+			employee.setPhone(phone);
+			employee.setPosition(position);
+			employee.setIsAdmin(isAdmin);
+			employee.setWarehouse(warehouse);
+			employee.setPhoto(photo);
 			em.getTransaction().commit();
 			
 		}
-		
-		public static void updateEmployeePassword(Employee employee, String password) {
 			
-			em.getTransaction().begin();
-			employee.setPassword(password);
-			em.getTransaction().commit();
+		public static void updateEmployeePhoto(Integer id, byte[] photo) throws SQLException {
 			
-		}
-		
-		public static void updateEmployeePhoto(Employee employee, byte[] photo) {
-			
+			Employee employee = JPAManager.searchEmployeeById(id);
 			em.getTransaction().begin();
 			employee.setPhoto(photo);
 			em.getTransaction().commit();
 			
 		}
-		
-		public static void updateEmployeePosition(Employee employee, String position) {
-			//lets hope he got promoted
+	
+		//Deliveries
+		public static void updateDeliverySent(Integer id, Boolean sent) throws SQLException {
 			
+			Delivery delivery = JPAManager.searchDeliveryById(id);
 			em.getTransaction().begin();
-			employee.setPosition(position);
+			delivery.isSent();
 			em.getTransaction().commit();
 			
-		}
-		
-		public static void updateEmployeeUsername(Employee employee, String username) {
 			
-			employee.setUsername(username);
-			em.getTransaction().begin();
-			em.flush();
-			
-			//em.flush();
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateEmployeeWarehouse(Employee employee, Warehouse warehouse) {
-			
-			em.getTransaction().begin();
-			employee.setWarehouse(warehouse);
-			em.getTransaction().commit();
-			
-		}
-		
-		
-		/*
-		 * Warehouse updates
-		 */
-		public static void updateWarehousePc(Warehouse warehouse, Integer pc) {
-			
-			em.getTransaction().begin();
-			warehouse.setPc(pc);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateWarehouseCountry(Warehouse warehouse, String  country) {
-			
-			em.getTransaction().begin();
-			warehouse.setCountry(country);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateWarehouseCity(Warehouse warehouse, String city) {
-			
-			em.getTransaction().begin();
-			warehouse.setCity(city);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateWarehouseAddress(Warehouse warehouse, String address) {
-			
-			em.getTransaction().begin();
-			warehouse.setAddress(address);
-			em.getTransaction().commit();
-			
-		}
-		
-		public static void updateWarehousePhone(Warehouse warehouse, Integer phone) {
-			
-			em.getTransaction().begin();
-			warehouse.setPhone(phone);
-			em.getTransaction().commit();
-			
-		}
-		
-		
-		
+		}	
 		
 /*
  * =====================================================================================================
  * 								DELETE
- * 
- * Might be missing Arrives and Packaged delete, not sure yet how to do it
  * =====================================================================================================
  */
 		

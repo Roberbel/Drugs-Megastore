@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Drug id="8" name="Droga6743" stock="23871" sellingPrice="65" activePrinciple="VIBRANUM">
+<Drug id="8" name="Droga6743" stock="23870" sellingPrice="65" activePrinciple="VIBRANUM">
     <corridor id="2" temperature="45.0">
         <warehouse id="2" pc="28049" country="Spain" city="Madrid" address="montecarmelo" phone="564332898">
             <Employees/>
@@ -16,12 +16,4 @@
             </delivery>
         </Package>
     </Packaged>
-    <Arrives>
-        <Arrive drugId="8" arrivalId="6" amount="87">
-            <arrival arrivalId="6" buyingPrice="100" received="false">
-                <date>2018-05-10</date>
-                <provider id="2" name="Jaime" address="montecarmelo" telephone="456" email="jimmyvinigra"/>
-            </arrival>
-        </Arrive>
-    </Arrives>
-</Drug>
+    <Arrives
