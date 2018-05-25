@@ -81,7 +81,7 @@
 								password CDATA #REQUIRED>
 		
 		
-		<!ELEMENT Packaged(){
+		<!ELEMENT Packaged()>
 			<!ATTLIST Packaged deliveryId IDREF #REQUIRED
 								drugID IDREF #REQUIRED
 								amount CDATA #REQUIRED>
