@@ -38,7 +38,7 @@
                         </HBox>
                      </bottom>
                      <center>
-                        <TableView fx:id="clientTable" BorderPane.alignment="CENTER">
+                        <TableView fx:id="clientTable" editable="true" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="clientName" prefWidth="84.00000309944153" text="Name" />
                             <TableColumn fx:id="clientAdress" prefWidth="136.00003051757812" text="Adress" />
@@ -58,7 +58,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="drugTable" onMouseClicked="#showDrugImage" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="drugTable" editable="true" onMouseClicked="#showDrugImage" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="drugName" prefWidth="292.7999756336212" text="Name" />
                               <TableColumn fx:id="drugPrinciple" prefWidth="237.20004272460938" text="Active Principle" />
@@ -92,7 +92,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="warehouseTable" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="warehouseTable" editable="true" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="warePc" prefWidth="94.3999969959259" text="Zip Code" />
                               <TableColumn fx:id="wareCountry" prefWidth="149.59994506835938" text="Country" />
