@@ -292,13 +292,14 @@ public class SQLManager implements Manager {
 		
 	public static void insertDrug(Drug drug) throws SQLException {
 
-		String sql1 = "INSERT INTO drug(name, photo, stock, active_principle,corridor_id )" + "VALUES(?,?.?,?,?);";
+		String sql1 = "INSERT INTO drug(name, photo, stock, active_principle,selling_price,corridor_id )" + "VALUES(?,?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, drug.getName());
 		prep.setBytes(2, drug.getPhoto());
 		prep.setInt(3, drug.getStock());
 		prep.setString(4, drug.getActivePrinciple());
-		prep.setInt(5, drug.getCorridor().getId());
+		prep.setInt(5,drug.getSellingPrice());
+		prep.setInt(6, drug.getCorridor().getId());
 		prep.executeUpdate();
 		prep.close();
 	
