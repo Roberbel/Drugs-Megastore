@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import DB.JPAManager;
 import DB.SQLManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -55,22 +56,12 @@ public class CartPanelSB {
     @FXML
     void confirmDelivery(MouseEvent event) {
     	
-    	try {
-    		
-    		System.out.println(delivery.getClient().getId());
-    		delivery.setTransactionDate(new Date(System.currentTimeMillis()));
-    		SQLManager.insertDeliveries(delivery);
-    		//we clear the delivery.
-    		parentPanel.clearDelivery();
-    		parentPanel.showShopPanel(null);
-    		
-    		
-    	}catch(SQLException e) {
-    		
-    		e.printStackTrace();
-    		System.out.println("Error saving the delivery");
-    		
-    	}
+    	delivery.setTransactionDate(new Date(System.currentTimeMillis()));
+    	JPAManager.insertDelivery(delivery);
+    	//we clear the delivery.
+    	parentPanel.clearDelivery();
+    	parentPanel.showShopPanel(null);
+
     	
     }
 

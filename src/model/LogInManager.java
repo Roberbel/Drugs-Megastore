@@ -2,6 +2,7 @@ package model;
 
 import java.sql.SQLException;
 
+import DB.JPAManager;
 import DB.SQLManager;
 import pojos.Client;
 import pojos.Employee;
@@ -86,12 +87,11 @@ public class LogInManager {
 			extractedClient = null;
 			extractedEmployee = null;
 			
-			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 			
-			extractedEmployee = SQLManager.searchEmployeeByUsername(username);
+			extractedEmployee = JPAManager.searchEmployeeByUsername(username);
 			
 			if(extractedEmployee == null) {
-				extractedClient = SQLManager.searchClientByUsername(username);
+				extractedClient = JPAManager.searchClientByUsername(username);
 				
 				if(extractedClient == null) {
 					return false;

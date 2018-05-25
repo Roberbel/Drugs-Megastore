@@ -179,7 +179,6 @@ public class ClientPanelSB {
     public void setClient(Client client) {
     	
     	this.client = client;
-
     	delivery = new Delivery(client);
     	profile.setText(client.getName());
     	
