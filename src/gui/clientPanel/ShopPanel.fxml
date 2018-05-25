@@ -27,17 +27,12 @@
             </FlowPane>
             <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
               <children>
-                <TextField fx:id="activePrincipleTextField" prefWidth="185.9998779296875" promptText="Active Principle" />
+                <TextField fx:id="activePrincipleTextField" onKeyReleased="#searchDrugs" prefWidth="185.9998779296875" promptText="Active Principle" />
               </children>
             </FlowPane>
             <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
               <children>
-                <TextField id="TextField" fx:id="maxPriceTextField" prefWidth="186.0" promptText="max price" />
-              </children>
-            </FlowPane>
-            <FlowPane alignment="CENTER" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
-              <children>
-                <Button fx:id="searchButton" mnemonicParsing="false" onMouseClicked="#searchDrugs" text="Search" />
+                <TextField id="TextField" fx:id="maxPriceTextField" onKeyReleased="#checkPrice" prefWidth="186.0" promptText="max price" />
               </children>
             </FlowPane>
           </children>
@@ -45,7 +40,6 @@
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

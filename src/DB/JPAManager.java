@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
@@ -30,12 +31,7 @@ public class JPAManager implements Manager{
 			
 			JPAManager.connect();
 			
-			for (int i = 0; i < 15; i++) {
-				
-				JPAManager.insertArrive(new Arrives());
-				
-			}
-			JPAManager.insertClient(new Client());
+			
 			 
 			JPAManager.disconnect();
 		}
@@ -67,6 +63,12 @@ public class JPAManager implements Manager{
 			
 			em.getTransaction().begin();
 			em.persist(arrival);
+			for(Arrives a: arrival.getArrives()) {
+				
+				Drug d = JPAManager.searchDrugById(a.getDrugId());
+				d.setStock(d.getStock() + a.getAmount());				
+				
+			}			
 			em.getTransaction().commit();
 			
 		}
@@ -99,6 +101,13 @@ public class JPAManager implements Manager{
 			
 			em.getTransaction().begin();
 			em.persist(delivery);
+			for(Packaged p: delivery.getPackages()) {
+				
+				Drug d = JPAManager.searchDrugById(p.getDrugId());
+				d.setStock(d.getStock() - p.getAmount());				
+				//p.setDeliveryId(delivery.getTransactionId());
+				//em.persist(p);
+			}
 			em.getTransaction().commit();
 			
 		}
@@ -153,7 +162,11 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM arrivals WHERE transaction_id = ?;", Arrival.class);
 			q1.setParameter(1, id);
-			return (Arrival) q1.getSingleResult();
+			try {
+				return (Arrival) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
@@ -177,7 +190,11 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM corridor WHERE id = ?;", Corridor.class);
 			q1.setParameter(1, id);
-			return (Corridor) q1.getSingleResult();
+			try {
+				return (Corridor) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
@@ -185,7 +202,11 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM client WHERE id = ?;", Client.class);
 			q1.setParameter(1, id);
-			return (Client) q1.getSingleResult();
+			try {
+				return (Client) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
@@ -193,7 +214,11 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM client WHERE username = ?;", Client.class);
 			q1.setParameter(1, username);
-			return (Client) q1.getSingleResult();
+			try {
+				return (Client) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 		
 		}
 		
@@ -201,7 +226,11 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM deliveries WHERE transaction_id = ?;", Delivery.class);
 			q1.setParameter(1, id);
-			return (Delivery) q1.getSingleResult();
+			try {
+				return (Delivery) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
@@ -278,7 +307,11 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM employee WHERE id = ?;", Employee.class);
 			q1.setParameter(1, id);
-			return (Employee) q1.getSingleResult();
+			try {
+				return (Employee) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
@@ -286,7 +319,11 @@ public class JPAManager implements Manager{
 
 			Query q1 = em.createNativeQuery("SELECT * FROM employee WHERE username LIKE ?;", Employee.class);
 			q1.setParameter(1, username);
-			return (Employee) q1.getSingleResult();
+			try {
+				return (Employee) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
@@ -310,7 +347,11 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM provider WHERE id = ?", Provider.class);
 			q1.setParameter(1, id);
-			return (Provider) q1.getSingleResult();
+			try {
+				return (Provider) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 		
@@ -318,18 +359,23 @@ public class JPAManager implements Manager{
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM warehouse WHERE id = ?", Warehouse.class);
 			q1.setParameter(1, id);
-			return (Warehouse) q1.getSingleResult();
+			try {
+				return (Warehouse) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
-		
-		
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 				
 		public static Drug searchDrugById(Integer id) {
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE id = ?", Drug.class);
 			q1.setParameter(1, id);
-			return (Drug) q1.getSingleResult();
+			try {
+				return (Drug) q1.getSingleResult();
+			}catch (NoResultException e) {
+				return null;
+			}
 			
 		}
 			
@@ -514,39 +560,7 @@ public class JPAManager implements Manager{
 			em.getTransaction().commit();
 			
 		}
-
-		
-		
-		//Arrives 
-		//The next two shouldn't be necesary at all!
-		/*
-			
-		public static void updateArrivesAmmount(Arrives arrives, int ammount)throws SQLException{
-			
-			String sql="UPDATE arrives SET ammount = ? WHERE transaction_id = ? AND drug_id = ?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1,ammount);
-			prep.setInt(2, arrives.getArrivalId());
-			prep.setInt(3, arrives.getDrugId());
-			prep.executeUpdate();
-			prep.close();
-		}
-		
-		
-
-		//Packaged
-		public static void updatePackagedAmmount(Packaged packaged, int ammount)throws SQLException{
-			
-			String sql="UPDATE packaged SET ammount= ? WHERE transaction_id = ? AND drug_id = ?";
-			PreparedStatement prep=c.prepareStatement(sql);
-			prep.setInt(1,ammount);
-			prep.setInt(2, packaged.getDeliveryId());
-			prep.setInt(3, packaged.getDrugId());
-			prep.executeUpdate();
-			prep.close();
-		}
-		*/
-				
+	
 		//Deliveries
 		public static void updateDeliverySent(Integer id, Boolean sent) throws SQLException {
 			
@@ -561,8 +575,6 @@ public class JPAManager implements Manager{
 /*
  * =====================================================================================================
  * 								DELETE
- * 
- * Might be missing Arrives and Packaged delete, not sure yet how to do it
  * =====================================================================================================
  */
 		

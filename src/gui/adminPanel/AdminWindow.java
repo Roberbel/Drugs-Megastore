@@ -415,6 +415,7 @@ public class AdminWindow implements Initializable {
 			}
     	}
     	try {
+    		drugTable.getItems().add(newDrug);
     		SQLManager.insertDrug(newDrug);
     	}catch(SQLException ex) {
     		ex.printStackTrace();
@@ -435,6 +436,7 @@ public class AdminWindow implements Initializable {
     	newEmployee.setPassword("god of thunder");
     	try {
 			SQLManager.insertEmployee(newEmployee);
+			employeeTable.getItems().add(newEmployee);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -450,6 +452,7 @@ public class AdminWindow implements Initializable {
     	newWarehouse.setPhone(Integer.parseInt(warePhoneField.getText()));
     	try {
     		SQLManager.insertWarehouse(newWarehouse);
+    		warehouseTable.getItems().add(newWarehouse);
     	}catch(SQLException ex) {
     		ex.printStackTrace();
     	}
@@ -581,7 +584,7 @@ public class AdminWindow implements Initializable {
     	FileChooser filechooser=new FileChooser(); 
     	FileChooser.ExtensionFilter extFilter=new FileChooser.ExtensionFilter("JPG Files", "*.jpg");
     	filechooser.getExtensionFilters().add(extFilter);
-    	File url=filechooser.showSaveDialog(stage);
+    	File url=filechooser.showOpenDialog(stage);
     	try {
 			InputStream blob=new FileInputStream(url);
 			byte [] byteBlob=new byte[blob.available()];
@@ -615,9 +618,11 @@ public class AdminWindow implements Initializable {
     void showDrugImage(MouseEvent event) {
     	try {
     		Drug drugtoShow=drugTable.getSelectionModel().getSelectedItem();
-			BufferedImage img=ImageIO.read(new ByteArrayInputStream(drugtoShow.getPhoto()));
-			Image picture=SwingFXUtils.toFXImage(img, null);
-			imageView.setImage(picture);
+    		if(drugtoShow.getPhoto()!=null) {
+    			BufferedImage img=ImageIO.read(new ByteArrayInputStream(drugtoShow.getPhoto()));
+    			Image picture=SwingFXUtils.toFXImage(img, null);
+    			imageView.setImage(picture);
+    		}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

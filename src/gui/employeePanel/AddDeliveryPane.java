@@ -105,9 +105,9 @@ public class AddDeliveryPane implements Initializable {
 	    		toBeAdded.setSent(false);
 	    }
 		
-	    JPAManager.connect();
+	    //JPAManager.connect();
 	    JPAManager.insertDelivery(toBeAdded);
-	    JPAManager.disconnect();
+	    //JPAManager.disconnect();
 	    
 	  
 	    
@@ -115,7 +115,7 @@ public class AddDeliveryPane implements Initializable {
 	        Drug droga = newDrugs.getCellObservableValue(item).getValue();
 	        Integer stock = newStocks.getCellObservableValue(item).getValue();
 	        Packaged packages = new Packaged(droga.getId(),toBeAdded.getTransactionId(),stock);
-	        
+	        packages.setDrug(droga);
 	        try {
 				SQLManager.insertPackaged(packages);
 			} catch (SQLException e) {
@@ -140,13 +140,14 @@ public class AddDeliveryPane implements Initializable {
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			clientComboBox.getItems().addAll(SQLManager.getAllClients());
-			drugPicker.getItems().addAll(SQLManager.getAllDrugs());
+		//try {
+			JPAManager.connect();
+			clientComboBox.getItems().addAll(JPAManager.getAllClients());
+			drugPicker.getItems().addAll(JPAManager.getAllDrugs());
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		//} catch (SQLException e) {
+			//e.printStackTrace();
+		//}
 		
 		newDrugs.setCellValueFactory(new PropertyValueFactory <Packaged,Drug>("drug"));
 		newStocks.setCellValueFactory(new PropertyValueFactory <Packaged,Integer>("amount"));

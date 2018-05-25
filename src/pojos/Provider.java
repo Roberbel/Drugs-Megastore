@@ -14,6 +14,8 @@ import javax.persistence.TableGenerator;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
@@ -22,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "provider")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Provider")
-@XmlType
+@XmlType(propOrder = {"arrivals"})
 public class Provider implements Serializable {
 
 	/**
@@ -49,7 +51,8 @@ public class Provider implements Serializable {
 	private String email;
 	
 	@OneToMany(mappedBy = "provider", fetch = FetchType.LAZY)
-	@XmlTransient
+	@XmlElement(name = "Arrival")
+	@XmlElementWrapper(name = "Arrivals")
 	private List<Arrival> arrivals;
 
 	public Provider() {

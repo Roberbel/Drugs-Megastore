@@ -5,6 +5,7 @@ import java.sql.ClientInfoStatus;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import DB.JPAManager;
 import DB.SQLManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -68,8 +69,6 @@ public class ProfilePanelSB {
     @FXML
     void showDelivery(MouseEvent event) {
     	Delivery toShow = deliveriesList.getSelectionModel().getSelectedItem();
-    	System.out.println("Selected: " + toShow);
-    	//deliveryDrugs = new ListView<Packaged>(FXCollections.<Packaged>observableArrayList(toShow.getPackages()));
     	deliveryDrugs.getItems().setAll(toShow.getPackages());
     	paymentAmount.setText("You payed: "+toShow.getSellingPrice());
     }
@@ -78,15 +77,15 @@ public class ProfilePanelSB {
     void updateClientInfo(MouseEvent event) {
     	String address = addressTextField.getText();
     	String email = emailTextField.getText();
-    	String name = nameTextField.getText();
     	PaymentMethod paymentMethod = paymentMethodChoiceBox.getSelectionModel().getSelectedItem();
     	Integer phone = Integer.parseInt((telephoneTextField.getText()));
-    	try {
-			SQLManager.updateClient(client.getId(), address, email, phone, paymentMethod);
+		try {
+			System.out.println("updating: "+client.getId()+" "+ address+" "+ email+ " "+phone+ " "+ paymentMethod);
+			JPAManager.updateClient(client.getId(), address, email, phone, paymentMethod);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			System.out.println("There was an error updating the client info");
+			System.out.println("COuldn't update client info");
 		}
     }
 
@@ -109,7 +108,6 @@ public class ProfilePanelSB {
     }
      
     protected void setClient(Client client){
-    	
     	this.client = client;
     	addressTextField.setText(client.getAddress());
     	emailTextField.setText(client.getEmail());
@@ -122,14 +120,13 @@ public class ProfilePanelSB {
 				PaymentMethod.ORGANS);
     	paymentMethodChoiceBox.getSelectionModel().select(client.getPaymentMethod());
     	telephoneTextField.setText(""+client.getTelephone());
-    	if(client.getDeliveries().isEmpty()) {
-	    	try {
-				client.setDeliveries(SQLManager.searchDeliveryByClientId(client.getId()));
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-    	}
+    	System.out.println("Client Id : " + client.getId());
+    	try {
+			client.setDeliveries(SQLManager.searchDeliveryByClientId((client.getId())));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		deliveriesList.getItems().setAll(client.getDeliveries());
 		
     }

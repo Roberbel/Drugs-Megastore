@@ -1,57 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE Database [
-	<!ELEMENT Database(arrivals, arrives, clients, corridors, deliveries, drugs, employees, packaged, providers,
-	 warehouses)>
-		 <!ELEMENT arrivals(Arrival+)>
-		 <!ELEMENT arrives(Arrive+)>
-		 <!ELEMENT clients(Client+)>
-		 <!ELEMENT corridors(Corridor+)>
-		 <!ELEMENT deliveries(Delivery+)>
-		 <!ELEMENT drugs(Drug+)>
-		 <!ELEMENT employees(Employee+)>
-		 <!ELEMENT packaged(Packaged+)>
-		 <!ELEMENT providers(Provider+)>
-		 <!ELEMENT warehouses(Warehouse+)>
+	<!ELEMENT Database(clients, providers, warehouses)>
+		 <!ELEMENT clients(Client*)>
+		 <!ELEMENT providers(Provider*)>
+		 <!ELEMENT warehouses(Warehouse*)>
 		 
-		 <!ELEMENT Arrival(Date, Provider)>
-		 	<!ATTLIST Arrival arrivalId ID #REQUIRED
-		 					buyingPrice CDATA #REQUIRED
-		 					received	CDATA #REQUIRED			 	
-		 	>
-		 
-		 <!ELEMENT Arrive()>
-		 	<!ATTLIST Arrive arrivalId IDREF #REQUIRED
-		 					drugID IDREF #REQUIRED
-		 					amount CDATA #REQUIRED>
-		 
-		 <!ELEMENT Client(Deliveries)>
+		 <!ELEMENT Client(deliveries)>
 		 	<!ATTLIST Client id ID #REQUIRED
 		 					name CDATA #REQUIRED
 		 					address CDATA #REQUIRED
 		 					telephone CDATA #IMPLIED
 		 					email CDATA #IMPLIED
 		 					paymentMethod CDATA #IMPLIED>
+		 	<!ELEMENT deliveries(Delivery*)>
 		 					
-		 <!ELEMENT Corridor(Warehouse)>
+		 <!ELEMENT Provider(arrivals)>
+			<!ATTLIST Provider id ID #REQUIRED
+								name CDATA #REQUIRED
+								address CDATA #REQUIRED
+								telephone CDATA #IMPLIED
+								email CDATA #IMPLIED>
+			<!ELEMENT arrivals(Arrival*)>
+		 					
+		 				
+		<!ELEMENT Warehouse(corridors, employees)>
+			<!ATTLIST Warehouse id ID #REQUIRED
+								pc CDATA #REQUIRED
+								country CDATA #REQUIRED
+								address CDATA #REQUIRED
+								phone CDATA #REQUIRED>
+								
+			<!ELEMENT corridors (corridor+)>
+			<!ELEMENT employees (employees+)>
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 <!ELEMENT Arrival(Date, arrives)>
+		 	<!ATTLIST Arrival arrivalId ID #REQUIRED
+		 					buyingPrice CDATA #REQUIRED
+		 					received	CDATA #REQUIRED			 	
+		 	>
+		 	<!ELEMENT arrives(Arrive+)>
+		 
+		 <!ELEMENT Arrive()>
+		 	<!ATTLIST Arrive arrivalId IDREF #REQUIRED
+		 					drugID IDREF #REQUIRED
+		 					amount CDATA #REQUIRED>
+				
+		 <!ELEMENT Corridor(drugs)>
 		 	<!ATTLIST Corridor id ID #REQUIRED
 		 					temperature CDATA #REQUIRED>
+		 	<!ELEMENT drugs(Drug*)>
 		 					
-		<!ELEMENT Delivery(Client, TransactionDate)>
+		<!ELEMENT Delivery(TransactionDate, packages)>
 			<!ATTLIST Delivery id ID #REQUIRED
 							sellingPrice CDATA #REQUIRED
 							sent CDATA #REQUIRED>
+			<!ELEMENT packages (Packaged+)>
 		
-		<!--Okey... so the packaged and arrives list here doesn't make sense... as it is not a column of the table-->
-		<!ELEMENT Drug(Corridor)
+		<!ELEMENT Drug()
 			<!ATTLIST Drug id ID #REQUIRED
 							name CDATA #REQUIRED
 							stock CDATA #REQUIRED
 							sellingPrice CDATA #REQUIRED
 							activePrinciple CDATA #IMPLIED>
 		
-		<!-- for the XML it doesn't make sense to have here the warehouse, as it would have mroe sense to have a list of employees in the warehouse, but in order to import/export the whole database... we need a column with the warehouse ID -->
-		<!ELEMENT Employee(Warehouse)>
+		<!ELEMENT Employee()>
 			<!ATTLIST Employee id ID #REQUIRED
 								name CDATA #REQUIRED
 								salary CDATA #REQUIRED
@@ -62,26 +81,9 @@
 								password CDATA #REQUIRED>
 		
 		
-		<!ELEMENT Packaged(){
+		<!ELEMENT Packaged()>
 			<!ATTLIST Packaged deliveryId IDREF #REQUIRED
 								drugID IDREF #REQUIRED
 								amount CDATA #REQUIRED>
-		
-		
-		<!ELEMENT Provider()>
-			<!ATTLIST Provider id ID #REQUIRED
-								name CDATA #REQUIRED
-								address CDATA #REQUIRED
-								telephone CDATA #IMPLIED
-								email CDATA #IMPLIED>
-				
-		<!ELEMENT Warehouse()>
-			<!ATTLIST Warehouse id ID #REQUIRED
-								pc CDATA #REQUIRED
-								country CDATA #REQUIRED
-								address CDATA #REQUIRED
-								phone CDATA #REQUIRED>
 		 
-		 
-		 					
-	
+>

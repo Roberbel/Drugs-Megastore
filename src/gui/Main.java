@@ -3,6 +3,7 @@ package gui;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import DB.JPAManager;
 import DB.SQLManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +22,20 @@ public class Main extends Application{
 	@Override
 	public void start(Stage stage) {
 		this.window=stage;
+		try {
+
+			this.window=stage;
+			//Remember remember the fifth of November and to change the resource to MainWindow
+			Parent root=FXMLLoader.load(getClass().getResource("/gui/adminPanel/adminWindow.fxml"));
+			this.window.setScene(new Scene(root));
+			this.window.setResizable(true);
+			this.window.show();
+			this.window.setOnCloseRequest(e->closeConnection());
+			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
+		}catch(SQLException | ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		JPAManager.connect();
 		loadLogin();
 	}
 	
@@ -30,6 +45,10 @@ public class Main extends Application{
 			SQLManager.disconnect();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			
+			JPAManager.disconnect();
+			
 		}
 	}
 	

@@ -32,7 +32,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "corridor")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "corridor")
-@XmlType(propOrder = {"warehouse"})
+@XmlType(propOrder = {"drugs"})
 public class Corridor implements Serializable {
 
 	
@@ -47,12 +47,13 @@ public class Corridor implements Serializable {
 	@XmlAttribute
 	private float temperature;
 	
-	@XmlElement
+	@XmlTransient
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="warehouse_id")
 	private Warehouse warehouse;
 	
-	@XmlTransient
+	@XmlElement(name = "Drug")
+	@XmlElementWrapper(name = "Drugs")
 	@OneToMany(mappedBy="corridor",fetch = FetchType.LAZY)
 	private List<Drug> drugs;
 	

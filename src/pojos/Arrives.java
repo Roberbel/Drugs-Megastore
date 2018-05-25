@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
 @IdClass(ArrivalAssociationId.class)
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Arrives")
-@XmlType(propOrder = { "arrival" })
+@XmlType
 public class Arrives implements Serializable{
 	
 	private static final long serialVersionUID = -7414814044025259619L;
@@ -44,7 +44,7 @@ public class Arrives implements Serializable{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn(name = "transaction_id", referencedColumnName = "transaction_id")
-	@XmlElement
+	@XmlTransient
 	private Arrival arrival;
 	
 	@XmlAttribute
