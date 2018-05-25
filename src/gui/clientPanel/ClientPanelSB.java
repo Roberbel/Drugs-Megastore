@@ -15,6 +15,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import pojos.Client;
 import pojos.Delivery;
 import gui.MainWindow;
@@ -27,6 +29,7 @@ public class ClientPanelSB {
 	private int drugAmount;
 	private Delivery delivery;
 	private MainWindow mainWindow;
+	private Font labelFont;
 
     @FXML
     private ResourceBundle resources;
@@ -64,21 +67,36 @@ public class ClientPanelSB {
 
     @FXML
     void highlightCart(MouseEvent event) {
+    	
+    	labelFont = cart.getFont();
+    	cart.setFont(new Font("System", 20));    	
+    	cart.setTextFill(Color.DARKBLUE);
+    	
     }
 
     @FXML
     void highlightProfile(MouseEvent event) {
+    	
+    	labelFont = profile.getFont();
+    	profile.setFont(new Font("System", 20));  
+    	profile.setTextFill(Color.DARKBLUE);
+    	
     }
 
     @FXML
     void returnCartToNormal(MouseEvent event) {
     	
-    	//cart.setFont(new Font());
+    	cart.setFont(labelFont);
+    	cart.setTextFill(Color.BLACK);
     	
     }
 
     @FXML
     void returnProfileToNormal(MouseEvent event) {
+    	
+    	profile.setFont(labelFont);
+    	profile.setTextFill(Color.BLACK);
+    	
     }
 
     @FXML
