@@ -492,7 +492,6 @@ public class SQLManager implements Manager {
 	
 	public static List<Corridor> searchCorridorByWarehouseId(Integer warehouseId) throws SQLException{
 		
-		System.out.println("QUERY: SELECT * FROM corridor WHERE warehouse_id = " + warehouseId);
 		String sql = "SELECT * FROM corridor WHERE warehouse_id = ? ;";
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, warehouseId);

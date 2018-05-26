@@ -67,4 +67,43 @@ public class Database {
 		this.warehouses = warehouses;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((clients == null) ? 0 : clients.hashCode());
+		result = prime * result + ((providers == null) ? 0 : providers.hashCode());
+		result = prime * result + ((warehouses == null) ? 0 : warehouses.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Database other = (Database) obj;
+		if (clients == null) {
+			if (other.clients != null)
+				return false;
+		} else if (!clients.equals(other.clients))
+			return false;
+		if (providers == null) {
+			if (other.providers != null)
+				return false;
+		} else if (!providers.equals(other.providers))
+			return false;
+		if (warehouses == null) {
+			if (other.warehouses != null)
+				return false;
+		} else if (!warehouses.equals(other.warehouses))
+			return false;
+		return true;
+	}
+	
+	
+
 }
