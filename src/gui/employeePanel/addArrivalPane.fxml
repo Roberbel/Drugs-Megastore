@@ -52,12 +52,12 @@
             <Label text="Has Arrived?" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <HBox alignment="CENTER_LEFT" spacing="30.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <children>
-                  <JFXCheckBox fx:id="yesCheckBox" onAction="#handleYesCheckBox" text="Yes">
+                  <JFXCheckBox fx:id="yesCheckBox" checkedColor="#d1091c" onAction="#handleYesCheckBox" text="Yes">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
                   </JFXCheckBox>
-                  <JFXCheckBox fx:id="noCheckBox" onAction="#handleNoCheckBox" text="No" />
+                  <JFXCheckBox fx:id="noCheckBox" checkedColor="#d1091c" onAction="#handleNoCheckBox" text="No" />
                </children>
             </HBox>
             <Label text="Inventory:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
