@@ -19,8 +19,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.*;
-import model.LogInManager.TYPE;
 import pojos.*;
 
 public class MainWindow {
@@ -31,6 +29,10 @@ public class MainWindow {
 	private String password;
 	private Employee extractedEmployee;
 	private Client extractedClient;
+	
+	public enum TYPE{
+		ADMIN,EMPLOYEE,CLIENT
+	}
 	
     @FXML
     private JFXTextField userField;
