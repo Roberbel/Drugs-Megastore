@@ -1049,7 +1049,7 @@ public class SQLManager implements Manager {
 	//Deliveries
 	public static void updateDeliverySent(Integer id, Boolean sent) throws SQLException {
 		
-		String sql = "UPDATE deliveries SET sent = ? WHERE id = ? ;";
+		String sql = "UPDATE deliveries SET sent = ? WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setBoolean(1, sent);
 		prep.setInt(2, id);
@@ -1058,7 +1058,20 @@ public class SQLManager implements Manager {
 		
 		
 	}	
-
+	//Arrivals
+	public static void updateArrivalRecibed(Integer id, Boolean recived) throws SQLException {
+		
+		String sql = "UPDATE arrivals SET received = ? WHERE transaction_id = ? ;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setBoolean(1, recived);
+		prep.setInt(2, id);
+		prep.executeUpdate();
+		prep.close();
+		
+		
+	}	
+	
+	
 /*
  *=====================================================================================================
  * 						Delete
