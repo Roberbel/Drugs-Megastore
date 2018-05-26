@@ -88,10 +88,10 @@ public class LogInManager {
 			extractedEmployee = null;
 			
 			
-			extractedEmployee = JPAManager.searchEmployeeByUsername(username);
+			extractedEmployee = SQLManager.searchEmployeeByUsername(username);
 			
 			if(extractedEmployee == null) {
-				extractedClient = JPAManager.searchClientByUsername(username);
+				extractedClient = SQLManager.searchClientByUsername(username);
 				
 				if(extractedClient == null) {
 					return false;
