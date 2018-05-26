@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
+import DB.SQLManager;
 import gui.adminPanel.AdminWindow;
 import gui.clientPanel.ClientPanelSB;
 import javafx.event.ActionEvent;
@@ -19,13 +20,17 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.*;
+import model.LogInManager.TYPE;
 import pojos.*;
 
 public class MainWindow {
 
 	private Main main;
-	private LogInManager user;
 	private Stage stage;
+	private String username;
+	private String password;
+	private Employee extractedEmployee;
+	private Client extractedClient;
 	
     @FXML
     private JFXTextField userField;
@@ -38,14 +43,13 @@ public class MainWindow {
 
     @FXML
     void signInClicked(ActionEvent event) {
-    	user=new LogInManager ();
-    	user.setUsername(userField.getText());
-    	user.setPassword(passField.getText());
+    	username = userField.getText();
+    	password = passField.getText();
     	this.stage=new Stage();
     	try {
-			if(user.checkExistance()){
-				if(user.checkPassword()) {
-					switch(user.getType().toString()) {
+			if(checkExistance()){
+				if(checkPassword()) {
+					switch(getType().toString()) {
 					case "ADMIN":
 						try {
 							Parent root =FXMLLoader.load(getClass().getResource("/gui/adminPanel/adminWindow.fxml"));
@@ -69,7 +73,7 @@ public class MainWindow {
 						try {
 							AnchorPane panel = loader.load();
 							ClientPanelSB controller = loader.<ClientPanelSB>getController();
-							controller.setClient(user.getExtractedClient());
+							controller.setClient(extractedClient);
 							main.updateScene(new Scene(panel));
 							controller.setMainWindow(this);
 							controller.showShopPanel(null);
@@ -93,15 +97,6 @@ public class MainWindow {
 		}
     	
     }
-
-	public LogInManager getUser() {
-		return user;
-	}
-
-	public void setUser(LogInManager user) {
-		this.user = user;
-	}
-
 	public Stage getStage() {
 		return stage;
 	}
@@ -122,7 +117,54 @@ public class MainWindow {
 		
 	}
     
-    
+	public boolean checkPassword () {
+		if(extractedEmployee != null) {
+			if(extractedEmployee.getPassword().equals(password)) {
+				return true;
+			}else {
+				return false;
+			}
+		} else {
+			if(extractedClient.getPassword().equals(password)) {
+				return true;
+			}else {
+				return false;
+			}
+		}
+	}
+	
+	public TYPE getType(){
+		if(extractedClient != null) {
+			return TYPE.CLIENT;
+		}else {
+			if(extractedEmployee.getIsAdmin()) {
+				return TYPE.ADMIN;
+			}else{
+				return TYPE.EMPLOYEE;
+			}
+		}
+	}
+	
+	public boolean checkExistance() throws SQLException, ClassNotFoundException{
+		extractedClient = null;
+		extractedEmployee = null;
+		
+		
+		extractedEmployee = SQLManager.searchEmployeeByUsername(username);
+		
+		if(extractedEmployee == null) {
+			extractedClient = SQLManager.searchClientByUsername(username);
+			
+			if(extractedClient == null) {
+				return false;
+			}else {
+				return true;
+			}
+		}else {
+			return true;
+		}
+		
+	}
 
 }
 
