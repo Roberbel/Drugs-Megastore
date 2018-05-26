@@ -958,6 +958,8 @@ public class SQLManager implements Manager {
 		prep.setInt(3, telephone);
 		prep.setString(4, paymentMethod.toString());
 		prep.setInt(5, id);
+		prep.executeUpdate();
+		prep.close();
 		
 	}
 	
@@ -972,7 +974,6 @@ public class SQLManager implements Manager {
 		prep.setString(5, username);
 		prep.setString(6, password);
 		prep.setInt(7, id);
-		
 		prep.executeUpdate();
 		prep.close();
 	}
