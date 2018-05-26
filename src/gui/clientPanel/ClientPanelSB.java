@@ -70,7 +70,7 @@ public class ClientPanelSB {
     	
     	labelFont = cart.getFont();
     	cart.setFont(new Font("System", 20));    	
-    	cart.setTextFill(Color.DARKBLUE);
+    	cart.setTextFill(Color.CRIMSON);
     	
     }
 
@@ -79,7 +79,7 @@ public class ClientPanelSB {
     	
     	labelFont = profile.getFont();
     	profile.setFont(new Font("System", 20));  
-    	profile.setTextFill(Color.DARKBLUE);
+    	profile.setTextFill(Color.CRIMSON);
     	
     }
 

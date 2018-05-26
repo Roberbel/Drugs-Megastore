@@ -117,6 +117,7 @@ public class AddArrivalPane implements Initializable {
 	        Drug droga = newDrugs.getCellObservableValue(item).getValue();
 	        Integer stock = newStocks.getCellObservableValue(item).getValue();
 	        Arrives arrive = new Arrives(droga.getId(),toBeAdded.getArrivalId(),stock);
+	        arrive.setDrug(droga);
 	        
 	        try {
 				SQLManager.insertArrives(arrive);

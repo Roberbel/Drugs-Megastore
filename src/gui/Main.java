@@ -32,11 +32,12 @@ public class Main extends Application{
 			this.window.show();
 			this.window.setOnCloseRequest(e->closeConnection());
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
+			JPAManager.connect();
+			loadLogin();
 		}catch(SQLException | ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
-		JPAManager.connect();
-		loadLogin();
+		
 	}
 	
 	private void closeConnection(){
