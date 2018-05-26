@@ -389,7 +389,7 @@ public class EmployeeWindow implements Initializable {
 		deliveryDrugs.setCellValueFactory(new PropertyValueFactory <Packaged,String>("drug"));
 		deliveryStocks.setCellValueFactory(new PropertyValueFactory <Packaged, Integer>("amount"));
 		drugPhoto.setImage(new Image("https://www.ecured.cu/images/thumb/f/f9/Pomo-medicina-icon-azul.png/390px-Pomo-medicina-icon-azul.png"));
-		logoApot.setImage(new Image"");
+		
 	}
 
 }
