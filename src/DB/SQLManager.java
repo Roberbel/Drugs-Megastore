@@ -1060,11 +1060,11 @@ public class SQLManager implements Manager {
 		
 	}	
 	//Arrivals
-	public static void updateArrivalRecibed(Integer id, Boolean recived) throws SQLException {
+	public static void updateArrivalReceived(Integer id, Boolean received) throws SQLException {
 		
 		String sql = "UPDATE arrivals SET received = ? WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
-		prep.setBoolean(1, recived);
+		prep.setBoolean(1, received);
 		prep.setInt(2, id);
 		prep.executeUpdate();
 		prep.close();
@@ -1081,13 +1081,21 @@ public class SQLManager implements Manager {
  */
 		
     public static void deleteArrival(Arrival arrival)  throws SQLException{
-
+    	
+		c.setAutoCommit(false);
+    	
+    	List<Arrives> arrives = arrival.getArrives();
+    	for(Arrives a: arrives) {
+    		SQLManager.deleteArrive(a);
+    	}
     	String sql = "DELETE FROM arrivals WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,arrival.getArrivalId());
 		prep.executeUpdate();
 		prep.close();	
 		
+		c.commit();
+		c.setAutoCommit(true);
 	}
     
     public static void deleteArrive(Arrives a) throws SQLException {
@@ -1145,12 +1153,19 @@ public class SQLManager implements Manager {
     
     public static void deleteDelivery(Delivery delivery) throws SQLException {
     	
+    	c.setAutoCommit(false);
     	List<Packaged> packs = delivery.getPackages();
+    	for(Packaged p : packs) {
+    		SQLManager.deletePackaged(p);
+    	}
     	String sql = "DELETE FROM deliveries WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,delivery.getTransactionId());
 		prep.executeUpdate();
 		prep.close();
+		
+		c.commit();
+		c.setAutoCommit(true);
     	
     }
     
