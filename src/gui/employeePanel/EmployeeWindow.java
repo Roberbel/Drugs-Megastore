@@ -302,15 +302,15 @@ public class EmployeeWindow implements Initializable {
 	@FXML
     void updateArrival(MouseEvent event) {
 		Arrival toBeUpdated = arrivalList.getSelectionModel().getSelectedItem();
-		boolean recibed = false ;
+		boolean received = false ;
 		if(yesCheckBox.isSelected()) {
-			recibed = true;
+			received = true;
 		}
 		if(noCheckBox.isSelected()) {
-			recibed = false;
+			received = false;
 		}
 		try {
-			SQLManager.updateArrivalRecibed(toBeUpdated.getArrivalId(), recibed);
+			SQLManager.updateArrivalReceived(toBeUpdated.getArrivalId(), received);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
