@@ -23,7 +23,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane prefHeight="671.0" prefWidth="683.0" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.employeePanel.EmployeeWindow">
    <bottom>
       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="683.0" BorderPane.alignment="CENTER">
@@ -101,12 +100,12 @@
                                           </TableView>
                                           <HBox alignment="CENTER_LEFT" spacing="30.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                              <children>
-                                                <JFXCheckBox fx:id="yesCheckBox" onAction="#handleYesCheckBox" text="Yes">
+                                                <JFXCheckBox fx:id="yesCheckBox" checkedColor="#d1091c" onAction="#handleYesCheckBox" text="Yes">
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="noCheckBox" onAction="#handleNoCheckBox" text="No" />
+                                                <JFXCheckBox fx:id="noCheckBox" checkedColor="#d1091c" onAction="#handleNoCheckBox" text="No" />
                                                 <Button fx:id="updateArrivalState" mnemonicParsing="false" onMouseClicked="#updateArrival" prefHeight="24.0" prefWidth="84.0" text="Ok">
                                                    <opaqueInsets>
                                                       <Insets left="-10.0" />
@@ -193,12 +192,12 @@
                                           </TableView>
                                           <HBox alignment="CENTER_LEFT" spacing="30.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                              <children>
-                                                <JFXCheckBox fx:id="yesCheckBox1" onAction="#handleYesCheckBox1" text="Yes">
+                                                <JFXCheckBox fx:id="yesCheckBox1" checkedColor="#d1091c" onAction="#handleYesCheckBox1" text="Yes">
                                                    <HBox.margin>
                                                       <Insets left="10.0" />
                                                    </HBox.margin>
                                                 </JFXCheckBox>
-                                                <JFXCheckBox fx:id="noCheckBox1" onAction="#handleNoCheckBox1" text="No" />
+                                                <JFXCheckBox fx:id="noCheckBox1" checkedColor="#d1091c" onAction="#handleNoCheckBox1" text="No" />
                                                 <Button fx:id="uupdateDeliveryUpdate" mnemonicParsing="false" onMouseClicked="#updateDelivery" prefHeight="24.0" prefWidth="96.0" text="Ok" />
                                              </children>
                                           </HBox>
