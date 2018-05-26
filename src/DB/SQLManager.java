@@ -951,7 +951,7 @@ public class SQLManager implements Manager {
 	//CLIENT
 	public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod) throws SQLException {
 		
-		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ? WHERE id = ? ;";
+		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, payment_method = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, address);
 		prep.setString(2, email);
@@ -963,7 +963,7 @@ public class SQLManager implements Manager {
 	
 	public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod, String username, String password) throws SQLException {
 		
-		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ?, username = ?, password = ? WHERE id = ? ;";
+		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, payment_method = ?, username = ?, password = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, address);
 		prep.setString(2, email);
