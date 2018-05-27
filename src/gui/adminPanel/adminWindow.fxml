@@ -238,7 +238,7 @@
                               <TextField fx:id="employeePhoneField" prefHeight="25.0" prefWidth="146.0" promptText="Phone Number" />
                               <TextField fx:id="employeePositionField" prefHeight="25.0" prefWidth="106.0" promptText="Position" />
                               <ComboBox fx:id="comboWarehouse" prefHeight="25.0" prefWidth="121.0" promptText="Warehouse" />
-                              <JFXButton fx:id="browseButton1" onAction="#browseButtonClicked" prefHeight="25.0" prefWidth="107.0" text="Browse Image" />
+                              <JFXButton fx:id="browseButton1" onAction="#browseButton1Clicked" prefHeight="25.0" prefWidth="107.0" text="Browse Image" />
                               <JFXButton fx:id="addEmployeeButton" onAction="#addEmployeeClicked" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: GREY;" text="Add" />
                               <JFXButton fx:id="deleteEmployeeButton" onAction="#deleteEmployeeClicked" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: grey;" text="Delete" />
                            </children>
@@ -279,7 +279,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="providerTable" editable="true" onMouseClicked="#loadEmployeeImage" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="providerTable" editable="true" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="providerName" prefWidth="186.8000214099884" text="Name" />
                               <TableColumn fx:id="providerAddress" prefWidth="96.79997253417969" text="Address" />

@@ -277,6 +277,9 @@ public class AdminWindow implements Initializable {
     private ComboBox<Warehouse> comboWarehouse;
 
     @FXML
+    private JFXButton browseButton1;
+    
+    @FXML
     private JFXButton addEmployeeButton;
 
     @FXML
@@ -407,8 +410,8 @@ public class AdminWindow implements Initializable {
     	if(this.imageLoaded!=null) {
     		newDrug.setPhoto(imageLoaded);
     		this.imageLoaded=null;
-    	}else {
-    		File photo = new File("utils/no_photo_1x.jpg");
+    	}/*else {
+    		File photo = new File("./Photos/no_photo_1x.jpg");
 			InputStream streamBlob;
 			try {
 				streamBlob = new FileInputStream(photo);
@@ -417,7 +420,7 @@ public class AdminWindow implements Initializable {
 			} catch ( IOException e) {
 				e.printStackTrace();
 			}
-    	}
+    	}*/
     	try {
     		drugTable.getItems().add(newDrug);
     		SQLManager.insertDrug(newDrug);
@@ -436,11 +439,14 @@ public class AdminWindow implements Initializable {
     	newEmployee.setPhone(Integer.parseInt(employeePhoneField.getText()));
     	newEmployee.setPosition(employeePositionField.getText());
     	newEmployee.setWarehouse(comboWarehouse.getSelectionModel().getSelectedItem());
+    	newEmployee.setUsername("Thor");
+    	newEmployee.setPassword("god of thunder");
+    	newEmployee.setIsAdmin(false);
     	if(this.imageLoaded!=null) {
     		newEmployee.setPhoto(this.imageLoaded);
     		this.imageLoaded=null;
-    	}else {
-    		File photo = new File("utils/no_photo_1x.jpg");
+    	}/*else {
+    		File photo = new File("/Photos/no_photo_1x.jpg");
 			InputStream streamBlob;
 			try {
 				streamBlob = new FileInputStream(photo);
@@ -449,10 +455,7 @@ public class AdminWindow implements Initializable {
 			} catch ( IOException e) {
 				e.printStackTrace();
 			}
-    	}
-    	newEmployee.setUsername("Thor");
-    	newEmployee.setPassword("god of thunder");
-    	newEmployee.setIsAdmin(false);
+    	}*/
     	try {
 			SQLManager.insertEmployee(newEmployee);
 			employeeTable.getItems().add(newEmployee);
@@ -583,7 +586,6 @@ public class AdminWindow implements Initializable {
     	}
     }
 
-    //ComboWare and ComboWarehouse are the same fucking thing so I will change it later
     void refreshComboBoxes() {
     	comboWare.getItems().clear();
     	comboCorridor.getItems().clear();
@@ -614,6 +616,23 @@ public class AdminWindow implements Initializable {
 			e.printStackTrace();
 		}
    	
+    }
+    
+    @FXML
+    void browseButton1Clicked(ActionEvent event) {
+    	FileChooser filechooser=new FileChooser(); 
+    	FileChooser.ExtensionFilter extFilter=new FileChooser.ExtensionFilter("JPG Files", "*.jpg");
+    	filechooser.getExtensionFilters().add(extFilter);
+    	File url=filechooser.showOpenDialog(stage);
+    	try {
+			InputStream blob=new FileInputStream(url);
+			byte [] byteBlob=new byte[blob.available()];
+			blob.read(byteBlob);
+			blob.close();
+			this.imageLoaded=byteBlob;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
 
@@ -656,6 +675,9 @@ public class AdminWindow implements Initializable {
     			BufferedImage img=ImageIO.read(new ByteArrayInputStream(empToShow.getPhoto()));
     			Image picture=SwingFXUtils.toFXImage(img, null);
     			imageView.setImage(picture);
+    		}else {
+    			Image img=new Image("file:./Photos/no_photo_1x.jpg");
+    			imageView.setImage(img);
     		}
     	}catch(IOException ex) {
     		ex.printStackTrace();
@@ -670,6 +692,9 @@ public class AdminWindow implements Initializable {
     			BufferedImage img=ImageIO.read(new ByteArrayInputStream(drugtoShow.getPhoto()));
     			Image picture=SwingFXUtils.toFXImage(img, null);
     			imageView.setImage(picture);
+    		}else {
+    		Image img=new Image("file:./Photos/no_photo_1x.jpg");
+			imageView.setImage(img);
     		}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -861,6 +886,10 @@ public class AdminWindow implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		//Images
+			Image logo=new Image("file:./Photos/aphotekeLogo.png");
+			this.imageView.setImage(logo);
+		
 		//Clients Table
 		ObservableList methods=FXCollections.observableArrayList();
 		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");
