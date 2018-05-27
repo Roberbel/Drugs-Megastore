@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 
 import DB.SQLManager;
+import gui.MainWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +37,8 @@ import pojos.Packaged;
 
 public class EmployeeWindow implements Initializable {
 
+	MainWindow mainWindow;
+	
 	@FXML
 	private Tab arrivals;
 
@@ -98,6 +101,9 @@ public class EmployeeWindow implements Initializable {
 
 	@FXML
 	private JFXButton addInventory;
+	
+	@FXML
+	private JFXButton logOut;
 
 	@FXML
 	private TextField drugActivePrinciple;
@@ -214,7 +220,12 @@ public class EmployeeWindow implements Initializable {
 
 	}
 	
-	
+	@FXML
+	void paneLogOut(ActionEvent event) {
+		
+		mainWindow.logout();
+		
+	}
 
 	@FXML
 	void deleteDelivery(ActionEvent event) {
@@ -356,11 +367,11 @@ public class EmployeeWindow implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		try {
+		/*try {
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 
 		try {
 
@@ -391,5 +402,11 @@ public class EmployeeWindow implements Initializable {
 		drugPhoto.setImage(new Image("https://www.ecured.cu/images/thumb/f/f9/Pomo-medicina-icon-azul.png/390px-Pomo-medicina-icon-azul.png"));
 		
 	}
+	
+public void setMainWindow(MainWindow mainWindow) {
+    	
+    	this.mainWindow = mainWindow;
+    	
+    }
 
 }

@@ -141,7 +141,7 @@ public class AddDeliveryPane implements Initializable {
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//try {
-			JPAManager.connect();
+			//JPAManager.connect();
 			clientComboBox.getItems().addAll(JPAManager.getAllClients());
 			drugPicker.getItems().addAll(JPAManager.getAllDrugs());
 			

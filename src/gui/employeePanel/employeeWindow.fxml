@@ -136,12 +136,11 @@
                                  <bottom>
                                     <ButtonBar prefHeight="32.0" prefWidth="282.0" BorderPane.alignment="CENTER">
                                        <buttons>
-                                          <JFXButton fx:id="addDelivery" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#addDelivery" prefHeight="29.0" prefWidth="181.0" text="Add" textAlignment="CENTER">
+                                          <JFXButton fx:id="addDelivery" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#addDelivery" prefHeight="29.0" prefWidth="337.0" text="Add" textAlignment="CENTER">
                                              <opaqueInsets>
                                                 <Insets />
                                              </opaqueInsets>
                                           </JFXButton>
-                                          <JFXButton fx:id="deleteDelivery" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" minWidth="0.0" onAction="#deleteDelivery" prefHeight="29.0" prefWidth="164.0" text="Delete" textAlignment="CENTER" />
                                        </buttons>
                                        <BorderPane.margin>
                                           <Insets bottom="10.0" left="5.0" right="10.0" />
@@ -283,6 +282,13 @@
       </HBox>
    </top>
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="logOut" onMouseClicked="#paneLogOut" text="Log out">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </JFXButton>
+         </children></HBox>
    </center>
 </BorderPane>

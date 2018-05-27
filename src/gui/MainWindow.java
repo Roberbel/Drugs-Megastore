@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTextField;
 import DB.SQLManager;
 import gui.adminPanel.AdminWindow;
 import gui.clientPanel.ClientPanelSB;
+import gui.employeePanel.EmployeeWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import pojos.*;
 
@@ -62,9 +64,12 @@ public class MainWindow {
 						
 						break;
 					case "EMPLOYEE":
+						FXMLLoader loaderEmp = new FXMLLoader(getClass().getResource("/gui/employeePanel/employeeWindow.fxml"));	
 						try {
-							Parent root =FXMLLoader.load(getClass().getResource("/gui/employeePanel/employeeWindow.fxml"));
-							main.updateScene(new Scene(root));
+							BorderPane panel = loaderEmp.load();
+							EmployeeWindow controller = loaderEmp.<EmployeeWindow>getController();
+							main.updateScene(new Scene(panel));
+							controller.setMainWindow(this);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}

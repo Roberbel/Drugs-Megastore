@@ -107,9 +107,9 @@ public class AddArrivalPane implements Initializable {
 	    		toBeAdded.setReceived(false);
 	    }
 		
-	    JPAManager.connect();
+	    //JPAManager.connect();
 	    JPAManager.insertArrival(toBeAdded);
-	    JPAManager.disconnect();
+	    //JPAManager.disconnect();
 	    
 	   
 	    
