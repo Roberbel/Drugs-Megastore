@@ -1,5 +1,6 @@
 package gui.adminPanel;
 
+import java.awt.Desktop;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -9,9 +10,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
+import javax.xml.bind.JAXBException;
+import javax.xml.transform.TransformerException;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
@@ -908,12 +912,80 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void xmlItemClicked(ActionEvent event) {
+    	
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Save XML");
+    	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.XML)", "*.xml");
+    	fileChooser.getExtensionFilters().add(extFilter);
+    	File file = fileChooser.showSaveDialog(stage);
+    	if(file != null) {
+    		Database database;
+    		try {
+	    		List<Client> clients = SQLManager.getAllClients();			
+				List<Provider> providers = SQLManager.getAllProviders();
+				List<Warehouse> warehouses = SQLManager.getAllWarehouses();
+				
+				for(Client c: clients) {
+					
+					c.setDeliveries(SQLManager.searchDeliveryByClientId(c.getId()));
+					
+				}
+				
+				for(Provider p: providers) {
+					
+					p.setArrivals(SQLManager.searchArrivalsByProviderId(p.getProviderId()));
+					
+				}
+				
+				for(Warehouse w: warehouses) {
+					
+					List<Corridor> corridors = SQLManager.searchCorridorByWarehouseId(w.getId());
+					for(Corridor c: corridors) {
+						
+						System.out.println(c);
+						c.setDrugs(SQLManager.searchDrugByCorridorId(c.getId()));
+						
+					}
+					w.setCorridors(corridors);
+					w.setEmployees(SQLManager.getAllEmployees());
+					
+				}
+				database = new Database(clients, providers, warehouses);
+				XMLManager.marshallDatabase(database, file);
+    		}catch(SQLException | JAXBException | IOException e) {
+    			System.out.println("Error exporting the database to an XML");
+    		}
+			
+    	}
+    	
 
     }
     
     @FXML
     void htmlItemClicked(ActionEvent event) {
-
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle("Choose the XML");
+    	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.XML)", "*.xml");
+    	fileChooser.getExtensionFilters().add(extFilter);
+    	File file1 = fileChooser.showOpenDialog(stage);
+    	
+    	FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("HTML files (*.HTML)", "*.html");
+    	fileChooser.getExtensionFilters().clear();
+    	fileChooser.getExtensionFilters().add(extFilter2);
+    	fileChooser.setTitle("Choose where to save it");
+    	File file2 = fileChooser.showSaveDialog(stage);
+    	try {
+    		System.out.println(file1.getAbsolutePath());
+    		System.out.println(file2.getAbsolutePath());
+			XMLManager.databasexml2Html(file1, file2);
+			try {
+				Desktop.getDesktop().browse(file2.toURI());
+			} catch (IOException e) {
+				System.out.println("Error opening the HTML file");
+			}
+		} catch (TransformerException e) {
+			System.out.println("Error turning XML into HTML");
+		}
     }
     
 	@Override

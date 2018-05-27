@@ -1,5 +1,6 @@
 package DB;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,10 +31,9 @@ import pojos.Warehouse;
 
 
 public class XMLManager {
-	private static final String xsltPath = "C:/Users/laura/git/Drug Megastore/xml/Database.xslt";
 	
 	public static void main(String[] args) throws TransformerException, JAXBException {
-		String dir = "C:/Users/laura/git/Drug Megastore/xml/DatabaseTest.xml";
+		String dir = "./xml/DatabaseTest.xml";
 		try {
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 			
@@ -70,8 +70,35 @@ public class XMLManager {
 			}
 			
 			Database database = new Database(clients, providers, warehouses);
-			//XMLManager.marshallDatabase(database, dir);
-			XMLManager.databasexml2Html(dir, "C:/Users/laura/git/Drug Megastore/xml/Datanuevo.html");
+			
+			try {
+				XMLManager.marshallDatabase(database, dir);
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+				System.out.println("error marshalling");
+			}
+			XMLManager.databasexml2Html(dir, "./xml/Datanuevo.html");
+			
+			try {
+				XMLManager.marshallDatabase(database, dir);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			try {
+				XMLManager.databasexml2Html(dir, "./xml/databasehtml.html");
+				try {
+					File file2 = new File("./xml/databasehtml.html");
+					Desktop.getDesktop().browse(file2.toURI());
+				} catch (IOException e) {
+					System.out.println("Error opening the HTML file");
+				}
+			} catch (TransformerException e) {
+				e.printStackTrace();
+				System.out.println("Error turning XML into HTML");
+			}
 			SQLManager.disconnect();
 		
 		} catch (ClassNotFoundException e) {
@@ -87,6 +114,7 @@ public class XMLManager {
 	
 	public static void databasexml2Html(String origin, String destiny) throws TransformerException {
 
+		String xsltPath = "./xml/Database.xslt";
         TransformerFactory tFactory = TransformerFactory.newInstance();
         Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
         transformer.transform(new StreamSource(new File(origin)),new StreamResult(new File(destiny)));
@@ -96,7 +124,7 @@ public class XMLManager {
 	
 	public static void drugxml2Html(String origin, String destiny) throws TransformerException {
 		
-		String xsltPath = "C:/Users/laura/git/Drug Megastore/xml/Database.xslt";
+		String xsltPath = "./xml/Database.xslt";
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
 		transformer.transform(new StreamSource(new File(origin)),new StreamResult(new File(destiny)));

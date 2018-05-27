@@ -42,14 +42,14 @@ public class Main extends Application{
 	
 	private void closeConnection(){
 		try {
-			System.exit(0);
+			
 			SQLManager.disconnect();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			
 			JPAManager.disconnect();
-			
+			System.exit(0);
 		}
 	}
 	
