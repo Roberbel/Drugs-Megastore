@@ -209,7 +209,7 @@
 					      <th bgcolor="#0816f7">Selling Price</th>
 					       <th bgcolor="#0816f7">Active Principle</th>
 					      <xsl:for-each select="Drugs/Drug">
-					      <xsl:sort select="@name" />
+					      <xsl:sort select="//Database//Warehouses//Warehouse//COrridors//Corridor//Drugs//Drug//@id" />
 					      
 					            <tr bgcolor="white">
 					            <td><i><xsl:value-of select="@id" /></i></td>
