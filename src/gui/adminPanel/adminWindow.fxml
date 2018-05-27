@@ -234,10 +234,11 @@
                         <HBox prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
                               <TextField fx:id="employeeNameField" prefHeight="25.0" prefWidth="118.0" promptText="Name" />
-                              <TextField fx:id="employeeSalaryField" prefHeight="25.0" prefWidth="134.0" promptText="Salary" />
+                              <TextField fx:id="employeeSalaryField" prefHeight="25.0" prefWidth="82.0" promptText="Salary" />
                               <TextField fx:id="employeePhoneField" prefHeight="25.0" prefWidth="146.0" promptText="Phone Number" />
-                              <TextField fx:id="employeePositionField" prefHeight="25.0" prefWidth="133.0" promptText="Position" />
+                              <TextField fx:id="employeePositionField" prefHeight="25.0" prefWidth="106.0" promptText="Position" />
                               <ComboBox fx:id="comboWarehouse" prefHeight="25.0" prefWidth="121.0" promptText="Warehouse" />
+                              <JFXButton fx:id="browseButton1" onAction="#browseButtonClicked" prefHeight="25.0" prefWidth="107.0" text="Browse Image" />
                               <JFXButton fx:id="addEmployeeButton" onAction="#addEmployeeClicked" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: GREY;" text="Add" />
                               <JFXButton fx:id="deleteEmployeeButton" onAction="#deleteEmployeeClicked" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: grey;" text="Delete" />
                            </children>

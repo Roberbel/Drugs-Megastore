@@ -436,8 +436,23 @@ public class AdminWindow implements Initializable {
     	newEmployee.setPhone(Integer.parseInt(employeePhoneField.getText()));
     	newEmployee.setPosition(employeePositionField.getText());
     	newEmployee.setWarehouse(comboWarehouse.getSelectionModel().getSelectedItem());
+    	if(this.imageLoaded!=null) {
+    		newEmployee.setPhoto(this.imageLoaded);
+    		this.imageLoaded=null;
+    	}else {
+    		File photo = new File("utils/no_photo_1x.jpg");
+			InputStream streamBlob;
+			try {
+				streamBlob = new FileInputStream(photo);
+				byte[] bytesBlob = new byte[streamBlob.available()];
+				newEmployee.setPhoto(bytesBlob);
+			} catch ( IOException e) {
+				e.printStackTrace();
+			}
+    	}
     	newEmployee.setUsername("Thor");
     	newEmployee.setPassword("god of thunder");
+    	newEmployee.setIsAdmin(false);
     	try {
 			SQLManager.insertEmployee(newEmployee);
 			employeeTable.getItems().add(newEmployee);
@@ -635,7 +650,16 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void loadEmployeeImage(MouseEvent event) {
-
+    	try {
+    		Employee empToShow=employeeTable.getSelectionModel().getSelectedItem();
+    		if(empToShow.getPhoto()!=null) {
+    			BufferedImage img=ImageIO.read(new ByteArrayInputStream(empToShow.getPhoto()));
+    			Image picture=SwingFXUtils.toFXImage(img, null);
+    			imageView.setImage(picture);
+    		}
+    	}catch(IOException ex) {
+    		ex.printStackTrace();
+    	}
     }
     
     @FXML
@@ -837,14 +861,6 @@ public class AdminWindow implements Initializable {
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		//Starts Connection with Database
-		//JPAManager.connect();
-		/*try {
-			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		//Clients Table
 		ObservableList methods=FXCollections.observableArrayList();
 		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");

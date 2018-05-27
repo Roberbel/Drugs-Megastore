@@ -320,7 +320,7 @@ public class SQLManager implements Manager {
 
 	public static void insertEmployee(Employee employees) throws SQLException {
 
-		String sql1 = "INSERT INTO employee(name,salary, phone,position,warehouse_id,username,password,type) VALUES(?,?,?,?,?);";
+		String sql1 = "INSERT INTO employee(name,salary, phone,position,warehouse_id,username,password,isAdmin) VALUES(?,?,?,?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, employees.getName());
 		prep.setFloat(2, employees.getSalary());
