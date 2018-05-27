@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
@@ -111,6 +112,9 @@ public class EmployeeWindow implements Initializable {
 	private ImageView drugPhoto;
 	
 	@FXML
+	private ImageView logoApot;
+	
+	@FXML
 	private SplitPane roberbelPanel;
 	
 	@FXML
@@ -136,6 +140,12 @@ public class EmployeeWindow implements Initializable {
 
 	@FXML
 	private JFXCheckBox noCheckBox1;
+	
+	@FXML
+    private Button uupdateDeliveryUpdate;
+	
+	@FXML
+    private Button uupdateArrivalUpdate;
 	
 	@FXML
 	private void handleYesCheckBox() {
@@ -289,6 +299,60 @@ public class EmployeeWindow implements Initializable {
 		}
 	}
 
+	@FXML
+    void updateArrival(MouseEvent event) {
+		Arrival toBeUpdated = arrivalList.getSelectionModel().getSelectedItem();
+		boolean received = false ;
+		if(yesCheckBox.isSelected()) {
+			received = true;
+		}
+		if(noCheckBox.isSelected()) {
+			received = false;
+		}
+		try {
+			SQLManager.updateArrivalReceived(toBeUpdated.getArrivalId(), received);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		updateTables();
+		
+    }
+
+    @FXML
+    void updateDelivery(MouseEvent event) {
+    		Delivery toBeUpdated = deliveryList.getSelectionModel().getSelectedItem();
+		boolean sent = false ;
+		if(yesCheckBox1.isSelected()) {
+			sent = true;
+		}
+		if(noCheckBox1.isSelected()) {
+			sent = false;
+		}
+		try {
+			SQLManager.updateDeliverySent(toBeUpdated.getTransactionId(), sent);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		updateTables();
+    }
+	
+    private void updateTables() {
+    		try {
+    			arrivalList.getItems().clear();;
+			arrivalList.getItems().addAll(SQLManager.getAllArrivals());
+	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			deliveryList.getItems().clear();
+			deliveryList.getItems().addAll(SQLManager.getAllDeliveries());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		

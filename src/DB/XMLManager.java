@@ -56,10 +56,11 @@ public class XMLManager {
 			for(Warehouse w: warehouses) {
 				
 				System.out.println("warehouse ID = "+ w.getId());
-				//List<Corridor> corridors = SQLManager.searchCorridorByWarehouseId(w.getId());
-				List<Corridor> corridors = SQLManager.getAllCorridors();
+				List<Corridor> corridors = SQLManager.searchCorridorByWarehouseId(w.getId());
+				//List<Corridor> corridors = SQLManager.getAllCorridors();
 				for(Corridor c: corridors) {
 					
+					System.out.println(c);
 					c.setDrugs(SQLManager.searchDrugByCorridorId(c.getId()));
 					
 				}
@@ -71,6 +72,8 @@ public class XMLManager {
 			Database database = new Database(clients, providers, warehouses);
 			XMLManager.marshallDatabase(database, dir);
 			
+			Database database1 = XMLManager.unmarshallDatabase("D:/Documents/GitHub/Drugs-Megastore/xml/DatabaseTest.txt");
+			System.out.println("D == D1 ? " + (database.equals(database1)));
 			SQLManager.disconnect();
 		} catch (JAXBException|IOException  e) {
 			

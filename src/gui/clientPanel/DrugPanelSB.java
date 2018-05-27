@@ -2,6 +2,7 @@ package gui.clientPanel;
 
 import java.io.ByteArrayInputStream;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -114,14 +115,29 @@ public class DrugPanelSB {
 
 	protected void setDrug(Drug drug) {
 		this.drug = drug;
+		packaged = null;
+		List<Packaged> packages = delivery.getPackages();
+		for(Packaged p : packages) {
+			if(p.getDrugId() == drug.getId()) {
+				packaged = p;
+			}
+		}
+		System.out.println(packaged);
 		nameLabel.setText("Name: " + drug.getName());
 		activePrincipleLabel.setText("Active Principle: " + drug.getActivePrinciple());
 		priceLabel.setText("Price: " + drug.getSellingPrice());
-		stock = drug.getStock();
+			
+		if( packaged == null ) {
+			stock = drug.getStock();
+		}else{
+			stock = drug.getStock() - packaged.getAmount();
+			amountTextField.setText(""+packaged.getAmount());
+		}
 		stockLabel.setText("Stock: " + stock);
 		if(drug.getPhoto()!= null) {
 			drugPhoto.setImage(new Image(new ByteArrayInputStream(drug.getPhoto())));
 		}
+		
 	}
 
 	protected void setShoppingPanel(ShopPanelSB clientPanel) {

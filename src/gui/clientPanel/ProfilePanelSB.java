@@ -81,7 +81,7 @@ public class ProfilePanelSB {
     	Integer phone = Integer.parseInt((telephoneTextField.getText()));
 		try {
 			System.out.println("updating: "+client.getId()+" "+ address+" "+ email+ " "+phone+ " "+ paymentMethod);
-			JPAManager.updateClient(client.getId(), address, email, phone, paymentMethod);
+			SQLManager.updateClient(client.getId(), address, email, phone, paymentMethod);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

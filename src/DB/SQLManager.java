@@ -492,7 +492,6 @@ public class SQLManager implements Manager {
 	
 	public static List<Corridor> searchCorridorByWarehouseId(Integer warehouseId) throws SQLException{
 		
-		System.out.println("QUERY: SELECT * FROM corridor WHERE warehouse_id = " + warehouseId);
 		String sql = "SELECT * FROM corridor WHERE warehouse_id = ? ;";
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, warehouseId);
@@ -967,13 +966,15 @@ public class SQLManager implements Manager {
 	//CLIENT
 	public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod) throws SQLException {
 		
-		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ? WHERE id = ? ;";
+		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, payment_method = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, address);
 		prep.setString(2, email);
 		prep.setInt(3, telephone);
 		prep.setString(4, paymentMethod.toString());
 		prep.setInt(5, id);
+		prep.executeUpdate();
+		prep.close();
 		
 	}
 	
@@ -988,7 +989,6 @@ public class SQLManager implements Manager {
 		prep.setString(5, username);
 		prep.setString(6, password);
 		prep.setInt(7, id);
-		
 		prep.executeUpdate();
 		prep.close();
 	}
@@ -1065,7 +1065,7 @@ public class SQLManager implements Manager {
 	//Deliveries
 	public static void updateDeliverySent(Integer id, Boolean sent) throws SQLException {
 		
-		String sql = "UPDATE deliveries SET sent = ? WHERE id = ? ;";
+		String sql = "UPDATE deliveries SET sent = ? WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setBoolean(1, sent);
 		prep.setInt(2, id);
@@ -1074,7 +1074,20 @@ public class SQLManager implements Manager {
 		
 		
 	}	
-
+	//Arrivals
+	public static void updateArrivalReceived(Integer id, Boolean received) throws SQLException {
+		
+		String sql = "UPDATE arrivals SET received = ? WHERE transaction_id = ? ;";
+		PreparedStatement prep = c.prepareStatement(sql);
+		prep.setBoolean(1, received);
+		prep.setInt(2, id);
+		prep.executeUpdate();
+		prep.close();
+		
+		
+	}	
+	
+	
 /*
  *=====================================================================================================
  * 						Delete
@@ -1083,13 +1096,21 @@ public class SQLManager implements Manager {
  */
 		
     public static void deleteArrival(Arrival arrival)  throws SQLException{
-
+    	
+		c.setAutoCommit(false);
+    	
+    	List<Arrives> arrives = arrival.getArrives();
+    	for(Arrives a: arrives) {
+    		SQLManager.deleteArrive(a);
+    	}
     	String sql = "DELETE FROM arrivals WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,arrival.getArrivalId());
 		prep.executeUpdate();
 		prep.close();	
 		
+		c.commit();
+		c.setAutoCommit(true);
 	}
     
     public static void deleteArrive(Arrives a) throws SQLException {
@@ -1147,12 +1168,19 @@ public class SQLManager implements Manager {
     
     public static void deleteDelivery(Delivery delivery) throws SQLException {
     	
+    	c.setAutoCommit(false);
     	List<Packaged> packs = delivery.getPackages();
+    	for(Packaged p : packs) {
+    		SQLManager.deletePackaged(p);
+    	}
     	String sql = "DELETE FROM deliveries WHERE transaction_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,delivery.getTransactionId());
 		prep.executeUpdate();
 		prep.close();
+		
+		c.commit();
+		c.setAutoCommit(true);
     	
     }
     

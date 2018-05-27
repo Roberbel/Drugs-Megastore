@@ -57,7 +57,12 @@ public class CartPanelSB {
     void confirmDelivery(MouseEvent event) {
     	
     	delivery.setTransactionDate(new Date(System.currentTimeMillis()));
-    	JPAManager.insertDelivery(delivery);
+    	try {
+			SQLManager.insertDeliveries(delivery);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	//we clear the delivery.
     	parentPanel.clearDelivery();
     	parentPanel.showShopPanel(null);
