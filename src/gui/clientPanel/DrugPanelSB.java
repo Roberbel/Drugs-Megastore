@@ -122,7 +122,6 @@ public class DrugPanelSB {
 				packaged = p;
 			}
 		}
-		System.out.println(packaged);
 		nameLabel.setText("Name: " + drug.getName());
 		activePrincipleLabel.setText("Active Principle: " + drug.getActivePrinciple());
 		priceLabel.setText("Price: " + drug.getSellingPrice());

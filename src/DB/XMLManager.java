@@ -72,9 +72,8 @@ public class XMLManager {
 			Database database = new Database(clients, providers, warehouses);
 			XMLManager.marshallDatabase(database, dir);
 			
-			Database database1 = XMLManager.unmarshallDatabase("D:/Documents/GitHub/Drugs-Megastore/xml/DatabaseTest.txt");
-			System.out.println("D == D1 ? " + (database.equals(database1)));
 			SQLManager.disconnect();
+		
 		} catch (JAXBException|IOException  e) {
 			
 			e.printStackTrace();
@@ -89,9 +88,18 @@ public class XMLManager {
 	}
 	
 	
+	public static void databasexml2Html(String origin, String destiny) throws TransformerException {
+		
+		String xsltPath = "D:/Documents/GitHub/Drugs-Megastore/xml/Database.xslt";
+		TransformerFactory tFactory = TransformerFactory.newInstance();
+		Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
+		transformer.transform(new StreamSource(new File(origin)),new StreamResult(new File(destiny)));
+	
+	}
+	
 	public static void drugxml2Html(String origin, String destiny) throws TransformerException {
 		
-		String xsltPath = "D:/Documents/GitHub/Drugs-Megastore/xml/Report-Style.xslt";
+		String xsltPath = "D:/Documents/GitHub/Drugs-Megastore/xml/Drug-style.xslt";
 		TransformerFactory tFactory = TransformerFactory.newInstance();
 		Transformer transformer = tFactory.newTransformer(new StreamSource(new File(xsltPath)));
 		transformer.transform(new StreamSource(new File(origin)),new StreamResult(new File(destiny)));
