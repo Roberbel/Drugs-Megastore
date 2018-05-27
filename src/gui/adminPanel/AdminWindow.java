@@ -951,7 +951,7 @@ public class AdminWindow implements Initializable {
 					
 				}
 				database = new Database(clients, providers, warehouses);
-				XMLManager.marshallDatabase(database, file);
+				XMLManager.marshallDatabase(database, file.getAbsolutePath());
     		}catch(SQLException | JAXBException | IOException e) {
     			System.out.println("Error exporting the database to an XML");
     		}
@@ -975,9 +975,7 @@ public class AdminWindow implements Initializable {
     	fileChooser.setTitle("Choose where to save it");
     	File file2 = fileChooser.showSaveDialog(stage);
     	try {
-    		System.out.println(file1.getAbsolutePath());
-    		System.out.println(file2.getAbsolutePath());
-			XMLManager.databasexml2Html(file1, file2);
+			XMLManager.databasexml2Html(file1.getAbsolutePath(), file2.getAbsolutePath());
 			try {
 				Desktop.getDesktop().browse(file2.toURI());
 			} catch (IOException e) {
