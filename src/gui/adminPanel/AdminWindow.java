@@ -883,8 +883,14 @@ public class AdminWindow implements Initializable {
 		providerName.setCellFactory(TextFieldTableCell.forTableColumn());
 		providerName.setOnEditCommit(e->updateProviderName(e));
 		providerPhone.setCellValueFactory(new PropertyValueFactory <Provider,Integer>("telephone"));
+		providerPhone.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		providerPhone.setOnEditCommit(e->updateProviderPhone(e));
 		providerAddress.setCellValueFactory(new PropertyValueFactory<Provider,String>("address"));
+		providerAddress.setCellFactory(TextFieldTableCell.forTableColumn());
+		providerAddress.setOnEditCommit(e->updateProviderAddress(e));
 		providerMail.setCellValueFactory(new PropertyValueFactory <Provider,String>("email"));
+		providerMail.setCellFactory(TextFieldTableCell.forTableColumn());
+		providerMail.setOnEditCommit(e->updateProviderMail(e));
 		try {
 			providerTable.getItems().addAll(SQLManager.getAllProviders());
 		}catch(SQLException ex) {

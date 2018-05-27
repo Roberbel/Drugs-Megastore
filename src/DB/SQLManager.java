@@ -961,6 +961,7 @@ public class SQLManager implements Manager {
 		prep.close();
 		
 	}
+	
 	//WAREHOUSE
 	public static void updateWarehouse(int id, int pc, String city, String country, String address, int phone) throws SQLException {
 		
@@ -976,6 +977,21 @@ public class SQLManager implements Manager {
 		
 		prep.executeUpdate();
 		prep.close();
+		
+	}
+	
+	//PROVIDER
+	public static void updateProvider(int id, String name, String address, int phone, String email) throws SQLException{
+		
+		String query="UPDATE provider SET name=?, address=?, telephone=?, email=? WHERE id=?;";
+		
+		PreparedStatement prep=c.prepareStatement(query);
+		prep.setString(1,name);
+		prep.setString(2,address);
+		prep.setInt(3,phone);
+		prep.setString(4,email);
+		prep.setInt(5,id);
+		
 		
 	}
 	
