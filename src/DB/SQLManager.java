@@ -947,6 +947,22 @@ public class SQLManager implements Manager {
 // 								Updates
 //=====================================================================================================
 	
+	//CORRIDOR
+	public static void updateCorridor(Integer id, float temp, Warehouse warehouse) throws SQLException {
+		
+		String query="UPDATE corridor SET temperature=?, warehouse_id = ? WHERE id=?;";
+		
+		PreparedStatement prep=c.prepareStatement(query);
+		prep.setFloat(1, temp);
+		prep.setInt(2, warehouse.getId());
+		prep.setInt(3, id);
+		
+		prep.executeUpdate();
+		prep.close();
+		
+	}
+	
+	
 	//CLIENT
 	public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod) throws SQLException {
 		
