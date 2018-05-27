@@ -18,7 +18,6 @@ import com.jfoenix.controls.JFXListView;
 
 import pojos.*;
 import pojos.Client.PaymentMethod;
-import model.*;
 import DB.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -649,20 +648,28 @@ public class AdminWindow implements Initializable {
 		}
     }
     
-    public void updateCorridor(Event e) {
-    	
-    	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();
-    	
+    public void updateCorridorTemp(Event e) {    	
+    	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();  	
     	TableColumn.CellEditEvent<Corridor,Float> ce;
-    	ce=(TableColumn.CellEditEvent<Corridor, Float>) e;
-    	    	
+    	ce=(TableColumn.CellEditEvent<Corridor, Float>) e; 	    	
     	try {
     		c.setTemperature(ce.getNewValue());
     		SQLManager.updateCorridor(c.getId(), c.getTemperature(), c.getWarehouse());
     	}catch(SQLException ex) {
     		ex.printStackTrace();
     	}
-    	
+    }
+    
+    public void updateCorridorWarehouse(Event e) {
+    	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();  	
+    	TableColumn.CellEditEvent<Corridor,Warehouse> ce;
+    	ce=(TableColumn.CellEditEvent<Corridor, Warehouse>) e;
+    	try {
+    		c.setWarehouse(ce.getNewValue());
+    		SQLManager.updateCorridor(c.getId(),c.getTemperature(),c.getWarehouse());
+    	}catch(SQLException ex) {
+    		
+    	}
     }
     
     
@@ -681,8 +688,6 @@ public class AdminWindow implements Initializable {
 		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");
 		comboPayment.getItems().addAll(methods);		
 		clientName.setCellValueFactory(new PropertyValueFactory <Client,String>("name"));
-		clientName.setCellFactory(TextFieldTableCell.forTableColumn());
-		clientName.setOnEditCommit(e-> updateClient(e));
 		clientAdress.setCellValueFactory(new PropertyValueFactory <Client,String>("address"));
 		clientPhone.setCellValueFactory(new PropertyValueFactory <Client,Integer>("telephone"));
 		clientMail.setCellValueFactory(new PropertyValueFactory <Client,String>("email"));
@@ -699,10 +704,10 @@ public class AdminWindow implements Initializable {
 			corridorId.setCellValueFactory(new PropertyValueFactory <Corridor,Integer>("id"));
 			corridorWarehouse.setCellValueFactory(new PropertyValueFactory <Corridor,Warehouse>("warehouse"));
 			corridorWarehouse.setCellFactory(ComboBoxTableCell.forTableColumn(comboWare.getItems()));
-			corridorWarehouse.setOnEditCommit(e->updateCorridor(e));
+			corridorWarehouse.setOnEditCommit(e->updateCorridorWarehouse(e));
 			corridorTemperature.setCellValueFactory(new PropertyValueFactory <Corridor,Float>("temperature"));
 			corridorTemperature.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
-			corridorTemperature.setOnEditCommit(e->updateCorridor(e));
+			corridorTemperature.setOnEditCommit(e->updateCorridorTemp(e));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
