@@ -948,6 +948,22 @@ public class SQLManager implements Manager {
 // 								Updates
 //=====================================================================================================
 	
+	//CORRIDOR
+	public static void updateCorridor(Integer id, float temp, Warehouse warehouse) throws SQLException {
+		
+		String query="UPDATE corridor SET temperature=?, warehouse_id = ? WHERE id=?;";
+		
+		PreparedStatement prep=c.prepareStatement(query);
+		prep.setFloat(1, temp);
+		prep.setInt(2, warehouse.getId());
+		prep.setInt(3, id);
+		
+		prep.executeUpdate();
+		prep.close();
+		
+	}
+	
+	
 	//CLIENT
 	public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod) throws SQLException {
 		
@@ -963,7 +979,7 @@ public class SQLManager implements Manager {
 	
 	public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod, String username, String password) throws SQLException {
 		
-		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, paymentMethod = ?, username = ?, password = ? WHERE id = ? ;";
+		String sql = "UPDATE client SET address = ?, email = ?, telephone = ?, payment_method = ?, username = ?, password = ? WHERE id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setString(1, address);
 		prep.setString(2, email);

@@ -24,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -34,13 +35,16 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.converter.FloatStringConverter;
 
 public class AdminWindow implements Initializable {
 	
@@ -628,22 +632,57 @@ public class AdminWindow implements Initializable {
 		}
     }
     
+    private void updateClient(Event e) {
+    	
+    	Client c= clientTable.getSelectionModel().getSelectedItem();
+    	
+    	TableColumn.CellEditEvent<Client, String> ce;
+    	ce=(TableColumn.CellEditEvent<Client, String>) e;
+
+    	try {
+    		c=SQLManager.searchClientByUsername(c.getUsername());
+    		c.setName(ce.getNewValue());
+			SQLManager.updateClient(c.getId(), c.getAddress(), c.getEmail(), c.getTelephone(),c.getPaymentMethod(), c.getUsername(), c.getPassword());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    }
+    
+    public void updateCorridor(Event e) {
+    	
+    	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();
+    	
+    	TableColumn.CellEditEvent<Corridor,Float> ce;
+    	ce=(TableColumn.CellEditEvent<Corridor, Float>) e;
+    	    	
+    	try {
+    		c.setTemperature(ce.getNewValue());
+    		SQLManager.updateCorridor(c.getId(), c.getTemperature(), c.getWarehouse());
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
+    	
+    }
+    
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Starts Connection with Database
 		//JPAManager.connect();
-		try {
+		/*try {
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		//Clients Table
 		ObservableList methods=FXCollections.observableArrayList();
 		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");
 		comboPayment.getItems().addAll(methods);		
 		clientName.setCellValueFactory(new PropertyValueFactory <Client,String>("name"));
+		clientName.setCellFactory(TextFieldTableCell.forTableColumn());
+		clientName.setOnEditCommit(e-> updateClient(e));
 		clientAdress.setCellValueFactory(new PropertyValueFactory <Client,String>("address"));
 		clientPhone.setCellValueFactory(new PropertyValueFactory <Client,Integer>("telephone"));
 		clientMail.setCellValueFactory(new PropertyValueFactory <Client,String>("email"));
@@ -654,12 +693,16 @@ public class AdminWindow implements Initializable {
 			e.printStackTrace();
 		}
 		//Corridors Table
-		corridorId.setCellValueFactory(new PropertyValueFactory <Corridor,Integer>("id"));
-		corridorWarehouse.setCellValueFactory(new PropertyValueFactory <Corridor,Warehouse>("warehouse"));
-		corridorTemperature.setCellValueFactory(new PropertyValueFactory <Corridor,Float>("temperature"));
 		try {
 			comboWare.getItems().addAll(SQLManager.getAllWarehouses());
 			corridorsTable.getItems().addAll(SQLManager.getAllCorridors());
+			corridorId.setCellValueFactory(new PropertyValueFactory <Corridor,Integer>("id"));
+			corridorWarehouse.setCellValueFactory(new PropertyValueFactory <Corridor,Warehouse>("warehouse"));
+			corridorWarehouse.setCellFactory(ComboBoxTableCell.forTableColumn(comboWare.getItems()));
+			corridorWarehouse.setOnEditCommit(e->updateCorridor(e));
+			corridorTemperature.setCellValueFactory(new PropertyValueFactory <Corridor,Float>("temperature"));
+			corridorTemperature.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
+			corridorTemperature.setOnEditCommit(e->updateCorridor(e));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -691,7 +734,7 @@ public class AdminWindow implements Initializable {
 		warePc.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("pc"));
 		wareCountry.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("country"));
 		wareCity.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("city"));
-		wareAdress.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("addres"));
+		wareAdress.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("address"));
 		warePhone.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("phone"));
 		try {
 			warehouseTable.getItems().addAll(SQLManager.getAllWarehouses());

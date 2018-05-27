@@ -250,7 +250,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="corridorsTable" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="corridorsTable" editable="true" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="corridorId" prefWidth="220.3999969959259" text="CorridorID" />
                               <TableColumn fx:id="corridorWarehouse" prefWidth="271.6000213623047" text="Warehouse" />
