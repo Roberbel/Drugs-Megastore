@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="gui.MainWindow">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainWindow">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -19,12 +20,12 @@
   </rowConstraints>
    <children>
       <JFXTextField fx:id="userField" focusColor="#dfa226" labelFloat="true" maxWidth="200.0" promptText="Username" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
-      <JFXTextField fx:id="passField" focusColor="#dfa226" labelFloat="true" maxWidth="200.0" promptText="Password" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
       <JFXButton fx:id="signInButton" buttonType="RAISED" onAction="#signInClicked" ripplerFill="#dfa226" style="-fx-background-color: Grey;" text="Sign In" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
       <ImageView fitHeight="136.0" fitWidth="136.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../../Pictures/logo%20bases.png" />
          </image>
       </ImageView>
+      <JFXPasswordField fx:id="passField" focusColor="#dfa226" labelFloat="true" maxWidth="200.0" promptText="Password" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
    </children>
 </GridPane>

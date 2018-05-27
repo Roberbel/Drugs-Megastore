@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.concurrent.TimeUnit;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import DB.SQLManager;
@@ -40,7 +41,7 @@ public class MainWindow {
     private JFXTextField userField;
 
     @FXML
-    private JFXTextField passField;
+    private JFXPasswordField passField;
 
     @FXML
     private JFXButton signInButton;
