@@ -237,11 +237,11 @@
                                  </rowConstraints>
                                  <children>
                                     <Label text="Active Principle:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField fx:id="drugCorridor" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                                    <TextField fx:id="drugActivePrinciple" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <TextField fx:id="drugCorridor" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="drugActivePrinciple" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                     <Label text="Corridor:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <Label text="Stock:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <TextField fx:id="drugStock" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <TextField fx:id="drugStock" editable="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                                     <Label text="Photo" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <ImageView fx:id="drugPhoto" fitHeight="150.0" fitWidth="168.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                        <image>
