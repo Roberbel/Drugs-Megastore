@@ -285,7 +285,7 @@ public class JPAManager implements Manager{
 		}
 		
 		public static List<Drug> searchDrugByName(String name, Integer maxPrice) {
-
+			
 			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND selling_price <= ?;");
 			q1.setParameter(1, "%"+name+"%");
 			q1.setParameter(2, maxPrice);

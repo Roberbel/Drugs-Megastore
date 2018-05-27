@@ -1,145 +1,289 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
 <Database>
+
     <Clients>
+
         <Client name="Khorne" address="c/Viena 17 cabanillas del campo" telephone="65" email="CELIACO" paymentMethod="ORGANS">
+
             <password>Craneos</password>
+
             <username>Khorne0</username>
+
             <Deliveries>
+
                 <Delivery id="2" sellingPrice="476" sent="true">
+
                     <transactionDate>2018-05-10</transactionDate>
+
                     <Packages>
+
                         <Package deliveryId="5" drugId="2" amount="64"/>
+
                         <Package deliveryId="6" drugId="2" amount="5"/>
+
                         <Package deliveryId="7" drugId="2" amount="55"/>
+
                         <Package deliveryId="8" drugId="2" amount="455"/>
+
                         <Package deliveryId="10" drugId="2" amount="5"/>
+
                         <Package deliveryId="11" drugId="2" amount="5"/>
+
                     </Packages>
+
                 </Delivery>
+
                 <Delivery id="3" sellingPrice="4567" sent="true">
+
                     <transactionDate>2018-05-10</transactionDate>
+
                     <Packages>
+
                         <Package deliveryId="12" drugId="3" amount="54"/>
+
                         <Package deliveryId="13" drugId="3" amount="54455"/>
+
                         <Package deliveryId="14" drugId="3" amount="54"/>
+
                     </Packages>
+
                 </Delivery>
+
                 <Delivery id="4" sellingPrice="54" sent="false">
+
                     <transactionDate>2018-05-10</transactionDate>
+
                     <Packages/>
+
                 </Delivery>
+
                 <Delivery id="265" sellingPrice="100" sent="true">
+
                     <transactionDate>2018-05-22</transactionDate>
+
                     <Packages>
+
                         <Package deliveryId="7" drugId="265" amount="9"/>
+
                     </Packages>
+
                 </Delivery>
+
                 <Delivery id="319" sellingPrice="430000" sent="false">
+
                     <transactionDate>2018-05-22</transactionDate>
+
                     <Packages>
+
                         <Package deliveryId="3" drugId="319" amount="5000"/>
+
                     </Packages>
+
                 </Delivery>
+
             </Deliveries>
+
         </Client>
+
         <Client name="GON" address="CELIACO" telephone="64" email="CELIACO" paymentMethod="ORGANS">
+
             <password>CELIACO</password>
+
             <username>CELIACO</username>
+
             <Deliveries>
+
                 <Delivery id="5" sellingPrice="87" sent="false">
+
                     <transactionDate>2018-05-10</transactionDate>
+
                     <Packages/>
+
                 </Delivery>
+
                 <Delivery id="215" sellingPrice="100" sent="true">
+
                     <transactionDate>2018-05-23</transactionDate>
+
                     <Packages>
+
                         <Package deliveryId="5" drugId="215" amount="7"/>
+
                     </Packages>
+
                 </Delivery>
+
                 <Delivery id="266" sellingPrice="100" sent="true">
+
                     <transactionDate>2018-05-22</transactionDate>
+
                     <Packages>
+
                         <Package deliveryId="7" drugId="266" amount="3000"/>
+
                     </Packages>
+
                 </Delivery>
+
             </Deliveries>
+
         </Client>
+
     </Clients>
+
     <Providers>
+
         <Provider id="2" name="Jaime" address="montecarmelo" telephone="456" email="jimmyvinigra">
+
             <Arrivals>
+
                 <Arrival arrivalId="305" buyingPrice="100" received="true">
+
                     <date>2018-05-29</date>
+
                     <Arrives>
+
                         <Arrive drugId="2" arrivalId="305" amount="1000"/>
+
                         <Arrive drugId="3" arrivalId="305" amount="1001"/>
+
                         <Arrive drugId="4" arrivalId="305" amount="1002"/>
+
                     </Arrives>
+
                 </Arrival>
+
                 <Arrival arrivalId="405" buyingPrice="100" received="true">
+
                     <date>2018-05-08</date>
+
                     <Arrives>
+
                         <Arrive drugId="12" arrivalId="405" amount="8"/>
+
                     </Arrives>
+
                 </Arrival>
+
                 <Arrival arrivalId="455" buyingPrice="100" received="true">
+
                     <date>2018-05-20</date>
+
                     <Arrives>
+
                         <Arrive drugId="15" arrivalId="455" amount="11"/>
+
                     </Arrives>
+
                 </Arrival>
+
             </Arrivals>
+
         </Provider>
+
         <Provider id="3" name="Laura" address="cabanillas" telephone="456" email="luuuuuuuuuuu">
+
             <Arrivals>
+
                 <Arrival arrivalId="355" buyingPrice="100" received="false">
+
                     <date>2018-05-16</date>
+
                     <Arrives/>
+
                 </Arrival>
+
             </Arrivals>
+
         </Provider>
+
     </Providers>
+
     <Warehouses>
+
         <Warehouse id="2" pc="28049" country="Spain" city="Madrid" address="montecarmelo" phone="564332898">
+
             <Employees>
+
                 <Employee id="2" name="" salary="0.0" phone="0" position="" isAdmin="false">
+
                     <password>ELE</password>
+
                     <username>jvini</username>
+
                 </Employee>
+
             </Employees>
+
             <Corridors>
+
                 <Corridor id="2" temperature="45.0">
+
                     <Drugs>
+
                         <Drug id="3" name="Droga4597" stock="10000" sellingPrice="86" activePrinciple="VIBRANUM"/>
+
                         <Drug id="4" name="Droga3470" stock="86380" sellingPrice="81" activePrinciple="VIBRANUM"/>
+
                         <Drug id="5" name="Droga3846" stock="59041" sellingPrice="61" activePrinciple="VIBRANUM"/>
+
                         <Drug id="6" name="Droga1050" stock="95293" sellingPrice="2" activePrinciple="VIBRANUM"/>
+
                         <Drug id="7" name="Droga5543" stock="32380" sellingPrice="49" activePrinciple="VIBRANUM"/>
+
                         <Drug id="8" name="Droga6743" stock="23870" sellingPrice="65" activePrinciple="VIBRANUM"/>
+
                         <Drug id="10" name="Droga1423" stock="5789" sellingPrice="38" activePrinciple="VIBRANUM"/>
+
                         <Drug id="11" name="Droga1907" stock="73712" sellingPrice="93" activePrinciple="VIBRANUM"/>
+
                         <Drug id="12" name="Droga4207" stock="37000" sellingPrice="93" activePrinciple="VIBRANUMVIBRANUM"/>
+
                         <Drug id="13" name="Droga9900" stock="51172" sellingPrice="9" activePrinciple="VIBRANUM"/>
+
                         <Drug id="14" name="Droga4948" stock="40450" sellingPrice="82" activePrinciple="VIBRANUM"/>
+
                         <Drug id="15" name="Droga7981" stock="78700" sellingPrice="47" activePrinciple="VIBRANUM"/>
+
                         <Drug id="16" name="Droga342" stock="5117" sellingPrice="8" activePrinciple="
+
 EFE"/>
+
                         <Drug id="17" name="Droga1520" stock="36852" sellingPrice="72" activePrinciple="
+
 EFE"/>
+
                         <Drug id="18" name="Droga174" stock="51465" sellingPrice="26" activePrinciple="
+
 EFE"/>
+
                         <Drug id="19" name="Droga7137" stock="90929" sellingPrice="81" activePrinciple="
+
 EFE"/>
+
                         <Drug id="20" name="Droga2725" stock="95180" sellingPrice="81" activePrinciple="
+
 EFE"/>
+
                         <Drug id="21" name="Droga6238" stock="97351" sellingPrice="7" activePrinciple="
+
 EFE"/>
+
                     </Drugs>
+
                 </Corridor>
+
                 <Corridor id="3" temperature="38.0">
+
                     <Drugs/>
+
                 </Corridor>
+
             </Corridors>
+
         </Warehouse>
+
     </Warehouses>
+
 </Database>
