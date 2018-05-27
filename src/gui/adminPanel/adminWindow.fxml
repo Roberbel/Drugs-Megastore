@@ -38,7 +38,7 @@
                         </HBox>
                      </bottom>
                      <center>
-                        <TableView fx:id="clientTable" editable="true" BorderPane.alignment="CENTER">
+                        <TableView fx:id="clientTable" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="clientName" prefWidth="84.00000309944153" text="Name" />
                             <TableColumn fx:id="clientAdress" prefWidth="136.00003051757812" text="Adress" />
@@ -160,7 +160,7 @@
                               <TextField fx:id="arrivedField" editable="false" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                               <Label text="Inventory" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
                               <Label text="Price" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                              <TextField fx:id="arrivalPriceField" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TextField fx:id="arrivalPriceField" editable="false" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </center>
@@ -206,7 +206,7 @@
                               <TextField fx:id="deliveredField" editable="false" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                               <Label text="Items Bougth" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
                               <Label text="Price" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                              <TextField fx:id="deliveryPriceField" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TextField fx:id="deliveryPriceField" editable="false" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </center>
@@ -278,7 +278,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="providerTable" onMouseClicked="#loadEmployeeImage" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="providerTable" editable="true" onMouseClicked="#loadEmployeeImage" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="providerName" prefWidth="186.8000214099884" text="Name" />
                               <TableColumn fx:id="providerAddress" prefWidth="96.79997253417969" text="Address" />

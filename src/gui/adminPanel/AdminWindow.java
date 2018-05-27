@@ -103,16 +103,16 @@ public class AdminWindow implements Initializable {
     private Tab drugTab;
 
     @FXML
-    private JFXListView<?> arrivalsList;
+    private JFXListView<Arrival> arrivalsList;
 
     @FXML
-    private TableView<?> inventoryTable;
+    private TableView<Arrives> inventoryTable;
 
     @FXML
-    private TableColumn<?, ?> inventoryDrug;
+    private TableColumn<Arrives, String> inventoryDrug;
 
     @FXML
-    private TableColumn<?, ?> inventoryAmount;
+    private TableColumn<Arrives, Integer> inventoryAmount;
     
     @FXML
     private TextField arrivalProviderField;
@@ -127,16 +127,16 @@ public class AdminWindow implements Initializable {
     private TextField arrivalPriceField;
 
     @FXML
-    private JFXListView<?> deliveriesList;
+    private JFXListView<Delivery> deliveriesList;
 
     @FXML
-    private TableView<?> itemsBoughtTable;
+    private TableView<Packaged> itemsBoughtTable;
 
     @FXML
-    private TableColumn<?, ?> itemsDrug;
+    private TableColumn<Packaged,String> itemsDrug;
 
     @FXML
-    private TableColumn<?, ?> itemsAmount;
+    private TableColumn<Packaged,Integer> itemsAmount;
 
     @FXML
     private TextField deliveryClientIdField;
@@ -604,12 +604,32 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void deliveryListClicked(MouseEvent event) {
-
+    	Delivery d=deliveriesList.getSelectionModel().getSelectedItem();
+    	
+    	deliveryClientIdField.setText(d.getClient().getUsername());
+    	deliveryDateField.setText(d.getTransactionDate().toString());
+    	deliveredField.setText(Boolean.toString(d.isSent()));
+    	deliveryPriceField.setText(String.valueOf(d.getSellingPrice()));
+    	
+    	itemsDrug.setCellValueFactory(new PropertyValueFactory<Packaged,String>("drug"));
+    	itemsAmount.setCellValueFactory(new PropertyValueFactory <Packaged,Integer>("amount"));
+    	
+    	itemsBoughtTable.getItems().addAll(d.getPackages());
     }
     
     @FXML
     void arrivalsListClicked(MouseEvent event) {
+    	Arrival a=arrivalsList.getSelectionModel().getSelectedItem();
     	
+    	arrivalProviderField.setText(a.getProvider().getName());
+    	arrivalProviderDate.setText(a.getDate().toString());
+    	arrivedField.setText(Boolean.toString(a.isReceived()));
+    	arrivalPriceField.setText(String.valueOf(a.getBuyingPrice()));
+    	
+    	inventoryDrug.setCellValueFactory(new PropertyValueFactory<Arrives,String>("drug"));
+    	inventoryAmount.setCellValueFactory(new PropertyValueFactory <Arrives,Integer>("amount"));
+    	
+    	inventoryTable.getItems().addAll(a.getArrives());
     }
 
 
@@ -631,24 +651,7 @@ public class AdminWindow implements Initializable {
 			e.printStackTrace();
 		}
     }
-    
-    private void updateClient(Event e) {
-    	
-    	Client c= clientTable.getSelectionModel().getSelectedItem();
-    	
-    	TableColumn.CellEditEvent<Client, String> ce;
-    	ce=(TableColumn.CellEditEvent<Client, String>) e;
-
-    	try {
-    		c=SQLManager.searchClientByUsername(c.getUsername());
-    		c.setName(ce.getNewValue());
-			SQLManager.updateClient(c.getId(), c.getAddress(), c.getEmail(), c.getTelephone(),c.getPaymentMethod(), c.getUsername(), c.getPassword());
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    }
-    
+        
     public void updateCorridorTemp(Event e) {    	
     	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();  	
     	TableColumn.CellEditEvent<Corridor,Float> ce;
@@ -669,7 +672,7 @@ public class AdminWindow implements Initializable {
     		c.setWarehouse(ce.getNewValue());
     		SQLManager.updateCorridor(c.getId(),c.getTemperature(),c.getWarehouse());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     
@@ -681,7 +684,7 @@ public class AdminWindow implements Initializable {
     		d.setStock(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     public void updateDrugPrinciple(Event e) {
@@ -692,7 +695,7 @@ public class AdminWindow implements Initializable {
     		d.setActivePrinciple(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     public void updateDrugPrice(Event e) {
@@ -703,7 +706,7 @@ public class AdminWindow implements Initializable {
     		d.setSellingPrice(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     public void updateDrugCorridor(Event e) {
@@ -714,7 +717,7 @@ public class AdminWindow implements Initializable {
     		d.setCorridor(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     public void updateDrugName(Event e) {
@@ -725,7 +728,7 @@ public class AdminWindow implements Initializable {
     		d.setName(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     public void updateWarePc(Event e) {
@@ -736,7 +739,7 @@ public class AdminWindow implements Initializable {
     		w.setPc(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     public void updateWareCity(Event e) {
@@ -747,7 +750,7 @@ public class AdminWindow implements Initializable {
     		w.setCity(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     public void updateWareCountry(Event e) {
@@ -758,7 +761,7 @@ public class AdminWindow implements Initializable {
     		w.setCountry(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     public void updateWarePhone(Event e) {
@@ -769,7 +772,7 @@ public class AdminWindow implements Initializable {
     		w.setPhone(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     public void updateWareAddress(Event e) {
@@ -780,10 +783,57 @@ public class AdminWindow implements Initializable {
     		w.setAddress(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		
+    		ex.printStackTrace();
     	}
     }
     
+    public void updateProviderName(Event e) {
+    	Provider p=providerTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Provider,String> ce;
+    	ce=(TableColumn.CellEditEvent<Provider, String>)e;
+    	try {
+    		p.setName(ce.getNewValue());
+    		SQLManager.updateProvider(p.getProviderId(), p.getName(), p.getAddress(), p.getTelephone(), p.getEmail());
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public void updateProviderAddress(Event e) {
+    	Provider p=providerTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Provider,String> ce;
+    	ce=(TableColumn.CellEditEvent<Provider, String>)e;
+    	try {
+    		p.setAddress(ce.getNewValue());
+    		SQLManager.updateProvider(p.getProviderId(), p.getName(), p.getAddress(), p.getTelephone(), p.getEmail());
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public void updateProviderPhone(Event e) {
+    	Provider p=providerTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Provider,Integer> ce;
+    	ce=(TableColumn.CellEditEvent<Provider, Integer>)e;
+    	try {
+    		p.setTelephone(ce.getNewValue());
+    		SQLManager.updateProvider(p.getProviderId(), p.getName(), p.getAddress(), p.getTelephone(), p.getEmail());
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public void updateProviderEmail(Event e) {
+    	Provider p=providerTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Provider,String> ce;
+    	ce=(TableColumn.CellEditEvent<Provider, String>)e;
+    	try {
+    		p.setEmail(ce.getNewValue());
+    		SQLManager.updateProvider(p.getProviderId(), p.getName(), p.getAddress(), p.getTelephone(), p.getEmail());
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
+    }
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -890,11 +940,19 @@ public class AdminWindow implements Initializable {
 		providerAddress.setOnEditCommit(e->updateProviderAddress(e));
 		providerMail.setCellValueFactory(new PropertyValueFactory <Provider,String>("email"));
 		providerMail.setCellFactory(TextFieldTableCell.forTableColumn());
-		providerMail.setOnEditCommit(e->updateProviderMail(e));
+		providerMail.setOnEditCommit(e->updateProviderEmail(e));
 		try {
 			providerTable.getItems().addAll(SQLManager.getAllProviders());
 		}catch(SQLException ex) {
 			ex.printStackTrace();
+		}
+		//Deliverys and Arrivals
+		try {
+			deliveriesList.getItems().addAll(SQLManager.getAllDeliveries());
+			arrivalsList.getItems().addAll(SQLManager.getAllArrivals());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
     
