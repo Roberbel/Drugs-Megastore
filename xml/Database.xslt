@@ -5,68 +5,22 @@
    <html>
    	<HEAD>
             <TITLE >APOTHEKE DATA BASE</TITLE>
-        <STYLE>
-               H1 {style=background-color:teal;
-               font-family: Arial,Univers,sans-serif;
-               font-size: 36pt;
-               font-effect-fire;
-               text-align:center}
-               
-                 H2 {style=background-color:#1a21f7;
-               font-family: Arial,Univers,sans-serif;
-               font-size: 20pt;
-               color:blue;
-               text-align:center}
-                H3 {style=background-color:#1a21f7;
-               font-family: sans-serif;
-               font-size: 15pt;
-               color:lime}
-               div {
-					    width: 90px;
-					    height: 20px;
-					    background-color: white;
-					    border: 1px solid black;
-					    position: relative;
-					    
-					    -webkit-animation-name: example; 
-					    -webkit-animation-duration: 4s; 
-					    -webkit-animation-iteration-count: infinite; 
-					    animation-name: example;
-					    animation-duration: 4s;
-					    animation-iteration-count: infinite;
-					}
-					
-									@-webkit-keyframes example {
-				    0%   {background-color:red; left:200px; top:0px;}
-				    25%  {background-color:yellow; left:900px; top:0px;}
-				    50%  {background-color:blue; left:900px; top:100px;}
-				    75%  {background-color:lime; left:200px; top:100px;}
-				    100% {background-color:red; left:200px; top:0px;}
-				}
-				
-				
-				@keyframes example {
-				    0%   {background-color:red; left:200px; top:0px;}
-				    25%  {background-color:yellow; left:900px; top:0px;}
-				    50%  {background-color:blue; left:900px; top:100px;}
-				    75%  {background-color:lime; left:200px; top:100px;}
-				    100% {background-color:red; left:200px; top:0px;}
-				}
-               
+        <STYLE type="text/css">
+                           
         </STYLE>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=font-effect-fire">
-   		</link>
-   		</link>
-   		</link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=font-effect-fire"/>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+   		
+   			
     </HEAD>
-   	<BODY STYLE="font-family:Arial, helvetica, sans-serif; font-size:12pt; background-color:#96f5ee">
+   	<BODY STYLE="font-family:Arial, helvetica, sans-serif; font-size:12pt; background-color:#96f5ee;" >
+   		
    		
 		<div>MegaStore</div>
    		<H1> <p><i class="fa fa-heart" style="font-size:60px;color:red;"></i><b>Apotheke Data Base: </b></p></H1>
    	 
-
   		 <H2><i class=" glyphicon glyphicon-user"></i><p><b>Clients: </b></p></H2>
   			 <table border="2" align="center" >	
   			 <th bgcolor="#f7a9f9">Name</th>
