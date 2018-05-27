@@ -881,6 +881,7 @@ public class AdminWindow implements Initializable {
 		//Providers Table
 		providerName.setCellValueFactory(new PropertyValueFactory<Provider,String>("name"));
 		providerName.setCellFactory(TextFieldTableCell.forTableColumn());
+		providerName.setOnEditCommit(e->updateProviderName(e));
 		providerPhone.setCellValueFactory(new PropertyValueFactory <Provider,Integer>("telephone"));
 		providerAddress.setCellValueFactory(new PropertyValueFactory<Provider,String>("address"));
 		providerMail.setCellValueFactory(new PropertyValueFactory <Provider,String>("email"));
