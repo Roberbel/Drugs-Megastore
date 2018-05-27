@@ -728,6 +728,14 @@ public class AdminWindow implements Initializable {
     		
     	}
     }
+    public void updateWarePc(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,Integer> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, Integer>)e;
+    	try {
+    		w.setPc(ce.getNewValue());
+    	}
+    }
     
     
 	@Override
@@ -804,10 +812,20 @@ public class AdminWindow implements Initializable {
 		}
 		//Warehouse Table
 		warePc.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("pc"));
+		warePc.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		warePc.setOnEditCommit(e->updateWarePc(e));
 		wareCountry.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("country"));
+		wareCountry.setCellFactory(TextFieldTableCell.forTableColumn());
+		wareCountry.setOnEditCommit(e->updateWareCountry(e));
 		wareCity.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("city"));
+		wareCity.setCellFactory(TextFieldTableCell.forTableColumn());
+		wareCity.setOnEditCommit(e->updateWareCity(e));
 		wareAdress.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("address"));
+		wareAdress.setCellFactory(TextFieldTableCell.forTableColumn());
+		wareAdress.setOnEditCommit(e->updateWareAddress(e));
 		warePhone.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("phone"));
+		warePhone.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		warePhone.setOnEditCommit(e->updateWarePhone(e));
 		try {
 			warehouseTable.getItems().addAll(SQLManager.getAllWarehouses());
 		}catch(SQLException ex) {
