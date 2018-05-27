@@ -390,7 +390,6 @@ public class AdminWindow implements Initializable {
     	}catch(NumberFormatException | NullPointerException | SQLException ex) {
     		Alert alert=new Alert(AlertType.ERROR);
     		alert.show();		
-    		ex.printStackTrace();
     	}
   	
     }
@@ -407,7 +406,6 @@ public class AdminWindow implements Initializable {
     	}catch(NumberFormatException | NullPointerException | SQLException ex) {
     		Alert alert=new Alert(AlertType.ERROR);
     		alert.show();	
-    		ex.printStackTrace();
     	}   	
     	
     }
@@ -423,22 +421,13 @@ public class AdminWindow implements Initializable {
     	if(this.imageLoaded!=null) {
     		newDrug.setPhoto(imageLoaded);
     		this.imageLoaded=null;
-    	}/*else {
-    		File photo = new File("./Photos/no_photo_1x.jpg");
-			InputStream streamBlob;
-			try {
-				streamBlob = new FileInputStream(photo);
-				byte[] bytesBlob = new byte[streamBlob.available()];
-				newDrug.setPhoto(bytesBlob);
-			} catch ( IOException e) {
-				e.printStackTrace();
-			}
-    	}*/
+    	}
     	try {
     		drugTable.getItems().add(newDrug);
     		SQLManager.insertDrug(newDrug);
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     	
     	
@@ -456,22 +445,13 @@ public class AdminWindow implements Initializable {
     	if(this.imageLoaded!=null) {
     		newEmployee.setPhoto(this.imageLoaded);
     		this.imageLoaded=null;
-    	}/*else {
-    		File photo = new File("/Photos/no_photo_1x.jpg");
-			InputStream streamBlob;
-			try {
-				streamBlob = new FileInputStream(photo);
-				byte[] bytesBlob = new byte[streamBlob.available()];
-				newEmployee.setPhoto(bytesBlob);
-			} catch ( IOException e) {
-				e.printStackTrace();
-			}
-    	}*/
+    	}
     	try {
 			SQLManager.insertEmployee(newEmployee);
 			employeeTable.getItems().add(newEmployee);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
     }
 
@@ -486,8 +466,10 @@ public class AdminWindow implements Initializable {
     	try {
     		SQLManager.insertWarehouse(newWarehouse);
     		warehouseTable.getItems().add(newWarehouse);
+    		refreshComboBoxes();
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     	
     }
@@ -503,7 +485,8 @@ public class AdminWindow implements Initializable {
     		SQLManager.insertProvider(newProvider);
     		providerTable.getItems().add(newProvider);
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
 
@@ -517,7 +500,8 @@ public class AdminWindow implements Initializable {
     		try {
 				SQLManager.deleteClient(c);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				Alert alert=new Alert(AlertType.ERROR);
+	    		alert.show();	
 			}
     	}    	
     }
@@ -532,7 +516,8 @@ public class AdminWindow implements Initializable {
     		try {
     			SQLManager.deleteCorridor(c);
     		}catch(SQLException ex) {
-    			ex.printStackTrace();
+    			Alert alert=new Alert(AlertType.ERROR);
+        		alert.show();	
     		}
     	}
     }
@@ -547,7 +532,8 @@ public class AdminWindow implements Initializable {
     		try {
     			SQLManager.deleteDrug(d);
     		}catch(SQLException ex) {
-    			ex.printStackTrace();
+    			Alert alert=new Alert(AlertType.ERROR);
+        		alert.show();	
     		}
     	}
     }
@@ -562,7 +548,8 @@ public class AdminWindow implements Initializable {
     		try {
     			SQLManager.deleteEmployee(e);
     		}catch(SQLException ex) {
-    			ex.printStackTrace();
+    			Alert alert=new Alert(AlertType.ERROR);
+        		alert.show();	
     		}
     	}
     }
@@ -576,8 +563,10 @@ public class AdminWindow implements Initializable {
     		items.remove(w);
     		try {
     			SQLManager.deleteWarehouse(w);
+    			refreshComboBoxes();
     		}catch(SQLException ex) {
-    			ex.printStackTrace();
+    			Alert alert=new Alert(AlertType.ERROR);
+        		alert.show();	
     		}
     	}
     }
@@ -592,7 +581,8 @@ public class AdminWindow implements Initializable {
     		try {
     			SQLManager.deleteProvider(p);
     		}catch(SQLException ex) {
-    			ex.printStackTrace();
+    			Alert alert=new Alert(AlertType.ERROR);
+        		alert.show();	
     		}
     	}
     }
@@ -606,8 +596,8 @@ public class AdminWindow implements Initializable {
 			comboCorridor.getItems().addAll(SQLManager.getAllCorridors());
 	    	comboWarehouse.getItems().addAll(SQLManager.getAllWarehouses());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
     }
     
@@ -624,7 +614,8 @@ public class AdminWindow implements Initializable {
 			blob.close();
 			this.imageLoaded=byteBlob;
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
    	
     }
@@ -642,7 +633,8 @@ public class AdminWindow implements Initializable {
 			blob.close();
 			this.imageLoaded=byteBlob;
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
     }
     
@@ -691,7 +683,8 @@ public class AdminWindow implements Initializable {
     			imageView.setImage(img);
     		}
     	}catch(IOException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     
@@ -708,7 +701,8 @@ public class AdminWindow implements Initializable {
 			imageView.setImage(img);
     		}
 		} catch (IOException e) {
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
     }
         
@@ -720,7 +714,8 @@ public class AdminWindow implements Initializable {
     		c.setTemperature(ce.getNewValue());
     		SQLManager.updateCorridor(c.getId(), c.getTemperature(), c.getWarehouse());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     
@@ -732,7 +727,8 @@ public class AdminWindow implements Initializable {
     		c.setWarehouse(ce.getNewValue());
     		SQLManager.updateCorridor(c.getId(),c.getTemperature(),c.getWarehouse());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     
@@ -744,7 +740,8 @@ public class AdminWindow implements Initializable {
     		d.setStock(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     public void updateDrugPrinciple(Event e) {
@@ -755,7 +752,8 @@ public class AdminWindow implements Initializable {
     		d.setActivePrinciple(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     public void updateDrugPrice(Event e) {
@@ -766,7 +764,8 @@ public class AdminWindow implements Initializable {
     		d.setSellingPrice(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     public void updateDrugCorridor(Event e) {
@@ -777,7 +776,8 @@ public class AdminWindow implements Initializable {
     		d.setCorridor(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     public void updateDrugName(Event e) {
@@ -788,7 +788,8 @@ public class AdminWindow implements Initializable {
     		d.setName(ce.getNewValue());
     		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     public void updateWarePc(Event e) {
@@ -799,7 +800,8 @@ public class AdminWindow implements Initializable {
     		w.setPc(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     public void updateWareCity(Event e) {
@@ -810,7 +812,8 @@ public class AdminWindow implements Initializable {
     		w.setCity(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     public void updateWareCountry(Event e) {
@@ -821,7 +824,8 @@ public class AdminWindow implements Initializable {
     		w.setCountry(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     public void updateWarePhone(Event e) {
@@ -832,7 +836,8 @@ public class AdminWindow implements Initializable {
     		w.setPhone(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     public void updateWareAddress(Event e) {
@@ -843,7 +848,8 @@ public class AdminWindow implements Initializable {
     		w.setAddress(ce.getNewValue());
     		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     
@@ -855,7 +861,8 @@ public class AdminWindow implements Initializable {
     		p.setName(ce.getNewValue());
     		SQLManager.updateProvider(p.getProviderId(), p.getName(), p.getAddress(), p.getTelephone(), p.getEmail());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     
@@ -867,7 +874,8 @@ public class AdminWindow implements Initializable {
     		p.setAddress(ce.getNewValue());
     		SQLManager.updateProvider(p.getProviderId(), p.getName(), p.getAddress(), p.getTelephone(), p.getEmail());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     
@@ -879,7 +887,8 @@ public class AdminWindow implements Initializable {
     		p.setTelephone(ce.getNewValue());
     		SQLManager.updateProvider(p.getProviderId(), p.getName(), p.getAddress(), p.getTelephone(), p.getEmail());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     
@@ -891,7 +900,8 @@ public class AdminWindow implements Initializable {
     		p.setEmail(ce.getNewValue());
     		SQLManager.updateProvider(p.getProviderId(), p.getName(), p.getAddress(), p.getTelephone(), p.getEmail());
     	}catch(SQLException ex) {
-    		ex.printStackTrace();
+    		Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
     	}
     }
     
@@ -924,7 +934,8 @@ public class AdminWindow implements Initializable {
 		try {
 			clientTable.getItems().addAll(SQLManager.getAllClients());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
 		//Corridors Table
 		try {
@@ -938,7 +949,8 @@ public class AdminWindow implements Initializable {
 			corridorTemperature.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
 			corridorTemperature.setOnEditCommit(e->updateCorridorTemp(e));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
 		//Drug Table		
 		try {
@@ -960,7 +972,8 @@ public class AdminWindow implements Initializable {
 			drugCorridor.setCellFactory(ComboBoxTableCell.forTableColumn(comboCorridor.getItems()));
 			drugCorridor.setOnEditCommit(e->updateDrugCorridor(e));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
 		//Employee Table
 		employeeName.setCellValueFactory(new PropertyValueFactory <Employee,String>("name"));
@@ -972,7 +985,8 @@ public class AdminWindow implements Initializable {
 			comboWarehouse.getItems().addAll(SQLManager.getAllWarehouses());
 			employeeTable.getItems().addAll(SQLManager.getAllEmployees());
 		}catch(SQLException ex) {
-			ex.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
 		//Warehouse Table
 		warePc.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("pc"));
@@ -993,7 +1007,8 @@ public class AdminWindow implements Initializable {
 		try {
 			warehouseTable.getItems().addAll(SQLManager.getAllWarehouses());
 		}catch(SQLException ex) {
-			ex.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
 		//Providers Table
 		providerName.setCellValueFactory(new PropertyValueFactory<Provider,String>("name"));
@@ -1011,7 +1026,8 @@ public class AdminWindow implements Initializable {
 		try {
 			providerTable.getItems().addAll(SQLManager.getAllProviders());
 		}catch(SQLException ex) {
-			ex.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
 		//Deliverys and Arrivals
 		try {
@@ -1019,7 +1035,8 @@ public class AdminWindow implements Initializable {
 			arrivalsList.getItems().addAll(SQLManager.getAllArrivals());
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR);
+    		alert.show();	
 		}
 	}
 

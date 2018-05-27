@@ -102,8 +102,8 @@ public class MainWindow {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			Alert alert=new Alert(AlertType.ERROR, "Wrong username or password");
-			e.printStackTrace();
 			alert.showAndWait();
+			e.printStackTrace();
 		}
     	
     }
