@@ -5,34 +5,29 @@
    <html>
    	<HEAD>
             <TITLE >APOTHEKE DATA BASE</TITLE>
-        <STYLE>
-               H1 {style=background-color:teal;
-               font-family: Arial,Univers,sans-serif;
-               font-size: 36pt;
-               text-align:center}
-               
-                 H2 {style=background-color:#1a21f7;
-               font-family: Arial,Univers,sans-serif;
-               font-size: 20pt;
-               color:blue;
-               text-align:center}
-                H3 {style=background-color:#1a21f7;
-               font-family: sans-serif;
-               font-size: 15pt;
-               color:lime}
+        <STYLE type="text/css">
+                           
         </STYLE>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+   		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=font-effect-fire"/>
+		<link rel="stylesheet" type="text/css" href="style.css" />
+   		
+   			
     </HEAD>
-   	<BODY STYLE="font-family:Arial, helvetica, sans-serif; font-size:12pt; background-color:#96f5ee">
-   	
-   		<H1> <p><b>Apotheke Data Base: </b></p></H1>
-   		 
-  		 <H2><p><b>Clients: </b></p></H2>
+   	<BODY STYLE="font-family:Arial, helvetica, sans-serif; font-size:12pt; background-color:#96f5ee;" >
+   		
+   		
+		<div>MegaStore</div>
+   		<H1> <p><i class="fa fa-heart" style="font-size:60px;color:red;"></i><b>Apotheke Data Base: </b></p></H1>
+   	 
+  		 <H2><i class=" glyphicon glyphicon-user"></i><p><b>Clients: </b></p></H2>
   			 <table border="2" align="center" >	
   			 <th bgcolor="#f7a9f9">Name</th>
 		 	 <th bgcolor="#f7a9f9">Address</th>	
 		 	 <th bgcolor="#f7a9f9">Telephone</th>			
  		 	 <th bgcolor="#f7a9f9">Email</th>					
- 		 	 <th bgcolor="#f7a9f9">Payment Method</th>	
+ 		 	 <th bgcolor="#f7a9f9" ><i class="fa fa-cc-visa"></i>Payment Method</th>	
  		 	  <xsl:for-each select="Database/Clients/Client">
       <xsl:sort select="@name" />
         
@@ -49,8 +44,8 @@
   
    					<xsl:for-each select="Database/Clients/Client">
    					<xsl:sort select="//Database//Clients//Client//@name" />
-   					  <H3> <p><b>Client:</b><xsl:value-of select="@name" /></p></H3>
-   					  <p><b>Delivery:</b></p>
+   					  <H3><p><b>Client:</b><xsl:value-of select="@name" /></p></H3>
+   					  <p><i class="glyphicon glyphicon-envelope"></i><b>Delivery:</b></p>
    			 			<table border="1" >
    			 		
      					<th bgcolor="#f7f408">ID</th>
@@ -71,7 +66,7 @@
 				    
 				   </table>
 				   
-				   <p><b>Packages:</b></p>
+				   <p><i class="fa fa-car" style="font-size:20px;color:darkblue;"></i><b>Packages:</b></p>
 				   <table border="1">
 				      <th bgcolor="#2cf708">Delivery Id</th>
 				      <th bgcolor="#2cf708">DrugId</th>
@@ -90,7 +85,7 @@
 				 </xsl:for-each>
    
 		   
-		 	 <H2> <p><b>Providers: </b></p></H2>
+		 	 <H2> <p><i class="fa fa-address-card "></i><b>Providers: </b></p></H2>
 		  			 <table border="1" align="center">	
 		  			 <th  bgcolor="#bb8fce ">ID</th>
 		  			 <th  bgcolor="#bb8fce ">Name</th>
@@ -153,14 +148,14 @@
 						     </xsl:for-each>
 		   
 		   						
-		     <H2> <p><b>Warehouses: </b></p></H2>
+		     <H2> <i class="fa fa-building"></i><p><b>Warehouses: </b></p></H2>
 		  			 <table border="1" align="center">	
-		  			 <th  bgcolor="##FF00FF">ID</th>
-		  			  <th bgcolor="##FF00FF" >pc</th>	
-		  			  <th  bgcolor="##FF00FF">country</th>	
-		  			  <th  bgcolor="##FF00FF">city</th>	
-				 	 <th bgcolor="##FF00FF">Address</th>	
-		 		 	 <th bgcolor="##FF00FF">Telephone</th>						
+		  			 <th  bgcolor="#f7a9f9">ID</th>
+		  			  <th bgcolor="#f7a9f9" >pc</th>	
+		  			  <th  bgcolor="#f7a9f9">country</th>	
+		  			  <th  bgcolor="#f7a9f9">city</th>	
+				 	 <th bgcolor="#f7a9f9">Address</th>	
+		 		 	 <th bgcolor="#f7a9f9">Telephone</th>						
 		 		 	  <xsl:for-each select="Database/Warehouses/Warehouse">
 		      <xsl:sort select="@id" />
 		        
@@ -176,8 +171,11 @@
 		         
 		      </xsl:for-each>
 		   </table>
-		   <H3> <p><b>Employees </b></p></H3>
-		  			 <table border="1" align="center">	
+		   <H3> <i class="fa fa-child" style="font-size:16px"></i>
+		   		<i class="fa fa-child" style="font-size:24px"></i>
+		   		<i class="fa fa-child" style="font-size:32px;color:red"></i>
+		   		<p><b>Employees </b></p></H3>
+		  			 <table border="1" >	
 		  			 <th  bgcolor="#bb8fce ">ID</th>
 		  			 <th  bgcolor="#bb8fce ">Name</th>
 				 	 <th  bgcolor="#bb8fce ">Salary</th>	
@@ -203,6 +201,7 @@
    					  <H3> <p><b>Corridor: </b><xsl:value-of select="@id" /></p></H3>
    					 	 <p><b>Temperature</b><xsl:value-of select="@temperature" /></p>
 					   	  <p ><b>Drugs:</b></p>
+					   	    <i class="fa fa-medkit" style="font-size:48px; color:red;"></i>
 						  <table border="1">
 					      <th bgcolor="#0816f7">Drug</th>
 					      <th bgcolor="#0816f7">Name</th>
@@ -210,8 +209,8 @@
 					      <th bgcolor="#0816f7">Selling Price</th>
 					       <th bgcolor="#0816f7">Active Principle</th>
 					      <xsl:for-each select="Drugs/Drug">
-					      <xsl:sort select="@name" />
-					        
+					      <xsl:sort select="//Database//Warehouses//Warehouse//COrridors//Corridor//Drugs//Drug//@id" />
+					      
 					            <tr bgcolor="white">
 					            <td><i><xsl:value-of select="@id" /></i></td>
 					            <td><xsl:value-of select="@name" /></td>

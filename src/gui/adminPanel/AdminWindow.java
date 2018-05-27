@@ -18,12 +18,12 @@ import com.jfoenix.controls.JFXListView;
 
 import pojos.*;
 import pojos.Client.PaymentMethod;
-import model.*;
 import DB.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -34,13 +34,17 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.converter.FloatStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 
 public class AdminWindow implements Initializable {
 	
@@ -628,17 +632,169 @@ public class AdminWindow implements Initializable {
 		}
     }
     
+    private void updateClient(Event e) {
+    	
+    	Client c= clientTable.getSelectionModel().getSelectedItem();
+    	
+    	TableColumn.CellEditEvent<Client, String> ce;
+    	ce=(TableColumn.CellEditEvent<Client, String>) e;
+
+    	try {
+    		c=SQLManager.searchClientByUsername(c.getUsername());
+    		c.setName(ce.getNewValue());
+			SQLManager.updateClient(c.getId(), c.getAddress(), c.getEmail(), c.getTelephone(),c.getPaymentMethod(), c.getUsername(), c.getPassword());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    }
+    
+    public void updateCorridorTemp(Event e) {    	
+    	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();  	
+    	TableColumn.CellEditEvent<Corridor,Float> ce;
+    	ce=(TableColumn.CellEditEvent<Corridor, Float>) e; 	    	
+    	try {
+    		c.setTemperature(ce.getNewValue());
+    		SQLManager.updateCorridor(c.getId(), c.getTemperature(), c.getWarehouse());
+    	}catch(SQLException ex) {
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public void updateCorridorWarehouse(Event e) {
+    	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();  	
+    	TableColumn.CellEditEvent<Corridor,Warehouse> ce;
+    	ce=(TableColumn.CellEditEvent<Corridor, Warehouse>) e;
+    	try {
+    		c.setWarehouse(ce.getNewValue());
+    		SQLManager.updateCorridor(c.getId(),c.getTemperature(),c.getWarehouse());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    
+    public void updateDrugStock(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,Integer> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, Integer>)e;
+    	try {
+    		d.setStock(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateDrugPrinciple(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,String> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, String>)e;
+    	try {
+    		d.setActivePrinciple(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateDrugPrice(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,Integer> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, Integer>)e;
+    	try {
+    		d.setSellingPrice(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateDrugCorridor(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,Corridor> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, Corridor>)e;
+    	try {
+    		d.setCorridor(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateDrugName(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,String> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, String>)e;
+    	try {
+    		d.setName(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateWarePc(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,Integer> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, Integer>)e;
+    	try {
+    		w.setPc(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateWareCity(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,String> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+    	try {
+    		w.setCity(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateWareCountry(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,String> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+    	try {
+    		w.setCountry(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateWarePhone(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,Integer> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, Integer>)e;
+    	try {
+    		w.setPhone(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateWareAddress(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,String> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+    	try {
+    		w.setAddress(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Starts Connection with Database
 		//JPAManager.connect();
-		try {
+		/*try {
 			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		//Clients Table
 		ObservableList methods=FXCollections.observableArrayList();
 		methods.addAll("PAYPAL", "VISA", "MASTERCARD", "AMERICAN EXPRESS", "ORGANS");
@@ -654,24 +810,38 @@ public class AdminWindow implements Initializable {
 			e.printStackTrace();
 		}
 		//Corridors Table
-		corridorId.setCellValueFactory(new PropertyValueFactory <Corridor,Integer>("id"));
-		corridorWarehouse.setCellValueFactory(new PropertyValueFactory <Corridor,Warehouse>("warehouse"));
-		corridorTemperature.setCellValueFactory(new PropertyValueFactory <Corridor,Float>("temperature"));
 		try {
 			comboWare.getItems().addAll(SQLManager.getAllWarehouses());
 			corridorsTable.getItems().addAll(SQLManager.getAllCorridors());
+			corridorId.setCellValueFactory(new PropertyValueFactory <Corridor,Integer>("id"));
+			corridorWarehouse.setCellValueFactory(new PropertyValueFactory <Corridor,Warehouse>("warehouse"));
+			corridorWarehouse.setCellFactory(ComboBoxTableCell.forTableColumn(comboWare.getItems()));
+			corridorWarehouse.setOnEditCommit(e->updateCorridorWarehouse(e));
+			corridorTemperature.setCellValueFactory(new PropertyValueFactory <Corridor,Float>("temperature"));
+			corridorTemperature.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
+			corridorTemperature.setOnEditCommit(e->updateCorridorTemp(e));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		//Drug Table		
-		drugName.setCellValueFactory(new PropertyValueFactory <Drug,String>("name"));
-		drugPrinciple.setCellValueFactory(new PropertyValueFactory <Drug,String>("activePrinciple"));
-		drugPrice.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("sellingPrice"));
-		drugStock.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("stock"));	
-		drugCorridor.setCellValueFactory(new PropertyValueFactory <Drug,Corridor>("corridor"));
 		try {
 			comboCorridor.getItems().addAll(SQLManager.getAllCorridors());
 			drugTable.getItems().addAll(SQLManager.getAllDrugs());
+			drugName.setCellValueFactory(new PropertyValueFactory <Drug,String>("name"));
+			drugName.setCellFactory(TextFieldTableCell.forTableColumn());
+			drugName.setOnEditCommit(e->updateDrugName(e));
+			drugPrinciple.setCellValueFactory(new PropertyValueFactory <Drug,String>("activePrinciple"));
+			drugPrinciple.setCellFactory(TextFieldTableCell.forTableColumn());
+			drugPrinciple.setOnEditCommit(e->updateDrugPrinciple(e));
+			drugPrice.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("sellingPrice"));
+			drugPrice.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+			drugPrice.setOnEditCommit(e->updateDrugPrice(e));
+			drugStock.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("stock"));
+			drugStock.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+			drugStock.setOnEditCommit(e->updateDrugStock(e));
+			drugCorridor.setCellValueFactory(new PropertyValueFactory <Drug,Corridor>("corridor"));
+			drugCorridor.setCellFactory(ComboBoxTableCell.forTableColumn(comboCorridor.getItems()));
+			drugCorridor.setOnEditCommit(e->updateDrugCorridor(e));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -689,10 +859,20 @@ public class AdminWindow implements Initializable {
 		}
 		//Warehouse Table
 		warePc.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("pc"));
+		warePc.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		warePc.setOnEditCommit(e->updateWarePc(e));
 		wareCountry.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("country"));
+		wareCountry.setCellFactory(TextFieldTableCell.forTableColumn());
+		wareCountry.setOnEditCommit(e->updateWareCountry(e));
 		wareCity.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("city"));
-		wareAdress.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("addres"));
+		wareCity.setCellFactory(TextFieldTableCell.forTableColumn());
+		wareCity.setOnEditCommit(e->updateWareCity(e));
+		wareAdress.setCellValueFactory(new PropertyValueFactory <Warehouse,String>("address"));
+		wareAdress.setCellFactory(TextFieldTableCell.forTableColumn());
+		wareAdress.setOnEditCommit(e->updateWareAddress(e));
 		warePhone.setCellValueFactory(new PropertyValueFactory <Warehouse,Integer>("phone"));
+		warePhone.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		warePhone.setOnEditCommit(e->updateWarePhone(e));
 		try {
 			warehouseTable.getItems().addAll(SQLManager.getAllWarehouses());
 		}catch(SQLException ex) {
@@ -700,9 +880,17 @@ public class AdminWindow implements Initializable {
 		}
 		//Providers Table
 		providerName.setCellValueFactory(new PropertyValueFactory<Provider,String>("name"));
+		providerName.setCellFactory(TextFieldTableCell.forTableColumn());
+		providerName.setOnEditCommit(e->updateProviderName(e));
 		providerPhone.setCellValueFactory(new PropertyValueFactory <Provider,Integer>("telephone"));
+		providerPhone.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+		providerPhone.setOnEditCommit(e->updateProviderPhone(e));
 		providerAddress.setCellValueFactory(new PropertyValueFactory<Provider,String>("address"));
+		providerAddress.setCellFactory(TextFieldTableCell.forTableColumn());
+		providerAddress.setOnEditCommit(e->updateProviderAddress(e));
 		providerMail.setCellValueFactory(new PropertyValueFactory <Provider,String>("email"));
+		providerMail.setCellFactory(TextFieldTableCell.forTableColumn());
+		providerMail.setOnEditCommit(e->updateProviderMail(e));
 		try {
 			providerTable.getItems().addAll(SQLManager.getAllProviders());
 		}catch(SQLException ex) {

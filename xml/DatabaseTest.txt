@@ -5,17 +5,6 @@
             <password>Craneos</password>
             <username>Khorne0</username>
             <Deliveries>
-                <Delivery id="2" sellingPrice="476" sent="true">
-                    <transactionDate>2018-05-10</transactionDate>
-                    <Packages>
-                        <Package deliveryId="5" drugId="2" amount="64"/>
-                        <Package deliveryId="6" drugId="2" amount="5"/>
-                        <Package deliveryId="7" drugId="2" amount="55"/>
-                        <Package deliveryId="8" drugId="2" amount="455"/>
-                        <Package deliveryId="10" drugId="2" amount="5"/>
-                        <Package deliveryId="11" drugId="2" amount="5"/>
-                    </Packages>
-                </Delivery>
                 <Delivery id="3" sellingPrice="4567" sent="true">
                     <transactionDate>2018-05-10</transactionDate>
                     <Packages>
@@ -26,6 +15,7 @@
                 </Delivery>
                 <Delivery id="4" sellingPrice="54" sent="false">
                     <transactionDate>2018-05-10</transactionDate>
+                    <Packages/>
                 </Delivery>
                 <Delivery id="265" sellingPrice="100" sent="true">
                     <transactionDate>2018-05-22</transactionDate>
@@ -33,10 +23,23 @@
                         <Package deliveryId="7" drugId="265" amount="9"/>
                     </Packages>
                 </Delivery>
-                <Delivery id="319" sellingPrice="430000" sent="false">
-                    <transactionDate>2018-05-22</transactionDate>
+                <Delivery id="320" sellingPrice="100" sent="false">
+                    <transactionDate>2018-05-26</transactionDate>
                     <Packages>
-                        <Package deliveryId="3" drugId="319" amount="5000"/>
+                        <Package deliveryId="11" drugId="320" amount="800"/>
+                    </Packages>
+                </Delivery>
+                <Delivery id="321" sellingPrice="100" sent="true">
+                    <transactionDate>2018-05-26</transactionDate>
+                    <Packages>
+                        <Package deliveryId="11" drugId="321" amount="90"/>
+                        <Package deliveryId="12" drugId="321" amount="89"/>
+                    </Packages>
+                </Delivery>
+                <Delivery id="370" sellingPrice="100" sent="true">
+                    <transactionDate>2018-05-26</transactionDate>
+                    <Packages>
+                        <Package deliveryId="4" drugId="370" amount="25"/>
                     </Packages>
                 </Delivery>
             </Deliveries>
@@ -47,17 +50,24 @@
             <Deliveries>
                 <Delivery id="5" sellingPrice="87" sent="false">
                     <transactionDate>2018-05-10</transactionDate>
-                </Delivery>
-                <Delivery id="215" sellingPrice="100" sent="true">
-                    <transactionDate>2018-05-23</transactionDate>
-                    <Packages>
-                        <Package deliveryId="5" drugId="215" amount="7"/>
-                    </Packages>
+                    <Packages/>
                 </Delivery>
                 <Delivery id="266" sellingPrice="100" sent="true">
                     <transactionDate>2018-05-22</transactionDate>
                     <Packages>
                         <Package deliveryId="7" drugId="266" amount="3000"/>
+                    </Packages>
+                </Delivery>
+                <Delivery id="322" sellingPrice="100" sent="true">
+                    <transactionDate>2018-05-25</transactionDate>
+                    <Packages>
+                        <Package deliveryId="2" drugId="322" amount="600"/>
+                    </Packages>
+                </Delivery>
+                <Delivery id="371" sellingPrice="100" sent="true">
+                    <transactionDate>2018-05-26</transactionDate>
+                    <Packages>
+                        <Package deliveryId="2" drugId="371" amount="400"/>
                     </Packages>
                 </Delivery>
             </Deliveries>
@@ -86,12 +96,29 @@
                         <Arrive drugId="15" arrivalId="455" amount="11"/>
                     </Arrives>
                 </Arrival>
+                <Arrival arrivalId="555" buyingPrice="100" received="false">
+                    <date>2018-05-26</date>
+                    <Arrives>
+                        <Arrive drugId="3" arrivalId="555" amount="9"/>
+                        <Arrive drugId="4" arrivalId="555" amount="8"/>
+                        <Arrive drugId="8" arrivalId="555" amount="87"/>
+                    </Arrives>
+                </Arrival>
             </Arrivals>
         </Provider>
         <Provider id="3" name="Laura" address="cabanillas" telephone="456" email="luuuuuuuuuuu">
             <Arrivals>
-                <Arrival arrivalId="355" buyingPrice="100" received="false">
-                    <date>2018-05-16</date>
+                <Arrival arrivalId="505" buyingPrice="100" received="true">
+                    <date>2018-05-25</date>
+                    <Arrives>
+                        <Arrive drugId="2" arrivalId="505" amount="986"/>
+                    </Arrives>
+                </Arrival>
+                <Arrival arrivalId="506" buyingPrice="100" received="false">
+                    <date>2018-05-25</date>
+                    <Arrives>
+                        <Arrive drugId="2" arrivalId="506" amount="986"/>
+                    </Arrives>
                 </Arrival>
             </Arrivals>
         </Provider>
@@ -99,7 +126,20 @@
     <Warehouses>
         <Warehouse id="2" pc="28049" country="Spain" city="Madrid" address="montecarmelo" phone="564332898">
             <Employees>
-                <Employee id="2" name="" salary="0.0" phone="0" position="" isAdmin="false">
+                <Employee id="2" name="Jiame" salary="1.2E7" phone="2085812681" position="CTO" isAdmin="false">
+                    <password>ELE</password>
+                    <username>jvini</username>
+                </Employee>
+            </Employees>
+            <Corridors>
+                <Corridor id="3" temperature="38.0">
+                    <Drugs/>
+                </Corridor>
+            </Corridors>
+        </Warehouse>
+        <Warehouse id="3" pc="28909" country="Spain" city="Madrid" address="calle noImporta" phone="983">
+            <Employees>
+                <Employee id="2" name="Jiame" salary="1.2E7" phone="2085812681" position="CTO" isAdmin="false">
                     <password>ELE</password>
                     <username>jvini</username>
                 </Employee>
@@ -107,15 +147,16 @@
             <Corridors>
                 <Corridor id="2" temperature="45.0">
                     <Drugs>
-                        <Drug id="3" name="Droga4597" stock="10000" sellingPrice="86" activePrinciple="VIBRANUM"/>
-                        <Drug id="4" name="Droga3470" stock="86380" sellingPrice="81" activePrinciple="VIBRANUM"/>
+                        <Drug id="2" name="Droga8479" stock="9000" sellingPrice="92" activePrinciple="VIBRANUM"/>
+                        <Drug id="3" name="Droga4597" stock="10009" sellingPrice="86" activePrinciple="VIBRANUM"/>
+                        <Drug id="4" name="Droga3470" stock="86363" sellingPrice="81" activePrinciple="VIBRANUM"/>
                         <Drug id="5" name="Droga3846" stock="59041" sellingPrice="61" activePrinciple="VIBRANUM"/>
                         <Drug id="6" name="Droga1050" stock="95293" sellingPrice="2" activePrinciple="VIBRANUM"/>
                         <Drug id="7" name="Droga5543" stock="32380" sellingPrice="49" activePrinciple="VIBRANUM"/>
-                        <Drug id="8" name="Droga6743" stock="23870" sellingPrice="65" activePrinciple="VIBRANUM"/>
+                        <Drug id="8" name="Droga6743" stock="23957" sellingPrice="65" activePrinciple="VIBRANUM"/>
                         <Drug id="10" name="Droga1423" stock="5789" sellingPrice="38" activePrinciple="VIBRANUM"/>
-                        <Drug id="11" name="Droga1907" stock="73712" sellingPrice="93" activePrinciple="VIBRANUM"/>
-                        <Drug id="12" name="Droga4207" stock="37000" sellingPrice="93" activePrinciple="VIBRANUMVIBRANUM"/>
+                        <Drug id="11" name="Droga1907" stock="73622" sellingPrice="93" activePrinciple="VIBRANUM"/>
+                        <Drug id="12" name="Droga4207" stock="36911" sellingPrice="93" activePrinciple="VIBRANUMVIBRANUM"/>
                         <Drug id="13" name="Droga9900" stock="51172" sellingPrice="9" activePrinciple="VIBRANUM"/>
                         <Drug id="14" name="Droga4948" stock="40450" sellingPrice="82" activePrinciple="VIBRANUM"/>
                         <Drug id="15" name="Droga7981" stock="78700" sellingPrice="47" activePrinciple="VIBRANUM"/>
@@ -132,9 +173,6 @@ EFE"/>
                         <Drug id="21" name="Droga6238" stock="97351" sellingPrice="7" activePrinciple="
 EFE"/>
                     </Drugs>
-                </Corridor>
-                <Corridor id="3" temperature="38.0">
-                    <Drugs/>
                 </Corridor>
             </Corridors>
         </Warehouse>

@@ -492,7 +492,6 @@ public class SQLManager implements Manager {
 	
 	public static List<Corridor> searchCorridorByWarehouseId(Integer warehouseId) throws SQLException{
 		
-		System.out.println("QUERY: SELECT * FROM corridor WHERE warehouse_id = " + warehouseId);
 		String sql = "SELECT * FROM corridor WHERE warehouse_id = ? ;";
 		PreparedStatement prep= c.prepareStatement(sql);
 		prep.setInt(1, warehouseId);
@@ -947,6 +946,55 @@ public class SQLManager implements Manager {
 //=====================================================================================================
 // 								Updates
 //=====================================================================================================
+	
+	//CORRIDOR
+	public static void updateCorridor(Integer id, float temp, Warehouse warehouse) throws SQLException {
+		
+		String query="UPDATE corridor SET temperature=?, warehouse_id = ? WHERE id=?;";
+		
+		PreparedStatement prep=c.prepareStatement(query);
+		prep.setFloat(1, temp);
+		prep.setInt(2, warehouse.getId());
+		prep.setInt(3, id);
+		
+		prep.executeUpdate();
+		prep.close();
+		
+	}
+	
+	//WAREHOUSE
+	public static void updateWarehouse(int id, int pc, String city, String country, String address, int phone) throws SQLException {
+		
+		String query="UPDATE warehouse SET phone=?, city=?, country=?, address=?, pc=? WHERE id=?;";
+		
+		PreparedStatement prep=c.prepareStatement(query);
+		prep.setInt(1, phone);
+		prep.setString(2,city);
+		prep.setString(3,country);
+		prep.setString(4,address);
+		prep.setInt(5,pc);
+		prep.setInt(6,id);
+		
+		prep.executeUpdate();
+		prep.close();
+		
+	}
+	
+	//PROVIDER
+	public static void updateProvider(int id, String name, String address, int phone, String email) throws SQLException{
+		
+		String query="UPDATE provider SET name=?, address=?, telephone=?, email=? WHERE id=?;";
+		
+		PreparedStatement prep=c.prepareStatement(query);
+		prep.setString(1,name);
+		prep.setString(2,address);
+		prep.setInt(3,phone);
+		prep.setString(4,email);
+		prep.setInt(5,id);
+		
+		
+	}
+	
 	
 	//CLIENT
 	public static void updateClient(Integer id, String address, String email, Integer telephone, PaymentMethod paymentMethod) throws SQLException {
