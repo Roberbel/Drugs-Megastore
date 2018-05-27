@@ -19,6 +19,7 @@ import com.jfoenix.controls.JFXListView;
 import pojos.*;
 import pojos.Client.PaymentMethod;
 import DB.*;
+import gui.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -29,6 +30,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
@@ -50,6 +53,7 @@ public class AdminWindow implements Initializable {
 	
 	Stage stage;
 	byte [] imageLoaded;
+	MainWindow mainWindow;
 	
 	@FXML
 	private BorderPane window;
@@ -352,6 +356,15 @@ public class AdminWindow implements Initializable {
     private ImageView imageView;
 
     @FXML
+    private Menu menuBar;
+
+    @FXML
+    private MenuItem xmlItem;
+
+    @FXML
+    private MenuItem htmlItem;
+    
+    @FXML
     void addClientClicked(ActionEvent event) {
     	Client newClient =new Client();
     	try {
@@ -439,8 +452,6 @@ public class AdminWindow implements Initializable {
     	newEmployee.setPhone(Integer.parseInt(employeePhoneField.getText()));
     	newEmployee.setPosition(employeePositionField.getText());
     	newEmployee.setWarehouse(comboWarehouse.getSelectionModel().getSelectedItem());
-    	newEmployee.setUsername("Thor");
-    	newEmployee.setPassword("god of thunder");
     	newEmployee.setIsAdmin(false);
     	if(this.imageLoaded!=null) {
     		newEmployee.setPhoto(this.imageLoaded);
@@ -884,6 +895,17 @@ public class AdminWindow implements Initializable {
     	}
     }
     
+
+    @FXML
+    void xmlItemClicked(ActionEvent event) {
+
+    }
+    
+    @FXML
+    void htmlItemClicked(ActionEvent event) {
+
+    }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Images
@@ -1000,6 +1022,16 @@ public class AdminWindow implements Initializable {
 			e1.printStackTrace();
 		}
 	}
+
+	public MainWindow getMainWindow() {
+		return mainWindow;
+	}
+
+	public void setMainWindow(MainWindow mainWindow) {
+		this.mainWindow = mainWindow;
+	}
+	
+	
     
     
 

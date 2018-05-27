@@ -55,9 +55,12 @@ public class MainWindow {
 				if(checkPassword()) {
 					switch(getType().toString()) {
 					case "ADMIN":
+						FXMLLoader loaderAdmin=new FXMLLoader(getClass().getResource("/gui/adminPanel/adminWindow.fxml"));
 						try {
-							Parent root =FXMLLoader.load(getClass().getResource("/gui/adminPanel/adminWindow.fxml"));
-							main.updateScene(new Scene(root));
+							BorderPane panel= loaderAdmin.load();
+							AdminWindow controller=loaderAdmin.<AdminWindow>getController();
+							main.updateScene(new Scene(panel));
+							controller.setMainWindow(this);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}

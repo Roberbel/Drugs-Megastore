@@ -4,12 +4,14 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -33,7 +35,6 @@
                               <TextField fx:id="clientEmailField" prefHeight="25.0" prefWidth="160.0" promptText="Email" />
                               <ComboBox fx:id="comboPayment" prefWidth="150.0" promptText="Payment Method" />
                               <JFXButton fx:id="addClientButton" onAction="#addClientClicked" prefHeight="25.0" prefWidth="67.0" style="-fx-background-color: GREY;" text="Add" />
-                              <JFXButton fx:id="deleteClientButton" onAction="#deleteClientClicked" prefHeight="25.0" prefWidth="69.0" style="-fx-background-color: grey;" text="Delete" />
                            </children>
                         </HBox>
                      </bottom>
@@ -79,9 +80,8 @@
                               <TextField fx:id="drugPriceField" prefHeight="25.0" prefWidth="106.0" promptText="Selling Price" />
                               <TextField fx:id="drugStockField" prefHeight="25.0" prefWidth="81.0" promptText="Stock" />
                               <ComboBox fx:id="comboCorridor" prefHeight="25.0" prefWidth="92.0" promptText="Corridor" />
-                              <JFXButton fx:id="browseButton" onAction="#browseButtonClicked" prefHeight="25.0" prefWidth="98.0" text="Browse Image" />
+                              <JFXButton fx:id="browseButton" onAction="#browseButtonClicked" prefHeight="25.0" prefWidth="98.0" style="-fx-background-color: grey;" text="Browse Image" />
                               <JFXButton fx:id="addDrugButton" onAction="#addDrugClicked" prefHeight="25.0" prefWidth="49.0" style="-fx-background-color: GREY;" text="Add" />
-                              <JFXButton fx:id="deleteDrugButton" onAction="#deleteDrugClicked" prefHeight="25.0" prefWidth="52.0" style="-fx-background-color: grey;" text="Delete" />
                            </children>
                         </HBox>
                      </bottom>
@@ -238,7 +238,7 @@
                               <TextField fx:id="employeePhoneField" prefHeight="25.0" prefWidth="146.0" promptText="Phone Number" />
                               <TextField fx:id="employeePositionField" prefHeight="25.0" prefWidth="106.0" promptText="Position" />
                               <ComboBox fx:id="comboWarehouse" prefHeight="25.0" prefWidth="121.0" promptText="Warehouse" />
-                              <JFXButton fx:id="browseButton1" onAction="#browseButton1Clicked" prefHeight="25.0" prefWidth="107.0" text="Browse Image" />
+                              <JFXButton fx:id="browseButton1" onAction="#browseButton1Clicked" prefHeight="25.0" prefWidth="107.0" style="-fx-background-color: grey;" text="Browse Image" />
                               <JFXButton fx:id="addEmployeeButton" onAction="#addEmployeeClicked" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: GREY;" text="Add" />
                               <JFXButton fx:id="deleteEmployeeButton" onAction="#deleteEmployeeClicked" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: grey;" text="Delete" />
                            </children>
@@ -319,12 +319,20 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="imageView" fitHeight="199.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER">
-               <image>
-                  <Image url="@../../../../../../../../../../Pictures/jK3xqZo.jpg" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="imageView" fitHeight="199.0" fitWidth="228.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" />
          </children>
       </GridPane>
    </right>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu fx:id="menuBar" mnemonicParsing="false" text="Generate">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#xmlItemClicked" text="XML" fx:id="xmlItem" />
+              <MenuItem fx:id="htmlItem" mnemonicParsing="false" onAction="#htmlItemClicked" text="HTML" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
 </BorderPane>
