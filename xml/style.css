@@ -1,0 +1,82 @@
+		 			H1 {
+				 		   style=background-color:teal;
+			               font-family: Arial,Univers,sans-serif;
+			               font-size: 36pt;
+			               font-effect-fire;
+			               text-align:center
+			               }
+	               
+	                 H2 {
+	                 	  style=background-color:#1a21f7;
+			               font-family: Arial,Univers,sans-serif;
+			               font-size: 20pt;
+			               color:blue;
+			               text-align:center}
+			                H3 {style=background-color:#1a21f7;
+			               font-family: sans-serif;
+			               font-size: 15pt;
+			               color:lime}
+	               
+	               div {
+						    width: 90px;
+						    height: 20px;
+						    background-color: white;
+						    border: 1px solid black;
+						    position: relative;
+						    
+						    -webkit-animation-name: example; 
+						    -webkit-animation-duration: 4s; 
+						    -webkit-animation-iteration-count: infinite; 
+						    animation-name: example;
+						    animation-duration: 4s;
+						    animation-iteration-count: infinite;
+						}
+						
+						@-webkit-keyframes example {
+					    0%   {background-color:red; left:200px; top:0px;}
+					    25%  {background-color:yellow; left:900px; top:0px;}
+					    50%  {background-color:blue; left:900px; top:100px;}
+					    75%  {background-color:lime; left:200px; top:100px;}
+					    100% {background-color:red; left:200px; top:0px;}
+					}
+					
+					
+					@keyframes example {
+					    0%   {background-color:red; left:200px; top:0px;}
+					    25%  {background-color:yellow; left:900px; top:0px;}
+					    50%  {background-color:blue; left:900px; top:100px;}
+					    75%  {background-color:lime; left:200px; top:100px;}
+					    100% {background-color:red; left:200px; top:0px;}
+				}
+								
+					table{						
+						 border-collapse: black;
+						 border: 1px solid black;
+						 border-spacing: 20px;
+						 table-layout: fixed;
+						 margin-bottom: 40px;
+						 padding-top:40px;
+						 width: 50%;					
+					}
+					
+					
+					
+					th,tr{						
+						text-align: center;
+						padding: 10px;
+						border: 1px solid black;
+					}
+					
+					
+					tr{					
+						height:20px;
+					}
+					
+					
+					
+					body{
+						margin-left:50px;
+						margin-right:50px;
+						margin-bottom:50px;
+					    background-image: src="/Drug Megastore/Photos/defaultDrug.png";
+					}
