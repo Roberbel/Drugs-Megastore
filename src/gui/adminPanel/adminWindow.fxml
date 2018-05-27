@@ -38,7 +38,7 @@
                         </HBox>
                      </bottom>
                      <center>
-                        <TableView fx:id="clientTable" editable="true" BorderPane.alignment="CENTER">
+                        <TableView fx:id="clientTable" BorderPane.alignment="CENTER">
                           <columns>
                             <TableColumn fx:id="clientName" prefWidth="84.00000309944153" text="Name" />
                             <TableColumn fx:id="clientAdress" prefWidth="136.00003051757812" text="Adress" />
@@ -278,7 +278,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="providerTable" onMouseClicked="#loadEmployeeImage" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="providerTable" editable="true" onMouseClicked="#loadEmployeeImage" prefHeight="457.0" prefWidth="530.0" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="providerName" prefWidth="186.8000214099884" text="Name" />
                               <TableColumn fx:id="providerAddress" prefWidth="96.79997253417969" text="Address" />

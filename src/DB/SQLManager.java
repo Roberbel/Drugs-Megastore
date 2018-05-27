@@ -350,7 +350,7 @@ public class SQLManager implements Manager {
 
 	public static void insertProvider(Provider provider) throws SQLException {
 
-		String sql1 = "INSERT INTO provider(name, adress, telephone, email) VALUES(?,?,?,?);";
+		String sql1 = "INSERT INTO provider(name, address, telephone, email) VALUES(?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, provider.getName());
 		prep.setString(2, provider.getAddress());
@@ -992,6 +992,8 @@ public class SQLManager implements Manager {
 		prep.setString(4,email);
 		prep.setInt(5,id);
 		
+		prep.executeUpdate();
+		prep.close();
 		
 	}
 	
