@@ -961,6 +961,23 @@ public class SQLManager implements Manager {
 		prep.close();
 		
 	}
+	//WAREHOUSE
+	public static void updateWarehouse(int id, int pc, String city, String country, String address, int phone) throws SQLException {
+		
+		String query="UPDATE warehouse SET phone=?, city=?, country=?, address=?, pc=? WHERE id=?;";
+		
+		PreparedStatement prep=c.prepareStatement(query);
+		prep.setInt(1, phone);
+		prep.setString(2,city);
+		prep.setString(3,country);
+		prep.setString(4,address);
+		prep.setInt(5,pc);
+		prep.setInt(6,id);
+		
+		prep.executeUpdate();
+		prep.close();
+		
+	}
 	
 	
 	//CLIENT
