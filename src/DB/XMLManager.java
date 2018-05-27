@@ -30,7 +30,7 @@ import pojos.Warehouse;
 
 
 public class XMLManager {
-	private static final String xsltPath = "C:/Users/laura/git/Drug Megastore/xml/Drug-Style.xslt";
+	private static final String xsltPath = "C:/Users/laura/git/Drug Megastore/xml/Database.xslt";
 	
 	public static void main(String[] args) throws TransformerException, JAXBException {
 		String dir = "C:/Users/laura/git/Drug Megastore/xml/DatabaseTest.xml";
