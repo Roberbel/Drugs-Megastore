@@ -160,7 +160,7 @@
                               <TextField fx:id="arrivedField" editable="false" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                               <Label text="Inventory" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
                               <Label text="Price" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                              <TextField fx:id="arrivalPriceField" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TextField fx:id="arrivalPriceField" editable="false" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </center>
@@ -206,7 +206,7 @@
                               <TextField fx:id="deliveredField" editable="false" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                               <Label text="Items Bougth" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
                               <Label text="Price" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                              <TextField fx:id="deliveryPriceField" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <TextField fx:id="deliveryPriceField" editable="false" maxWidth="165.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </center>

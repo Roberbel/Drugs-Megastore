@@ -103,16 +103,16 @@ public class AdminWindow implements Initializable {
     private Tab drugTab;
 
     @FXML
-    private JFXListView<?> arrivalsList;
+    private JFXListView<Arrival> arrivalsList;
 
     @FXML
-    private TableView<?> inventoryTable;
+    private TableView<Arrives> inventoryTable;
 
     @FXML
-    private TableColumn<?, ?> inventoryDrug;
+    private TableColumn<Arrives, String> inventoryDrug;
 
     @FXML
-    private TableColumn<?, ?> inventoryAmount;
+    private TableColumn<Arrives, Integer> inventoryAmount;
     
     @FXML
     private TextField arrivalProviderField;
@@ -127,16 +127,16 @@ public class AdminWindow implements Initializable {
     private TextField arrivalPriceField;
 
     @FXML
-    private JFXListView<?> deliveriesList;
+    private JFXListView<Delivery> deliveriesList;
 
     @FXML
-    private TableView<?> itemsBoughtTable;
+    private TableView<Packaged> itemsBoughtTable;
 
     @FXML
-    private TableColumn<?, ?> itemsDrug;
+    private TableColumn<Packaged,String> itemsDrug;
 
     @FXML
-    private TableColumn<?, ?> itemsAmount;
+    private TableColumn<Packaged,Integer> itemsAmount;
 
     @FXML
     private TextField deliveryClientIdField;
@@ -604,12 +604,32 @@ public class AdminWindow implements Initializable {
 
     @FXML
     void deliveryListClicked(MouseEvent event) {
-
+    	Delivery d=deliveriesList.getSelectionModel().getSelectedItem();
+    	
+    	deliveryClientIdField.setText(d.getClient().getUsername());
+    	deliveryDateField.setText(d.getTransactionDate().toString());
+    	deliveredField.setText(Boolean.toString(d.isSent()));
+    	deliveryPriceField.setText(String.valueOf(d.getSellingPrice()));
+    	
+    	itemsDrug.setCellValueFactory(new PropertyValueFactory<Packaged,String>("drug"));
+    	itemsAmount.setCellValueFactory(new PropertyValueFactory <Packaged,Integer>("amount"));
+    	
+    	itemsBoughtTable.getItems().addAll(d.getPackages());
     }
     
     @FXML
     void arrivalsListClicked(MouseEvent event) {
+    	Arrival a=arrivalsList.getSelectionModel().getSelectedItem();
     	
+    	arrivalProviderField.setText(a.getProvider().getName());
+    	arrivalProviderDate.setText(a.getDate().toString());
+    	arrivedField.setText(Boolean.toString(a.isReceived()));
+    	arrivalPriceField.setText(String.valueOf(a.getBuyingPrice()));
+    	
+    	inventoryDrug.setCellValueFactory(new PropertyValueFactory<Arrives,String>("drug"));
+    	inventoryAmount.setCellValueFactory(new PropertyValueFactory <Arrives,Integer>("amount"));
+    	
+    	inventoryTable.getItems().addAll(a.getArrives());
     }
 
 
@@ -631,24 +651,7 @@ public class AdminWindow implements Initializable {
 			e.printStackTrace();
 		}
     }
-    
-    private void updateClient(Event e) {
-    	
-    	Client c= clientTable.getSelectionModel().getSelectedItem();
-    	
-    	TableColumn.CellEditEvent<Client, String> ce;
-    	ce=(TableColumn.CellEditEvent<Client, String>) e;
-
-    	try {
-    		c=SQLManager.searchClientByUsername(c.getUsername());
-    		c.setName(ce.getNewValue());
-			SQLManager.updateClient(c.getId(), c.getAddress(), c.getEmail(), c.getTelephone(),c.getPaymentMethod(), c.getUsername(), c.getPassword());
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-    }
-    
+        
     public void updateCorridorTemp(Event e) {    	
     	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();  	
     	TableColumn.CellEditEvent<Corridor,Float> ce;
@@ -942,6 +945,14 @@ public class AdminWindow implements Initializable {
 			providerTable.getItems().addAll(SQLManager.getAllProviders());
 		}catch(SQLException ex) {
 			ex.printStackTrace();
+		}
+		//Deliverys and Arrivals
+		try {
+			deliveriesList.getItems().addAll(SQLManager.getAllDeliveries());
+			arrivalsList.getItems().addAll(SQLManager.getAllArrivals());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
     
