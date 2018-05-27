@@ -221,7 +221,7 @@ public class EmployeeWindow implements Initializable {
 	}
 	
 	@FXML
-	void paneLogOut(ActionEvent event) {
+	void paneLogOut(MouseEvent event) {
 		
 		mainWindow.logout();
 		
