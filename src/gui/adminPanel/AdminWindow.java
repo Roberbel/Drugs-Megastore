@@ -44,6 +44,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.FloatStringConverter;
+import javafx.util.converter.IntegerStringConverter;
 
 public class AdminWindow implements Initializable {
 	
@@ -672,6 +673,62 @@ public class AdminWindow implements Initializable {
     	}
     }
     
+    public void updateDrugStock(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,Integer> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, Integer>)e;
+    	try {
+    		d.setStock(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateDrugPrinciple(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,String> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, String>)e;
+    	try {
+    		d.setActivePrinciple(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateDrugPrice(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,Integer> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, Integer>)e;
+    	try {
+    		d.setSellingPrice(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateDrugCorridor(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,Corridor> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, Corridor>)e;
+    	try {
+    		d.setCorridor(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateDrugName(Event e) {
+    	Drug d=drugTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Drug,String> ce;
+    	ce=(TableColumn.CellEditEvent<Drug, String>)e;
+    	try {
+    		d.setName(ce.getNewValue());
+    		SQLManager.updateDrug(d.getId(), d.getStock(), d.getSellingPrice(), d.getName(), d.getActivePrinciple(), d.getCorridor(), d.getPhoto());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -712,14 +769,24 @@ public class AdminWindow implements Initializable {
 			e.printStackTrace();
 		}
 		//Drug Table		
-		drugName.setCellValueFactory(new PropertyValueFactory <Drug,String>("name"));
-		drugPrinciple.setCellValueFactory(new PropertyValueFactory <Drug,String>("activePrinciple"));
-		drugPrice.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("sellingPrice"));
-		drugStock.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("stock"));	
-		drugCorridor.setCellValueFactory(new PropertyValueFactory <Drug,Corridor>("corridor"));
 		try {
 			comboCorridor.getItems().addAll(SQLManager.getAllCorridors());
 			drugTable.getItems().addAll(SQLManager.getAllDrugs());
+			drugName.setCellValueFactory(new PropertyValueFactory <Drug,String>("name"));
+			drugName.setCellFactory(TextFieldTableCell.forTableColumn());
+			drugName.setOnEditCommit(e->updateDrugName(e));
+			drugPrinciple.setCellValueFactory(new PropertyValueFactory <Drug,String>("activePrinciple"));
+			drugPrinciple.setCellFactory(TextFieldTableCell.forTableColumn());
+			drugPrinciple.setOnEditCommit(e->updateDrugPrinciple(e));
+			drugPrice.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("sellingPrice"));
+			drugPrice.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+			drugPrice.setOnEditCommit(e->updateDrugPrice(e));
+			drugStock.setCellValueFactory(new PropertyValueFactory <Drug,Integer>("stock"));
+			drugStock.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+			drugStock.setOnEditCommit(e->updateDrugStock(e));
+			drugCorridor.setCellValueFactory(new PropertyValueFactory <Drug,Corridor>("corridor"));
+			drugCorridor.setCellFactory(ComboBoxTableCell.forTableColumn(comboCorridor.getItems()));
+			drugCorridor.setOnEditCommit(e->updateDrugCorridor(e));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
