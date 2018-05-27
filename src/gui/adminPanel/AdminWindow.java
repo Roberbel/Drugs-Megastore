@@ -734,6 +734,53 @@ public class AdminWindow implements Initializable {
     	ce=(TableColumn.CellEditEvent<Warehouse, Integer>)e;
     	try {
     		w.setPc(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateWareCity(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,String> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+    	try {
+    		w.setCity(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateWareCountry(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,String> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+    	try {
+    		w.setCountry(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateWarePhone(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,Integer> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, Integer>)e;
+    	try {
+    		w.setPhone(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
+    	}
+    }
+    public void updateWareAddress(Event e) {
+    	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
+    	TableColumn.CellEditEvent<Warehouse,String> ce;
+    	ce=(TableColumn.CellEditEvent<Warehouse, String>)e;
+    	try {
+    		w.setAddress(ce.getNewValue());
+    		SQLManager.updateWarehouse(w.getId(), w.getPc(), w.getCity(), w.getCountry(), w.getAddress(), w.getPhone());
+    	}catch(SQLException ex) {
+    		
     	}
     }
     
