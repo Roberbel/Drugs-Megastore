@@ -1,14 +1,10 @@
 package gui.clientPanel;
 
 import java.net.URL;
-import java.sql.ClientInfoStatus;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import DB.JPAManager;
 import DB.SQLManager;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -21,7 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import pojos.Client;
 import pojos.Client.PaymentMethod;
 import pojos.Delivery;
-import pojos.Drug;
 import pojos.Packaged;
 
 

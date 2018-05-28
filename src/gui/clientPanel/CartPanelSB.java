@@ -6,7 +6,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import DB.JPAManager;
 import DB.SQLManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import pojos.Client;
 import pojos.Delivery;
-import pojos.Drug;
 import pojos.Packaged;
 
 

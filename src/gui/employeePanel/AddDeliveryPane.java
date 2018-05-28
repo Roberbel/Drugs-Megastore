@@ -10,7 +10,6 @@ import com.jfoenix.controls.JFXCheckBox;
 
 import DB.JPAManager;
 import DB.SQLManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,8 +25,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import pojos.Arrival;
-import pojos.Arrives;
 import pojos.Client;
 import pojos.Delivery;
 import pojos.Drug;
@@ -143,7 +140,6 @@ public class AddDeliveryPane implements Initializable {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/employeePanel/employeeWindow.fxml"));
 				BorderPane root = loader.load();
-				EmployeeWindow controller = loader.<EmployeeWindow>getController();
 				Scene scene = addDeliveryButton.getScene();
 				Stage stage = (Stage) scene.getWindow();
 				stage.setScene(new Scene(root));

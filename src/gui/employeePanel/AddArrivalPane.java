@@ -3,8 +3,6 @@ package gui.employeePanel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -12,7 +10,6 @@ import com.jfoenix.controls.JFXCheckBox;
 
 import DB.JPAManager;
 import DB.SQLManager;
-import gui.Main;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +24,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import pojos.Arrival;
 import pojos.Arrives;
@@ -148,7 +144,6 @@ public class AddArrivalPane implements Initializable {
 			try {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/employeePanel/employeeWindow.fxml"));
 				BorderPane root = loader.load();
-				EmployeeWindow controller = loader.<EmployeeWindow>getController();
 				Scene scene = addArrivalButton.getScene();
 				Stage stage = (Stage) scene.getWindow();
 				stage.setScene(new Scene(root));
