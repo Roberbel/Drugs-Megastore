@@ -319,16 +319,17 @@ public class SQLManager implements Manager {
 
 	public static void insertEmployee(Employee employees) throws SQLException {
 
-		String sql1 = "INSERT INTO employee(name,salary, phone,position,warehouse_id,username,password,isAdmin) VALUES(?,?,?,?,?,?,?,?);";
+		String sql1 = "INSERT INTO employee(name,photo,salary, phone,position,warehouse_id,username,password,isAdmin) VALUES(?,?,?,?,?,?,?,?,?);";
 		PreparedStatement prep = c.prepareStatement(sql1);
 		prep.setString(1, employees.getName());
-		prep.setFloat(2, employees.getSalary());
-		prep.setInt(3, employees.getPhone());
-		prep.setString(4, employees.getPosition());
-		prep.setInt(5, employees.getWarehouse().getId());
-		prep.setString(6, employees.getUsername());
-		prep.setString(7, employees.getPassword());
-		prep.setBoolean(8, employees.getIsAdmin());
+		prep.setBytes(2, employees.getPhoto());
+		prep.setFloat(3, employees.getSalary());
+		prep.setInt(4, employees.getPhone());
+		prep.setString(5, employees.getPosition());
+		prep.setInt(6, employees.getWarehouse().getId());
+		prep.setString(7, employees.getUsername());
+		prep.setString(8, employees.getPassword());
+		prep.setBoolean(9, employees.getIsAdmin());
 		prep.executeUpdate();
 
 		prep.close();
