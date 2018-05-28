@@ -50,7 +50,7 @@ public class Delivery implements Serializable {
 	@Column (name = "selling_price")
 	private Integer sellingPrice;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne(cascade=CascadeType.MERGE, fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id")
 	@XmlTransient
 	private Client client;

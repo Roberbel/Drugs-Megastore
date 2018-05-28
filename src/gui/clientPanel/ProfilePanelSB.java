@@ -77,7 +77,6 @@ public class ProfilePanelSB {
     	PaymentMethod paymentMethod = paymentMethodChoiceBox.getSelectionModel().getSelectedItem();
     	Integer phone = Integer.parseInt((telephoneTextField.getText()));
 		try {
-			System.out.println("updating: "+client.getId()+" "+ address+" "+ email+ " "+phone+ " "+ paymentMethod);
 			SQLManager.updateClient(client.getId(), address, email, phone, paymentMethod);
 		} catch (SQLException e) {
 			Alert alert=new Alert(AlertType.ERROR, "Error updating the CLient Info");
@@ -116,7 +115,6 @@ public class ProfilePanelSB {
 				PaymentMethod.ORGANS);
     	paymentMethodChoiceBox.getSelectionModel().select(client.getPaymentMethod());
     	telephoneTextField.setText(""+client.getTelephone());
-    	System.out.println("Client Id : " + client.getId());
     	try {
 			client.setDeliveries(SQLManager.searchDeliveryByClientId((client.getId())));
 		} catch (SQLException e) {

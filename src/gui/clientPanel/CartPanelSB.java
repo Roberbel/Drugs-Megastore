@@ -9,8 +9,10 @@ import java.util.ResourceBundle;
 import DB.SQLManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -57,13 +59,14 @@ public class CartPanelSB {
     	delivery.setTransactionDate(new Date(System.currentTimeMillis()));
     	try {
 			SQLManager.insertDeliveries(delivery);
+			//we clear the delivery.
+	    	parentPanel.clearDelivery();
+	    	parentPanel.showShopPanel(null);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR, "Error confirming the delivery");
+			alert.showAndWait();
 		}
-    	//we clear the delivery.
-    	parentPanel.clearDelivery();
-    	parentPanel.showShopPanel(null);
+    	
 
     	
     }
@@ -85,7 +88,6 @@ public class CartPanelSB {
     protected void removePanel(PackagedPanelSB toRemove) {
     	
     	//when we remove a panel we also remove the packaged from the list 
-    	System.out.println("Removing panel");
     	
     	if(delivery.removePackaged(toRemove.getPackaged()) ) {
     		vbox.getChildren().clear();
@@ -105,13 +107,15 @@ public class CartPanelSB {
 					vbox.getChildren().add(packagedPanel);
 				
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					Alert alert=new Alert(AlertType.ERROR, "Error loading packaged panels");
+					alert.showAndWait();
 				}
 	    	}
     	}else{
     		
+    		//this should never happen
     		System.out.println("That panel doesn't exist");
+    		
     	}
     		
 		
@@ -154,8 +158,8 @@ public class CartPanelSB {
 				vbox.getChildren().add(fp);
 			
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Alert alert=new Alert(AlertType.ERROR, "Error loading the packaged panels");
+				alert.showAndWait();
 			}
     		
 			

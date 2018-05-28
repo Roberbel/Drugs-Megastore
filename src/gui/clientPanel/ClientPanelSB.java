@@ -6,8 +6,10 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -111,8 +113,8 @@ public class ClientPanelSB {
 			mainPanel.setCenter(cartPanel);
 			    	
         }catch(IOException e) {
-    		e.printStackTrace();
-    		System.out.println("Error loading  cart panel");
+        	Alert alert=new Alert(AlertType.ERROR, "Error loading the cart panel");
+			alert.showAndWait();
     		
     	}
     }
@@ -132,8 +134,8 @@ public class ClientPanelSB {
 			mainPanel.setCenter(shopPanel);
 			    	
         }catch(IOException e) {
-    		e.printStackTrace();
-    		System.out.println("Error loading  shop panel");
+        	Alert alert=new Alert(AlertType.ERROR, "Error loading the shop Panel");
+			alert.showAndWait();
     		
     	}
     }
@@ -150,8 +152,8 @@ public class ClientPanelSB {
 			controller.setClient(client);
 			mainPanel.setCenter(profilePanel);
     	}catch(IOException e) {
-    		e.printStackTrace();
-    		System.out.println("Error loading profile panel");
+    		Alert alert=new Alert(AlertType.ERROR, "Error loading the profile Panel");
+			alert.showAndWait();
     		
     	}
     	

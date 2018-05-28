@@ -594,15 +594,15 @@ public class JPAManager implements Manager{
 		}	
 		
 		//Arrival
-				public static void updateArrivalSent(Integer id, Boolean sent) throws SQLException {
+		public static void updateArrivalSent(Integer id, Boolean sent) throws SQLException {
 					
-					Arrival arrival = JPAManager.searchArrivalById(id);
-					em.getTransaction().begin();
-					arrival.setReceived(sent);
-					em.getTransaction().commit();
+				Arrival arrival = JPAManager.searchArrivalById(id);
+				em.getTransaction().begin();
+				arrival.setReceived(sent);
+				em.getTransaction().commit();
 					
 					
-				}	
+		}	
 /*
  * =====================================================================================================
  * 								DELETE
