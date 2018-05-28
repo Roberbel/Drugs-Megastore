@@ -460,6 +460,7 @@ public class AdminWindow implements Initializable {
 			Alert alert=new Alert(AlertType.ERROR);
     		alert.show();	
 		}
+    	
     }
 
     @FXML
