@@ -62,7 +62,8 @@ public class MainWindow {
 							main.updateScene(new Scene(panel));
 							controller.setMainWindow(this);
 						} catch (IOException e) {
-							e.printStackTrace();
+							Alert alert=new Alert(AlertType.ERROR, "Error loading the admin view");
+							alert.showAndWait();
 						}
 						
 						break;
@@ -74,7 +75,8 @@ public class MainWindow {
 							main.updateScene(new Scene(panel));
 							controller.setMainWindow(this);
 						} catch (IOException e) {
-							e.printStackTrace();
+							Alert alert=new Alert(AlertType.ERROR, "Error loading Employee window");
+							alert.showAndWait();
 						}
 						break;
 					case "CLIENT":
@@ -88,22 +90,23 @@ public class MainWindow {
 							controller.setMainWindow(this);
 							controller.showShopPanel(null);
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							Alert alert=new Alert(AlertType.ERROR, "Error loading Client view");
+							alert.showAndWait();
 						}
 						break;
 					
 					}
 				}else {
-					throw new ClassNotFoundException();
+					Alert alert=new Alert(AlertType.ERROR, "Wrong username or password");
+					alert.showAndWait();
 				}
 			}else {
-				throw new ClassNotFoundException();
+				Alert alert=new Alert(AlertType.ERROR, "Wrong username or password");
+				alert.showAndWait();
 			}
-		} catch (ClassNotFoundException | SQLException e) {
-			Alert alert=new Alert(AlertType.ERROR, "Wrong username or password");
+		} catch (SQLException e) {
+			Alert alert=new Alert(AlertType.ERROR, "Error in the database");
 			alert.showAndWait();
-			e.printStackTrace();
 		}
     	
     }
@@ -127,7 +130,7 @@ public class MainWindow {
 		
 	}
     
-	public boolean checkPassword () {
+	private boolean checkPassword () {
 		if(extractedEmployee != null) {
 			if(extractedEmployee.getPassword().equals(password)) {
 				return true;
@@ -143,7 +146,7 @@ public class MainWindow {
 		}
 	}
 	
-	public TYPE getType(){
+	private TYPE getType(){
 		if(extractedClient != null) {
 			return TYPE.CLIENT;
 		}else {
@@ -155,7 +158,7 @@ public class MainWindow {
 		}
 	}
 	
-	public boolean checkExistance() throws SQLException, ClassNotFoundException{
+	private boolean checkExistance() throws SQLException{
 		extractedClient = null;
 		extractedEmployee = null;
 		
