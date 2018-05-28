@@ -1,27 +1,25 @@
 package gui.clientPanel;
 
 import java.net.URL;
-import java.sql.ClientInfoStatus;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import DB.JPAManager;
 import DB.SQLManager;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import pojos.Client;
 import pojos.Client.PaymentMethod;
 import pojos.Delivery;
-import pojos.Drug;
 import pojos.Packaged;
 
 
@@ -83,9 +81,8 @@ public class ProfilePanelSB {
 			System.out.println("updating: "+client.getId()+" "+ address+" "+ email+ " "+phone+ " "+ paymentMethod);
 			SQLManager.updateClient(client.getId(), address, email, phone, paymentMethod);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("COuldn't update client info");
+			Alert alert=new Alert(AlertType.ERROR, "Error updating the CLient Info");
+			alert.showAndWait();
 		}
     }
 
@@ -124,17 +121,12 @@ public class ProfilePanelSB {
     	try {
 			client.setDeliveries(SQLManager.searchDeliveryByClientId((client.getId())));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Alert alert=new Alert(AlertType.ERROR, "Error retrieving the client");
+			alert.showAndWait();
 		}
 		deliveriesList.getItems().setAll(client.getDeliveries());
 		
     }
-    
-    protected void setClientPanel(ClientPanelSB clientPanel) {
-    	
-    	
-    	
-    }
+
 
 }

@@ -150,7 +150,6 @@ public class ClientPanelSB {
 			profilePanel.prefWidthProperty().bind(this.mainPanel.widthProperty());
 			profilePanel.prefHeightProperty().bind(this.mainPanel.heightProperty());
 			controller.setClient(client);
-			controller.setClientPanel(this);
 			mainPanel.setCenter(profilePanel);
     	}catch(IOException e) {
     		e.printStackTrace();
