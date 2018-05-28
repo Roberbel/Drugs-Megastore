@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "drug")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Drug")
-@XmlType(propOrder = { "photo" })
+@XmlType
 public class Drug implements Serializable {
 
 	/**
@@ -69,7 +69,7 @@ public class Drug implements Serializable {
 	private List<Arrives> arrives;
 	
 	@Lob
-	@XmlElement
+	@XmlTransient
 	private byte[] photo;
 
 	public Drug() {

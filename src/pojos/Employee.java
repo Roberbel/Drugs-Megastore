@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlType;
 @Table(name = "employee")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Employee")
-@XmlType( propOrder = {"photo"})
+@XmlType
 public class Employee extends User implements Serializable {
 
 	/**
@@ -59,7 +59,7 @@ public class Employee extends User implements Serializable {
 	@JoinColumn (name = "warehouse_id")
 	private Warehouse warehouse;
 	
-	@XmlElement
+	@XmlTransient
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] photo;

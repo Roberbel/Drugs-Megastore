@@ -35,80 +35,19 @@ public class XMLManager {
 	public static void main(String[] args) throws TransformerException, JAXBException {
 		String dir = "./xml/DatabaseTest.xml";
 		try {
-			SQLManager.connect("jdbc:sqlite:./db/Drug Megastore Data Base TEST 2.db");
-			
-			List<Client> clients = SQLManager.getAllClients();			
-			List<Provider> providers = SQLManager.getAllProviders();
-			List<Warehouse> warehouses = SQLManager.getAllWarehouses();
-			
-			for(Client c: clients) {
-				
-				c.setDeliveries(SQLManager.searchDeliveryByClientId(c.getId()));
-				
-			}
-			
-			for(Provider p: providers) {
-				
-				p.setArrivals(SQLManager.searchArrivalsByProviderId(p.getProviderId()));
-				
-			}
-			
-			for(Warehouse w: warehouses) {
-				
-				System.out.println("warehouse ID = "+ w.getId());
-				List<Corridor> corridors = SQLManager.searchCorridorByWarehouseId(w.getId());
-				//List<Corridor> corridors = SQLManager.getAllCorridors();
-				for(Corridor c: corridors) {
-					
-					System.out.println(c);
-					c.setDrugs(SQLManager.searchDrugByCorridorId(c.getId()));
-					
-				}
-				w.setCorridors(corridors);
-				w.setEmployees(SQLManager.getAllEmployees());
-				
-			}
-			
-			Database database = new Database(clients, providers, warehouses);
-			
+			XMLManager.databasexml2Html(dir, "./xml/databasehtml.html");
 			try {
-				XMLManager.marshallDatabase(database, dir);
-			} catch (IOException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-				System.out.println("error marshalling");
-			}
-			XMLManager.databasexml2Html(dir, "./xml/Datanuevo.html");
-			
-			try {
-				XMLManager.marshallDatabase(database, dir);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			
-			try {
-				XMLManager.databasexml2Html(dir, "./xml/databasehtml.html");
-				try {
-					File file2 = new File("./xml/databasehtml.html");
-					Desktop.getDesktop().browse(file2.toURI());
-				} catch (IOException e) {
-					System.out.println("Error opening the HTML file");
-				}
-			} catch (TransformerException e) {
+				File file2 = new File("./xml/databasehtml.html");
+				Desktop.getDesktop().browse(file2.toURI());
+			} catch (IOException e) {
 				e.printStackTrace();
-				System.out.println("Error turning XML into HTML");
+				System.out.println("Error opening the HTML file, please, go into the xml folder inside Drug-megastore to be able to see our awesome html  (databasehtml.html)");
 			}
-			SQLManager.disconnect();
-		
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+		} catch (TransformerException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error turning XML into HTML");
 		}
-		
+					
 	}
 	
 	
