@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -712,7 +712,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
 		}
     }
-        
+       
+    @SuppressWarnings("unchecked")
     public void updateCorridorTemp(Event e) {    	
     	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();  	
     	TableColumn.CellEditEvent<Corridor,Float> ce;
@@ -726,6 +727,7 @@ public class AdminWindow implements Initializable {
     	}
     }
     
+    @SuppressWarnings("unchecked")
     public void updateCorridorWarehouse(Event e) {
     	Corridor c=corridorsTable.getSelectionModel().getSelectedItem();  	
     	TableColumn.CellEditEvent<Corridor,Warehouse> ce;
@@ -739,6 +741,7 @@ public class AdminWindow implements Initializable {
     	}
     }
     
+    @SuppressWarnings("unchecked")
     public void updateDrugStock(Event e) {
     	Drug d=drugTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Drug,Integer> ce;
@@ -751,6 +754,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
     	}
     }
+    
+    @SuppressWarnings("unchecked")
     public void updateDrugPrinciple(Event e) {
     	Drug d=drugTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Drug,String> ce;
@@ -763,6 +768,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
     	}
     }
+    
+    @SuppressWarnings("unchecked")
     public void updateDrugPrice(Event e) {
     	Drug d=drugTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Drug,Integer> ce;
@@ -775,6 +782,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
     	}
     }
+    
+    @SuppressWarnings("unchecked")
     public void updateDrugCorridor(Event e) {
     	Drug d=drugTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Drug,Corridor> ce;
@@ -787,6 +796,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
     	}
     }
+    
+    @SuppressWarnings("unchecked")
     public void updateDrugName(Event e) {
     	Drug d=drugTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Drug,String> ce;
@@ -799,6 +810,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
     	}
     }
+    
+    @SuppressWarnings("unchecked")
     public void updateWarePc(Event e) {
     	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Warehouse,Integer> ce;
@@ -811,6 +824,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
     	}
     }
+    
+    @SuppressWarnings("unchecked")
     public void updateWareCity(Event e) {
     	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Warehouse,String> ce;
@@ -823,6 +838,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
     	}
     }
+    
+    @SuppressWarnings("unchecked")
     public void updateWareCountry(Event e) {
     	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Warehouse,String> ce;
@@ -835,6 +852,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
     	}
     }
+    
+    @SuppressWarnings("unchecked")
     public void updateWarePhone(Event e) {
     	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Warehouse,Integer> ce;
@@ -847,6 +866,8 @@ public class AdminWindow implements Initializable {
     		alert.show();	
     	}
     }
+    
+    @SuppressWarnings("unchecked")
     public void updateWareAddress(Event e) {
     	Warehouse w=warehouseTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Warehouse,String> ce;
@@ -860,6 +881,7 @@ public class AdminWindow implements Initializable {
     	}
     }
     
+    @SuppressWarnings("unchecked")
     public void updateProviderName(Event e) {
     	Provider p=providerTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Provider,String> ce;
@@ -873,6 +895,7 @@ public class AdminWindow implements Initializable {
     	}
     }
     
+    @SuppressWarnings("unchecked")
     public void updateProviderAddress(Event e) {
     	Provider p=providerTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Provider,String> ce;
@@ -886,7 +909,8 @@ public class AdminWindow implements Initializable {
     	}
     }
     
-    public void updateProviderPhone(Event e) {
+    @SuppressWarnings("unchecked")
+	public void updateProviderPhone(Event e) {
     	Provider p=providerTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Provider,Integer> ce;
     	ce=(TableColumn.CellEditEvent<Provider, Integer>)e;
@@ -899,6 +923,7 @@ public class AdminWindow implements Initializable {
     	}
     }
     
+    @SuppressWarnings("unchecked")
     public void updateProviderEmail(Event e) {
     	Provider p=providerTable.getSelectionModel().getSelectedItem();
     	TableColumn.CellEditEvent<Provider,String> ce;
@@ -1016,6 +1041,7 @@ public class AdminWindow implements Initializable {
     	}
     }
     
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//Images

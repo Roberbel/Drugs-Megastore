@@ -1,7 +1,6 @@
 package DB;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -170,6 +169,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Arrives> searchArrivesByArrivalId(Integer id){
 		
 			Query q1 = em.createNativeQuery("SELECT * FROM arrives WHERE drug_id = ?;", Arrives.class);
@@ -178,6 +178,7 @@ public class JPAManager implements Manager{
 		
 		}
 
+		@SuppressWarnings("unchecked")
 		public static List<Arrives> searchArrivesByDrugId(Integer id){
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM arrives WHERE transaction_id = ?;", Arrives.class);
@@ -234,6 +235,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Delivery> searchDeliveryByClientId(Integer id) {
 		
 			Query q1 = em.createNativeQuery("SELECT * FROM deliveries WHERE client_id = ?;", Delivery.class);
@@ -242,6 +244,7 @@ public class JPAManager implements Manager{
 		
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Drug> searchDrugByActivePrinciple(String activePrinciple) {
 		
 			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE active_principle LIKE ?;");
@@ -250,6 +253,7 @@ public class JPAManager implements Manager{
 		
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Drug> searchDrugByActivePrinciple(String activePrinciple, Integer maxPrice) {
 		
 			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE active_principle LIKE ? AND selling_price <= ?;");
@@ -259,6 +263,7 @@ public class JPAManager implements Manager{
 		
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Drug> searchDrugByMaxPrice(Integer maxPrice) {
 
 			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE selling_price <= ?;");
@@ -267,6 +272,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Drug> searchDrugByName(String name) {
 
 			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ?;");
@@ -275,6 +281,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Drug> searchDrugByName(String name, String activePrinciple) {
 
 			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND active_principle LIKE ?;");
@@ -284,6 +291,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Drug> searchDrugByName(String name, Integer maxPrice) {
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND selling_price <= ?;");
@@ -293,6 +301,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Drug> searchDrugByName(String name, String activePrinciple, Integer maxPrice) {
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM drug WHERE name like ? AND active_principle LIKE ? AND selling_price <= ?;");
@@ -327,6 +336,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Packaged> searchPackagedByDeliveryId(Integer id) {
 
 			Query q1 = em.createNativeQuery("SELECT * FROM packaged WHERE drug_id = ?;", Packaged.class);
@@ -335,6 +345,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Packaged> searchPackagedByDrugId(Integer id) {
 
 			Query q1 = em.createNativeQuery("SELECT * FROM packaged WHERE transaction_id = ?;", Packaged.class);
@@ -384,6 +395,7 @@ public class JPAManager implements Manager{
 		 *  SELECT EVERYTHING FROM EACH TABLE
 		 */
 		
+		@SuppressWarnings("unchecked")
 		public static List<Arrival> getAllArrivals(){
 			
 			Query q1 = em.createNativeQuery("SELECT * FROM arrivals", Arrival.class);
@@ -391,6 +403,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Arrives> getAllArrives(){
 			
 			Query q1 = em.createNativeQuery("Select * FROM arrives", Arrives.class);
@@ -398,6 +411,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Client> getAllClients(){
 			
 			Query q1 = em.createNativeQuery("Select * FROM client", Client.class);
@@ -405,6 +419,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Corridor> getAllCorridors(){
 			
 			Query q1 = em.createNativeQuery("Select * FROM corridor", Corridor.class);
@@ -412,6 +427,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Delivery> getAllDeliveries(){
 			
 			Query q1 = em.createNativeQuery("Select * FROM deliveries", Delivery.class);
@@ -419,6 +435,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Drug> getAllDrugs(){
 			
 			Query q1 = em.createNativeQuery("Select * FROM drug", Drug.class);
@@ -426,6 +443,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Employee> getAllEmployees(){
 			
 			Query q1 = em.createNativeQuery("Select * FROM employee", Employee.class);
@@ -434,6 +452,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Packaged> getAllPackaged(){
 			
 			Query q1 = em.createNativeQuery("Select * FROM packaged", Packaged.class);
@@ -441,6 +460,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Provider> getAllProviders(){
 			
 			Query q1 = em.createNativeQuery("Select * FROM provider", Provider.class);
@@ -448,6 +468,7 @@ public class JPAManager implements Manager{
 			
 		}
 		
+		@SuppressWarnings("unchecked")
 		public static List<Warehouse> getAllWarehouses(){
 			
 			Query q1 = em.createNativeQuery("Select * FROM warehouse", Warehouse.class);
@@ -566,12 +587,22 @@ public class JPAManager implements Manager{
 			
 			Delivery delivery = JPAManager.searchDeliveryById(id);
 			em.getTransaction().begin();
-			delivery.isSent();
+			delivery.setSent(sent);
 			em.getTransaction().commit();
 			
 			
 		}	
 		
+		//Arrival
+				public static void updateArrivalSent(Integer id, Boolean sent) throws SQLException {
+					
+					Arrival arrival = JPAManager.searchArrivalById(id);
+					em.getTransaction().begin();
+					arrival.setReceived(sent);
+					em.getTransaction().commit();
+					
+					
+				}	
 /*
  * =====================================================================================================
  * 								DELETE

@@ -4,7 +4,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import DB.JPAManager;
 import DB.SQLManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

@@ -322,7 +322,7 @@ public class EmployeeWindow implements Initializable {
 			received = false;
 		}
 		try {
-			SQLManager.updateArrivalReceived(toBeUpdated.getArrivalId(), received);
+			JPAManager.updateArrivalSent(toBeUpdated.getArrivalId(), received);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -341,7 +341,7 @@ public class EmployeeWindow implements Initializable {
 			sent = false;
 		}
 		try {
-			SQLManager.updateDeliverySent(toBeUpdated.getTransactionId(), sent);
+			JPAManager.updateDeliverySent(toBeUpdated.getTransactionId(), sent);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -1,16 +1,16 @@
 package gui.clientPanel;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
+
 import java.util.List;
 import java.util.ResourceBundle;
 
 import DB.JPAManager;
-import DB.SQLManager;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -18,7 +18,7 @@ import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
+
 import pojos.Delivery;
 import pojos.Drug;
 
