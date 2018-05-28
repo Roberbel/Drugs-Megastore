@@ -1007,6 +1007,7 @@ public class AdminWindow implements Initializable {
     			byte [] byteBlob=new byte[blob.available()];
     			blob.read(byteBlob);
     			blob.close();
+    			d.setPhoto(byteBlob);
     			SQLManager.updateDrugPhoto(d.getId(), byteBlob);
     		} catch (IOException | SQLException e) {
     			Alert alert=new Alert(AlertType.ERROR);
