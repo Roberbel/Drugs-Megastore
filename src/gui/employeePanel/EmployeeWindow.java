@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 
+import DB.JPAManager;
 import DB.SQLManager;
 import gui.MainWindow;
 import javafx.event.ActionEvent;
@@ -209,12 +210,12 @@ public class EmployeeWindow implements Initializable {
 
 		Arrival toBeRemoved = arrivalList.getSelectionModel().getSelectedItem();
 		toBeRemoved.getArrives();
-		try {
-			SQLManager.deleteArrival(toBeRemoved);
+		//try {
+			JPAManager.deleteArrival(toBeRemoved);
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		//} catch (SQLException e) {
+		//	e.printStackTrace();
+		//}
 
 		arrivalList.getItems().remove(toBeRemoved);
 

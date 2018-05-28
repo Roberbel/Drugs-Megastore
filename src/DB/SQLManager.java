@@ -1150,7 +1150,7 @@ public class SQLManager implements Manager {
     
     public static void deleteArrive(Arrives a) throws SQLException {
     	
-    	String sql = "DELETE FROM arrivaes WHERE transaction_id = ? AND drug_id = ? ;";
+    	String sql = "DELETE FROM arrives WHERE transaction_id = ? AND drug_id = ? ;";
 		PreparedStatement prep = c.prepareStatement(sql);
 		prep.setInt(1,a.getArrivalId());
 		prep.setInt(2, a.getDrugId());
