@@ -135,6 +135,9 @@ public class AdminWindow implements Initializable {
     private TextField arrivalPriceField;
 
     @FXML
+    private JFXButton logOutButton;
+    
+    @FXML
     private JFXListView<Delivery> deliveriesList;
 
     @FXML
@@ -984,6 +987,32 @@ public class AdminWindow implements Initializable {
 		} catch (TransformerException e) {
 			System.out.println("Error turning XML into HTML");
 		}
+    }
+    
+    @FXML
+    void logOutClicked(ActionEvent event) {
+    	this.mainWindow.logout();
+    }
+    
+    @FXML
+    void updateDrugImage(MouseEvent event) {
+    	if(drugTab.isSelected()) {
+    		Drug d=drugTable.getSelectionModel().getSelectedItem();
+    		FileChooser filechooser=new FileChooser(); 
+        	FileChooser.ExtensionFilter extFilter=new FileChooser.ExtensionFilter("JPG Files", "*.jpg");
+        	filechooser.getExtensionFilters().add(extFilter);
+        	File url=filechooser.showOpenDialog(stage);
+        	try {
+    			InputStream blob=new FileInputStream(url);
+    			byte [] byteBlob=new byte[blob.available()];
+    			blob.read(byteBlob);
+    			blob.close();
+    			SQLManager.updateDrugPhoto(d.getId(), byteBlob);
+    		} catch (IOException | SQLException e) {
+    			Alert alert=new Alert(AlertType.ERROR);
+        		alert.show();	
+    		}
+    	}
     }
     
 	@Override
