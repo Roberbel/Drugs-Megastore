@@ -64,69 +64,63 @@ public class ShopPanelSB {
 
     @FXML
     void searchDrugs(InputEvent event) {
-    	try {
+    	
+		String name = nameTextField.getText();
+		String activePrinciple = activePrincipleTextField.getText();
+		String stringMaxPrice = maxPriceTextField.getText();
+		/*
+		 * if the name isn't empty we will search mainly by it
+		 * if the name is empty we will search mainly by Active principle
+		 * if both the active principle and name are empty, we will just look by max price
+		 * if everything is empty, we will just retrieve the full list of drugs
+		 * 
+		 */
 			
-			String name = nameTextField.getText();
-			String activePrinciple = activePrincipleTextField.getText();
-			System.out.println(activePrinciple);
-			String stringMaxPrice = maxPriceTextField.getText();
-			/*
-			 * if the name isn't empty we will search mainly by it
-			 * if the name is empty we will search mainly by Active principle
-			 * if both the active principle and name are empty, we will just look by max price
-			 * if everything is empty, we will just retrieve the full list of drugs
-			 * 
-			 */
-			
-			if(!name.equals("")) {
+		if(!name.equals("")) {
 				
-				if(!activePrinciple.equals("")) {
-					if(!stringMaxPrice.equals("")) {
-					
-						drugs = SQLManager.searchDrugByName(name, activePrinciple, Integer.parseInt(stringMaxPrice));
-					
-					}else {
-						
-						drugs = SQLManager.searchDrugByName(name, activePrinciple);
-					
-					}
-				}else if(!stringMaxPrice.equals("")) {
-					
-					drugs = SQLManager.searchDrugByName(name, Integer.parseInt(stringMaxPrice));
-				
-				}else {
-					
-					System.out.println("getting drugs starting with '"+name+"'");
-					drugs = SQLManager.searchDrugByName(name);
-				
-				}
-								
-			}else if (!activePrinciple.equals("")) {
-				
+			if(!activePrinciple.equals("")) {
 				if(!stringMaxPrice.equals("")) {
 					
-					drugs = SQLManager.searchDrugByActivePrinciple(activePrinciple, Integer.parseInt(stringMaxPrice));
+					drugs = JPAManager.searchDrugByName(name, activePrinciple, Integer.parseInt(stringMaxPrice));
 					
 				}else {
+						
+					drugs = JPAManager.searchDrugByName(name, activePrinciple);
 					
-					drugs = SQLManager.searchDrugByActivePrinciple(activePrinciple);
-				
 				}
-				
 			}else if(!stringMaxPrice.equals("")) {
-				
-				drugs = SQLManager.searchDrugByMaxPrice(Integer.parseInt(stringMaxPrice));
+					
+				drugs = JPAManager.searchDrugByName(name, Integer.parseInt(stringMaxPrice));
 				
 			}else {
-				
-				drugs = SQLManager.getAllDrugs();
+					
+				drugs = JPAManager.searchDrugByName(name);
 				
 			}
-			createDrugsPanels();
-		}catch (SQLException e) {
-			System.out.println("Error retrieving all the Drugs from the database");		
-			e.printStackTrace();
+								
+		}else if (!activePrinciple.equals("")) {
+				
+			if(!stringMaxPrice.equals("")) {
+					
+				drugs = JPAManager.searchDrugByActivePrinciple(activePrinciple, Integer.parseInt(stringMaxPrice));
+					
+			}else {
+					
+				drugs = JPAManager.searchDrugByActivePrinciple(activePrinciple);
+				
+			}
+				
+		}else if(!stringMaxPrice.equals("")) {
+				
+			drugs = JPAManager.searchDrugByMaxPrice(Integer.parseInt(stringMaxPrice));
+				
+		}else {
+				
+			drugs = JPAManager.getAllDrugs();
+				
 		}
+		createDrugsPanels();
+
     }
     
     private void createDrugsPanels(){

@@ -63,7 +63,6 @@ public class Main extends Application{
 		
 		Parent root;
 		try {
-			//Remember remember the fifth of November and to change the resource to MainWindow
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainWindow.fxml"));	
 			root = loader.load();
 			MainWindow controller = loader.getController();
@@ -73,8 +72,8 @@ public class Main extends Application{
 			this.window.show();
 			this.window.setOnCloseRequest(e->closeConnection());
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			System.out.println("There was some kind of error and we haven't even started!");
 		}
 		
 		
