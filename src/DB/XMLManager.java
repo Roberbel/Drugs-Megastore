@@ -36,12 +36,16 @@ public class XMLManager {
 		String dir = "./xml/DatabaseTest.xml";
 		try {
 			XMLManager.databasexml2Html(dir, "./xml/databasehtml.html");
+			File file2 = null;
 			try {
-				File file2 = new File("./xml/databasehtml.html");
+				file2 = new File("./xml/databasehtml.html");
+				//I really hate doing it like this... but it works
+				String path = file2.getAbsolutePath().substring(0, file2.getAbsolutePath().length() - "./xml/databasehtml.html".length()) + "xml/databasehtml.html";
+				file2 = new File(path);
 				Desktop.getDesktop().browse(file2.toURI());
 			} catch (IOException e) {
 				e.printStackTrace();
-				System.out.println("Error opening the HTML file, please, go into the xml folder inside Drug-megastore to be able to see our awesome html  (databasehtml.html)");
+				System.out.println("Error opening the HTML file, please, go into the xml folder inside Drug-megastore to be able to see our awesome html: " + file2.getAbsolutePath());
 			}
 		} catch (TransformerException e) {
 			e.printStackTrace();
